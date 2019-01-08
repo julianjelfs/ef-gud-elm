@@ -1,0 +1,40 @@
+body {
+  font-family: "Source Sans Pro", "Trebuchet MS", "Lucida Grande",
+    "Bitstream Vera Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  color: #293c4b;
+}
+
+section {
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  width: 300px;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.sidebar a {
+  text-decoration: none;
+}
+.selected-component a {
+  color: #ffffff;
+}
+
+.content {
+}
+
+.selected-component {
+  font-weight: bold;
+  background-color: #ff329b;
+}
