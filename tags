@@ -9,7 +9,6 @@ ButtonShape	src/Components/Button.elm	/^type ButtonShape$/;"	t
 ButtonSize	src/Components/Button.elm	/^type ButtonSize$/;"	t
 ButtonType	src/Components/Button.elm	/^type ButtonType$/;"	t
 Colors	src/Theme.elm	/^type alias Colors =$/;"	a
-Constants	src/Components/Button.elm	/^type alias Constants =$/;"	a
 Model	src/Main.elm	/^type alias Model =$/;"	a
 Msg	src/Main.elm	/^type Msg$/;"	t
 Route	src/Main.elm	/^type Route$/;"	t
@@ -21,7 +20,6 @@ checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServic
 colors	src/Theme.elm	/^colors : Colors$/;"	c
 componentView	src/Main.elm	/^componentView : Route -> Html Msg$/;"	f
 concatIf	src/Components/Button.elm	/^concatIf : Bool -> List Style -> List Style -> List Style$/;"	f
-constants	src/Components/Button.elm	/^constants : Constants$/;"	c
 container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
 defaultButtonProps	src/Main.elm	/^defaultButtonProps : Button.ButtonProps Msg$/;"	c
 defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c

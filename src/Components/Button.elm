@@ -30,13 +30,26 @@ type ButtonSize
     | Small
 
 
-type alias Constants =
-    { lineHeight : Float }
-
-
-constants : Constants
 constants =
     { lineHeight = 1.2
+    , padding =
+        { big =
+            { vertical = 12
+            , horizontal = 25
+            }
+        , small =
+            { vertical = 8
+            , horizontal = 12
+            }
+        }
+    , fontSize =
+        { big = 14
+        , small = 12
+        }
+    , borderRadius =
+        { big = 20
+        , small = 4
+        }
     }
 
 
@@ -100,22 +113,28 @@ buttonDimensions : ButtonShape -> ButtonSize -> List Style
 buttonDimensions shape size =
     case size of
         Default ->
-            [ padding2 (px 12) (px 25)
-            , fontSize (px 14)
+            [ padding2 (px constants.padding.big.vertical)
+                (px
+                    constants.padding.big.horizontal
+                )
+            , fontSize (px constants.fontSize.big)
             , borderRadius
                 (case shape of
                     Rounded ->
-                        px 20
+                        px constants.borderRadius.big
 
                     Square ->
-                        px 4
+                        px constants.borderRadius.small
                 )
             ]
 
         Small ->
-            [ padding2 (px 8) (px 12)
-            , fontSize (px 12)
-            , borderRadius (px 4)
+            [ padding2 (px constants.padding.small.vertical)
+                (px
+                    constants.padding.small.horizontal
+                )
+            , fontSize (px constants.fontSize.small)
+            , borderRadius (px constants.borderRadius.small)
             ]
 
 
@@ -126,7 +145,7 @@ buttonComponent props =
          , css
             ([ position relative
              , display inlineFlex
-             , lineHeight (num 1.2)
+             , lineHeight (num constants.lineHeight)
              , border (px 0)
              , padding (px 20)
              , backgroundColor theme.colors.digitalFirstBlue
