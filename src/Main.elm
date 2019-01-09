@@ -2,7 +2,9 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
+import Components.Button as Button
 import Components.Container as Container
+import Css exposing (..)
 import Html
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (..)
@@ -54,6 +56,7 @@ urlToRoute =
 type Msg
     = OnUrlRequest UrlRequest
     | OnUrlChange Url
+    | ButtonClicked
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -71,6 +74,9 @@ update msg model =
             ( { model | route = urlToRoute url }
             , Cmd.none
             )
+
+        ButtonClicked ->
+            ( model, Cmd.none )
 
 
 routeParser : Url.Parser (Route -> a) a
@@ -132,6 +138,20 @@ view { route } =
     }
 
 
+defaultButtonProps : Button.ButtonProps Msg
+defaultButtonProps =
+    let
+        p =
+            Button.defaultProps
+    in
+    { p | text = "Clicky Button!", onClick = Just ButtonClicked }
+
+
+paddedBox : List Style
+paddedBox =
+    [ padding (px 10) ]
+
+
 componentView : Route -> Html Msg
 componentView route =
     case route of
@@ -139,7 +159,12 @@ componentView route =
             h2 [] [ text "Select a component" ]
 
         Button ->
-            h2 [] [ text "Button component selected" ]
+            h2 []
+                [ div [ css paddedBox ] [ Button.story defaultButtonProps ]
+                , div [ css paddedBox ] [ Button.story { defaultButtonProps | disabled = True } ]
+                , div [ css paddedBox ] [ Button.story { defaultButtonProps | shape = Button.Square } ]
+                , div [ css paddedBox ] [ Button.story { defaultButtonProps | size = Button.Small } ]
+                ]
 
         ButtonGroup ->
             h2 [] [ text "Button Group component selected" ]
