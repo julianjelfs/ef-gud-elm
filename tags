@@ -3,22 +3,6 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-Colors	src/Theme.elm	/^type alias Colors =$/;"	a
-Model	src/Main.elm	/^type alias Model =$/;"	a
-Msg	src/Main.elm	/^type Msg$/;"	t
-Route	src/Main.elm	/^type Route$/;"	t
-Theme	src/Theme.elm	/^type alias Theme =$/;"	a
-all	tests/Tests.elm	/^all : Test$/;"	c
+!_TAG_PROGRAM_VERSION	5.8	//
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
-colors	src/Theme.elm	/^colors : Colors$/;"	c
-componentView	src/Main.elm	/^componentView : Route -> Html Msg$/;"	f
-init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
-main	src/Main.elm	/^main : Program () Model Msg$/;"	c
-menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
-routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
-theme	src/Theme.elm	/^theme : Theme$/;"	c
-update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
-urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
-view	src/Main.elm	/^view : Model -> Document Msg$/;"	f

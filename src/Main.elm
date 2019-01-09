@@ -2,9 +2,11 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Components.Container as Container
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes exposing (..)
+import Html.Styled.Events exposing (..)
 import Url exposing (Url)
 import Url.Parser as Url
 
@@ -105,27 +107,28 @@ view : Model -> Document Msg
 view { route } =
     { title = "EF Web UI Kit - Elm Style"
     , body =
-        [ div [ class "container" ]
-            [ section [ class "sidebar" ]
-                [ ul
-                    []
-                    [ menuItem route Button "button" "Button Component"
-                    , menuItem route ButtonGroup "button-group" "Button Group Component"
-                    , menuItem route Grid "grid" "Grid Component"
-                    , menuItem route Input "input" "Input Component"
-                    , menuItem route Section "section" "Section Component"
-                    , menuItem route Surface "surface" "Surface Component"
-                    , menuItem route Container "container" "Container Component"
+        List.map toUnstyled
+            [ div [ class "container" ]
+                [ section [ class "sidebar" ]
+                    [ ul
+                        []
+                        [ menuItem route Button "button" "Button Component"
+                        , menuItem route ButtonGroup "button-group" "Button Group Component"
+                        , menuItem route Grid "grid" "Grid Component"
+                        , menuItem route Input "input" "Input Component"
+                        , menuItem route Section "section" "Section Component"
+                        , menuItem route Surface "surface" "Surface Component"
+                        , menuItem route Container "container" "Container Component"
+                        ]
+                    ]
+                , section [ class "content" ]
+                    [ h1 [] [ text "EF Web UI Kit" ]
+                    , p [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
+                    , hr [] []
+                    , componentView route
                     ]
                 ]
-            , section [ class "content" ]
-                [ h1 [] [ text "EF Web UI Kit" ]
-                , p [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
-                , hr [] []
-                , componentView route
-                ]
             ]
-        ]
     }
 
 
@@ -151,7 +154,7 @@ componentView route =
             h2 [] [ text "Surface component selected" ]
 
         Container ->
-            h2 [] [ text "Container component selected" ]
+            h2 [] [ Container.story ]
 
         Grid ->
             h2 [] [ text "Grid component selected" ]
