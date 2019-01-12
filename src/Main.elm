@@ -2,13 +2,13 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
-import Components.Button as Button
-import Components.Container as Container
 import Css exposing (..)
 import Html
-import Html.Styled exposing (..)
+import Html.Styled as SHtml exposing (..)
 import Html.Styled.Attributes exposing (..)
 import Html.Styled.Events exposing (..)
+import Stories.Button as Button
+import Stories.Container as Container
 import Url exposing (Url)
 import Url.Parser as Url
 
@@ -32,6 +32,8 @@ type Route
 type alias Model =
     { key : Nav.Key
     , route : Route
+    , button : Button.Model
+    , container : Container.Model
     }
 
 
@@ -39,6 +41,8 @@ init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
     ( { key = key
       , route = urlToRoute url
+      , button = Button.init
+      , container = Container.init
       }
     , Cmd.none
     )
@@ -56,7 +60,8 @@ urlToRoute =
 type Msg
     = OnUrlRequest UrlRequest
     | OnUrlChange Url
-    | ButtonClicked
+    | ButtonMsg Button.Msg
+    | ContainerMsg Container.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -75,8 +80,19 @@ update msg model =
             , Cmd.none
             )
 
-        ButtonClicked ->
-            ( model, Cmd.none )
+        ButtonMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Button.update subMsg model.button
+            in
+            ( { model | button = subModel }, Cmd.map ButtonMsg subCmd )
+
+        ContainerMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Container.update subMsg model.container
+            in
+            ( { model | container = subModel }, Cmd.map ContainerMsg subCmd )
 
 
 routeParser : Url.Parser (Route -> a) a
@@ -110,7 +126,7 @@ menuItem selectedRoute route path desc =
 
 
 view : Model -> Document Msg
-view { route } =
+view model =
     { title = "EF Web UI Kit - Elm Style"
     , body =
         List.map toUnstyled
@@ -118,53 +134,34 @@ view { route } =
                 [ section [ class "sidebar" ]
                     [ ul
                         []
-                        [ menuItem route Button "button" "Button Component"
-                        , menuItem route ButtonGroup "button-group" "Button Group Component"
-                        , menuItem route Grid "grid" "Grid Component"
-                        , menuItem route Input "input" "Input Component"
-                        , menuItem route Section "section" "Section Component"
-                        , menuItem route Surface "surface" "Surface Component"
-                        , menuItem route Container "container" "Container Component"
+                        [ menuItem model.route Button "button" "Button Component"
+                        , menuItem model.route ButtonGroup "button-group" "Button Group Component"
+                        , menuItem model.route Grid "grid" "Grid Component"
+                        , menuItem model.route Input "input" "Input Component"
+                        , menuItem model.route Section "section" "Section Component"
+                        , menuItem model.route Surface "surface" "Surface Component"
+                        , menuItem model.route Container "container" "Container Component"
                         ]
                     ]
                 , section [ class "content" ]
                     [ h1 [] [ text "EF Web UI Kit" ]
                     , p [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
                     , hr [] []
-                    , componentView route
+                    , componentView model
                     ]
                 ]
             ]
     }
 
 
-defaultButtonProps : Button.ButtonProps Msg
-defaultButtonProps =
-    let
-        p =
-            Button.defaultProps
-    in
-    { p | text = "Clicky Button!", onClick = Just ButtonClicked }
-
-
-paddedBox : List Style
-paddedBox =
-    [ padding (px 10) ]
-
-
-componentView : Route -> Html Msg
-componentView route =
-    case route of
+componentView : Model -> Html Msg
+componentView model =
+    case model.route of
         Home ->
             h2 [] [ text "Select a component" ]
 
         Button ->
-            h2 []
-                [ div [ css paddedBox ] [ Button.story defaultButtonProps ]
-                , div [ css paddedBox ] [ Button.story { defaultButtonProps | disabled = True } ]
-                , div [ css paddedBox ] [ Button.story { defaultButtonProps | shape = Button.Square } ]
-                , div [ css paddedBox ] [ Button.story { defaultButtonProps | size = Button.Small } ]
-                ]
+            SHtml.map ButtonMsg (Button.view model.button)
 
         ButtonGroup ->
             h2 [] [ text "Button Group component selected" ]
@@ -179,7 +176,7 @@ componentView route =
             h2 [] [ text "Surface component selected" ]
 
         Container ->
-            h2 [] [ Container.story ]
+            SHtml.map ContainerMsg (Container.view model.container)
 
         Grid ->
             h2 [] [ text "Grid component selected" ]

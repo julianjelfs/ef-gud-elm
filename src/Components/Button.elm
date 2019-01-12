@@ -12,7 +12,8 @@ import Html
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (css, disabled, href, src)
 import Html.Styled.Events exposing (onClick)
-import Theme exposing (theme)
+import Theme exposing (Theme, theme)
+import Utils exposing (concatIf, maybeAppend)
 
 
 type ButtonType
@@ -28,6 +29,33 @@ type ButtonShape
 type ButtonSize
     = Default
     | Small
+
+
+type ButtonShadow
+    = PrimaryDefault
+    | PrimaryHover
+    | PrimaryFocus
+    | PrimaryFocusHover
+    | SecondaryDefault
+    | SecondaryHover
+    | SecondaryFocus
+    | SecondaryFocusHover
+
+
+type alias ShadowStyles =
+    { borderLight : Style
+    , borderNone : Style
+    , focusNone : Style
+    , focusNoneColor : Style
+    , focusShadow : Style
+    , focusShadowColor : Style
+    , shadowDarkColor : Style
+    , shadowLight : Style
+    , shadowLightColor : Style
+    , shadowMidColor : Style
+    , shadowNone : Style
+    , shadowNoneColor : Style
+    }
 
 
 constants =
@@ -89,26 +117,6 @@ disabledStyles =
     ]
 
 
-concatIf : Bool -> List Style -> List Style -> List Style
-concatIf pred toAppend appendTo =
-    case pred of
-        True ->
-            appendTo ++ toAppend
-
-        False ->
-            appendTo
-
-
-maybeAppend : Maybe a -> List a -> List a
-maybeAppend m l =
-    case m of
-        Just x ->
-            l ++ [ x ]
-
-        Nothing ->
-            l
-
-
 buttonDimensions : ButtonShape -> ButtonSize -> List Style
 buttonDimensions shape size =
     case size of
@@ -136,6 +144,91 @@ buttonDimensions shape size =
             , fontSize (px constants.fontSize.small)
             , borderRadius (px constants.borderRadius.small)
             ]
+
+
+
+-- Problem: https://github.com/rtfeldman/elm-css/issues/265
+-- not possible to do multiple box shadows at the moment with elm-css
+
+
+themeBasedStyles : Theme -> ShadowStyles
+themeBasedStyles theme =
+    { borderLight =
+        boxShadow6 inset
+            (px 0)
+            (px 0)
+            (px 0)
+            (px 1)
+            (changeAlpha theme.colors.border.interactive 0.2)
+    , borderNone =
+        boxShadow6 inset
+            (px 0)
+            (px 0)
+            (px 0)
+            (px 0)
+            (changeAlpha theme.colors.border.interactive 0.4)
+    , focusNone =
+        boxShadow5 (px 0)
+            (px 0)
+            (px 0)
+            (px 0)
+            (changeAlpha theme.colors.border.interactive 0.1)
+    , focusNoneColor =
+        boxShadow5 (px 0)
+            (px 0)
+            (px 0)
+            (px 0)
+            (changeAlpha theme.colors.border.interactive 0.1)
+    , focusShadow =
+        boxShadow5 (px 0)
+            (px 0)
+            (px 0)
+            (Css.em 0.25)
+            (changeAlpha theme.colors.border.interactive 0.1)
+    , focusShadowColor =
+        boxShadow5 (px 0)
+            (px 0)
+            (px 0)
+            (Css.em 0.25)
+            (changeAlpha theme.colors.primary 0.3)
+    , shadowDarkColor =
+        boxShadow4 (px 0)
+            (px 4)
+            (px 12)
+            (changeAlpha theme.colors.primary 0.4)
+    , shadowLight =
+        boxShadow4 (px 0)
+            (px 2)
+            (px 4)
+            (changeAlpha theme.colors.inkBlack 0.2)
+    , shadowLightColor =
+        boxShadow4 (px 0)
+            (px 2)
+            (px 8)
+            (changeAlpha theme.colors.primary 0.2)
+    , shadowMidColor =
+        boxShadow4 (px 0)
+            (px 2)
+            (px 8)
+            (changeAlpha theme.colors.primary 0.2)
+    , shadowNone =
+        boxShadow5 (px 0)
+            (px 0)
+            (px 0)
+            (px 0)
+            (changeAlpha theme.colors.inkBlack 0.2)
+    , shadowNoneColor =
+        boxShadow5 (px 0)
+            (px 0)
+            (px 0)
+            (px 0)
+            (changeAlpha theme.colors.primary 0.3)
+    }
+
+
+changeAlpha : Css.Color -> Float -> Css.Color
+changeAlpha { red, green, blue } =
+    \a -> rgba red green blue a
 
 
 buttonComponent : ButtonProps msg -> Html msg

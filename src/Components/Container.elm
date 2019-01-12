@@ -1,4 +1,4 @@
-module Components.Container exposing (container, story)
+module Components.Container exposing (container)
 
 import Css exposing (..)
 import Html
@@ -22,9 +22,3 @@ container children =
             ]
         ]
         children
-
-
-story : Html msg
-story =
-    container
-        [ h1 [] [ text "Yo this is a container" ] ]

@@ -8,6 +8,10 @@ type alias Theme =
     }
 
 
+type alias BorderColors =
+    { interactive : Css.Color }
+
+
 type alias Colors =
     { digitalFirstBlue : Css.Color
     , educationBlue : Css.Color
@@ -15,6 +19,8 @@ type alias Colors =
     , efGrey : Css.Color
     , inkBlack : Css.Color
     , white : Css.Color
+    , border : BorderColors
+    , primary : Css.Color
     }
 
 
@@ -26,6 +32,8 @@ colors =
     , efGrey = Css.hex "EFEFEF"
     , inkBlack = Css.hex "191919"
     , white = Css.hex "FFFFFF"
+    , border = BorderColors <| Css.hex "191919"
+    , primary = Css.hex "003C64"
     }
 
 
