@@ -12,6 +12,11 @@ type alias BorderColors =
     { interactive : Css.Color }
 
 
+type alias TextColors =
+    { light : Css.Color
+    }
+
+
 type alias Colors =
     { digitalFirstBlue : Css.Color
     , educationBlue : Css.Color
@@ -21,6 +26,7 @@ type alias Colors =
     , white : Css.Color
     , border : BorderColors
     , primary : Css.Color
+    , text : TextColors
     }
 
 
@@ -34,6 +40,7 @@ colors =
     , white = Css.hex "FFFFFF"
     , border = BorderColors <| Css.hex "191919"
     , primary = Css.hex "003C64"
+    , text = TextColors <| Css.hex "FFFFFF"
     }
 
 

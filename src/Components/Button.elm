@@ -8,6 +8,7 @@ module Components.Button exposing
     )
 
 import Css exposing (..)
+import Css.Transitions as CT
 import Html
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (css, disabled, href, src)
@@ -117,6 +118,42 @@ disabledStyles =
     ]
 
 
+primaryStyles : ButtonProps msg -> List Style
+primaryStyles { disabled } =
+    [ zIndex (int 1)
+    , before
+        [ opacity (num 1) ]
+    , borderShadows theme |> .focusNoneColor
+    , color theme.colors.text.light
+    ]
+        |> concatIf (not disabled)
+            [ hover
+                [ borderShadows theme |> .shadowDarkColor
+                , focus [ borderShadows theme |> .shadowDarkColor ]
+                ]
+            , focus
+                [ borderShadows theme |> .shadowMidColor ]
+            ]
+
+
+secondaryStyles : ButtonProps msg -> List Style
+secondaryStyles { disabled } =
+    [ backgroundColor <| Css.hex "FFFFFF"
+    , before
+        [ opacity (num 0) ]
+    , borderShadows theme |> .shadowNone
+    , color theme.colors.text.light
+    ]
+        |> concatIf (not disabled)
+            [ hover
+                [ borderShadows theme |> .shadowLight
+                , focus [ borderShadows theme |> .shadowLight ]
+                ]
+            , focus
+                [ borderShadows theme |> .shadowNone ]
+            ]
+
+
 buttonDimensions : ButtonShape -> ButtonSize -> List Style
 buttonDimensions shape size =
     case size of
@@ -151,8 +188,8 @@ buttonDimensions shape size =
 -- not possible to do multiple box shadows at the moment with elm-css
 
 
-themeBasedStyles : Theme -> ShadowStyles
-themeBasedStyles theme =
+borderShadows : Theme -> ShadowStyles
+borderShadows theme =
     { borderLight =
         boxShadow6 inset
             (px 0)
@@ -231,6 +268,11 @@ changeAlpha { red, green, blue } =
     \a -> rgba red green blue a
 
 
+transWhite : Css.Color
+transWhite =
+    Css.rgba 255 255 255 0.3
+
+
 buttonComponent : ButtonProps msg -> Html msg
 buttonComponent props =
     button
@@ -245,9 +287,25 @@ buttonComponent props =
              , cursor pointer
              , outline none
              , overflow hidden
+             , before
+                [ display block
+                , position absolute
+                , top (px 0)
+                , right (px 0)
+                , bottom (px 0)
+                , left (px 0)
+                , CT.transition
+                    [ CT.opacity3 100.0 0 CT.ease ]
+                , opacity (num 1)
+                , zIndex (int 0)
+                , backgroundImage
+                    (linearGradient (stop transWhite) (stop transWhite) [])
+                ]
              ]
                 |> List.append (buttonDimensions props.shape props.size)
                 |> concatIf props.disabled disabledStyles
+                |> concatIf (props.buttonType == Primary) (primaryStyles props)
+                |> concatIf (props.buttonType == Secondary) (secondaryStyles props)
             )
          ]
             |> maybeAppend (Maybe.map onClick props.onClick)
