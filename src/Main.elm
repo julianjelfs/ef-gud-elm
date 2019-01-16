@@ -2,11 +2,9 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
-import Css exposing (..)
-import Html
-import Html.Styled as SHtml exposing (..)
-import Html.Styled.Attributes exposing (..)
-import Html.Styled.Events exposing (..)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Stories.Button as Button
 import Stories.Container as Container
 import Url exposing (Url)
@@ -129,28 +127,27 @@ view : Model -> Document Msg
 view model =
     { title = "EF Web UI Kit - Elm Style"
     , body =
-        List.map toUnstyled
-            [ div [ class "container" ]
-                [ section [ class "sidebar" ]
-                    [ ul
-                        []
-                        [ menuItem model.route Button "button" "Button Component"
-                        , menuItem model.route ButtonGroup "button-group" "Button Group Component"
-                        , menuItem model.route Grid "grid" "Grid Component"
-                        , menuItem model.route Input "input" "Input Component"
-                        , menuItem model.route Section "section" "Section Component"
-                        , menuItem model.route Surface "surface" "Surface Component"
-                        , menuItem model.route Container "container" "Container Component"
-                        ]
-                    ]
-                , section [ class "content" ]
-                    [ h1 [] [ text "EF Web UI Kit" ]
-                    , p [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
-                    , hr [] []
-                    , componentView model
+        [ div [ class "container" ]
+            [ section [ class "sidebar" ]
+                [ ul
+                    []
+                    [ menuItem model.route Button "button" "Button Component"
+                    , menuItem model.route ButtonGroup "button-group" "Button Group Component"
+                    , menuItem model.route Grid "grid" "Grid Component"
+                    , menuItem model.route Input "input" "Input Component"
+                    , menuItem model.route Section "section" "Section Component"
+                    , menuItem model.route Surface "surface" "Surface Component"
+                    , menuItem model.route Container "container" "Container Component"
                     ]
                 ]
+            , section [ class "content" ]
+                [ h1 [] [ text "EF Web UI Kit" ]
+                , p [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
+                , hr [] []
+                , componentView model
+                ]
             ]
+        ]
     }
 
 
@@ -161,7 +158,7 @@ componentView model =
             h2 [] [ text "Select a component" ]
 
         Button ->
-            SHtml.map ButtonMsg (Button.view model.button)
+            Html.map ButtonMsg (Button.view model.button)
 
         ButtonGroup ->
             h2 [] [ text "Button Group component selected" ]
@@ -176,7 +173,7 @@ componentView model =
             h2 [] [ text "Surface component selected" ]
 
         Container ->
-            SHtml.map ContainerMsg (Container.view model.container)
+            Html.map ContainerMsg (Container.view model.container)
 
         Grid ->
             h2 [] [ text "Grid component selected" ]

@@ -1,11 +1,9 @@
 module Stories.Button exposing (Model, Msg, init, update, view)
 
 import Components.Button as Button
-import Css exposing (..)
-import Html
-import Html.Styled exposing (..)
-import Html.Styled.Attributes exposing (css, disabled, href, src)
-import Html.Styled.Events exposing (onClick)
+import Html exposing (..)
+import Html.Attributes exposing (disabled, href, src)
+import Html.Events exposing (onClick)
 
 
 type alias Model =
@@ -33,10 +31,10 @@ view model =
     div
         []
         [ h2 [] [ text "This is the button component" ]
-        , div [ css paddedBox ] [ Button.buttonComponent defaultButtonProps ]
-        , div [ css paddedBox ] [ Button.buttonComponent { defaultButtonProps | disabled = True } ]
-        , div [ css paddedBox ] [ Button.buttonComponent { defaultButtonProps | shape = Button.Square } ]
-        , div [ css paddedBox ] [ Button.buttonComponent { defaultButtonProps | size = Button.Small } ]
+        , div [] [ Button.buttonComponent defaultButtonProps ]
+        , div [] [ Button.buttonComponent { defaultButtonProps | disabled = True } ]
+        , div [] [ Button.buttonComponent { defaultButtonProps | shape = Button.Square } ]
+        , div [] [ Button.buttonComponent { defaultButtonProps | size = Button.Small } ]
         , div []
             [ p []
                 [ text <|
@@ -55,8 +53,3 @@ defaultButtonProps =
             Button.defaultProps
     in
     { p | text = "Clicky Button!", onClick = Just OnClick }
-
-
-paddedBox : List Style
-paddedBox =
-    [ padding (px 10) ]

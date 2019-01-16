@@ -18,14 +18,10 @@ Msg	src/Main.elm	/^type Msg$/;"	t
 Msg	src/Stories/Button.elm	/^type Msg$/;"	t
 Msg	src/Stories/Container.elm	/^type Msg$/;"	t
 Route	src/Main.elm	/^type Route$/;"	t
-ShadowStyles	src/Components/Button.elm	/^type alias ShadowStyles =$/;"	a
 TextColors	src/Theme.elm	/^type alias TextColors =$/;"	a
 Theme	src/Theme.elm	/^type alias Theme =$/;"	a
 all	tests/Tests.elm	/^all : Test$/;"	c
-borderShadows	src/Components/Button.elm	/^borderShadows : Theme -> ShadowStyles$/;"	f
 buttonComponent	src/Components/Button.elm	/^buttonComponent : ButtonProps msg -> Html msg$/;"	f
-buttonDimensions	src/Components/Button.elm	/^buttonDimensions : ButtonShape -> ButtonSize -> List Style$/;"	f
-changeAlpha	src/Components/Button.elm	/^changeAlpha : Css.Color -> Float -> Css.Color$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
 colors	src/Theme.elm	/^colors : Colors$/;"	c
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
@@ -33,22 +29,15 @@ concatIf	src/Utils.elm	/^concatIf : Bool -> List Style -> List Style -> List Sty
 container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
 defaultButtonProps	src/Stories/Button.elm	/^defaultButtonProps : Button.ButtonProps Msg$/;"	c
 defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c
-disabledStyles	src/Components/Button.elm	/^disabledStyles : List Style$/;"	c
 init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
 init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Container.elm	/^init : Model$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
-paddedBox	src/Stories/Button.elm	/^paddedBox : List Style$/;"	c
-paddedBox	src/Stories/Container.elm	/^paddedBox : List Style$/;"	c
-primaryStyles	src/Components/Button.elm	/^primaryStyles : ButtonProps msg -> List Style$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
-secondaryStyles	src/Components/Button.elm	/^secondaryStyles : ButtonProps msg -> List Style$/;"	f
-story	src/Components/Button.elm	/^story : ButtonProps msg -> Html msg$/;"	f
 theme	src/Theme.elm	/^theme : Theme$/;"	c
-transWhite	src/Components/Button.elm	/^transWhite : Css.Color$/;"	c
 update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Container.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
