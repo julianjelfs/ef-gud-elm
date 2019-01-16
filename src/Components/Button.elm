@@ -2,15 +2,16 @@ module Components.Button exposing
     ( ButtonProps
     , ButtonShape(..)
     , ButtonSize(..)
+    , ButtonType(..)
     , buttonComponent
     , defaultProps
     )
 
 import Html exposing (..)
-import Html.Attributes exposing (disabled, href, src)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Theme exposing (Theme, theme)
-import Utils exposing (concatIf, maybeAppend)
+import Utils exposing (..)
 
 
 type ButtonType
@@ -50,6 +51,10 @@ type alias ButtonProps msg =
     , accessKey : Maybe String
     , tabIndex : Maybe Int
     , grouped : Bool
+    , hover : Bool
+    , active : Bool
+    , focus : Bool
+    , loading : Bool
     }
 
 
@@ -65,11 +70,30 @@ defaultProps =
     , accessKey = Nothing
     , tabIndex = Nothing
     , grouped = False
+    , hover = False
+    , active = False
+    , focus = False
+    , loading = False
     }
 
 
 buttonComponent : ButtonProps msg -> Html msg
 buttonComponent props =
     button
-        []
-        [ text props.text ]
+        ([ class "ef-button"
+         , type_ "button"
+         , disabled props.disabled
+         , classList
+            [ ( "-primary", props.buttonType == Primary )
+            , ( "-secondary", props.buttonType == Secondary )
+            , ( "-active", props.active )
+            , ( "-hover", props.hover )
+            , ( "-focus", props.focus )
+            , ( "-is-loading", props.loading )
+            , ( "-square", props.shape == Square )
+            , ( "-small", props.size == Small )
+            ]
+         ]
+            |> maybeAppend (Maybe.map onClick props.onClick)
+        )
+        [ span [ class "ef-button__content" ] [ text props.text ] ]

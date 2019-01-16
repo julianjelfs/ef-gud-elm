@@ -22,6 +22,7 @@ TextColors	src/Theme.elm	/^type alias TextColors =$/;"	a
 Theme	src/Theme.elm	/^type alias Theme =$/;"	a
 all	tests/Tests.elm	/^all : Test$/;"	c
 buttonComponent	src/Components/Button.elm	/^buttonComponent : ButtonProps msg -> Html msg$/;"	f
+buttonStates	src/Stories/Button.elm	/^buttonStates : Button.ButtonProps Msg -> Model -> Html Msg$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
 colors	src/Theme.elm	/^colors : Colors$/;"	c
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
@@ -35,8 +36,13 @@ init	src/Stories/Container.elm	/^init : Model$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
+primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
+secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"	f
+secondaryButtonProps	src/Stories/Button.elm	/^secondaryButtonProps : Button.ButtonProps Msg$/;"	c
+smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
+squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProps Msg$/;"	c
 theme	src/Theme.elm	/^theme : Theme$/;"	c
 update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f

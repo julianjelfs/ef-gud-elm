@@ -1,9 +1,7 @@
-module Utils exposing (concatIf, maybeAppend)
-
-import Css exposing (..)
+module Utils exposing (appendIf, concatIf, maybeAppend)
 
 
-concatIf : Bool -> List Style -> List Style -> List Style
+concatIf : Bool -> List a -> List a -> List a
 concatIf pred toAppend appendTo =
     case pred of
         True ->
@@ -11,6 +9,15 @@ concatIf pred toAppend appendTo =
 
         False ->
             appendTo
+
+
+appendIf : Bool -> a -> List a -> List a
+appendIf pred toAppend appendTo =
+    if pred then
+        appendTo ++ [ toAppend ]
+
+    else
+        appendTo
 
 
 maybeAppend : Maybe a -> List a -> List a
