@@ -10,7 +10,6 @@ module Components.Button exposing
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Theme exposing (Theme, theme)
 import Utils exposing (..)
 
 

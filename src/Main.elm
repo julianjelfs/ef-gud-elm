@@ -7,6 +7,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Stories.Button as Button
 import Stories.Container as Container
+import Stories.Section as Section
+import Stories.Surface as Surface
 import Url exposing (Url)
 import Url.Parser as Url
 
@@ -18,7 +20,6 @@ import Url.Parser as Url
 type Route
     = Home
     | Button
-    | ButtonGroup
     | Input
     | Section
     | Surface
@@ -32,6 +33,8 @@ type alias Model =
     , route : Route
     , button : Button.Model
     , container : Container.Model
+    , section : Section.Model
+    , surface : Surface.Model
     }
 
 
@@ -41,6 +44,8 @@ init _ url key =
       , route = urlToRoute url
       , button = Button.init
       , container = Container.init
+      , section = Section.init
+      , surface = Surface.init
       }
     , Cmd.none
     )
@@ -60,6 +65,8 @@ type Msg
     | OnUrlChange Url
     | ButtonMsg Button.Msg
     | ContainerMsg Container.Msg
+    | SectionMsg Section.Msg
+    | SurfaceMsg Surface.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -92,13 +99,26 @@ update msg model =
             in
             ( { model | container = subModel }, Cmd.map ContainerMsg subCmd )
 
+        SectionMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Section.update subMsg model.section
+            in
+            ( { model | section = subModel }, Cmd.map SectionMsg subCmd )
+
+        SurfaceMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Surface.update subMsg model.surface
+            in
+            ( { model | surface = subModel }, Cmd.map SurfaceMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
     Url.oneOf
         [ Url.map Home Url.top
         , Url.map Button (Url.s "button")
-        , Url.map ButtonGroup (Url.s "button-group")
         , Url.map Input (Url.s "input")
         , Url.map Section (Url.s "section")
         , Url.map Surface (Url.s "surface")
@@ -132,7 +152,6 @@ view model =
                 [ ul
                     []
                     [ menuItem model.route Button "button" "Button Component"
-                    , menuItem model.route ButtonGroup "button-group" "Button Group Component"
                     , menuItem model.route Grid "grid" "Grid Component"
                     , menuItem model.route Input "input" "Input Component"
                     , menuItem model.route Section "section" "Section Component"
@@ -160,17 +179,14 @@ componentView model =
         Button ->
             Html.map ButtonMsg (Button.view model.button)
 
-        ButtonGroup ->
-            h2 [] [ text "Button Group component selected" ]
-
         Input ->
             h2 [] [ text "Input component selected" ]
 
         Section ->
-            h2 [] [ text "Input component selected" ]
+            Html.map SectionMsg (Section.view model.section)
 
         Surface ->
-            h2 [] [ text "Surface component selected" ]
+            Html.map SurfaceMsg (Surface.view model.surface)
 
         Container ->
             Html.map ContainerMsg (Container.view model.container)
