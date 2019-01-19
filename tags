@@ -23,7 +23,9 @@ Msg	src/Stories/Surface.elm	/^type Msg$/;"	t
 Padding	src/Padding.elm	/^type Padding$/;"	t
 Route	src/Main.elm	/^type Route$/;"	t
 SectionProps	src/Components/Section.elm	/^type alias SectionProps =$/;"	a
-SurfaceProps	src/Components/Surface.elm	/^type alias SurfaceProps =$/;"	a
+SurfaceProps	src/Components/Surface.elm	/^type alias SurfaceProps msg =$/;"	a
+SurfaceShadow	src/Components/Surface.elm	/^type SurfaceShadow$/;"	t
+SurfaceShape	src/Components/Surface.elm	/^type SurfaceShape$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
 all	tests/Tests.elm	/^all : Test$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
@@ -36,11 +38,13 @@ concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
 defaultButtonProps	src/Stories/Button.elm	/^defaultButtonProps : Button.ButtonProps Msg$/;"	c
 defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c
+defaultProps	src/Components/Surface.elm	/^defaultProps : SurfaceProps msg$/;"	c
 init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
 init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Container.elm	/^init : Model$/;"	c
 init	src/Stories/Section.elm	/^init : Model$/;"	c
 init	src/Stories/Surface.elm	/^init : Model$/;"	c
+loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
@@ -54,7 +58,7 @@ sectionComponent	src/Components/Section.elm	/^sectionComponent : SectionProps ->
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProps Msg$/;"	c
-surface	src/Components/Surface.elm	/^surface : SurfaceProps -> List (Html msg) -> Html msg$/;"	f
+surface	src/Components/Surface.elm	/^surface : SurfaceProps msg -> List (Html msg) -> Html msg$/;"	f
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
 toString	src/Padding.elm	/^toString : Padding -> String$/;"	f
 update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f

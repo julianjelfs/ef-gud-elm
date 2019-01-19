@@ -7,6 +7,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Padding as PD
+import Utils exposing (loremIpsum)
 
 
 type alias Model =
@@ -29,12 +30,69 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div
-        [ class <| PD.paddingClass BP.Small PD.Medium
-        , class <| C.backgroundClass C.HelloPaper
-        ]
-        [ Surface.surface {}
-            [ h3 [] [ text "This stuff is inside a boring surface" ]
-            , p [] [ text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis convallis eros. Curabitur nulla mi, aliquet vel tempor a, pharetra ac massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis venenatis elit sed tempus rhoncus. Donec a quam dignissim, fermentum neque varius, porttitor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum lacinia venenatis nunc, a vehicula enim dictum eget. Etiam at elit turpis. In at pretium velit, quis blandit metus. Duis cursus orci eget tortor venenatis condimentum. Aenean semper sollicitudin eros sed vulputate. Morbi vehicula ut neque vitae faucibus. Duis non sollicitudin elit." ]
+    let
+        d =
+            Surface.defaultProps
+    in
+    div []
+        [ div
+            [ class <| PD.paddingClass BP.Small PD.Medium
+            , class <| C.backgroundClass C.HelloPaper
+            ]
+            [ Surface.surface d
+                [ h3 [] [ text "This stuff is inside a boring surface" ]
+                , p [] [ text loremIpsum ]
+                ]
+            ]
+        , div
+            [ class <| C.backgroundClass C.EfGrey
+            , class <| PD.paddingClass BP.Small PD.Medium
+            ]
+            [ Surface.surface { d | outline = True }
+                [ h3 [] [ text "A surface can have an outline" ]
+                , p [] [ text loremIpsum ]
+                ]
+            ]
+        , div
+            [ class <| C.backgroundClass C.LegalPaper
+            , class <| PD.paddingClass BP.Small PD.Medium
+            ]
+            [ Surface.surface { d | shadow = Surface.DefaultShadow }
+                [ h3 [] [ text "Or it can have a shadow" ]
+                , p [] [ text loremIpsum ]
+                ]
+            ]
+        , div
+            [ class <| C.backgroundClass C.OutdoorPaper
+            , class <| PD.paddingClass BP.Small PD.Medium
+            ]
+            [ Surface.surface { d | shadow = Surface.DeepShadow }
+                [ h3 [] [ text "And even a DEEP shadow" ]
+                , p [] [ text loremIpsum ]
+                ]
+            ]
+        , div
+            [ class <| C.backgroundClass C.White
+            , class <| PD.paddingClass BP.Small PD.Medium
+            ]
+            [ Surface.surface
+                { d
+                    | shadow = Surface.DeepShadow
+                    , shape =
+                        Surface.Rounded
+                }
+                [ h3 [] [ text "And we can also have round corners" ]
+                , p [] [ text loremIpsum ]
+                ]
+            ]
+        , div
+            [ class <| C.backgroundClass C.EfGrey
+            , class <| PD.paddingClass BP.Small PD.Medium
+            ]
+            [ Surface.surface
+                { d | onClick = Just NoOp }
+                [ h3 [] [ text "We get interaction states if we wrap an <a> tag" ]
+                , p [] [ text loremIpsum ]
+                ]
             ]
         ]
