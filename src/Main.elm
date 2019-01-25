@@ -7,6 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Stories.Button as Button
 import Stories.Container as Container
+import Stories.Input as Input
 import Stories.Section as Section
 import Stories.Surface as Surface
 import Url exposing (Url)
@@ -35,6 +36,7 @@ type alias Model =
     , container : Container.Model
     , section : Section.Model
     , surface : Surface.Model
+    , input : Input.Model
     }
 
 
@@ -46,6 +48,7 @@ init _ url key =
       , container = Container.init
       , section = Section.init
       , surface = Surface.init
+      , input = Input.init
       }
     , Cmd.none
     )
@@ -67,6 +70,7 @@ type Msg
     | ContainerMsg Container.Msg
     | SectionMsg Section.Msg
     | SurfaceMsg Surface.Msg
+    | InputMsg Input.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -112,6 +116,13 @@ update msg model =
                     Surface.update subMsg model.surface
             in
             ( { model | surface = subModel }, Cmd.map SurfaceMsg subCmd )
+
+        InputMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Input.update subMsg model.input
+            in
+            ( { model | input = subModel }, Cmd.map InputMsg subCmd )
 
 
 routeParser : Url.Parser (Route -> a) a
@@ -180,7 +191,7 @@ componentView model =
             Html.map ButtonMsg (Button.view model.button)
 
         Input ->
-            h2 [] [ text "Input component selected" ]
+            Html.map InputMsg (Input.view model.input)
 
         Section ->
             Html.map SectionMsg (Section.view model.section)

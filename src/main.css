@@ -15,7 +15,7 @@ section {
 }
 
 .sidebar {
-  width: 300px;
+  width: 400px;
 }
 
 .sidebar li {
@@ -32,6 +32,7 @@ section {
 }
 
 .content {
+  width: 100%;
 }
 
 .selected-component {
