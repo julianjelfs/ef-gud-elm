@@ -14,6 +14,7 @@ ButtonSize	src/Components/Button.elm	/^type ButtonSize$/;"	t
 ButtonType	src/Components/Button.elm	/^type ButtonType$/;"	t
 GridColumnProps	src/Components/Grid.elm	/^type alias GridColumnProps =$/;"	a
 GridRowProps	src/Components/Grid.elm	/^type alias GridRowProps =$/;"	a
+HorizontalAlignment	src/Components/Grid.elm	/^type HorizontalAlignment$/;"	t
 InputProps	src/Components/Input.elm	/^type alias InputProps =$/;"	a
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 InputValidity	src/Components/Input.elm	/^type InputValidity$/;"	t
@@ -45,16 +46,21 @@ all	tests/Tests.elm	/^all : Test$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
 backgroundClass	src/Color.elm	/^backgroundClass : ThemeColor -> String$/;"	f
+borderedBox	src/Stories/Grid.elm	/^borderedBox : List (Html Msg) -> Html Msg$/;"	f
 box	src/Stories/Grid.elm	/^box : BoxTags -> Html Msg$/;"	f
-bpPropsToClass	src/Components/Grid.elm	/^bpPropsToClass : String -> BreakpointColumnProps -> String$/;"	f
+bp	src/Stories/Grid.elm	/^bp : Grid.BreakpointColumnProps$/;"	c
+bpPropsToHzClass	src/Components/Grid.elm	/^bpPropsToHzClass : String -> BreakpointColumnProps -> String$/;"	f
+bpPropsToSpanClass	src/Components/Grid.elm	/^bpPropsToSpanClass : String -> BreakpointColumnProps -> String$/;"	f
 buttonComponent	src/Components/Button.elm	/^buttonComponent : ButtonProps msg -> Html msg$/;"	f
 buttonStates	src/Stories/Button.elm	/^buttonStates : Button.ButtonProps Msg -> Model -> Html Msg$/;"	f
 catMaybes	src/Utils.elm	/^catMaybes : List (Maybe a) -> List a$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
+colProps	src/Stories/Grid.elm	/^colProps : Grid.GridColumnProps$/;"	c
 colPropsToClass	src/Components/Grid.elm	/^colPropsToClass : GridColumnProps -> String$/;"	f
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
 concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
+defaultBreakpointProps	src/Components/Grid.elm	/^defaultBreakpointProps : BreakpointColumnProps$/;"	c
 defaultButtonProps	src/Stories/Button.elm	/^defaultButtonProps : Button.ButtonProps Msg$/;"	c
 defaultColProps	src/Components/Grid.elm	/^defaultColProps : GridColumnProps$/;"	c
 defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c
@@ -64,6 +70,9 @@ defaultRowProps	src/Components/Grid.elm	/^defaultRowProps : GridRowProps$/;"	c
 defaultTags	src/Stories/Grid.elm	/^defaultTags : BoxTags$/;"	c
 gridColumn	src/Components/Grid.elm	/^gridColumn : GridColumnProps -> List (Html msg) -> Html msg$/;"	f
 gridRow	src/Components/Grid.elm	/^gridRow : GridRowProps -> List (Html msg) -> Html msg$/;"	f
+horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
+horizontalAlignmentChildOverrides	src/Stories/Grid.elm	/^horizontalAlignmentChildOverrides : Html Msg$/;"	c
+hzToClass	src/Components/Grid.elm	/^hzToClass : HorizontalAlignment -> String$/;"	f
 init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
 init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Container.elm	/^init : Model$/;"	c
@@ -84,13 +93,19 @@ primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 responsiveWidths	src/Stories/Grid.elm	/^responsiveWidths : Html Msg$/;"	c
 routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
+rowProps	src/Stories/Grid.elm	/^rowProps : Grid.GridRowProps$/;"	c
 secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"	f
 secondaryButtonProps	src/Stories/Button.elm	/^secondaryButtonProps : Button.ButtonProps Msg$/;"	c
 sectionComponent	src/Components/Section.elm	/^sectionComponent : SectionProps -> List (Html msg) -> Html msg$/;"	f
+setBreakpointHorizontalAlignment	src/Components/Grid.elm	/^setBreakpointHorizontalAlignment : HorizontalAlignment -> BreakpointColumnProps -> BreakpointColumnProps$/;"	f
+setBreakpointSpan	src/Components/Grid.elm	/^setBreakpointSpan : Int -> BreakpointColumnProps -> BreakpointColumnProps$/;"	f
+setSpan	src/Components/Grid.elm	/^setSpan : Int -> GridColumnProps -> GridColumnProps$/;"	f
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
+spannedProps	src/Stories/Grid.elm	/^spannedProps : Int -> Grid.GridColumnProps$/;"	f
 squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProps Msg$/;"	c
 surface	src/Components/Surface.elm	/^surface : SurfaceProps msg -> List (Html msg) -> Html msg$/;"	f
+taggedBox	src/Stories/Grid.elm	/^taggedBox : String -> Html Msg$/;"	f
 taggedBoxFromProps	src/Stories/Grid.elm	/^taggedBoxFromProps : Grid.GridColumnProps -> Html Msg$/;"	f
 template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f

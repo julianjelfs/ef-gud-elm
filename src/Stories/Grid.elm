@@ -37,6 +37,21 @@ type alias BoxTags =
     }
 
 
+rowProps : Grid.GridRowProps
+rowProps =
+    Grid.defaultRowProps
+
+
+colProps : Grid.GridColumnProps
+colProps =
+    Grid.defaultColProps
+
+
+bp : Grid.BreakpointColumnProps
+bp =
+    Grid.defaultBreakpointProps
+
+
 defaultTags : BoxTags
 defaultTags =
     BoxTags Nothing Nothing Nothing Nothing Nothing
@@ -58,40 +73,25 @@ box { tag, stag, mtag, ltag, xltag } =
 
 autoWidths : Html Msg
 autoWidths =
-    let
-        rowProps =
-            Grid.defaultRowProps
-
-        colProps =
-            Grid.defaultColProps
-
-        taggedBox =
-            box
-                { defaultTags
-                    | tag =
-                        Just
-                            "ef-col"
-                }
-    in
     div
         []
         [ h5 [] [ text "Auto widths" ]
         , p [] [ text "By default columns fill an equal amount of the available        space. If you add two, they will be 50% wide each. Simple" ]
         , Grid.gridRow rowProps
             [ Grid.gridColumn colProps
-                [ taggedBox ]
-            , Grid.gridColumn colProps [ taggedBox ]
+                [ taggedBox "ef-col" ]
+            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
             ]
         , Grid.gridRow rowProps
-            [ Grid.gridColumn colProps [ taggedBox ]
-            , Grid.gridColumn colProps [ taggedBox ]
-            , Grid.gridColumn colProps [ taggedBox ]
+            [ Grid.gridColumn colProps [ taggedBox "ef-col" ]
+            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
+            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
             ]
         , Grid.gridRow rowProps
-            [ Grid.gridColumn colProps [ taggedBox ]
-            , Grid.gridColumn colProps [ taggedBox ]
-            , Grid.gridColumn colProps [ taggedBox ]
-            , Grid.gridColumn colProps [ taggedBox ]
+            [ Grid.gridColumn colProps [ taggedBox "ef-col" ]
+            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
+            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
+            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
             ]
         ]
 
@@ -114,18 +114,12 @@ taggedBoxFromProps { small, medium, large, extraLarge } =
 responsiveWidths : Html Msg
 responsiveWidths =
     let
-        rowProps =
-            Grid.defaultRowProps
-
-        colProps =
-            Grid.defaultColProps
-
         props s m l xl =
             { colProps
-                | small = Just { span = s }
-                , medium = Just { span = m }
-                , large = Just { span = l }
-                , extraLarge = Just { span = xl }
+                | small = Just { bp | span = s }
+                , medium = Just { bp | span = m }
+                , large = Just { bp | span = l }
+                , extraLarge = Just { bp | span = xl }
             }
 
         col p =
@@ -150,6 +144,105 @@ responsiveWidths =
         ]
 
 
+borderedBox : List (Html Msg) -> Html Msg
+borderedBox content =
+    div [ class "bordered-box" ] content
+
+
+spannedProps : Int -> Grid.GridColumnProps
+spannedProps n =
+    Grid.setSpan n colProps
+
+
+taggedBox : String -> Html Msg
+taggedBox tag =
+    box
+        { defaultTags
+            | tag = Just tag
+        }
+
+
+horizontalAlignment : Html Msg
+horizontalAlignment =
+    div
+        []
+        [ h5 [] [ text "Horizontal Alignment" ]
+        , p [] [ text "You can align groups of columns on the X-axis" ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.Start }
+                [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-start" ] ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.End }
+                [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-end" ] ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.Center }
+                [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-center" ] ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceAround }
+                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
+                , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
+                ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceBetween }
+                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
+                , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
+                ]
+            ]
+        ]
+
+
+horizontalAlignmentChildOverrides : Html Msg
+horizontalAlignmentChildOverrides =
+    let
+        startBp =
+            Grid.setBreakpointHorizontalAlignment Grid.Start bp
+                |> Grid.setBreakpointSpan 2
+
+        centerBp =
+            Grid.setBreakpointHorizontalAlignment Grid.Center bp
+                |> Grid.setBreakpointSpan 2
+
+        endBp =
+            Grid.setBreakpointHorizontalAlignment Grid.End bp
+                |> Grid.setBreakpointSpan 2
+
+        props s =
+            { colProps
+                | small = Just s
+            }
+    in
+    div
+        []
+        [ h5 [] [ text "Child Alignment Overrides" ]
+        , p [] [ text "These classes can be used on ef-col items for finer grained alignment control. Again these are settable per breakpoint, use the -s version to apply to all. Note that using these will use up the available space between flex items, effectively pushing siblings aside." ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceBetween }
+                [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-between" ]
+                , Grid.gridColumn (props startBp) [ taggedBox "-s-x-start" ]
+                , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
+                ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.Start }
+                [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-start" ]
+                , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
+                , Grid.gridColumn (props centerBp) [ taggedBox "-s-x-center" ]
+                ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceBetween }
+                [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-between" ]
+                , Grid.gridColumn (props endBp) [ taggedBox "-s-x-end" ]
+                , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
+                ]
+            ]
+        ]
+
+
 view : Model -> Html Msg
 view model =
     Container.container
@@ -157,4 +250,8 @@ view model =
         , autoWidths
         , br [] []
         , responsiveWidths
+        , br [] []
+        , horizontalAlignment
+        , br [] []
+        , horizontalAlignmentChildOverrides
         ]

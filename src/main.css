@@ -39,6 +39,11 @@ section {
   font-weight: bold;
   background-color: #ff329b;
 }
+.bordered-box {
+  padding: 20px;
+  border: 1px solid #dedede;
+  margin-bottom: 20px;
+}
 
 .docs-box {
   position: relative;
