@@ -120,27 +120,16 @@ responsiveWidths =
         colProps =
             Grid.defaultColProps
 
-        respProps =
+        props s m l xl =
             { colProps
-                | small = Just { span = 12 }
-                , medium = Just { span = 6 }
-                , large = Just { span = 3 }
-                , extraLarge = Just { span = 1 }
+                | small = Just { span = s }
+                , medium = Just { span = m }
+                , large = Just { span = l }
+                , extraLarge = Just { span = xl }
             }
 
-        taggedBox =
-            taggedBoxFromProps respProps
-
-        respProps2 =
-            { colProps
-                | small = Just { span = 12 }
-                , medium = Just { span = 6 }
-                , large = Just { span = 1 }
-                , extraLarge = Just { span = 2 }
-            }
-
-        taggedBox2 =
-            taggedBoxFromProps respProps2
+        col p =
+            Grid.gridColumn p [ taggedBoxFromProps p ]
     in
     div
         []
@@ -151,18 +140,12 @@ responsiveWidths =
         , Grid.gridRow rowProps
             (List.range 1 12
                 |> List.map
-                    (\_ ->
-                        Grid.gridColumn respProps
-                            [ taggedBox ]
-                    )
+                    (\_ -> col <| props 12 6 3 1)
             )
         , Grid.gridRow rowProps
             (List.range 1 12
                 |> List.map
-                    (\_ ->
-                        Grid.gridColumn respProps2
-                            [ taggedBox2 ]
-                    )
+                    (\_ -> col <| props 12 6 1 2)
             )
         ]
 
