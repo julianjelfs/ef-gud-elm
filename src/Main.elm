@@ -7,6 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Stories.Button as Button
 import Stories.Container as Container
+import Stories.Grid as Grid
 import Stories.Input as Input
 import Stories.Section as Section
 import Stories.Surface as Surface
@@ -37,6 +38,7 @@ type alias Model =
     , section : Section.Model
     , surface : Surface.Model
     , input : Input.Model
+    , grid : Grid.Model
     }
 
 
@@ -49,6 +51,7 @@ init _ url key =
       , section = Section.init
       , surface = Surface.init
       , input = Input.init
+      , grid = Grid.init
       }
     , Cmd.none
     )
@@ -71,6 +74,7 @@ type Msg
     | SectionMsg Section.Msg
     | SurfaceMsg Surface.Msg
     | InputMsg Input.Msg
+    | GridMsg Grid.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -123,6 +127,13 @@ update msg model =
                     Input.update subMsg model.input
             in
             ( { model | input = subModel }, Cmd.map InputMsg subCmd )
+
+        GridMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Grid.update subMsg model.grid
+            in
+            ( { model | grid = subModel }, Cmd.map GridMsg subCmd )
 
 
 routeParser : Url.Parser (Route -> a) a
@@ -203,7 +214,7 @@ componentView model =
             Html.map ContainerMsg (Container.view model.container)
 
         Grid ->
-            h2 [] [ text "Grid component selected" ]
+            Html.map GridMsg (Grid.view model.grid)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]

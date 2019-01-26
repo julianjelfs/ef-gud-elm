@@ -39,3 +39,66 @@ section {
   font-weight: bold;
   background-color: #ff329b;
 }
+
+.docs-box {
+  position: relative;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  min-height: 100px;
+  background: #efefef;
+  border-radius: 2px;
+  color: #333333;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  margin-bottom: 1em;
+}
+
+[data-tag]:before,
+[data-tag-s]:before,
+[data-tag-m]:before,
+[data-tag-l]:before,
+[data-tag-xl]:before {
+  font-size: 12px;
+  position: absolute;
+  font-weight: 400;
+  background: #ff329b;
+  padding: 4px 12px;
+  color: white;
+  top: 8px;
+  left: -4px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+[data-tag]:before {
+  content: attr(data-tag);
+}
+
+@media screen and (max-width: 39.9375em) {
+  [data-tag-s]:before {
+    display: block;
+    content: attr(data-tag-s);
+  }
+}
+
+@media screen and (max-width: 63.9375em) and (min-width: 40em) {
+  [data-tag-m]:before {
+    display: block;
+    content: attr(data-tag-m);
+  }
+}
+
+@media screen and (max-width: 78.9375em) and (min-width: 64em) {
+  [data-tag-l]:before {
+    display: block;
+    content: attr(data-tag-l);
+  }
+}
+
+@media screen and (min-width: 79em) {
+  [data-tag-xl]:before {
+    display: block;
+    content: attr(data-tag-xl);
+  }
+}

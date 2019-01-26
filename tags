@@ -3,6 +3,113 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BoxTags	src/Stories/Grid.elm	/^type alias BoxTags =$/;"	a
+Breakpoint	src/Breakpoint.elm	/^type Breakpoint$/;"	t
+BreakpointColumnProps	src/Components/Grid.elm	/^type alias BreakpointColumnProps =$/;"	a
+ButtonProps	src/Components/Button.elm	/^type alias ButtonProps msg =$/;"	a
+ButtonShadow	src/Components/Button.elm	/^type ButtonShadow$/;"	t
+ButtonShape	src/Components/Button.elm	/^type ButtonShape$/;"	t
+ButtonSize	src/Components/Button.elm	/^type ButtonSize$/;"	t
+ButtonType	src/Components/Button.elm	/^type ButtonType$/;"	t
+GridColumnProps	src/Components/Grid.elm	/^type alias GridColumnProps =$/;"	a
+GridRowProps	src/Components/Grid.elm	/^type alias GridRowProps =$/;"	a
+InputProps	src/Components/Input.elm	/^type alias InputProps =$/;"	a
+InputType	src/Components/Input.elm	/^type InputType$/;"	t
+InputValidity	src/Components/Input.elm	/^type InputValidity$/;"	t
+Model	src/Main.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Button.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Container.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Grid.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Input.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Section.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Surface.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Template.elm	/^type alias Model =$/;"	a
+Msg	src/Main.elm	/^type Msg$/;"	t
+Msg	src/Stories/Button.elm	/^type Msg$/;"	t
+Msg	src/Stories/Container.elm	/^type Msg$/;"	t
+Msg	src/Stories/Grid.elm	/^type Msg$/;"	t
+Msg	src/Stories/Input.elm	/^type Msg$/;"	t
+Msg	src/Stories/Section.elm	/^type Msg$/;"	t
+Msg	src/Stories/Surface.elm	/^type Msg$/;"	t
+Msg	src/Stories/Template.elm	/^type Msg$/;"	t
+Padding	src/Padding.elm	/^type Padding$/;"	t
+Route	src/Main.elm	/^type Route$/;"	t
+SectionProps	src/Components/Section.elm	/^type alias SectionProps =$/;"	a
+SurfaceProps	src/Components/Surface.elm	/^type alias SurfaceProps msg =$/;"	a
+SurfaceShadow	src/Components/Surface.elm	/^type SurfaceShadow$/;"	t
+SurfaceShape	src/Components/Surface.elm	/^type SurfaceShape$/;"	t
+TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
+ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
+all	tests/Tests.elm	/^all : Test$/;"	c
+appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
+autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
+backgroundClass	src/Color.elm	/^backgroundClass : ThemeColor -> String$/;"	f
+box	src/Stories/Grid.elm	/^box : BoxTags -> Html Msg$/;"	f
+bpPropsToClass	src/Components/Grid.elm	/^bpPropsToClass : String -> BreakpointColumnProps -> String$/;"	f
+buttonComponent	src/Components/Button.elm	/^buttonComponent : ButtonProps msg -> Html msg$/;"	f
+buttonStates	src/Stories/Button.elm	/^buttonStates : Button.ButtonProps Msg -> Model -> Html Msg$/;"	f
+catMaybes	src/Utils.elm	/^catMaybes : List (Maybe a) -> List a$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
+colPropsToClass	src/Components/Grid.elm	/^colPropsToClass : GridColumnProps -> String$/;"	f
+componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
+concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
+container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
+defaultButtonProps	src/Stories/Button.elm	/^defaultButtonProps : Button.ButtonProps Msg$/;"	c
+defaultColProps	src/Components/Grid.elm	/^defaultColProps : GridColumnProps$/;"	c
+defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c
+defaultProps	src/Components/Input.elm	/^defaultProps : InputProps$/;"	c
+defaultProps	src/Components/Surface.elm	/^defaultProps : SurfaceProps msg$/;"	c
+defaultRowProps	src/Components/Grid.elm	/^defaultRowProps : GridRowProps$/;"	c
+defaultTags	src/Stories/Grid.elm	/^defaultTags : BoxTags$/;"	c
+gridColumn	src/Components/Grid.elm	/^gridColumn : GridColumnProps -> List (Html msg) -> Html msg$/;"	f
+gridRow	src/Components/Grid.elm	/^gridRow : GridRowProps -> List (Html msg) -> Html msg$/;"	f
+init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
+init	src/Stories/Button.elm	/^init : Model$/;"	c
+init	src/Stories/Container.elm	/^init : Model$/;"	c
+init	src/Stories/Grid.elm	/^init : Model$/;"	c
+init	src/Stories/Input.elm	/^init : Model$/;"	c
+init	src/Stories/Section.elm	/^init : Model$/;"	c
+init	src/Stories/Surface.elm	/^init : Model$/;"	c
+init	src/Stories/Template.elm	/^init : Model$/;"	c
+inputComponent	src/Components/Input.elm	/^inputComponent : InputProps -> Html msg$/;"	f
+inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
+inputTypes	src/Stories/Input.elm	/^inputTypes : List (Html Msg)$/;"	c
+loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
+main	src/Main.elm	/^main : Program () Model Msg$/;"	c
+maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
+menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
+paddingClass	src/Padding.elm	/^paddingClass : BP.Breakpoint -> Padding -> String$/;"	f
+primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
+responsiveWidths	src/Stories/Grid.elm	/^responsiveWidths : Html Msg$/;"	c
+routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
+secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"	f
+secondaryButtonProps	src/Stories/Button.elm	/^secondaryButtonProps : Button.ButtonProps Msg$/;"	c
+sectionComponent	src/Components/Section.elm	/^sectionComponent : SectionProps -> List (Html msg) -> Html msg$/;"	f
+sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
+smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
+squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProps Msg$/;"	c
+surface	src/Components/Surface.elm	/^surface : SurfaceProps msg -> List (Html msg) -> Html msg$/;"	f
+taggedBoxFromProps	src/Stories/Grid.elm	/^taggedBoxFromProps : Grid.GridColumnProps -> Html Msg$/;"	f
+template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
+toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
+toString	src/Padding.elm	/^toString : Padding -> String$/;"	f
+typeToString	src/Components/Input.elm	/^typeToString : InputType -> String$/;"	f
+update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Container.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Grid.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Input.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
+view	src/Main.elm	/^view : Model -> Document Msg$/;"	f
+view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Container.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Grid.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
