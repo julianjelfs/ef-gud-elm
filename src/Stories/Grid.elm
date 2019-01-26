@@ -99,15 +99,15 @@ autoWidths =
 taggedBoxFromProps : Grid.GridColumnProps -> Html Msg
 taggedBoxFromProps { small, medium, large, extraLarge } =
     let
-        spanToTag =
-            .span >> String.fromInt >> (++) "-s-"
+        spanToTag s =
+            .span >> String.fromInt >> (++) ("-" ++ s ++ "-")
     in
     box
         { defaultTags
-            | stag = Maybe.map spanToTag small
-            , mtag = Maybe.map spanToTag medium
-            , ltag = Maybe.map spanToTag large
-            , xltag = Maybe.map spanToTag extraLarge
+            | stag = Maybe.map (spanToTag "s") small
+            , mtag = Maybe.map (spanToTag "m") medium
+            , ltag = Maybe.map (spanToTag "l") large
+            , xltag = Maybe.map (spanToTag "xl") extraLarge
         }
 
 
