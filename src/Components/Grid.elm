@@ -3,6 +3,7 @@ module Components.Grid exposing
     , GridColumnProps
     , GridRowProps
     , HorizontalAlignment(..)
+    , VerticalAlignment(..)
     , defaultBreakpointProps
     , defaultColProps
     , defaultRowProps
@@ -20,43 +21,72 @@ import Utils exposing (..)
 
 
 type alias GridRowProps =
-    { horizontalAlignment : HorizontalAlignment }
+    { horizontalAlignment : HorizontalAlignment
+    , verticalAlignment : VerticalAlignment
+    }
 
 
 type HorizontalAlignment
-    = None
-    | Start
-    | End
-    | Center
-    | SpaceAround
-    | SpaceBetween
+    = HNone
+    | HStart
+    | HEnd
+    | HCenter
+    | HSpaceAround
+    | HSpaceBetween
+
+
+type VerticalAlignment
+    = VNone
+    | VStretch
+    | VTop
+    | VCenter
+    | VBottom
 
 
 hzToClass : HorizontalAlignment -> String
 hzToClass ha =
     case ha of
-        None ->
+        HNone ->
             ""
 
-        Start ->
+        HStart ->
             "-x-start"
 
-        End ->
+        HEnd ->
             "-x-end"
 
-        Center ->
+        HCenter ->
             "-x-center"
 
-        SpaceAround ->
+        HSpaceAround ->
             "-x-around"
 
-        SpaceBetween ->
+        HSpaceBetween ->
             "-x-between"
+
+
+vtToClass : VerticalAlignment -> String
+vtToClass va =
+    case va of
+        VNone ->
+            ""
+
+        VStretch ->
+            "-y-stretch"
+
+        VTop ->
+            "-y-start"
+
+        VCenter ->
+            "-y-center"
+
+        VBottom ->
+            "-y-end"
 
 
 defaultRowProps : GridRowProps
 defaultRowProps =
-    { horizontalAlignment = None }
+    { horizontalAlignment = HNone, verticalAlignment = VNone }
 
 
 type alias BreakpointColumnProps =
@@ -130,22 +160,33 @@ setBreakpointHorizontalAlignment ha bp =
 
 defaultBreakpointProps : BreakpointColumnProps
 defaultBreakpointProps =
-    { span = 6, horizontalAlignment = None }
+    { span = 6, horizontalAlignment = HNone }
 
 
-gridRow : GridRowProps -> List (Html msg) -> Html msg
+
+-- this might look a bit weird but it ensures that only grid columns can be
+-- added to a grid row
+
+
+type GridColumn msg
+    = GridColumn (Html msg)
+
+
+gridRow : GridRowProps -> List (GridColumn msg) -> Html msg
 gridRow props cols =
     div
         [ class "ef-row"
         , class <| hzToClass props.horizontalAlignment
+        , class <| vtToClass props.verticalAlignment
         ]
-        cols
+        (List.map (\(GridColumn c) -> c) cols)
 
 
-gridColumn : GridColumnProps -> List (Html msg) -> Html msg
+gridColumn : GridColumnProps -> List (Html msg) -> GridColumn msg
 gridColumn props content =
-    div
-        [ class "ef-col"
-        , class <| colPropsToClass props
-        ]
-        content
+    GridColumn <|
+        div
+            [ class "ef-col"
+            , class <| colPropsToClass props
+            ]
+            content

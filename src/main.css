@@ -59,6 +59,10 @@ section {
   margin-bottom: 1em;
 }
 
+.tall {
+  min-height: 250px;
+}
+
 [data-tag]:before,
 [data-tag-s]:before,
 [data-tag-m]:before,

@@ -12,6 +12,7 @@ ButtonShadow	src/Components/Button.elm	/^type ButtonShadow$/;"	t
 ButtonShape	src/Components/Button.elm	/^type ButtonShape$/;"	t
 ButtonSize	src/Components/Button.elm	/^type ButtonSize$/;"	t
 ButtonType	src/Components/Button.elm	/^type ButtonType$/;"	t
+GridColumn	src/Components/Grid.elm	/^type GridColumn msg$/;"	t
 GridColumnProps	src/Components/Grid.elm	/^type alias GridColumnProps =$/;"	a
 GridRowProps	src/Components/Grid.elm	/^type alias GridRowProps =$/;"	a
 HorizontalAlignment	src/Components/Grid.elm	/^type HorizontalAlignment$/;"	t
@@ -42,6 +43,7 @@ SurfaceShadow	src/Components/Surface.elm	/^type SurfaceShadow$/;"	t
 SurfaceShape	src/Components/Surface.elm	/^type SurfaceShape$/;"	t
 TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
+VerticalAlignment	src/Components/Grid.elm	/^type VerticalAlignment$/;"	t
 all	tests/Tests.elm	/^all : Test$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
@@ -68,8 +70,8 @@ defaultProps	src/Components/Input.elm	/^defaultProps : InputProps$/;"	c
 defaultProps	src/Components/Surface.elm	/^defaultProps : SurfaceProps msg$/;"	c
 defaultRowProps	src/Components/Grid.elm	/^defaultRowProps : GridRowProps$/;"	c
 defaultTags	src/Stories/Grid.elm	/^defaultTags : BoxTags$/;"	c
-gridColumn	src/Components/Grid.elm	/^gridColumn : GridColumnProps -> List (Html msg) -> Html msg$/;"	f
-gridRow	src/Components/Grid.elm	/^gridRow : GridRowProps -> List (Html msg) -> Html msg$/;"	f
+gridColumn	src/Components/Grid.elm	/^gridColumn : GridColumnProps -> List (Html msg) -> GridColumn msg$/;"	f
+gridRow	src/Components/Grid.elm	/^gridRow : GridRowProps -> List (GridColumn msg) -> Html msg$/;"	f
 horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
 horizontalAlignmentChildOverrides	src/Stories/Grid.elm	/^horizontalAlignmentChildOverrides : Html Msg$/;"	c
 hzToClass	src/Components/Grid.elm	/^hzToClass : HorizontalAlignment -> String$/;"	f
@@ -107,6 +109,8 @@ squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProp
 surface	src/Components/Surface.elm	/^surface : SurfaceProps msg -> List (Html msg) -> Html msg$/;"	f
 taggedBox	src/Stories/Grid.elm	/^taggedBox : String -> Html Msg$/;"	f
 taggedBoxFromProps	src/Stories/Grid.elm	/^taggedBoxFromProps : Grid.GridColumnProps -> Html Msg$/;"	f
+tallBox	src/Stories/Grid.elm	/^tallBox : BoxTags -> Html Msg$/;"	f
+tallTaggedBox	src/Stories/Grid.elm	/^tallTaggedBox : String -> Html Msg$/;"	f
 template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
 toString	src/Padding.elm	/^toString : Padding -> String$/;"	f
@@ -120,6 +124,7 @@ update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"
 update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
+verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
 view	src/Main.elm	/^view : Model -> Document Msg$/;"	f
 view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Container.elm	/^view : Model -> Html Msg$/;"	f
@@ -128,3 +133,4 @@ view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
+vtToClass	src/Components/Grid.elm	/^vtToClass : VerticalAlignment -> String$/;"	f

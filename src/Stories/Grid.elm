@@ -34,6 +34,7 @@ type alias BoxTags =
     , mtag : Maybe String
     , ltag : Maybe String
     , xltag : Maybe String
+    , tall : Bool
     }
 
 
@@ -54,13 +55,14 @@ bp =
 
 defaultTags : BoxTags
 defaultTags =
-    BoxTags Nothing Nothing Nothing Nothing Nothing
+    BoxTags Nothing Nothing Nothing Nothing Nothing False
 
 
 box : BoxTags -> Html Msg
-box { tag, stag, mtag, ltag, xltag } =
+box { tag, stag, mtag, ltag, xltag, tall } =
     div
         ([ class "docs-box"
+         , classList [ ( "tall", tall ) ]
          ]
             |> maybeAppend (Maybe.map (attribute "data-tag") tag)
             |> maybeAppend (Maybe.map (attribute "data-tag-s") stag)
@@ -162,6 +164,20 @@ taggedBox tag =
         }
 
 
+tallTaggedBox : String -> Html Msg
+tallTaggedBox tag =
+    box
+        { defaultTags
+            | tag = Just tag
+            , tall = True
+        }
+
+
+tallBox : BoxTags -> Html Msg
+tallBox tags =
+    box { tags | tall = True }
+
+
 horizontalAlignment : Html Msg
 horizontalAlignment =
     div
@@ -169,25 +185,25 @@ horizontalAlignment =
         [ h5 [] [ text "Horizontal Alignment" ]
         , p [] [ text "You can align groups of columns on the X-axis" ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.Start }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HStart }
                 [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-start" ] ]
             ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.End }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HEnd }
                 [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-end" ] ]
             ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.Center }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HCenter }
                 [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-center" ] ]
             ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceAround }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceAround }
                 [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
                 , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
                 ]
             ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceBetween }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
                 [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
                 , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
                 ]
@@ -199,15 +215,15 @@ horizontalAlignmentChildOverrides : Html Msg
 horizontalAlignmentChildOverrides =
     let
         startBp =
-            Grid.setBreakpointHorizontalAlignment Grid.Start bp
+            Grid.setBreakpointHorizontalAlignment Grid.HStart bp
                 |> Grid.setBreakpointSpan 2
 
         centerBp =
-            Grid.setBreakpointHorizontalAlignment Grid.Center bp
+            Grid.setBreakpointHorizontalAlignment Grid.HCenter bp
                 |> Grid.setBreakpointSpan 2
 
         endBp =
-            Grid.setBreakpointHorizontalAlignment Grid.End bp
+            Grid.setBreakpointHorizontalAlignment Grid.HEnd bp
                 |> Grid.setBreakpointSpan 2
 
         props s =
@@ -220,24 +236,47 @@ horizontalAlignmentChildOverrides =
         [ h5 [] [ text "Child Alignment Overrides" ]
         , p [] [ text "These classes can be used on ef-col items for finer grained alignment control. Again these are settable per breakpoint, use the -s version to apply to all. Note that using these will use up the available space between flex items, effectively pushing siblings aside." ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceBetween }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
                 [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-between" ]
                 , Grid.gridColumn (props startBp) [ taggedBox "-s-x-start" ]
                 , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
                 ]
             ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.Start }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HStart }
                 [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-start" ]
                 , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
                 , Grid.gridColumn (props centerBp) [ taggedBox "-s-x-center" ]
                 ]
             ]
         , borderedBox
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.SpaceBetween }
+            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
                 [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-between" ]
                 , Grid.gridColumn (props endBp) [ taggedBox "-s-x-end" ]
                 , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
+                ]
+            ]
+        ]
+
+
+verticalAlignment : Html Msg
+verticalAlignment =
+    div
+        []
+        [ h5 [] [ text "Vertical Alignment" ]
+        , p [] [ text "You can align groups of columns on the Y-axis" ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | verticalAlignment = Grid.VStretch }
+                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-stretch" ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                ]
+            ]
+        , borderedBox
+            [ Grid.gridRow { rowProps | verticalAlignment = Grid.VTop }
+                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-top" ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
                 ]
             ]
         ]
@@ -254,4 +293,6 @@ view model =
         , horizontalAlignment
         , br [] []
         , horizontalAlignmentChildOverrides
+        , br [] []
+        , verticalAlignment
         ]
