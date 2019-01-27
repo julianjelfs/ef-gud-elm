@@ -16,7 +16,7 @@ GridColumn	src/Components/Grid.elm	/^type GridColumn msg$/;"	t
 GridColumnProps	src/Components/Grid.elm	/^type alias GridColumnProps =$/;"	a
 GridRowProps	src/Components/Grid.elm	/^type alias GridRowProps =$/;"	a
 HorizontalAlignment	src/Components/Grid.elm	/^type HorizontalAlignment$/;"	t
-InputProps	src/Components/Input.elm	/^type alias InputProps =$/;"	a
+InputProps	src/Components/Input.elm	/^type alias InputProps msg =$/;"	a
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 InputValidity	src/Components/Input.elm	/^type InputValidity$/;"	t
 Model	src/Main.elm	/^type alias Model =$/;"	a
@@ -70,7 +70,7 @@ defaultBreakpointProps	src/Components/Grid.elm	/^defaultBreakpointProps : Breakp
 defaultButtonProps	src/Stories/Button.elm	/^defaultButtonProps : Button.ButtonProps Msg$/;"	c
 defaultColProps	src/Components/Grid.elm	/^defaultColProps : GridColumnProps$/;"	c
 defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c
-defaultProps	src/Components/Input.elm	/^defaultProps : InputProps$/;"	c
+defaultProps	src/Components/Input.elm	/^defaultProps : InputProps msg$/;"	c
 defaultProps	src/Components/Surface.elm	/^defaultProps : SurfaceProps msg$/;"	c
 defaultRowProps	src/Components/Grid.elm	/^defaultRowProps : GridRowProps$/;"	c
 defaultTags	src/Stories/Grid.elm	/^defaultTags : BoxTags$/;"	c
@@ -87,9 +87,9 @@ init	src/Stories/Input.elm	/^init : Model$/;"	c
 init	src/Stories/Section.elm	/^init : Model$/;"	c
 init	src/Stories/Surface.elm	/^init : Model$/;"	c
 init	src/Stories/Template.elm	/^init : Model$/;"	c
-inputComponent	src/Components/Input.elm	/^inputComponent : InputProps -> Html msg$/;"	f
+inputComponent	src/Components/Input.elm	/^inputComponent : InputProps msg -> Html msg$/;"	f
 inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
-inputTypes	src/Stories/Input.elm	/^inputTypes : List (Html Msg)$/;"	c
+inputTypes	src/Stories/Input.elm	/^inputTypes : Model -> List (Html Msg)$/;"	f
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f

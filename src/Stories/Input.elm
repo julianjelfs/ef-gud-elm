@@ -7,32 +7,37 @@ import Html.Events exposing (..)
 
 
 type alias Model =
-    {}
+    { text : String }
 
 
 type Msg
-    = NoOp
+    = OnInput String
 
 
 init : Model
 init =
-    {}
+    { text = "" }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp ->
-            ( model, Cmd.none )
+        OnInput str ->
+            ( { model | text = str }, Cmd.none )
 
 
-inputTypes : List (Html Msg)
-inputTypes =
+inputTypes : Model -> List (Html Msg)
+inputTypes model =
     let
-        props =
+        defProps =
             Input.defaultProps
+
+        props =
+            { defProps | onInput = Just OnInput }
     in
     [ div [] [ Input.inputComponent { props | placeholder = Just "type: text" } ]
+    , div []
+        [ code [] [ text model.text ] ]
     , div []
         [ Input.inputComponent
             { props
@@ -149,7 +154,7 @@ view model =
         ([ h3 [] [ text "This is the input component" ]
          ]
             ++ [ h5 [] [ text "These are the input types" ] ]
-            ++ inputTypes
+            ++ inputTypes model
             ++ [ br [] [], h5 [] [ text "These are the interaction states" ] ]
             ++ inputStates
         )

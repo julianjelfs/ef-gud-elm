@@ -28,7 +28,7 @@ type InputValidity
     | Neither
 
 
-type alias InputProps =
+type alias InputProps msg =
     { focus : Bool
     , type_ : InputType
     , placeholder : Maybe String
@@ -36,10 +36,11 @@ type alias InputProps =
     , disabled : Bool
     , validity : InputValidity
     , loading : Bool
+    , onInput : Maybe (String -> msg)
     }
 
 
-defaultProps : InputProps
+defaultProps : InputProps msg
 defaultProps =
     { focus = False
     , type_ = TextInput
@@ -48,6 +49,7 @@ defaultProps =
     , disabled = False
     , validity = Neither
     , loading = False
+    , onInput = Nothing
     }
 
 
@@ -76,7 +78,7 @@ typeToString t =
             "url"
 
 
-inputComponent : InputProps -> Html msg
+inputComponent : InputProps msg -> Html msg
 inputComponent props =
     div
         [ class "ef-input-w u-mb-m"
@@ -87,14 +89,16 @@ inputComponent props =
             ]
         ]
         [ input
-            [ class "ef-input"
-            , classList
+            ([ class "ef-input"
+             , classList
                 [ ( "-focus", props.focus )
                 , ( "-completed", props.completed )
                 ]
-            , type_ <| typeToString props.type_
-            , placeholder <| Maybe.withDefault "" props.placeholder
-            , disabled (props.disabled || props.loading)
-            ]
+             , type_ <| typeToString props.type_
+             , placeholder <| Maybe.withDefault "" props.placeholder
+             , disabled (props.disabled || props.loading)
+             ]
+                |> maybeAppend (Maybe.map onInput props.onInput)
+            )
             []
         ]
