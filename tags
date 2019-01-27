@@ -48,11 +48,15 @@ all	tests/Tests.elm	/^all : Test$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
 backgroundClass	src/Color.elm	/^backgroundClass : ThemeColor -> String$/;"	f
-borderedBox	src/Stories/Grid.elm	/^borderedBox : List (Html Msg) -> Html Msg$/;"	f
+behaviour	src/Stories/Grid.elm	/^behaviour : Html Msg$/;"	c
+borderedBox	src/Stories/Grid.elm	/^borderedBox : Bool -> List (Html Msg) -> Html Msg$/;"	f
 box	src/Stories/Grid.elm	/^box : BoxTags -> Html Msg$/;"	f
-bp	src/Stories/Grid.elm	/^bp : Grid.BreakpointColumnProps$/;"	c
-bpPropsToHzClass	src/Components/Grid.elm	/^bpPropsToHzClass : String -> BreakpointColumnProps -> String$/;"	f
+bpProps	src/Stories/Grid.elm	/^bpProps : Grid.BreakpointColumnProps$/;"	c
+bpPropsToBoolClass	src/Components/Grid.elm	/^bpPropsToBoolClass : String -> String -> Bool -> Maybe String$/;"	f
+bpPropsToHzClass	src/Components/Grid.elm	/^bpPropsToHzClass : String -> BreakpointColumnProps -> Maybe String$/;"	f
+bpPropsToOffsetClass	src/Components/Grid.elm	/^bpPropsToOffsetClass : String -> BreakpointColumnProps -> Maybe String$/;"	f
 bpPropsToSpanClass	src/Components/Grid.elm	/^bpPropsToSpanClass : String -> BreakpointColumnProps -> String$/;"	f
+bpPropsToVtClass	src/Components/Grid.elm	/^bpPropsToVtClass : String -> BreakpointColumnProps -> Maybe String$/;"	f
 buttonComponent	src/Components/Button.elm	/^buttonComponent : ButtonProps msg -> Html msg$/;"	f
 buttonStates	src/Stories/Button.elm	/^buttonStates : Button.ButtonProps Msg -> Model -> Html Msg$/;"	f
 catMaybes	src/Utils.elm	/^catMaybes : List (Maybe a) -> List a$/;"	f
@@ -74,7 +78,7 @@ gridColumn	src/Components/Grid.elm	/^gridColumn : GridColumnProps -> List (Html 
 gridRow	src/Components/Grid.elm	/^gridRow : GridRowProps -> List (GridColumn msg) -> Html msg$/;"	f
 horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
 horizontalAlignmentChildOverrides	src/Stories/Grid.elm	/^horizontalAlignmentChildOverrides : Html Msg$/;"	c
-hzToClass	src/Components/Grid.elm	/^hzToClass : HorizontalAlignment -> String$/;"	f
+hzToClass	src/Components/Grid.elm	/^hzToClass : HorizontalAlignment -> Maybe String$/;"	f
 init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
 init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Container.elm	/^init : Model$/;"	c
@@ -90,16 +94,18 @@ loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
+modifySmallBreakpointProps	src/Components/Grid.elm	/^modifySmallBreakpointProps : (BreakpointColumnProps -> BreakpointColumnProps) -> GridColumnProps -> GridColumnProps$/;"	f
+offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 paddingClass	src/Padding.elm	/^paddingClass : BP.Breakpoint -> Padding -> String$/;"	f
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
+reordering	src/Stories/Grid.elm	/^reordering : Html Msg$/;"	c
 responsiveWidths	src/Stories/Grid.elm	/^responsiveWidths : Html Msg$/;"	c
 routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
 rowProps	src/Stories/Grid.elm	/^rowProps : Grid.GridRowProps$/;"	c
 secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"	f
 secondaryButtonProps	src/Stories/Button.elm	/^secondaryButtonProps : Button.ButtonProps Msg$/;"	c
 sectionComponent	src/Components/Section.elm	/^sectionComponent : SectionProps -> List (Html msg) -> Html msg$/;"	f
-setBreakpointHorizontalAlignment	src/Components/Grid.elm	/^setBreakpointHorizontalAlignment : HorizontalAlignment -> BreakpointColumnProps -> BreakpointColumnProps$/;"	f
 setBreakpointSpan	src/Components/Grid.elm	/^setBreakpointSpan : Int -> BreakpointColumnProps -> BreakpointColumnProps$/;"	f
 setSpan	src/Components/Grid.elm	/^setSpan : Int -> GridColumnProps -> GridColumnProps$/;"	f
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
@@ -109,8 +115,6 @@ squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProp
 surface	src/Components/Surface.elm	/^surface : SurfaceProps msg -> List (Html msg) -> Html msg$/;"	f
 taggedBox	src/Stories/Grid.elm	/^taggedBox : String -> Html Msg$/;"	f
 taggedBoxFromProps	src/Stories/Grid.elm	/^taggedBoxFromProps : Grid.GridColumnProps -> Html Msg$/;"	f
-tallBox	src/Stories/Grid.elm	/^tallBox : BoxTags -> Html Msg$/;"	f
-tallTaggedBox	src/Stories/Grid.elm	/^tallTaggedBox : String -> Html Msg$/;"	f
 template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
 toString	src/Padding.elm	/^toString : Padding -> String$/;"	f
@@ -125,6 +129,7 @@ update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
 verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
+verticalAlignmentChildOverrides	src/Stories/Grid.elm	/^verticalAlignmentChildOverrides : Html Msg$/;"	c
 view	src/Main.elm	/^view : Model -> Document Msg$/;"	f
 view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Container.elm	/^view : Model -> Html Msg$/;"	f
@@ -133,4 +138,4 @@ view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
-vtToClass	src/Components/Grid.elm	/^vtToClass : VerticalAlignment -> String$/;"	f
+vtToClass	src/Components/Grid.elm	/^vtToClass : VerticalAlignment -> Maybe String$/;"	f

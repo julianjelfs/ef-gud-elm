@@ -35,6 +35,7 @@ type alias BoxTags =
     , ltag : Maybe String
     , xltag : Maybe String
     , tall : Bool
+    , content : Maybe String
     }
 
 
@@ -48,18 +49,18 @@ colProps =
     Grid.defaultColProps
 
 
-bp : Grid.BreakpointColumnProps
-bp =
+bpProps : Grid.BreakpointColumnProps
+bpProps =
     Grid.defaultBreakpointProps
 
 
 defaultTags : BoxTags
 defaultTags =
-    BoxTags Nothing Nothing Nothing Nothing Nothing False
+    BoxTags Nothing Nothing Nothing Nothing Nothing False Nothing
 
 
 box : BoxTags -> Html Msg
-box { tag, stag, mtag, ltag, xltag, tall } =
+box { tag, stag, mtag, ltag, xltag, tall, content } =
     div
         ([ class "docs-box"
          , classList [ ( "tall", tall ) ]
@@ -70,7 +71,7 @@ box { tag, stag, mtag, ltag, xltag, tall } =
             |> maybeAppend (Maybe.map (attribute "data-tag-l") ltag)
             |> maybeAppend (Maybe.map (attribute "data-tag-xl") xltag)
         )
-        []
+        [ text <| Maybe.withDefault "" content ]
 
 
 autoWidths : Html Msg
@@ -118,10 +119,10 @@ responsiveWidths =
     let
         props s m l xl =
             { colProps
-                | small = Just { bp | span = s }
-                , medium = Just { bp | span = m }
-                , large = Just { bp | span = l }
-                , extraLarge = Just { bp | span = xl }
+                | small = Just { bpProps | span = s }
+                , medium = Just { bpProps | span = m }
+                , large = Just { bpProps | span = l }
+                , extraLarge = Just { bpProps | span = xl }
             }
 
         col p =
@@ -146,9 +147,9 @@ responsiveWidths =
         ]
 
 
-borderedBox : List (Html Msg) -> Html Msg
-borderedBox content =
-    div [ class "bordered-box" ] content
+borderedBox : Bool -> List (Html Msg) -> Html Msg
+borderedBox tall content =
+    div [ class "bordered-box", classList [ ( "tall", tall ) ] ] content
 
 
 spannedProps : Int -> Grid.GridColumnProps
@@ -164,45 +165,31 @@ taggedBox tag =
         }
 
 
-tallTaggedBox : String -> Html Msg
-tallTaggedBox tag =
-    box
-        { defaultTags
-            | tag = Just tag
-            , tall = True
-        }
-
-
-tallBox : BoxTags -> Html Msg
-tallBox tags =
-    box { tags | tall = True }
-
-
 horizontalAlignment : Html Msg
 horizontalAlignment =
     div
         []
         [ h5 [] [ text "Horizontal Alignment" ]
         , p [] [ text "You can align groups of columns on the X-axis" ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HStart }
                 [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-start" ] ]
             ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HEnd }
                 [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-end" ] ]
             ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HCenter }
                 [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-center" ] ]
             ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceAround }
                 [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
                 , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
                 ]
             ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
                 [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
                 , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
@@ -215,15 +202,15 @@ horizontalAlignmentChildOverrides : Html Msg
 horizontalAlignmentChildOverrides =
     let
         startBp =
-            Grid.setBreakpointHorizontalAlignment Grid.HStart bp
+            Grid.setBreakpointHorizontalAlignment Grid.HStart bpProps
                 |> Grid.setBreakpointSpan 2
 
         centerBp =
-            Grid.setBreakpointHorizontalAlignment Grid.HCenter bp
+            Grid.setBreakpointHorizontalAlignment Grid.HCenter bpProps
                 |> Grid.setBreakpointSpan 2
 
         endBp =
-            Grid.setBreakpointHorizontalAlignment Grid.HEnd bp
+            Grid.setBreakpointHorizontalAlignment Grid.HEnd bpProps
                 |> Grid.setBreakpointSpan 2
 
         props s =
@@ -233,23 +220,23 @@ horizontalAlignmentChildOverrides =
     in
     div
         []
-        [ h5 [] [ text "Child Alignment Overrides" ]
+        [ h5 [] [ text "Child Horizontal Alignment Overrides" ]
         , p [] [ text "These classes can be used on ef-col items for finer grained alignment control. Again these are settable per breakpoint, use the -s version to apply to all. Note that using these will use up the available space between flex items, effectively pushing siblings aside." ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
                 [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-between" ]
                 , Grid.gridColumn (props startBp) [ taggedBox "-s-x-start" ]
                 , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
                 ]
             ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HStart }
                 [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-start" ]
                 , Grid.gridColumn (spannedProps 2) [ box defaultTags ]
                 , Grid.gridColumn (props centerBp) [ taggedBox "-s-x-center" ]
                 ]
             ]
-        , borderedBox
+        , borderedBox False
             [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
                 [ Grid.gridColumn (spannedProps 2) [ taggedBox "-x-between" ]
                 , Grid.gridColumn (props endBp) [ taggedBox "-s-x-end" ]
@@ -265,20 +252,173 @@ verticalAlignment =
         []
         [ h5 [] [ text "Vertical Alignment" ]
         , p [] [ text "You can align groups of columns on the Y-axis" ]
-        , borderedBox
+        , borderedBox True
             [ Grid.gridRow { rowProps | verticalAlignment = Grid.VStretch }
                 [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-stretch" ]
                 , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
                 , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
                 ]
             ]
-        , borderedBox
+        , borderedBox True
             [ Grid.gridRow { rowProps | verticalAlignment = Grid.VTop }
                 [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-top" ]
                 , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
                 , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
                 ]
             ]
+        , borderedBox True
+            [ Grid.gridRow { rowProps | verticalAlignment = Grid.VCenter }
+                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-center" ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                ]
+            ]
+        , borderedBox True
+            [ Grid.gridRow { rowProps | verticalAlignment = Grid.VBottom }
+                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-bottom" ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                , Grid.gridColumn (spannedProps 4) [ box defaultTags ]
+                ]
+            ]
+        ]
+
+
+verticalAlignmentChildOverrides : Html Msg
+verticalAlignmentChildOverrides =
+    let
+        topBp =
+            Grid.setBreakpointVerticalAlignment Grid.VTop bpProps
+                |> Grid.setBreakpointSpan 4
+
+        centerBp =
+            Grid.setBreakpointVerticalAlignment Grid.VCenter bpProps
+                |> Grid.setBreakpointSpan 4
+
+        bottomBp =
+            Grid.setBreakpointVerticalAlignment Grid.VBottom bpProps
+                |> Grid.setBreakpointSpan 4
+
+        props s =
+            { colProps
+                | small = Just s
+            }
+    in
+    div
+        []
+        [ h5 [] [ text "Child Vertical Alignment Overrides" ]
+        , p [] [ text "These classes can be used on ef-col items for finer grained alignment control. Again these are settable per breakpoint, use the -s version to apply to all." ]
+        , borderedBox True
+            [ Grid.gridRow rowProps
+                [ Grid.gridColumn (props topBp) [ taggedBox "-s-y-top" ]
+                , Grid.gridColumn (props centerBp) [ taggedBox "-s-y-center" ]
+                , Grid.gridColumn (props bottomBp) [ taggedBox "-s-y-bottom" ]
+                ]
+            ]
+        ]
+
+
+reordering : Html Msg
+reordering =
+    let
+        firstBp s =
+            { s | first = True, span = 3 }
+
+        lastBp s =
+            { s | last = True, span = 3 }
+    in
+    div
+        []
+        [ h5 [] [ text "Reordering" ]
+        , p [] [ text "Use the ordering classes to change the visual order of the layout per breakpoint. Use .order- classes for controlling the visual order of your content. These classes are responsive, so you can set the order by breakpoint." ]
+        , Grid.gridRow rowProps
+            [ Grid.gridColumn (spannedProps 3) [ box { defaultTags | content = Just "1" } ]
+            , Grid.gridColumn (spannedProps 3) [ box { defaultTags | content = Just "2" } ]
+            , Grid.gridColumn (spannedProps 3) [ box { defaultTags | content = Just "3" } ]
+            , Grid.gridColumn
+                (Grid.modifySmallBreakpointProps firstBp
+                    colProps
+                )
+                [ box { defaultTags | content = Just "4", tag = Just "-{bp}-first" } ]
+            ]
+        , Grid.gridRow rowProps
+            [ Grid.gridColumn
+                (Grid.modifySmallBreakpointProps lastBp
+                    colProps
+                )
+                [ box { defaultTags | content = Just "1", tag = Just "-{bp}-last" } ]
+            , Grid.gridColumn (spannedProps 3) [ box { defaultTags | content = Just "2" } ]
+            , Grid.gridColumn (spannedProps 3) [ box { defaultTags | content = Just "3" } ]
+            , Grid.gridColumn (spannedProps 3) [ box { defaultTags | content = Just "4" } ]
+            ]
+        ]
+
+
+behaviour : Html Msg
+behaviour =
+    let
+        shrinkBp s =
+            { s | shrink = True, span = 6 }
+
+        collapseBp s =
+            { s | collapse = True, span = 6 }
+    in
+    div
+        []
+        [ h5 [] [ text "Column Behaviour" ]
+        , p [] [ text "Use the sizing classes to change the behaviour of the layout per breakpoint." ]
+        , Grid.gridRow rowProps
+            [ Grid.gridColumn
+                (Grid.modifySmallBreakpointProps shrinkBp
+                    colProps
+                )
+                [ box { defaultTags | content = Just "should shrink" } ]
+            , Grid.gridColumn (spannedProps 6) [ box { defaultTags | tag = Just "-{bp}-shrink" } ]
+            ]
+        , Grid.gridRow rowProps
+            [ Grid.gridColumn
+                (Grid.modifySmallBreakpointProps collapseBp
+                    colProps
+                )
+                [ box { defaultTags | content = Just "should collapse" } ]
+            , Grid.gridColumn
+                (Grid.modifySmallBreakpointProps collapseBp
+                    colProps
+                )
+                [ box { defaultTags | content = Just "should collapse" } ]
+            ]
+        ]
+
+
+offsetting : Html Msg
+offsetting =
+    let
+        offsetBp o sp s =
+            { s | span = sp, offset = Just o }
+    in
+    div
+        []
+        [ h5 [] [ text "Offsetting Columns" ]
+        , p [] [ text "Use the -{breakpoint}-offset modifiers to offset columns by the specified number." ]
+        , div
+            []
+            (List.range 1 11
+                |> List.map
+                    (\n ->
+                        Grid.gridRow rowProps
+                            [ Grid.gridColumn
+                                (Grid.modifySmallBreakpointProps
+                                    (offsetBp
+                                        (12
+                                            - n
+                                        )
+                                        n
+                                    )
+                                    colProps
+                                )
+                                [ taggedBox <| "-s-offset-" ++ String.fromInt (12 - n) ]
+                            ]
+                    )
+            )
         ]
 
 
@@ -295,4 +435,12 @@ view model =
         , horizontalAlignmentChildOverrides
         , br [] []
         , verticalAlignment
+        , br [] []
+        , verticalAlignmentChildOverrides
+        , br [] []
+        , reordering
+        , br [] []
+        , behaviour
+        , br [] []
+        , offsetting
         ]

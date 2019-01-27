@@ -4,13 +4,16 @@ module Components.Grid exposing
     , GridRowProps
     , HorizontalAlignment(..)
     , VerticalAlignment(..)
+    , colPropsToClass
     , defaultBreakpointProps
     , defaultColProps
     , defaultRowProps
     , gridColumn
     , gridRow
+    , modifySmallBreakpointProps
     , setBreakpointHorizontalAlignment
     , setBreakpointSpan
+    , setBreakpointVerticalAlignment
     , setSpan
     )
 
@@ -43,45 +46,45 @@ type VerticalAlignment
     | VBottom
 
 
-hzToClass : HorizontalAlignment -> String
+hzToClass : HorizontalAlignment -> Maybe String
 hzToClass ha =
     case ha of
         HNone ->
-            ""
+            Nothing
 
         HStart ->
-            "-x-start"
+            Just "-x-start"
 
         HEnd ->
-            "-x-end"
+            Just "-x-end"
 
         HCenter ->
-            "-x-center"
+            Just "-x-center"
 
         HSpaceAround ->
-            "-x-around"
+            Just "-x-around"
 
         HSpaceBetween ->
-            "-x-between"
+            Just "-x-between"
 
 
-vtToClass : VerticalAlignment -> String
+vtToClass : VerticalAlignment -> Maybe String
 vtToClass va =
     case va of
         VNone ->
-            ""
+            Nothing
 
         VStretch ->
-            "-y-stretch"
+            Just "-y-stretch"
 
         VTop ->
-            "-y-start"
+            Just "-y-start"
 
         VCenter ->
-            "-y-center"
+            Just "-y-center"
 
         VBottom ->
-            "-y-end"
+            Just "-y-end"
 
 
 defaultRowProps : GridRowProps
@@ -92,6 +95,12 @@ defaultRowProps =
 type alias BreakpointColumnProps =
     { span : Int
     , horizontalAlignment : HorizontalAlignment
+    , verticalAlignment : VerticalAlignment
+    , first : Bool
+    , last : Bool
+    , shrink : Bool
+    , collapse : Bool
+    , offset : Maybe Int
     }
 
 
@@ -108,22 +117,45 @@ bpPropsToSpanClass prefix { span } =
     "-" ++ prefix ++ "-" ++ String.fromInt span
 
 
-bpPropsToHzClass : String -> BreakpointColumnProps -> String
-bpPropsToHzClass prefix { horizontalAlignment } =
-    "-" ++ prefix ++ hzToClass horizontalAlignment
+bpPropsToHzClass : String -> BreakpointColumnProps -> Maybe String
+bpPropsToHzClass prefix =
+    .horizontalAlignment >> hzToClass >> Maybe.map (\c -> "-" ++ prefix ++ c)
+
+
+bpPropsToVtClass : String -> BreakpointColumnProps -> Maybe String
+bpPropsToVtClass prefix =
+    .verticalAlignment >> vtToClass >> Maybe.map (\c -> "-" ++ prefix ++ c)
+
+
+bpPropsToOffsetClass : String -> BreakpointColumnProps -> Maybe String
+bpPropsToOffsetClass prefix =
+    .offset >> Maybe.map String.fromInt >> Maybe.map (\o -> "-" ++ prefix ++ "-offset-" ++ o)
+
+
+bpPropsToBoolClass : String -> String -> Bool -> Maybe String
+bpPropsToBoolClass prefix label prop =
+    if prop then
+        Just <| "-" ++ prefix ++ "-" ++ label
+
+    else
+        Nothing
 
 
 colPropsToClass : GridColumnProps -> String
 colPropsToClass { small, medium, large, extraLarge } =
-    [ Maybe.map (bpPropsToSpanClass "s") small
-    , Maybe.map (bpPropsToSpanClass "m") medium
-    , Maybe.map (bpPropsToSpanClass "l") large
-    , Maybe.map (bpPropsToSpanClass "xl") extraLarge
-    , Maybe.map (bpPropsToHzClass "s") small
-    , Maybe.map (bpPropsToHzClass "m") medium
-    , Maybe.map (bpPropsToHzClass "l") large
-    , Maybe.map (bpPropsToHzClass "xl") extraLarge
-    ]
+    [ ( "s", small ), ( "m", medium ), ( "l", large ), ( "xl", extraLarge ) ]
+        |> List.concatMap
+            (\( k, v ) ->
+                [ Maybe.map (bpPropsToSpanClass k) v
+                , Maybe.andThen (bpPropsToOffsetClass k) v
+                , Maybe.andThen (bpPropsToHzClass k) v
+                , Maybe.andThen (bpPropsToVtClass k) v
+                , Maybe.andThen (.first >> bpPropsToBoolClass k "first") v
+                , Maybe.andThen (.last >> bpPropsToBoolClass k "last") v
+                , Maybe.andThen (.shrink >> bpPropsToBoolClass k "shrink") v
+                , Maybe.andThen (.collapse >> bpPropsToBoolClass k "collapse") v
+                ]
+            )
         |> catMaybes
         |> List.intersperse " "
         |> List.foldr (++) ""
@@ -145,22 +177,46 @@ setBreakpointSpan n bp =
 
 setSpan : Int -> GridColumnProps -> GridColumnProps
 setSpan n p =
+    modifySmallBreakpointProps (\s -> { s | span = n }) p
+
+
+modifySmallBreakpointProps : (BreakpointColumnProps -> BreakpointColumnProps) -> GridColumnProps -> GridColumnProps
+modifySmallBreakpointProps fn p =
     case p.small of
         Nothing ->
-            { p | small = Just { defaultBreakpointProps | span = n } }
+            { p | small = Just (fn defaultBreakpointProps) }
 
         Just s ->
-            { p | small = Just { s | span = n } }
+            { p | small = Just (fn s) }
 
 
-setBreakpointHorizontalAlignment : HorizontalAlignment -> BreakpointColumnProps -> BreakpointColumnProps
+setBreakpointHorizontalAlignment :
+    HorizontalAlignment
+    -> BreakpointColumnProps
+    -> BreakpointColumnProps
 setBreakpointHorizontalAlignment ha bp =
     { bp | horizontalAlignment = ha }
 
 
+setBreakpointVerticalAlignment :
+    VerticalAlignment
+    -> BreakpointColumnProps
+    -> BreakpointColumnProps
+setBreakpointVerticalAlignment va bp =
+    { bp | verticalAlignment = va }
+
+
 defaultBreakpointProps : BreakpointColumnProps
 defaultBreakpointProps =
-    { span = 6, horizontalAlignment = HNone }
+    { span = 6
+    , horizontalAlignment = HNone
+    , verticalAlignment = VNone
+    , first = False
+    , last = False
+    , shrink = False
+    , collapse = False
+    , offset = Nothing
+    }
 
 
 
@@ -176,8 +232,8 @@ gridRow : GridRowProps -> List (GridColumn msg) -> Html msg
 gridRow props cols =
     div
         [ class "ef-row"
-        , class <| hzToClass props.horizontalAlignment
-        , class <| vtToClass props.verticalAlignment
+        , class <| Maybe.withDefault "" (hzToClass props.horizontalAlignment)
+        , class <| Maybe.withDefault "" (vtToClass props.verticalAlignment)
         ]
         (List.map (\(GridColumn c) -> c) cols)
 

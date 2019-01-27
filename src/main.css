@@ -57,10 +57,15 @@ section {
   line-height: 24px;
   font-weight: 400;
   margin-bottom: 1em;
+  text-align: right;
 }
 
-.tall {
-  min-height: 250px;
+.tall .ef-row {
+  height: 200px;
+}
+
+.tall .docs-box {
+  height: 100%;
 }
 
 [data-tag]:before,
