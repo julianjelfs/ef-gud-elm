@@ -1,6 +1,6 @@
 module Components.Link exposing
     ( LinkProps
-    , linkComponent
+    , link
     )
 
 import Html exposing (..)
@@ -9,12 +9,18 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-type alias LinkProps =
-    {}
+type alias LinkProps msg =
+    { href : String
+    , onClick : Maybe msg
+    }
 
 
-linkComponent : LinkProps -> List (Html msg) -> Html msg
-linkComponent props children =
-    div
-        [ class "ef-link" ]
+link : LinkProps msg -> List (Html msg) -> Html msg
+link props children =
+    a
+        ([ class "ef-link"
+         , href props.href
+         ]
+            |> maybeAppend (Maybe.map onClick props.onClick)
+        )
         children

@@ -19,10 +19,12 @@ HorizontalAlignment	src/Components/Grid.elm	/^type HorizontalAlignment$/;"	t
 InputProps	src/Components/Input.elm	/^type alias InputProps msg =$/;"	a
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 InputValidity	src/Components/Input.elm	/^type InputValidity$/;"	t
+LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a
 Model	src/Stories/Button.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Container.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Grid.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Input.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Link.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Section.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Surface.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Template.elm	/^type alias Model =$/;"	a
@@ -30,6 +32,7 @@ Msg	src/Stories/Button.elm	/^type Msg$/;"	t
 Msg	src/Stories/Container.elm	/^type Msg$/;"	t
 Msg	src/Stories/Grid.elm	/^type Msg$/;"	t
 Msg	src/Stories/Input.elm	/^type Msg$/;"	t
+Msg	src/Stories/Link.elm	/^type Msg$/;"	t
 Msg	src/Stories/Section.elm	/^type Msg$/;"	t
 Msg	src/Stories/Surface.elm	/^type Msg$/;"	t
 Msg	src/Stories/Template.elm	/^type Msg$/;"	t
@@ -79,12 +82,14 @@ init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Container.elm	/^init : Model$/;"	c
 init	src/Stories/Grid.elm	/^init : Model$/;"	c
 init	src/Stories/Input.elm	/^init : Model$/;"	c
+init	src/Stories/Link.elm	/^init : Model$/;"	c
 init	src/Stories/Section.elm	/^init : Model$/;"	c
 init	src/Stories/Surface.elm	/^init : Model$/;"	c
 init	src/Stories/Template.elm	/^init : Model$/;"	c
 inputComponent	src/Components/Input.elm	/^inputComponent : InputProps msg -> Html msg$/;"	f
 inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
 inputTypes	src/Stories/Input.elm	/^inputTypes : Model -> List (Html Msg)$/;"	f
+link	src/Components/Link.elm	/^link : LinkProps msg -> List (Html msg) -> Html msg$/;"	f
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 modifySmallBreakpointProps	src/Components/Grid.elm	/^modifySmallBreakpointProps : (BreakpointColumnProps -> BreakpointColumnProps) -> GridColumnProps -> GridColumnProps$/;"	f
@@ -115,6 +120,7 @@ update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	
 update	src/Stories/Container.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Grid.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Input.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Link.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
@@ -124,6 +130,7 @@ view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Container.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Grid.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Link.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
