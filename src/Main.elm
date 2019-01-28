@@ -6,6 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Stories.Button as Button
+import Stories.Checkbox as Checkbox
 import Stories.Container as Container
 import Stories.Grid as Grid
 import Stories.Input as Input
@@ -31,6 +32,7 @@ type Route
     | Grid
     | Stack
     | Link
+    | Checkbox
     | NotFound
 
 
@@ -45,6 +47,7 @@ type alias Model =
     , grid : Grid.Model
     , stack : Stack.Model
     , link : Link.Model
+    , checkbox : Checkbox.Model
     }
 
 
@@ -60,6 +63,7 @@ init _ url key =
       , grid = Grid.init
       , stack = Stack.init
       , link = Link.init
+      , checkbox = Checkbox.init
       }
     , Cmd.none
     )
@@ -85,6 +89,7 @@ type Msg
     | GridMsg Grid.Msg
     | StackMsg Stack.Msg
     | LinkMsg Link.Msg
+    | CheckboxMsg Checkbox.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -159,6 +164,13 @@ update msg model =
             in
             ( { model | link = subModel }, Cmd.map LinkMsg subCmd )
 
+        CheckboxMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Checkbox.update subMsg model.checkbox
+            in
+            ( { model | checkbox = subModel }, Cmd.map CheckboxMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -172,6 +184,7 @@ routeParser =
         , Url.map Grid (Url.s "grid")
         , Url.map Stack (Url.s "stack")
         , Url.map Link (Url.s "link")
+        , Url.map Checkbox (Url.s "checkbox")
         ]
 
 
@@ -204,6 +217,7 @@ view model =
                     , menuItem model.route Grid "grid" "Grid Component"
                     , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Input "input" "Input Component"
+                    , menuItem model.route Checkbox "checkbox" "Checkbox Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
@@ -234,6 +248,9 @@ componentView model =
 
         Input ->
             Html.map InputMsg (Input.view model.input)
+
+        Checkbox ->
+            Html.map CheckboxMsg (Checkbox.view model.checkbox)
 
         Section ->
             Html.map SectionMsg (Section.view model.section)
