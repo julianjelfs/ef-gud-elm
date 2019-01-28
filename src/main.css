@@ -60,6 +60,10 @@ section {
   text-align: right;
 }
 
+.stack-docs .tall {
+  height: 330px;
+}
+
 .tall .ef-row {
   height: 200px;
 }

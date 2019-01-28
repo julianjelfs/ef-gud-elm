@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-BoxTags	src/Stories/Grid.elm	/^type alias BoxTags =$/;"	a
+BoxTags	src/Stories/Utils.elm	/^type alias BoxTags =$/;"	a
 Breakpoint	src/Breakpoint.elm	/^type Breakpoint$/;"	t
 BreakpointColumnProps	src/Components/Grid.elm	/^type alias BreakpointColumnProps =$/;"	a
 ButtonProps	src/Components/Button.elm	/^type alias ButtonProps msg =$/;"	a
@@ -19,6 +19,7 @@ HorizontalAlignment	src/Components/Grid.elm	/^type HorizontalAlignment$/;"	t
 InputProps	src/Components/Input.elm	/^type alias InputProps msg =$/;"	a
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 InputValidity	src/Components/Input.elm	/^type InputValidity$/;"	t
+ItemAlignment	src/Components/Stack.elm	/^type ItemAlignment$/;"	t
 LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a
 Model	src/Stories/Button.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Container.elm	/^type alias Model =$/;"	a
@@ -26,6 +27,7 @@ Model	src/Stories/Grid.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Input.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Link.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Section.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Stack.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Surface.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Template.elm	/^type alias Model =$/;"	a
 Msg	src/Stories/Button.elm	/^type Msg$/;"	t
@@ -34,23 +36,29 @@ Msg	src/Stories/Grid.elm	/^type Msg$/;"	t
 Msg	src/Stories/Input.elm	/^type Msg$/;"	t
 Msg	src/Stories/Link.elm	/^type Msg$/;"	t
 Msg	src/Stories/Section.elm	/^type Msg$/;"	t
+Msg	src/Stories/Stack.elm	/^type Msg$/;"	t
 Msg	src/Stories/Surface.elm	/^type Msg$/;"	t
 Msg	src/Stories/Template.elm	/^type Msg$/;"	t
 Padding	src/Padding.elm	/^type Padding$/;"	t
 SectionProps	src/Components/Section.elm	/^type alias SectionProps =$/;"	a
+StackItem	src/Components/Stack.elm	/^type StackItem msg$/;"	t
+StackItemProps	src/Components/Stack.elm	/^type alias StackItemProps =$/;"	a
+StackProps	src/Components/Stack.elm	/^type alias StackProps =$/;"	a
 SurfaceProps	src/Components/Surface.elm	/^type alias SurfaceProps msg =$/;"	a
 SurfaceShadow	src/Components/Surface.elm	/^type SurfaceShadow$/;"	t
 SurfaceShape	src/Components/Surface.elm	/^type SurfaceShape$/;"	t
 TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
 VerticalAlignment	src/Components/Grid.elm	/^type VerticalAlignment$/;"	t
+VerticalAlignment	src/Components/Stack.elm	/^type VerticalAlignment$/;"	t
+alignToClass	src/Components/Stack.elm	/^alignToClass : ItemAlignment -> Maybe String$/;"	f
 all	tests/Tests.elm	/^all : Test$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
 backgroundClass	src/Color.elm	/^backgroundClass : ThemeColor -> String$/;"	f
 behaviour	src/Stories/Grid.elm	/^behaviour : Html Msg$/;"	c
-borderedBox	src/Stories/Grid.elm	/^borderedBox : Bool -> List (Html Msg) -> Html Msg$/;"	f
-box	src/Stories/Grid.elm	/^box : BoxTags -> Html Msg$/;"	f
+borderedBox	src/Stories/Utils.elm	/^borderedBox : Bool -> List (Html msg) -> Html msg$/;"	f
+box	src/Stories/Utils.elm	/^box : BoxTags -> Html msg$/;"	f
 bpProps	src/Stories/Grid.elm	/^bpProps : Grid.BreakpointColumnProps$/;"	c
 bpPropsToBoolClass	src/Components/Grid.elm	/^bpPropsToBoolClass : String -> String -> Bool -> Maybe String$/;"	f
 bpPropsToHzClass	src/Components/Grid.elm	/^bpPropsToHzClass : String -> BreakpointColumnProps -> Maybe String$/;"	f
@@ -63,6 +71,7 @@ catMaybes	src/Utils.elm	/^catMaybes : List (Maybe a) -> List a$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
 colProps	src/Stories/Grid.elm	/^colProps : Grid.GridColumnProps$/;"	c
 colPropsToClass	src/Components/Grid.elm	/^colPropsToClass : GridColumnProps -> String$/;"	f
+coloredBox	src/Stories/Stack.elm	/^coloredBox : String -> Html msg$/;"	f
 concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
 defaultBreakpointProps	src/Components/Grid.elm	/^defaultBreakpointProps : BreakpointColumnProps$/;"	c
@@ -72,7 +81,10 @@ defaultProps	src/Components/Button.elm	/^defaultProps : ButtonProps msg$/;"	c
 defaultProps	src/Components/Input.elm	/^defaultProps : InputProps msg$/;"	c
 defaultProps	src/Components/Surface.elm	/^defaultProps : SurfaceProps msg$/;"	c
 defaultRowProps	src/Components/Grid.elm	/^defaultRowProps : GridRowProps$/;"	c
-defaultTags	src/Stories/Grid.elm	/^defaultTags : BoxTags$/;"	c
+defaultStackItemProps	src/Components/Stack.elm	/^defaultStackItemProps : StackItemProps$/;"	c
+defaultStackProps	src/Components/Stack.elm	/^defaultStackProps : StackProps$/;"	c
+defaultTags	src/Stories/Utils.elm	/^defaultTags : BoxTags$/;"	c
+fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
 gridColumn	src/Components/Grid.elm	/^gridColumn : GridColumnProps -> List (Html msg) -> GridColumn msg$/;"	f
 gridRow	src/Components/Grid.elm	/^gridRow : GridRowProps -> List (GridColumn msg) -> Html msg$/;"	f
 horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
@@ -84,11 +96,13 @@ init	src/Stories/Grid.elm	/^init : Model$/;"	c
 init	src/Stories/Input.elm	/^init : Model$/;"	c
 init	src/Stories/Link.elm	/^init : Model$/;"	c
 init	src/Stories/Section.elm	/^init : Model$/;"	c
+init	src/Stories/Stack.elm	/^init : Model$/;"	c
 init	src/Stories/Surface.elm	/^init : Model$/;"	c
 init	src/Stories/Template.elm	/^init : Model$/;"	c
 inputComponent	src/Components/Input.elm	/^inputComponent : InputProps msg -> Html msg$/;"	f
 inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
 inputTypes	src/Stories/Input.elm	/^inputTypes : Model -> List (Html Msg)$/;"	f
+itemAlignment	src/Stories/Stack.elm	/^itemAlignment : Html Msg$/;"	c
 link	src/Components/Link.elm	/^link : LinkProps msg -> List (Html msg) -> Html msg$/;"	f
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
@@ -105,12 +119,16 @@ secondaryButtonProps	src/Stories/Button.elm	/^secondaryButtonProps : Button.Butt
 sectionComponent	src/Components/Section.elm	/^sectionComponent : SectionProps -> List (Html msg) -> Html msg$/;"	f
 setBreakpointSpan	src/Components/Grid.elm	/^setBreakpointSpan : Int -> BreakpointColumnProps -> BreakpointColumnProps$/;"	f
 setSpan	src/Components/Grid.elm	/^setSpan : Int -> GridColumnProps -> GridColumnProps$/;"	f
+simpleStack	src/Stories/Stack.elm	/^simpleStack : Html Msg$/;"	c
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 spannedProps	src/Stories/Grid.elm	/^spannedProps : Int -> Grid.GridColumnProps$/;"	f
 squareButtonProps	src/Stories/Button.elm	/^squareButtonProps : Button.ButtonProps Msg$/;"	c
+stack	src/Components/Stack.elm	/^stack : StackProps -> List (StackItem msg) -> Html msg$/;"	f
+stackAlignment	src/Stories/Stack.elm	/^stackAlignment : Html Msg$/;"	c
+stackItem	src/Components/Stack.elm	/^stackItem : StackItemProps -> List (Html msg) -> StackItem msg$/;"	f
 surface	src/Components/Surface.elm	/^surface : SurfaceProps msg -> List (Html msg) -> Html msg$/;"	f
-taggedBox	src/Stories/Grid.elm	/^taggedBox : String -> Html Msg$/;"	f
+taggedBox	src/Stories/Utils.elm	/^taggedBox : String -> Html msg$/;"	f
 taggedBoxFromProps	src/Stories/Grid.elm	/^taggedBoxFromProps : Grid.GridColumnProps -> Html Msg$/;"	f
 template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
@@ -122,6 +140,7 @@ update	src/Stories/Grid.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Input.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Link.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Stack.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
@@ -132,6 +151,8 @@ view	src/Stories/Grid.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Link.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Stack.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
 vtToClass	src/Components/Grid.elm	/^vtToClass : VerticalAlignment -> Maybe String$/;"	f
+vtToClass	src/Components/Stack.elm	/^vtToClass : VerticalAlignment -> String$/;"	f

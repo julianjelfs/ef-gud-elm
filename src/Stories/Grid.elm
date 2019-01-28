@@ -5,6 +5,7 @@ import Components.Grid as Grid
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Stories.Utils exposing (..)
 import Utils exposing (..)
 
 
@@ -28,17 +29,6 @@ update msg model =
             ( model, Cmd.none )
 
 
-type alias BoxTags =
-    { tag : Maybe String
-    , stag : Maybe String
-    , mtag : Maybe String
-    , ltag : Maybe String
-    , xltag : Maybe String
-    , tall : Bool
-    , content : Maybe String
-    }
-
-
 rowProps : Grid.GridRowProps
 rowProps =
     Grid.defaultRowProps
@@ -52,26 +42,6 @@ colProps =
 bpProps : Grid.BreakpointColumnProps
 bpProps =
     Grid.defaultBreakpointProps
-
-
-defaultTags : BoxTags
-defaultTags =
-    BoxTags Nothing Nothing Nothing Nothing Nothing False Nothing
-
-
-box : BoxTags -> Html Msg
-box { tag, stag, mtag, ltag, xltag, tall, content } =
-    div
-        ([ class "docs-box"
-         , classList [ ( "tall", tall ) ]
-         ]
-            |> maybeAppend (Maybe.map (attribute "data-tag") tag)
-            |> maybeAppend (Maybe.map (attribute "data-tag-s") stag)
-            |> maybeAppend (Maybe.map (attribute "data-tag-m") mtag)
-            |> maybeAppend (Maybe.map (attribute "data-tag-l") ltag)
-            |> maybeAppend (Maybe.map (attribute "data-tag-xl") xltag)
-        )
-        [ text <| Maybe.withDefault "" content ]
 
 
 autoWidths : Html Msg
@@ -147,22 +117,9 @@ responsiveWidths =
         ]
 
 
-borderedBox : Bool -> List (Html Msg) -> Html Msg
-borderedBox tall content =
-    div [ class "bordered-box", classList [ ( "tall", tall ) ] ] content
-
-
 spannedProps : Int -> Grid.GridColumnProps
 spannedProps n =
     Grid.setSpan n colProps
-
-
-taggedBox : String -> Html Msg
-taggedBox tag =
-    box
-        { defaultTags
-            | tag = Just tag
-        }
 
 
 horizontalAlignment : Html Msg
