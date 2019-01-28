@@ -9,7 +9,9 @@ import Stories.Button as Button
 import Stories.Container as Container
 import Stories.Grid as Grid
 import Stories.Input as Input
+import Stories.Link as Link
 import Stories.Section as Section
+import Stories.Stack as Stack
 import Stories.Surface as Surface
 import Url exposing (Url)
 import Url.Parser as Url
@@ -27,6 +29,8 @@ type Route
     | Surface
     | Container
     | Grid
+    | Stack
+    | Link
     | NotFound
 
 
@@ -39,6 +43,8 @@ type alias Model =
     , surface : Surface.Model
     , input : Input.Model
     , grid : Grid.Model
+    , stack : Stack.Model
+    , link : Link.Model
     }
 
 
@@ -52,6 +58,8 @@ init _ url key =
       , surface = Surface.init
       , input = Input.init
       , grid = Grid.init
+      , stack = Stack.init
+      , link = Link.init
       }
     , Cmd.none
     )
@@ -75,6 +83,8 @@ type Msg
     | SurfaceMsg Surface.Msg
     | InputMsg Input.Msg
     | GridMsg Grid.Msg
+    | StackMsg Stack.Msg
+    | LinkMsg Link.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -135,6 +145,20 @@ update msg model =
             in
             ( { model | grid = subModel }, Cmd.map GridMsg subCmd )
 
+        StackMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Stack.update subMsg model.stack
+            in
+            ( { model | stack = subModel }, Cmd.map StackMsg subCmd )
+
+        LinkMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Link.update subMsg model.link
+            in
+            ( { model | link = subModel }, Cmd.map LinkMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -146,6 +170,8 @@ routeParser =
         , Url.map Surface (Url.s "surface")
         , Url.map Container (Url.s "container")
         , Url.map Grid (Url.s "grid")
+        , Url.map Stack (Url.s "stack")
+        , Url.map Link (Url.s "link")
         ]
 
 
@@ -174,7 +200,9 @@ view model =
                 [ ul
                     []
                     [ menuItem model.route Button "button" "Button Component"
+                    , menuItem model.route Link "link" "Link Component"
                     , menuItem model.route Grid "grid" "Grid Component"
+                    , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Input "input" "Input Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
@@ -201,6 +229,9 @@ componentView model =
         Button ->
             Html.map ButtonMsg (Button.view model.button)
 
+        Link ->
+            Html.map LinkMsg (Link.view model.link)
+
         Input ->
             Html.map InputMsg (Input.view model.input)
 
@@ -215,6 +246,9 @@ componentView model =
 
         Grid ->
             Html.map GridMsg (Grid.view model.grid)
+
+        Stack ->
+            Html.map StackMsg (Stack.view model.stack)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]
