@@ -11,10 +11,19 @@ module Components.Grid exposing
     , defaultRowProps
     , defaultSpan
     , extraLargeSpan
+    , extralargexcenter
+    , extralargexend
+    , extralargexstart
     , gridColumn
     , gridRow
     , largeSpan
+    , largexcenter
+    , largexend
+    , largexstart
     , mediumSpan
+    , mediumxcenter
+    , mediumxend
+    , mediumxstart
     , modifySmallBreakpointProps
     , row
     , setBreakpointHorizontalAlignment
@@ -22,6 +31,9 @@ module Components.Grid exposing
     , setBreakpointVerticalAlignment
     , setSpan
     , smallSpan
+    , smallxcenter
+    , smallxend
+    , smallxstart
     , xaround
     , xbetween
     , xcenter
@@ -122,9 +134,74 @@ extraLargeSpan =
     bpSpan "xl"
 
 
+smallxstart : ColProp msg
+smallxstart =
+    bpHa "s" "x-start"
+
+
+smallxcenter : ColProp msg
+smallxcenter =
+    bpHa "s" "x-center"
+
+
+smallxend : ColProp msg
+smallxend =
+    bpHa "s" "x-end"
+
+
+mediumxstart : ColProp msg
+mediumxstart =
+    bpHa "m" "x-start"
+
+
+mediumxcenter : ColProp msg
+mediumxcenter =
+    bpHa "m" "x-center"
+
+
+mediumxend : ColProp msg
+mediumxend =
+    bpHa "m" "x-end"
+
+
+largexstart : ColProp msg
+largexstart =
+    bpHa "l" "x-start"
+
+
+largexcenter : ColProp msg
+largexcenter =
+    bpHa "l" "x-center"
+
+
+largexend : ColProp msg
+largexend =
+    bpHa "l" "x-end"
+
+
+extralargexstart : ColProp msg
+extralargexstart =
+    bpHa "xl" "x-start"
+
+
+extralargexcenter : ColProp msg
+extralargexcenter =
+    bpHa "xl" "x-center"
+
+
+extralargexend : ColProp msg
+extralargexend =
+    bpHa "xl" "x-end"
+
+
 bpSpan : String -> Int -> ColProp msg
 bpSpan bp n =
     ColProp <| class <| "-" ++ bp ++ "-" ++ String.fromInt n
+
+
+bpHa : String -> String -> ColProp msg
+bpHa bp ha =
+    ColProp <| class <| "-" ++ bp ++ "-" ++ ha
 
 
 rowClass : String -> RowProp msg
