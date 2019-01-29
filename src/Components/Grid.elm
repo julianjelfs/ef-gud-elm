@@ -4,6 +4,7 @@ module Components.Grid exposing
     , GridRowProps
     , HorizontalAlignment(..)
     , VerticalAlignment(..)
+    , col
     , colPropsToClass
     , defaultBreakpointProps
     , defaultColProps
@@ -11,16 +12,71 @@ module Components.Grid exposing
     , gridColumn
     , gridRow
     , modifySmallBreakpointProps
+    , row
     , setBreakpointHorizontalAlignment
     , setBreakpointSpan
     , setBreakpointVerticalAlignment
     , setSpan
+    , smallSpan
+    , xstart
+    , ystretch
     )
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Utils exposing (..)
+
+
+type RowProp msg
+    = RowProp (Attribute msg)
+
+
+type ColProp msg
+    = ColProp (Attribute msg)
+
+
+type Column msg
+    = Column (Html msg)
+
+
+type Row msg
+    = Row (Html msg)
+
+
+row : List (RowProp msg) -> List (Column msg) -> Html msg
+row props cols =
+    div
+        (List.map (\(RowProp a) -> a) props)
+        (List.map (\(Column c) -> c) cols)
+
+
+col : List (ColProp msg) -> List (Html msg) -> Column msg
+col props content =
+    Column <|
+        div
+            (List.map (\(ColProp a) -> a) props)
+            content
+
+
+xstart : RowProp msg
+xstart =
+    rowClass "-x-start"
+
+
+ystretch : RowProp msg
+ystretch =
+    rowClass "-y-stretch"
+
+
+smallSpan : Int -> ColProp msg
+smallSpan n =
+    ColProp <| class <| "-s-" ++ String.fromInt n
+
+
+rowClass : String -> RowProp msg
+rowClass =
+    class >> RowProp
 
 
 type alias GridRowProps =

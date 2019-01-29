@@ -44,6 +44,26 @@ bpProps =
     Grid.defaultBreakpointProps
 
 
+
+-- this is a *much simpler* api and a much simpler implementation. The one
+-- downside is that it is a tiny bit less type safe because we can add mutually
+-- exclusive and/or contradictory props. Probably worth it to be honest.
+
+
+perfectApi : Html Msg
+perfectApi =
+    div []
+        [ Grid.row
+            [ Grid.xstart
+            , Grid.ystretch
+            ]
+            [ Grid.col [ Grid.smallSpan 3 ] [ box defaultTags ]
+            , Grid.col [ Grid.smallSpan 3 ] [ box defaultTags ]
+            , Grid.col [ Grid.smallSpan 3 ] [ box defaultTags ]
+            ]
+        ]
+
+
 autoWidths : Html Msg
 autoWidths =
     div
