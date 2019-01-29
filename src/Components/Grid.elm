@@ -9,8 +9,12 @@ module Components.Grid exposing
     , defaultBreakpointProps
     , defaultColProps
     , defaultRowProps
+    , defaultSpan
+    , extraLargeSpan
     , gridColumn
     , gridRow
+    , largeSpan
+    , mediumSpan
     , modifySmallBreakpointProps
     , row
     , setBreakpointHorizontalAlignment
@@ -18,6 +22,10 @@ module Components.Grid exposing
     , setBreakpointVerticalAlignment
     , setSpan
     , smallSpan
+    , xaround
+    , xbetween
+    , xcenter
+    , xend
     , xstart
     , ystretch
     )
@@ -47,7 +55,7 @@ type Row msg
 row : List (RowProp msg) -> List (Column msg) -> Html msg
 row props cols =
     div
-        (List.map (\(RowProp a) -> a) props)
+        ([ class "ef-row" ] ++ List.map (\(RowProp a) -> a) props)
         (List.map (\(Column c) -> c) cols)
 
 
@@ -55,7 +63,7 @@ col : List (ColProp msg) -> List (Html msg) -> Column msg
 col props content =
     Column <|
         div
-            (List.map (\(ColProp a) -> a) props)
+            ([ class "ef-col" ] ++ List.map (\(ColProp a) -> a) props)
             content
 
 
@@ -64,14 +72,59 @@ xstart =
     rowClass "-x-start"
 
 
+xaround : RowProp msg
+xaround =
+    rowClass "-x-around"
+
+
+xbetween : RowProp msg
+xbetween =
+    rowClass "-x-between"
+
+
+xend : RowProp msg
+xend =
+    rowClass "-x-end"
+
+
+xcenter : RowProp msg
+xcenter =
+    rowClass "-x-center"
+
+
 ystretch : RowProp msg
 ystretch =
     rowClass "-y-stretch"
 
 
 smallSpan : Int -> ColProp msg
-smallSpan n =
-    ColProp <| class <| "-s-" ++ String.fromInt n
+smallSpan =
+    bpSpan "s"
+
+
+defaultSpan : Int -> ColProp msg
+defaultSpan =
+    smallSpan
+
+
+mediumSpan : Int -> ColProp msg
+mediumSpan =
+    bpSpan "m"
+
+
+largeSpan : Int -> ColProp msg
+largeSpan =
+    bpSpan "l"
+
+
+extraLargeSpan : Int -> ColProp msg
+extraLargeSpan =
+    bpSpan "xl"
+
+
+bpSpan : String -> Int -> ColProp msg
+bpSpan bp n =
+    ColProp <| class <| "-" ++ bp ++ "-" ++ String.fromInt n
 
 
 rowClass : String -> RowProp msg

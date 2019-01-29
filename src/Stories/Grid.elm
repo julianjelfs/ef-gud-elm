@@ -70,21 +70,21 @@ autoWidths =
         []
         [ h5 [] [ text "Auto widths" ]
         , p [] [ text "By default columns fill an equal amount of the available        space. If you add two, they will be 50% wide each. Simple" ]
-        , Grid.gridRow rowProps
-            [ Grid.gridColumn colProps
+        , Grid.row []
+            [ Grid.col []
                 [ taggedBox "ef-col" ]
-            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
+            , Grid.col [] [ taggedBox "ef-col" ]
             ]
-        , Grid.gridRow rowProps
-            [ Grid.gridColumn colProps [ taggedBox "ef-col" ]
-            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
-            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
+        , Grid.row []
+            [ Grid.col [] [ taggedBox "ef-col" ]
+            , Grid.col [] [ taggedBox "ef-col" ]
+            , Grid.col [] [ taggedBox "ef-col" ]
             ]
-        , Grid.gridRow rowProps
-            [ Grid.gridColumn colProps [ taggedBox "ef-col" ]
-            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
-            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
-            , Grid.gridColumn colProps [ taggedBox "ef-col" ]
+        , Grid.row []
+            [ Grid.col [] [ taggedBox "ef-col" ]
+            , Grid.col [] [ taggedBox "ef-col" ]
+            , Grid.col [] [ taggedBox "ef-col" ]
+            , Grid.col [] [ taggedBox "ef-col" ]
             ]
         ]
 
@@ -104,35 +104,54 @@ taggedBoxFromProps { small, medium, large, extraLarge } =
         }
 
 
+taggedBoxFromSpans : Maybe Int -> Maybe Int -> Maybe Int -> Maybe Int -> Html Msg
+taggedBoxFromSpans small medium large extraLarge =
+    let
+        spanToTag s =
+            String.fromInt >> (++) ("-" ++ s ++ "-")
+    in
+    box
+        { defaultTags
+            | stag = Maybe.map (spanToTag "s") small
+            , mtag = Maybe.map (spanToTag "m") medium
+            , ltag = Maybe.map (spanToTag "l") large
+            , xltag = Maybe.map (spanToTag "xl") extraLarge
+        }
+
+
 responsiveWidths : Html Msg
 responsiveWidths =
-    let
-        props s m l xl =
-            { colProps
-                | small = Just { bpProps | span = s }
-                , medium = Just { bpProps | span = m }
-                , large = Just { bpProps | span = l }
-                , extraLarge = Just { bpProps | span = xl }
-            }
-
-        col p =
-            Grid.gridColumn p [ taggedBoxFromProps p ]
-    in
     div
         []
         [ h5 [] [ text "Responsive widths" ]
         , p [] [ text "As the grid uses flexbox, you needn't set widths for all columns - you can set as many or as few as you like and the remaining columns will take up an equal amount of the remaining space." ]
         , p [] [ text "Column width is set per breakpoint. If you don't need the grid to adapt, you should use the .-s-{size} modifier class to set the width. 12 column spaces are available per row - columns exceeding this number will wrap onto the next line." ]
         , p [] [ text "Resize the container to see the class being used for each breakpoint. The classnames are based on the short versions of the breakpoint names: s, m, l, and xl." ]
-        , Grid.gridRow rowProps
+        , Grid.row []
             (List.range 1 12
                 |> List.map
-                    (\_ -> col <| props 12 6 3 1)
+                    (\_ ->
+                        Grid.col
+                            [ Grid.smallSpan 12
+                            , Grid.mediumSpan 6
+                            , Grid.largeSpan 3
+                            , Grid.extraLargeSpan 1
+                            ]
+                            [ taggedBoxFromSpans (Just 12) (Just 6) (Just 3) (Just 1) ]
+                    )
             )
-        , Grid.gridRow rowProps
+        , Grid.row []
             (List.range 1 12
                 |> List.map
-                    (\_ -> col <| props 12 6 1 2)
+                    (\_ ->
+                        Grid.col
+                            [ Grid.smallSpan 12
+                            , Grid.mediumSpan 6
+                            , Grid.largeSpan 1
+                            , Grid.extraLargeSpan 2
+                            ]
+                            [ taggedBoxFromSpans (Just 12) (Just 6) (Just 1) (Just 2) ]
+                    )
             )
         ]
 
@@ -149,27 +168,27 @@ horizontalAlignment =
         [ h5 [] [ text "Horizontal Alignment" ]
         , p [] [ text "You can align groups of columns on the X-axis" ]
         , borderedBox False
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HStart }
-                [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-start" ] ]
+            [ Grid.row [ Grid.xstart ]
+                [ Grid.col [ Grid.defaultSpan 6 ] [ taggedBox "-x-start" ] ]
             ]
         , borderedBox False
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HEnd }
-                [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-end" ] ]
+            [ Grid.row [ Grid.xend ]
+                [ Grid.col [ Grid.defaultSpan 6 ] [ taggedBox "-x-end" ] ]
             ]
         , borderedBox False
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HCenter }
-                [ Grid.gridColumn (spannedProps 6) [ taggedBox "-x-center" ] ]
+            [ Grid.row [ Grid.xcenter ]
+                [ Grid.col [ Grid.defaultSpan 6 ] [ taggedBox "-x-center" ] ]
             ]
         , borderedBox False
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceAround }
-                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
-                , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-around" ]
+            [ Grid.row [ Grid.xaround ]
+                [ Grid.col [ Grid.defaultSpan 4 ] [ taggedBox "-x-around" ]
+                , Grid.col [ Grid.defaultSpan 4 ] [ taggedBox "-x-around" ]
                 ]
             ]
         , borderedBox False
-            [ Grid.gridRow { rowProps | horizontalAlignment = Grid.HSpaceBetween }
-                [ Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
-                , Grid.gridColumn (spannedProps 4) [ taggedBox "-x-between" ]
+            [ Grid.row [ Grid.xbetween ]
+                [ Grid.col [ Grid.defaultSpan 4 ] [ taggedBox "-x-between" ]
+                , Grid.col [ Grid.defaultSpan 4 ] [ taggedBox "-x-between" ]
                 ]
             ]
         ]
