@@ -1,45 +1,64 @@
 module Components.Grid exposing
-    ( BreakpointColumnProps
-    , GridColumnProps
-    , GridRowProps
-    , HorizontalAlignment(..)
-    , VerticalAlignment(..)
-    , col
-    , colPropsToClass
-    , defaultBreakpointProps
-    , defaultColProps
-    , defaultRowProps
+    ( col
     , defaultSpan
+    , extraLargeCollapse
+    , extraLargeFirst
+    , extraLargeLast
+    , extraLargeOffset
+    , extraLargeShrink
     , extraLargeSpan
     , extralargexcenter
     , extralargexend
     , extralargexstart
-    , gridColumn
-    , gridRow
+    , extralargeybottom
+    , extralargeycenter
+    , extralargeytop
+    , largeCollapse
+    , largeFirst
+    , largeLast
+    , largeOffset
+    , largeShrink
     , largeSpan
     , largexcenter
     , largexend
     , largexstart
+    , largeybottom
+    , largeycenter
+    , largeytop
+    , mediumCollapse
+    , mediumFirst
+    , mediumLast
+    , mediumOffset
+    , mediumShrink
     , mediumSpan
     , mediumxcenter
     , mediumxend
     , mediumxstart
-    , modifySmallBreakpointProps
+    , mediumybottom
+    , mediumycenter
+    , mediumytop
     , row
-    , setBreakpointHorizontalAlignment
-    , setBreakpointSpan
-    , setBreakpointVerticalAlignment
-    , setSpan
+    , smallCollapse
+    , smallFirst
+    , smallLast
+    , smallOffset
+    , smallShrink
     , smallSpan
     , smallxcenter
     , smallxend
     , smallxstart
+    , smallybottom
+    , smallycenter
+    , smallytop
     , xaround
     , xbetween
     , xcenter
     , xend
     , xstart
+    , ybottom
+    , ycenter
     , ystretch
+    , ytop
     )
 
 import Html exposing (..)
@@ -109,9 +128,104 @@ ystretch =
     rowClass "-y-stretch"
 
 
+ytop : RowProp msg
+ytop =
+    rowClass "-y-top"
+
+
+ycenter : RowProp msg
+ycenter =
+    rowClass "-y-center"
+
+
+ybottom : RowProp msg
+ybottom =
+    rowClass "-y-bottom"
+
+
 smallSpan : Int -> ColProp msg
 smallSpan =
     bpSpan "s"
+
+
+smallFirst : ColProp msg
+smallFirst =
+    bpFirst "s"
+
+
+mediumFirst : ColProp msg
+mediumFirst =
+    bpFirst "m"
+
+
+largeFirst : ColProp msg
+largeFirst =
+    bpFirst "l"
+
+
+extraLargeFirst : ColProp msg
+extraLargeFirst =
+    bpFirst "xl"
+
+
+smallShrink : ColProp msg
+smallShrink =
+    bpShrink "s"
+
+
+mediumShrink : ColProp msg
+mediumShrink =
+    bpShrink "m"
+
+
+largeShrink : ColProp msg
+largeShrink =
+    bpShrink "l"
+
+
+extraLargeShrink : ColProp msg
+extraLargeShrink =
+    bpShrink "xl"
+
+
+smallCollapse : ColProp msg
+smallCollapse =
+    bpCollapse "s"
+
+
+mediumCollapse : ColProp msg
+mediumCollapse =
+    bpCollapse "m"
+
+
+largeCollapse : ColProp msg
+largeCollapse =
+    bpCollapse "l"
+
+
+extraLargeCollapse : ColProp msg
+extraLargeCollapse =
+    bpCollapse "xl"
+
+
+smallLast : ColProp msg
+smallLast =
+    bpLast "s"
+
+
+mediumLast : ColProp msg
+mediumLast =
+    bpLast "m"
+
+
+largeLast : ColProp msg
+largeLast =
+    bpLast "l"
+
+
+extraLargeLast : ColProp msg
+extraLargeLast =
+    bpLast "xl"
 
 
 defaultSpan : Int -> ColProp msg
@@ -134,64 +248,144 @@ extraLargeSpan =
     bpSpan "xl"
 
 
+smallOffset : Int -> ColProp msg
+smallOffset =
+    bpOffset "s"
+
+
+mediumOffset : Int -> ColProp msg
+mediumOffset =
+    bpOffset "m"
+
+
+largeOffset : Int -> ColProp msg
+largeOffset =
+    bpOffset "l"
+
+
+extraLargeOffset : Int -> ColProp msg
+extraLargeOffset =
+    bpOffset "xl"
+
+
+smallytop : ColProp msg
+smallytop =
+    bpString "y-top" "s"
+
+
+mediumytop : ColProp msg
+mediumytop =
+    bpString "y-top" "m"
+
+
+largeytop : ColProp msg
+largeytop =
+    bpString "y-top" "l"
+
+
+extralargeytop : ColProp msg
+extralargeytop =
+    bpString "y-top" "xl"
+
+
+smallycenter : ColProp msg
+smallycenter =
+    bpString "y-center" "s"
+
+
+mediumycenter : ColProp msg
+mediumycenter =
+    bpString "y-center" "m"
+
+
+largeycenter : ColProp msg
+largeycenter =
+    bpString "y-center" "l"
+
+
+extralargeycenter : ColProp msg
+extralargeycenter =
+    bpString "y-center" "xl"
+
+
+smallybottom : ColProp msg
+smallybottom =
+    bpString "y-bottom" "s"
+
+
+mediumybottom : ColProp msg
+mediumybottom =
+    bpString "y-bottom" "m"
+
+
+largeybottom : ColProp msg
+largeybottom =
+    bpString "y-bottom" "l"
+
+
+extralargeybottom : ColProp msg
+extralargeybottom =
+    bpString "y-bottom" "xl"
+
+
 smallxstart : ColProp msg
 smallxstart =
-    bpHa "s" "x-start"
+    bpString "x-start" "s"
 
 
 smallxcenter : ColProp msg
 smallxcenter =
-    bpHa "s" "x-center"
+    bpString "x-center" "s"
 
 
 smallxend : ColProp msg
 smallxend =
-    bpHa "s" "x-end"
+    bpString "x-end" "s"
 
 
 mediumxstart : ColProp msg
 mediumxstart =
-    bpHa "m" "x-start"
+    bpString "x-start" "m"
 
 
 mediumxcenter : ColProp msg
 mediumxcenter =
-    bpHa "m" "x-center"
+    bpString "x-center" "m"
 
 
 mediumxend : ColProp msg
 mediumxend =
-    bpHa "m" "x-end"
+    bpString "x-end" "m"
 
 
 largexstart : ColProp msg
 largexstart =
-    bpHa "l" "x-start"
+    bpString "x-start" "l"
 
 
 largexcenter : ColProp msg
 largexcenter =
-    bpHa "l" "x-center"
+    bpString "x-center" "l"
 
 
 largexend : ColProp msg
 largexend =
-    bpHa "l" "x-end"
+    bpString "x-end" "l"
 
 
 extralargexstart : ColProp msg
 extralargexstart =
-    bpHa "xl" "x-start"
+    bpString "x-start" "xl"
 
 
 extralargexcenter : ColProp msg
 extralargexcenter =
-    bpHa "xl" "x-center"
+    bpString "x-center" "xl"
 
 
 extralargexend : ColProp msg
 extralargexend =
-    bpHa "xl" "x-end"
+    bpString "x-end" "xl"
 
 
 bpSpan : String -> Int -> ColProp msg
@@ -199,236 +393,36 @@ bpSpan bp n =
     ColProp <| class <| "-" ++ bp ++ "-" ++ String.fromInt n
 
 
-bpHa : String -> String -> ColProp msg
-bpHa bp ha =
-    ColProp <| class <| "-" ++ bp ++ "-" ++ ha
+bpOffset : String -> Int -> ColProp msg
+bpOffset bp n =
+    ColProp <| class <| "-" ++ bp ++ "-offset-" ++ String.fromInt n
+
+
+bpString : String -> String -> ColProp msg
+bpString cls bp =
+    ColProp <| class <| "-" ++ bp ++ "-" ++ cls
+
+
+bpCollapse : String -> ColProp msg
+bpCollapse =
+    bpString "collapse"
+
+
+bpShrink : String -> ColProp msg
+bpShrink =
+    bpString "shrink"
+
+
+bpFirst : String -> ColProp msg
+bpFirst =
+    bpString "first"
+
+
+bpLast : String -> ColProp msg
+bpLast =
+    bpString "last"
 
 
 rowClass : String -> RowProp msg
 rowClass =
     class >> RowProp
-
-
-type alias GridRowProps =
-    { horizontalAlignment : HorizontalAlignment
-    , verticalAlignment : VerticalAlignment
-    }
-
-
-type HorizontalAlignment
-    = HNone
-    | HStart
-    | HEnd
-    | HCenter
-    | HSpaceAround
-    | HSpaceBetween
-
-
-type VerticalAlignment
-    = VNone
-    | VStretch
-    | VTop
-    | VCenter
-    | VBottom
-
-
-hzToClass : HorizontalAlignment -> Maybe String
-hzToClass ha =
-    case ha of
-        HNone ->
-            Nothing
-
-        HStart ->
-            Just "-x-start"
-
-        HEnd ->
-            Just "-x-end"
-
-        HCenter ->
-            Just "-x-center"
-
-        HSpaceAround ->
-            Just "-x-around"
-
-        HSpaceBetween ->
-            Just "-x-between"
-
-
-vtToClass : VerticalAlignment -> Maybe String
-vtToClass va =
-    case va of
-        VNone ->
-            Nothing
-
-        VStretch ->
-            Just "-y-stretch"
-
-        VTop ->
-            Just "-y-start"
-
-        VCenter ->
-            Just "-y-center"
-
-        VBottom ->
-            Just "-y-end"
-
-
-defaultRowProps : GridRowProps
-defaultRowProps =
-    { horizontalAlignment = HNone, verticalAlignment = VNone }
-
-
-type alias BreakpointColumnProps =
-    { span : Int
-    , horizontalAlignment : HorizontalAlignment
-    , verticalAlignment : VerticalAlignment
-    , first : Bool
-    , last : Bool
-    , shrink : Bool
-    , collapse : Bool
-    , offset : Maybe Int
-    }
-
-
-type alias GridColumnProps =
-    { small : Maybe BreakpointColumnProps
-    , medium : Maybe BreakpointColumnProps
-    , large : Maybe BreakpointColumnProps
-    , extraLarge : Maybe BreakpointColumnProps
-    }
-
-
-bpPropsToSpanClass : String -> BreakpointColumnProps -> String
-bpPropsToSpanClass prefix { span } =
-    "-" ++ prefix ++ "-" ++ String.fromInt span
-
-
-bpPropsToHzClass : String -> BreakpointColumnProps -> Maybe String
-bpPropsToHzClass prefix =
-    .horizontalAlignment >> hzToClass >> Maybe.map (\c -> "-" ++ prefix ++ c)
-
-
-bpPropsToVtClass : String -> BreakpointColumnProps -> Maybe String
-bpPropsToVtClass prefix =
-    .verticalAlignment >> vtToClass >> Maybe.map (\c -> "-" ++ prefix ++ c)
-
-
-bpPropsToOffsetClass : String -> BreakpointColumnProps -> Maybe String
-bpPropsToOffsetClass prefix =
-    .offset >> Maybe.map String.fromInt >> Maybe.map (\o -> "-" ++ prefix ++ "-offset-" ++ o)
-
-
-bpPropsToBoolClass : String -> String -> Bool -> Maybe String
-bpPropsToBoolClass prefix label prop =
-    if prop then
-        Just <| "-" ++ prefix ++ "-" ++ label
-
-    else
-        Nothing
-
-
-colPropsToClass : GridColumnProps -> String
-colPropsToClass { small, medium, large, extraLarge } =
-    [ ( "s", small ), ( "m", medium ), ( "l", large ), ( "xl", extraLarge ) ]
-        |> List.concatMap
-            (\( k, v ) ->
-                [ Maybe.map (bpPropsToSpanClass k) v
-                , Maybe.andThen (bpPropsToOffsetClass k) v
-                , Maybe.andThen (bpPropsToHzClass k) v
-                , Maybe.andThen (bpPropsToVtClass k) v
-                , Maybe.andThen (.first >> bpPropsToBoolClass k "first") v
-                , Maybe.andThen (.last >> bpPropsToBoolClass k "last") v
-                , Maybe.andThen (.shrink >> bpPropsToBoolClass k "shrink") v
-                , Maybe.andThen (.collapse >> bpPropsToBoolClass k "collapse") v
-                ]
-            )
-        |> catMaybes
-        |> List.intersperse " "
-        |> List.foldr (++) ""
-
-
-defaultColProps : GridColumnProps
-defaultColProps =
-    { small = Nothing
-    , medium = Nothing
-    , large = Nothing
-    , extraLarge = Nothing
-    }
-
-
-setBreakpointSpan : Int -> BreakpointColumnProps -> BreakpointColumnProps
-setBreakpointSpan n bp =
-    { bp | span = n }
-
-
-setSpan : Int -> GridColumnProps -> GridColumnProps
-setSpan n p =
-    modifySmallBreakpointProps (\s -> { s | span = n }) p
-
-
-modifySmallBreakpointProps : (BreakpointColumnProps -> BreakpointColumnProps) -> GridColumnProps -> GridColumnProps
-modifySmallBreakpointProps fn p =
-    case p.small of
-        Nothing ->
-            { p | small = Just (fn defaultBreakpointProps) }
-
-        Just s ->
-            { p | small = Just (fn s) }
-
-
-setBreakpointHorizontalAlignment :
-    HorizontalAlignment
-    -> BreakpointColumnProps
-    -> BreakpointColumnProps
-setBreakpointHorizontalAlignment ha bp =
-    { bp | horizontalAlignment = ha }
-
-
-setBreakpointVerticalAlignment :
-    VerticalAlignment
-    -> BreakpointColumnProps
-    -> BreakpointColumnProps
-setBreakpointVerticalAlignment va bp =
-    { bp | verticalAlignment = va }
-
-
-defaultBreakpointProps : BreakpointColumnProps
-defaultBreakpointProps =
-    { span = 6
-    , horizontalAlignment = HNone
-    , verticalAlignment = VNone
-    , first = False
-    , last = False
-    , shrink = False
-    , collapse = False
-    , offset = Nothing
-    }
-
-
-
--- this might look a bit weird but it ensures that only grid columns can be
--- added to a grid row
-
-
-type GridColumn msg
-    = GridColumn (Html msg)
-
-
-gridRow : GridRowProps -> List (GridColumn msg) -> Html msg
-gridRow props cols =
-    div
-        [ class "ef-row"
-        , class <| Maybe.withDefault "" (hzToClass props.horizontalAlignment)
-        , class <| Maybe.withDefault "" (vtToClass props.verticalAlignment)
-        ]
-        (List.map (\(GridColumn c) -> c) cols)
-
-
-gridColumn : GridColumnProps -> List (Html msg) -> GridColumn msg
-gridColumn props content =
-    GridColumn <|
-        div
-            [ class "ef-col"
-            , class <| colPropsToClass props
-            ]
-            content

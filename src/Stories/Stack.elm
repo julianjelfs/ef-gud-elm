@@ -152,21 +152,6 @@ coloredBox cls =
 fullLayout : Html Msg
 fullLayout =
     let
-        rowProps =
-            Grid.defaultRowProps
-
-        bpProps =
-            Grid.defaultBreakpointProps
-
-        colProps =
-            Grid.defaultColProps
-
-        mainCol =
-            { colProps
-                | small = Just { bpProps | span = 12 }
-                , medium = Just { bpProps | span = 8 }
-            }
-
         stretchProps =
             { defaultItemProps
                 | alignment =
@@ -177,12 +162,12 @@ fullLayout =
         []
         [ h5 [] [ text "Full Layout" ]
         , p [] [ text "As mentioned above, it's possible to combine stacks with grids to build tile-based UIs like the following." ]
-        , Grid.gridRow rowProps
-            [ Grid.gridColumn mainCol
+        , Grid.row []
+            [ Grid.col [ Grid.smallSpan 12, Grid.mediumSpan 8 ]
                 [ Stack.stack defaultStackProps
                     [ Stack.stackItem stretchProps
-                        [ Grid.gridRow rowProps
-                            [ Grid.gridColumn colProps
+                        [ Grid.row []
+                            [ Grid.col []
                                 [ Stack.stack defaultStackProps
                                     [ Stack.stackItem stretchProps
                                         [ coloredBox "u-bg-education-blue"
@@ -191,7 +176,7 @@ fullLayout =
                                         [ coloredBox "u-bg-first-blue" ]
                                     ]
                                 ]
-                            , Grid.gridColumn colProps
+                            , Grid.col []
                                 [ Stack.stack defaultStackProps
                                     [ Stack.stackItem stretchProps
                                         [ coloredBox "u-bg-hello-pink" ]
@@ -205,7 +190,7 @@ fullLayout =
                         ]
                     ]
                 ]
-            , Grid.gridColumn colProps
+            , Grid.col []
                 [ Stack.stack defaultStackProps
                     [ Stack.stackItem stretchProps
                         [ coloredBox
@@ -215,34 +200,6 @@ fullLayout =
                 ]
             ]
         ]
-
-
-
--- <div class="ef-row" style="height: 800px">
--- <div class="ef-col -m-8 -s-12">
---     <div class="ef-stack">
---         <div class="ef-row ef-stack__item -stretch u-mb-m">
---             <div class="ef-col">
---                 <div class="ef-stack">
---                     <div class="ef-stack__item -stretch u-bg-education-blue u-mb-m"></div>
---                     <div class="ef-stack__item -stretch u-bg-first-blue"></div>
---                 </div>
---             </div>
---             <div class="ef-col">
---                 <div class="ef-stack">
---                     <div class="ef-stack__item -stretch u-bg-hello-pink"></div>
---                 </div>
---             </div>
---         </div>
---         <div class="ef-stack__item -stretch u-bg-education-blue u-mb-m"></div>
---     </div>
--- </div>
--- <div class="ef-col">
---     <div class="ef-stack">
---         <div class="ef-stack__item -stretch u-bg-first-blue u-mb-m"></div>
---     </div>
--- </div>
--- </div>
 
 
 view : Model -> Html Msg

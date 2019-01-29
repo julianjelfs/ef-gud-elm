@@ -4,5 +4,107 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
+Column	src/Components/Grid.elm	/^type Column msg$/;"	t
+Model	src/Stories/Checkbox.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Grid.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Stack.elm	/^type alias Model =$/;"	a
+Msg	src/Stories/Checkbox.elm	/^type Msg$/;"	t
+Msg	src/Stories/Grid.elm	/^type Msg$/;"	t
+Msg	src/Stories/Stack.elm	/^type Msg$/;"	t
+Row	src/Components/Grid.elm	/^type Row msg$/;"	t
+RowProp	src/Components/Grid.elm	/^type RowProp msg$/;"	t
+autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
+behaviour	src/Stories/Grid.elm	/^behaviour : Html Msg$/;"	c
+bpCollapse	src/Components/Grid.elm	/^bpCollapse : String -> ColProp msg$/;"	f
+bpFirst	src/Components/Grid.elm	/^bpFirst : String -> ColProp msg$/;"	f
+bpLast	src/Components/Grid.elm	/^bpLast : String -> ColProp msg$/;"	f
+bpOffset	src/Components/Grid.elm	/^bpOffset : String -> Int -> ColProp msg$/;"	f
+bpShrink	src/Components/Grid.elm	/^bpShrink : String -> ColProp msg$/;"	f
+bpSpan	src/Components/Grid.elm	/^bpSpan : String -> Int -> ColProp msg$/;"	f
+bpString	src/Components/Grid.elm	/^bpString : String -> String -> ColProp msg$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
+col	src/Components/Grid.elm	/^col : List (ColProp msg) -> List (Html msg) -> Column msg$/;"	f
+coloredBox	src/Stories/Stack.elm	/^coloredBox : String -> Html msg$/;"	f
+defaultSpan	src/Components/Grid.elm	/^defaultSpan : Int -> ColProp msg$/;"	f
+extraLargeCollapse	src/Components/Grid.elm	/^extraLargeCollapse : ColProp msg$/;"	c
+extraLargeFirst	src/Components/Grid.elm	/^extraLargeFirst : ColProp msg$/;"	c
+extraLargeLast	src/Components/Grid.elm	/^extraLargeLast : ColProp msg$/;"	c
+extraLargeOffset	src/Components/Grid.elm	/^extraLargeOffset : Int -> ColProp msg$/;"	f
+extraLargeShrink	src/Components/Grid.elm	/^extraLargeShrink : ColProp msg$/;"	c
+extraLargeSpan	src/Components/Grid.elm	/^extraLargeSpan : Int -> ColProp msg$/;"	f
+extralargexcenter	src/Components/Grid.elm	/^extralargexcenter : ColProp msg$/;"	c
+extralargexend	src/Components/Grid.elm	/^extralargexend : ColProp msg$/;"	c
+extralargexstart	src/Components/Grid.elm	/^extralargexstart : ColProp msg$/;"	c
+extralargeybottom	src/Components/Grid.elm	/^extralargeybottom : ColProp msg$/;"	c
+extralargeycenter	src/Components/Grid.elm	/^extralargeycenter : ColProp msg$/;"	c
+extralargeytop	src/Components/Grid.elm	/^extralargeytop : ColProp msg$/;"	c
+fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
+horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
+horizontalAlignmentChildOverrides	src/Stories/Grid.elm	/^horizontalAlignmentChildOverrides : Html Msg$/;"	c
+init	src/Stories/Checkbox.elm	/^init : Model$/;"	c
+init	src/Stories/Grid.elm	/^init : Model$/;"	c
+init	src/Stories/Stack.elm	/^init : Model$/;"	c
+itemAlignment	src/Stories/Stack.elm	/^itemAlignment : Html Msg$/;"	c
+largeCollapse	src/Components/Grid.elm	/^largeCollapse : ColProp msg$/;"	c
+largeFirst	src/Components/Grid.elm	/^largeFirst : ColProp msg$/;"	c
+largeLast	src/Components/Grid.elm	/^largeLast : ColProp msg$/;"	c
+largeOffset	src/Components/Grid.elm	/^largeOffset : Int -> ColProp msg$/;"	f
+largeShrink	src/Components/Grid.elm	/^largeShrink : ColProp msg$/;"	c
+largeSpan	src/Components/Grid.elm	/^largeSpan : Int -> ColProp msg$/;"	f
+largexcenter	src/Components/Grid.elm	/^largexcenter : ColProp msg$/;"	c
+largexend	src/Components/Grid.elm	/^largexend : ColProp msg$/;"	c
+largexstart	src/Components/Grid.elm	/^largexstart : ColProp msg$/;"	c
+largeybottom	src/Components/Grid.elm	/^largeybottom : ColProp msg$/;"	c
+largeycenter	src/Components/Grid.elm	/^largeycenter : ColProp msg$/;"	c
+largeytop	src/Components/Grid.elm	/^largeytop : ColProp msg$/;"	c
+mediumCollapse	src/Components/Grid.elm	/^mediumCollapse : ColProp msg$/;"	c
+mediumFirst	src/Components/Grid.elm	/^mediumFirst : ColProp msg$/;"	c
+mediumLast	src/Components/Grid.elm	/^mediumLast : ColProp msg$/;"	c
+mediumOffset	src/Components/Grid.elm	/^mediumOffset : Int -> ColProp msg$/;"	f
+mediumShrink	src/Components/Grid.elm	/^mediumShrink : ColProp msg$/;"	c
+mediumSpan	src/Components/Grid.elm	/^mediumSpan : Int -> ColProp msg$/;"	f
+mediumxcenter	src/Components/Grid.elm	/^mediumxcenter : ColProp msg$/;"	c
+mediumxend	src/Components/Grid.elm	/^mediumxend : ColProp msg$/;"	c
+mediumxstart	src/Components/Grid.elm	/^mediumxstart : ColProp msg$/;"	c
+mediumybottom	src/Components/Grid.elm	/^mediumybottom : ColProp msg$/;"	c
+mediumycenter	src/Components/Grid.elm	/^mediumycenter : ColProp msg$/;"	c
+mediumytop	src/Components/Grid.elm	/^mediumytop : ColProp msg$/;"	c
+offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
+reordering	src/Stories/Grid.elm	/^reordering : Html Msg$/;"	c
+responsiveWidths	src/Stories/Grid.elm	/^responsiveWidths : Html Msg$/;"	c
+row	src/Components/Grid.elm	/^row : List (RowProp msg) -> List (Column msg) -> Html msg$/;"	f
+rowClass	src/Components/Grid.elm	/^rowClass : String -> RowProp msg$/;"	f
+simpleStack	src/Stories/Stack.elm	/^simpleStack : Html Msg$/;"	c
+smallCollapse	src/Components/Grid.elm	/^smallCollapse : ColProp msg$/;"	c
+smallFirst	src/Components/Grid.elm	/^smallFirst : ColProp msg$/;"	c
+smallLast	src/Components/Grid.elm	/^smallLast : ColProp msg$/;"	c
+smallOffset	src/Components/Grid.elm	/^smallOffset : Int -> ColProp msg$/;"	f
+smallShrink	src/Components/Grid.elm	/^smallShrink : ColProp msg$/;"	c
+smallSpan	src/Components/Grid.elm	/^smallSpan : Int -> ColProp msg$/;"	f
+smallxcenter	src/Components/Grid.elm	/^smallxcenter : ColProp msg$/;"	c
+smallxend	src/Components/Grid.elm	/^smallxend : ColProp msg$/;"	c
+smallxstart	src/Components/Grid.elm	/^smallxstart : ColProp msg$/;"	c
+smallybottom	src/Components/Grid.elm	/^smallybottom : ColProp msg$/;"	c
+smallycenter	src/Components/Grid.elm	/^smallycenter : ColProp msg$/;"	c
+smallytop	src/Components/Grid.elm	/^smallytop : ColProp msg$/;"	c
+stackAlignment	src/Stories/Stack.elm	/^stackAlignment : Html Msg$/;"	c
+taggedBoxFromSpans	src/Stories/Grid.elm	/^taggedBoxFromSpans : Maybe Int -> Maybe Int -> Maybe Int -> Maybe Int -> Html Msg$/;"	f
+update	src/Stories/Checkbox.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Grid.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Stack.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
+verticalAlignmentChildOverrides	src/Stories/Grid.elm	/^verticalAlignmentChildOverrides : Html Msg$/;"	c
+view	src/Stories/Checkbox.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Grid.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Stack.elm	/^view : Model -> Html Msg$/;"	f
+xaround	src/Components/Grid.elm	/^xaround : RowProp msg$/;"	c
+xbetween	src/Components/Grid.elm	/^xbetween : RowProp msg$/;"	c
+xcenter	src/Components/Grid.elm	/^xcenter : RowProp msg$/;"	c
+xend	src/Components/Grid.elm	/^xend : RowProp msg$/;"	c
+xstart	src/Components/Grid.elm	/^xstart : RowProp msg$/;"	c
+ybottom	src/Components/Grid.elm	/^ybottom : RowProp msg$/;"	c
+ycenter	src/Components/Grid.elm	/^ycenter : RowProp msg$/;"	c
+ystretch	src/Components/Grid.elm	/^ystretch : RowProp msg$/;"	c
+ytop	src/Components/Grid.elm	/^ytop : RowProp msg$/;"	c

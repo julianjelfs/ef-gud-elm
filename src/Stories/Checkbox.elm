@@ -82,7 +82,7 @@ view model =
                 { props
                     | validity = Checkbox.Invalid
                     , checked = True
-                    , label = "invalid checked"
+                    , label = "invalid"
                 }
             ]
         ]
