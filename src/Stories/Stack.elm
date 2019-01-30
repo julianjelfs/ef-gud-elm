@@ -28,14 +28,6 @@ update msg model =
             ( model, Cmd.none )
 
 
-defaultStackProps =
-    Stack.defaultStackProps
-
-
-defaultItemProps =
-    Stack.defaultStackItemProps
-
-
 simpleStack : Html Msg
 simpleStack =
     div
@@ -43,9 +35,9 @@ simpleStack =
         [ h5 [] [ text "Simple Stack" ]
         , p [] [ text "By default, the stack wrapper just piles stack items on top of each other, like any other div. Note that it doesn't handle spacing between items - as elsewhere this should be handled with utility classes." ]
         , borderedBox False
-            [ Stack.stack defaultStackProps
-                [ Stack.stackItem defaultItemProps [ taggedBox "ef-stack__item" ]
-                , Stack.stackItem defaultItemProps [ taggedBox "ef-stack__item" ]
+            [ Stack.stack []
+                [ Stack.item [] [ taggedBox "ef-stack__item" ]
+                , Stack.item [] [ taggedBox "ef-stack__item" ]
                 ]
             ]
         ]
@@ -59,38 +51,30 @@ stackAlignment =
         , p [] [ text "The stack component starts to become useful when aligning items inside arbitrarily tall columns. The modifier classnames mirror the alignment classes in the grid, but since in this case we are only concerned with the y-axis, we drop the y from the classname" ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VStart
-                }
-                [ Stack.stackItem defaultItemProps [ taggedBox "-start" ]
-                , Stack.stackItem defaultItemProps [ box defaultTags ]
+                [ Stack.vTop ]
+                [ Stack.item [] [ taggedBox "-start" ]
+                , Stack.item [] [ box defaultTags ]
                 ]
             ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VBetween
-                }
-                [ Stack.stackItem defaultItemProps [ taggedBox "-between" ]
-                , Stack.stackItem defaultItemProps [ box defaultTags ]
+                [ Stack.vBetween ]
+                [ Stack.item [] [ taggedBox "-between" ]
+                , Stack.item [] [ box defaultTags ]
                 ]
             ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VAround
-                }
-                [ Stack.stackItem defaultItemProps [ taggedBox "-around" ]
-                , Stack.stackItem defaultItemProps [ box defaultTags ]
+                [ Stack.vAround ]
+                [ Stack.item [] [ taggedBox "-around" ]
+                , Stack.item [] [ box defaultTags ]
                 ]
             ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VEnd
-                }
-                [ Stack.stackItem defaultItemProps [ taggedBox "-end" ]
-                , Stack.stackItem defaultItemProps [ box defaultTags ]
+                [ Stack.vBottom ]
+                [ Stack.item [] [ taggedBox "-end" ]
+                , Stack.item [] [ box defaultTags ]
                 ]
             ]
         ]
@@ -104,40 +88,28 @@ itemAlignment =
         , p [] [ text "Sometimes you'll need one item to behave differently to its siblings. These modifiers handle those situations." ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VStart
-                }
-                [ Stack.stackItem
-                    { defaultItemProps
-                        | alignment = Stack.IStretch
-                    }
+                [ Stack.vTop ]
+                [ Stack.item
+                    [ Stack.itemStretch ]
                     [ taggedBox "-stretch" ]
-                , Stack.stackItem defaultItemProps [ box defaultTags ]
+                , Stack.item [] [ box defaultTags ]
                 ]
             ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VAround
-                }
-                [ Stack.stackItem
-                    { defaultItemProps
-                        | alignment = Stack.IStart
-                    }
+                [ Stack.vAround ]
+                [ Stack.item
+                    [ Stack.itemTop ]
                     [ taggedBox "-start" ]
-                , Stack.stackItem defaultItemProps [ box defaultTags ]
+                , Stack.item [] [ box defaultTags ]
                 ]
             ]
         , borderedBox True
             [ Stack.stack
-                { defaultStackProps
-                    | verticalAlignment = Stack.VAround
-                }
-                [ Stack.stackItem defaultItemProps [ box defaultTags ]
-                , Stack.stackItem
-                    { defaultItemProps
-                        | alignment = Stack.IEnd
-                    }
+                [ Stack.vAround ]
+                [ Stack.item [] [ box defaultTags ]
+                , Stack.item
+                    [ Stack.itemBottom ]
                     [ taggedBox "-end" ]
                 ]
             ]
@@ -153,10 +125,7 @@ fullLayout : Html Msg
 fullLayout =
     let
         stretchProps =
-            { defaultItemProps
-                | alignment =
-                    Stack.IStretch
-            }
+            [ Stack.itemStretch ]
     in
     div
         []
@@ -164,35 +133,35 @@ fullLayout =
         , p [] [ text "As mentioned above, it's possible to combine stacks with grids to build tile-based UIs like the following." ]
         , Grid.row []
             [ Grid.col [ Grid.smallSpan 12, Grid.mediumSpan 8 ]
-                [ Stack.stack defaultStackProps
-                    [ Stack.stackItem stretchProps
+                [ Stack.stack []
+                    [ Stack.item stretchProps
                         [ Grid.row []
                             [ Grid.col []
-                                [ Stack.stack defaultStackProps
-                                    [ Stack.stackItem stretchProps
+                                [ Stack.stack []
+                                    [ Stack.item stretchProps
                                         [ coloredBox "u-bg-education-blue"
                                         ]
-                                    , Stack.stackItem stretchProps
+                                    , Stack.item stretchProps
                                         [ coloredBox "u-bg-first-blue" ]
                                     ]
                                 ]
                             , Grid.col []
-                                [ Stack.stack defaultStackProps
-                                    [ Stack.stackItem stretchProps
+                                [ Stack.stack []
+                                    [ Stack.item stretchProps
                                         [ coloredBox "u-bg-hello-pink" ]
                                     ]
                                 ]
                             ]
                         ]
-                    , Stack.stackItem stretchProps
+                    , Stack.item stretchProps
                         [ coloredBox
                             "u-bg-education-blue"
                         ]
                     ]
                 ]
             , Grid.col []
-                [ Stack.stack defaultStackProps
-                    [ Stack.stackItem stretchProps
+                [ Stack.stack []
+                    [ Stack.item stretchProps
                         [ coloredBox
                             "u-bg-first-blue"
                         ]

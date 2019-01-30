@@ -7,36 +7,36 @@ module Components.Grid exposing
     , extraLargeOffset
     , extraLargeShrink
     , extraLargeSpan
-    , extralargexcenter
-    , extralargexend
-    , extralargexstart
-    , extralargeybottom
-    , extralargeycenter
-    , extralargeytop
+    , extralargeXCenter
+    , extralargeXEnd
+    , extralargeXStart
+    , extralargeYBottom
+    , extralargeYCenter
+    , extralargeYTop
     , largeCollapse
     , largeFirst
     , largeLast
     , largeOffset
     , largeShrink
     , largeSpan
-    , largexcenter
-    , largexend
-    , largexstart
-    , largeybottom
-    , largeycenter
-    , largeytop
+    , largeXCenter
+    , largeXEnd
+    , largeXStart
+    , largeYBottom
+    , largeYCenter
+    , largeYTop
     , mediumCollapse
     , mediumFirst
     , mediumLast
     , mediumOffset
     , mediumShrink
     , mediumSpan
-    , mediumxcenter
-    , mediumxend
-    , mediumxstart
-    , mediumybottom
-    , mediumycenter
-    , mediumytop
+    , mediumXCenter
+    , mediumXEnd
+    , mediumXStart
+    , mediumYBottom
+    , mediumYCenter
+    , mediumYTop
     , row
     , smallCollapse
     , smallFirst
@@ -44,21 +44,21 @@ module Components.Grid exposing
     , smallOffset
     , smallShrink
     , smallSpan
-    , smallxcenter
-    , smallxend
-    , smallxstart
-    , smallybottom
-    , smallycenter
-    , smallytop
-    , xaround
-    , xbetween
-    , xcenter
-    , xend
-    , xstart
-    , ybottom
-    , ycenter
-    , ystretch
-    , ytop
+    , smallXCenter
+    , smallXEnd
+    , smallXStart
+    , smallYBottom
+    , smallYCenter
+    , smallYTop
+    , xAround
+    , xBetween
+    , xCenter
+    , xEnd
+    , xStart
+    , yBottom
+    , yCenter
+    , yStretch
+    , yTop
     )
 
 import Html exposing (..)
@@ -98,49 +98,49 @@ col props content =
             content
 
 
-xstart : RowProp msg
-xstart =
+xStart : RowProp msg
+xStart =
     rowClass "-x-start"
 
 
-xaround : RowProp msg
-xaround =
+xAround : RowProp msg
+xAround =
     rowClass "-x-around"
 
 
-xbetween : RowProp msg
-xbetween =
+xBetween : RowProp msg
+xBetween =
     rowClass "-x-between"
 
 
-xend : RowProp msg
-xend =
+xEnd : RowProp msg
+xEnd =
     rowClass "-x-end"
 
 
-xcenter : RowProp msg
-xcenter =
+xCenter : RowProp msg
+xCenter =
     rowClass "-x-center"
 
 
-ystretch : RowProp msg
-ystretch =
+yStretch : RowProp msg
+yStretch =
     rowClass "-y-stretch"
 
 
-ytop : RowProp msg
-ytop =
-    rowClass "-y-top"
+yTop : RowProp msg
+yTop =
+    rowClass "-y-start"
 
 
-ycenter : RowProp msg
-ycenter =
+yCenter : RowProp msg
+yCenter =
     rowClass "-y-center"
 
 
-ybottom : RowProp msg
-ybottom =
-    rowClass "-y-bottom"
+yBottom : RowProp msg
+yBottom =
+    rowClass "-y-end"
 
 
 smallSpan : Int -> ColProp msg
@@ -268,123 +268,123 @@ extraLargeOffset =
     bpOffset "xl"
 
 
-smallytop : ColProp msg
-smallytop =
-    bpString "y-top" "s"
+smallYTop : ColProp msg
+smallYTop =
+    bpString "y-start" "s"
 
 
-mediumytop : ColProp msg
-mediumytop =
-    bpString "y-top" "m"
+mediumYTop : ColProp msg
+mediumYTop =
+    bpString "y-start" "m"
 
 
-largeytop : ColProp msg
-largeytop =
-    bpString "y-top" "l"
+largeYTop : ColProp msg
+largeYTop =
+    bpString "y-start" "l"
 
 
-extralargeytop : ColProp msg
-extralargeytop =
-    bpString "y-top" "xl"
+extralargeYTop : ColProp msg
+extralargeYTop =
+    bpString "y-start" "xl"
 
 
-smallycenter : ColProp msg
-smallycenter =
+smallYCenter : ColProp msg
+smallYCenter =
     bpString "y-center" "s"
 
 
-mediumycenter : ColProp msg
-mediumycenter =
+mediumYCenter : ColProp msg
+mediumYCenter =
     bpString "y-center" "m"
 
 
-largeycenter : ColProp msg
-largeycenter =
+largeYCenter : ColProp msg
+largeYCenter =
     bpString "y-center" "l"
 
 
-extralargeycenter : ColProp msg
-extralargeycenter =
+extralargeYCenter : ColProp msg
+extralargeYCenter =
     bpString "y-center" "xl"
 
 
-smallybottom : ColProp msg
-smallybottom =
-    bpString "y-bottom" "s"
+smallYBottom : ColProp msg
+smallYBottom =
+    bpString "y-end" "s"
 
 
-mediumybottom : ColProp msg
-mediumybottom =
-    bpString "y-bottom" "m"
+mediumYBottom : ColProp msg
+mediumYBottom =
+    bpString "y-end" "m"
 
 
-largeybottom : ColProp msg
-largeybottom =
-    bpString "y-bottom" "l"
+largeYBottom : ColProp msg
+largeYBottom =
+    bpString "y-end" "l"
 
 
-extralargeybottom : ColProp msg
-extralargeybottom =
-    bpString "y-bottom" "xl"
+extralargeYBottom : ColProp msg
+extralargeYBottom =
+    bpString "y-end" "xl"
 
 
-smallxstart : ColProp msg
-smallxstart =
+smallXStart : ColProp msg
+smallXStart =
     bpString "x-start" "s"
 
 
-smallxcenter : ColProp msg
-smallxcenter =
+smallXCenter : ColProp msg
+smallXCenter =
     bpString "x-center" "s"
 
 
-smallxend : ColProp msg
-smallxend =
+smallXEnd : ColProp msg
+smallXEnd =
     bpString "x-end" "s"
 
 
-mediumxstart : ColProp msg
-mediumxstart =
+mediumXStart : ColProp msg
+mediumXStart =
     bpString "x-start" "m"
 
 
-mediumxcenter : ColProp msg
-mediumxcenter =
+mediumXCenter : ColProp msg
+mediumXCenter =
     bpString "x-center" "m"
 
 
-mediumxend : ColProp msg
-mediumxend =
+mediumXEnd : ColProp msg
+mediumXEnd =
     bpString "x-end" "m"
 
 
-largexstart : ColProp msg
-largexstart =
+largeXStart : ColProp msg
+largeXStart =
     bpString "x-start" "l"
 
 
-largexcenter : ColProp msg
-largexcenter =
+largeXCenter : ColProp msg
+largeXCenter =
     bpString "x-center" "l"
 
 
-largexend : ColProp msg
-largexend =
+largeXEnd : ColProp msg
+largeXEnd =
     bpString "x-end" "l"
 
 
-extralargexstart : ColProp msg
-extralargexstart =
+extralargeXStart : ColProp msg
+extralargeXStart =
     bpString "x-start" "xl"
 
 
-extralargexcenter : ColProp msg
-extralargexcenter =
+extralargeXCenter : ColProp msg
+extralargeXCenter =
     bpString "x-center" "xl"
 
 
-extralargexend : ColProp msg
-extralargexend =
+extralargeXEnd : ColProp msg
+extralargeXEnd =
     bpString "x-end" "xl"
 
 

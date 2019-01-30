@@ -1,12 +1,14 @@
 module Components.Stack exposing
-    ( ItemAlignment(..)
-    , StackItem
-    , StackProps
-    , VerticalAlignment(..)
-    , defaultStackItemProps
-    , defaultStackProps
+    ( StackItem
+    , item
+    , itemBottom
+    , itemStretch
+    , itemTop
     , stack
-    , stackItem
+    , vAround
+    , vBetween
+    , vBottom
+    , vTop
     )
 
 import Html exposing (..)
@@ -15,89 +17,63 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-type alias StackProps =
-    { verticalAlignment : VerticalAlignment }
+type StackProp msg
+    = StackProp (Attribute msg)
 
 
-type VerticalAlignment
-    = VStart
-    | VBetween
-    | VAround
-    | VEnd
-
-
-type ItemAlignment
-    = INone
-    | IStretch
-    | IStart
-    | IEnd
-
-
-defaultStackProps : StackProps
-defaultStackProps =
-    { verticalAlignment = VStart }
-
-
-defaultStackItemProps : StackItemProps
-defaultStackItemProps =
-    { alignment = INone }
-
-
-type alias StackItemProps =
-    { alignment : ItemAlignment }
+type StackItemProp msg
+    = StackItemProp (Attribute msg)
 
 
 type StackItem msg
     = StackItem (Html msg)
 
 
-alignToClass : ItemAlignment -> Maybe String
-alignToClass va =
-    case va of
-        INone ->
-            Nothing
-
-        IStretch ->
-            Just "-stretch"
-
-        IStart ->
-            Just "-start"
-
-        IEnd ->
-            Just "-end"
+itemStretch : StackItemProp msg
+itemStretch =
+    StackItemProp <| class "-stretch"
 
 
-vtToClass : VerticalAlignment -> String
-vtToClass va =
-    case va of
-        VStart ->
-            "-start"
-
-        VBetween ->
-            "-between"
-
-        VAround ->
-            "-around"
-
-        VEnd ->
-            "-end"
+itemTop : StackItemProp msg
+itemTop =
+    StackItemProp <| class "-start"
 
 
-stack : StackProps -> List (StackItem msg) -> Html msg
-stack props children =
+itemBottom : StackItemProp msg
+itemBottom =
+    StackItemProp <| class "-end"
+
+
+vTop : StackProp msg
+vTop =
+    StackProp <| class "-start"
+
+
+vBetween : StackProp msg
+vBetween =
+    StackProp <| class "-between"
+
+
+vAround : StackProp msg
+vAround =
+    StackProp <| class "-around"
+
+
+vBottom : StackProp msg
+vBottom =
+    StackProp <| class "-end"
+
+
+stack : List (StackProp msg) -> List (StackItem msg) -> Html msg
+stack props items =
     div
-        [ class "ef-stack"
-        , class (vtToClass props.verticalAlignment)
-        ]
-        (List.map (\(StackItem item) -> item) children)
+        ([ class "ef-stack" ] ++ List.map (\(StackProp a) -> a) props)
+        (List.map (\(StackItem i) -> i) items)
 
 
-stackItem : StackItemProps -> List (Html msg) -> StackItem msg
-stackItem props children =
+item : List (StackItemProp msg) -> List (Html msg) -> StackItem msg
+item props content =
     StackItem <|
         div
-            ([ class "ef-stack__item" ]
-                |> maybeAppend
-                    (Maybe.map class (alignToClass props.alignment))
-            )
-            children
+            ([ class "ef-stack__item" ] ++ List.map (\(StackItemProp a) -> a) props)
+            content
