@@ -1,6 +1,6 @@
 module Stories.Button exposing (Model, Msg, init, update, view)
 
-import Components.Button as Button
+import Components.Button as B
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -26,35 +26,15 @@ update msg model =
             ( { model | numClicks = model.numClicks + 1 }, Cmd.none )
 
 
-buttonStates : Button.ButtonProps Msg -> Model -> Html Msg
+buttonStates : List (B.ButtonProp Msg) -> Model -> Html Msg
 buttonStates props model =
     div
         [ class "ef-button-group u-s-p-s" ]
-        [ Button.buttonComponent
-            { props
-                | text = "Hover"
-                , hover = True
-            }
-        , Button.buttonComponent
-            { props
-                | text = "Active"
-                , active = True
-            }
-        , Button.buttonComponent
-            { props
-                | text = "Focus"
-                , focus = True
-            }
-        , Button.buttonComponent
-            { props
-                | text = "Disabled"
-                , disabled = True
-            }
-        , Button.buttonComponent
-            { props
-                | text = "Loading"
-                , loading = True
-            }
+        [ exampleButton (props ++ [ B.hover ]) "Hover"
+        , exampleButton (props ++ [ B.active ]) "Active"
+        , exampleButton (props ++ [ B.focus ]) "Focus"
+        , exampleButton (props ++ [ B.disabled ]) "Disabled"
+        , exampleButton (props ++ [ B.loading ]) "Loading"
         ]
 
 
@@ -62,18 +42,9 @@ secondaryButton : Model -> Html Msg
 secondaryButton model =
     div
         [ class "ef-button-group u-s-p-s" ]
-        [ Button.buttonComponent
-            { secondaryButtonProps
-                | text = "Lots"
-            }
-        , Button.buttonComponent
-            { secondaryButtonProps
-                | text = "Of Nice"
-            }
-        , Button.buttonComponent
-            { secondaryButtonProps
-                | text = "Buttons"
-            }
+        [ exampleButton [ B.secondary ] "Lots"
+        , exampleButton [ B.secondary ] "Of Nice"
+        , exampleButton [ B.secondary ] "Buttons"
         ]
 
 
@@ -81,18 +52,9 @@ primaryButton : Model -> Html Msg
 primaryButton model =
     div
         [ class "ef-button-group u-s-p-s" ]
-        [ Button.buttonComponent
-            { defaultButtonProps
-                | text = "And more"
-            }
-        , Button.buttonComponent
-            { defaultButtonProps
-                | text = "And more"
-            }
-        , Button.buttonComponent
-            { defaultButtonProps
-                | text = "Buttons"
-            }
+        [ exampleButton [ B.primary ] "And more"
+        , exampleButton [ B.primary ] "And more"
+        , exampleButton [ B.primary ] "Buttons"
         ]
 
 
@@ -100,29 +62,36 @@ smallButtons : Model -> Html Msg
 smallButtons model =
     div
         [ class "ef-button-group u-s-p-s" ]
-        [ Button.buttonComponent
-            { defaultButtonProps
-                | text = "Slight smaller"
-                , size = Button.Small
-            }
-        , Button.buttonComponent
-            { secondaryButtonProps
-                | text = "than normal buttons"
-                , size = Button.Small
-            }
+        [ exampleButton [ B.primary, B.small ] "Slightly smaller"
+        , exampleButton [ B.secondary, B.small ] "than normal button"
         ]
+
+
+exampleButton : List (B.ButtonProp Msg) -> String -> Html Msg
+exampleButton props txt =
+    B.button (B.onClick OnClick :: props) [ text txt ]
 
 
 view : Model -> Html Msg
 view model =
+    let
+        defaultProps =
+            [ B.primary, B.onClick OnClick ]
+
+        secondaryProps =
+            [ B.secondary, B.onClick OnClick ]
+
+        squareProps =
+            [ B.square, B.secondary, B.onClick OnClick ]
+    in
     div
         []
         [ h3 [] [ text "This is the button component" ]
         , primaryButton model
-        , buttonStates defaultButtonProps model
+        , buttonStates defaultProps model
         , secondaryButton model
-        , buttonStates secondaryButtonProps model
-        , buttonStates squareButtonProps model
+        , buttonStates secondaryProps model
+        , buttonStates squareProps model
         , smallButtons model
         , div [ class "u-s-p-s" ]
             [ pre []
@@ -133,22 +102,3 @@ view model =
                 ]
             ]
         ]
-
-
-squareButtonProps : Button.ButtonProps Msg
-squareButtonProps =
-    { secondaryButtonProps | shape = Button.Square }
-
-
-secondaryButtonProps : Button.ButtonProps Msg
-secondaryButtonProps =
-    { defaultButtonProps | buttonType = Button.Secondary }
-
-
-defaultButtonProps : Button.ButtonProps Msg
-defaultButtonProps =
-    let
-        p =
-            Button.defaultProps
-    in
-    { p | text = "Clicky Button!", onClick = Just OnClick }

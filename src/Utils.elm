@@ -1,4 +1,19 @@
-module Utils exposing (appendIf, catMaybes, concatIf, loremIpsum, maybeAppend)
+module Utils exposing
+    ( appendIf
+    , catMaybes
+    , concatIf
+    , loremIpsum
+    , maybeAppend
+    , wrapClass
+    )
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
+
+
+wrapClass : (Attribute msg -> p) -> String -> p
+wrapClass p s =
+    p <| class s
 
 
 catMaybes : List (Maybe a) -> List a
