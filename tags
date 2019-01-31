@@ -5,6 +5,8 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 ButtonProp	src/Components/Button.elm	/^type ButtonProp msg$/;"	t
+CheckboxProp	src/Components/Checkbox.elm	/^type CheckboxProp msg$/;"	t
+ControlProp	src/Components/Checkbox.elm	/^type ControlProp msg$/;"	t
 Model	src/Stories/Button.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Checkbox.elm	/^type alias Model =$/;"	a
 Msg	src/Stories/Button.elm	/^type Msg$/;"	t
@@ -16,17 +18,23 @@ buttonProp	src/Components/Button.elm	/^buttonProp : String -> ButtonProp msg$/;"
 buttonStates	src/Stories/Button.elm	/^buttonStates : List (B.ButtonProp Msg) -> Model -> Html Msg$/;"	f
 catMaybes	src/Utils.elm	/^catMaybes : List (Maybe a) -> List a$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
+checkbox	src/Components/Checkbox.elm	/^checkbox : List (CheckboxProp msg) -> List (Html msg) -> Html msg$/;"	f
+checked	src/Components/Checkbox.elm	/^checked : CheckboxProp msg$/;"	c
 concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 disabled	src/Components/Button.elm	/^disabled : ButtonProp msg$/;"	c
+disabled	src/Components/Checkbox.elm	/^disabled : CheckboxProp msg$/;"	c
 exampleButton	src/Stories/Button.elm	/^exampleButton : List (B.ButtonProp Msg) -> String -> Html Msg$/;"	f
 focus	src/Components/Button.elm	/^focus : ButtonProp msg$/;"	c
+focus	src/Components/Checkbox.elm	/^focus : CheckboxProp msg$/;"	c
 hover	src/Components/Button.elm	/^hover : ButtonProp msg$/;"	c
 init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Checkbox.elm	/^init : Model$/;"	c
+invalid	src/Components/Checkbox.elm	/^invalid : CheckboxProp msg$/;"	c
 loading	src/Components/Button.elm	/^loading : ButtonProp msg$/;"	c
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
+partition	src/Components/Checkbox.elm	/^partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 primary	src/Components/Button.elm	/^primary : ButtonProp msg$/;"	c
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
@@ -37,6 +45,7 @@ smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 square	src/Components/Button.elm	/^square : ButtonProp msg$/;"	c
 update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Checkbox.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+valid	src/Components/Checkbox.elm	/^valid : CheckboxProp msg$/;"	c
 view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Checkbox.elm	/^view : Model -> Html Msg$/;"	f
 wrapClass	src/Utils.elm	/^wrapClass : (Attribute msg -> p) -> String -> p$/;"	f

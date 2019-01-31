@@ -1,8 +1,11 @@
 module Components.Checkbox exposing
-    ( CheckboxProps
-    , CheckboxValidity(..)
+    ( CheckboxProp
     , checkbox
-    , defaultProps
+    , checked
+    , disabled
+    , focus
+    , invalid
+    , valid
     )
 
 import Html exposing (..)
@@ -11,52 +14,71 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-defaultProps : CheckboxProps msg
-defaultProps =
-    { checked = False
-    , label = ""
-    , focus = False
-    , disabled = False
-    , validity = Neither
-    , onInput = Nothing
-    }
+type ControlProp msg
+    = LabelProp (Attribute msg)
+    | InputProp (Attribute msg)
 
 
-type alias CheckboxProps msg =
-    { checked : Bool
-    , label : String
-    , focus : Bool
-    , disabled : Bool
-    , validity : CheckboxValidity
-    , onInput : Maybe (String -> msg)
-    }
+type CheckboxProp msg
+    = CheckboxProp (ControlProp msg)
 
 
-type CheckboxValidity
-    = Valid
-    | Invalid
-    | Neither
+valid : CheckboxProp msg
+valid =
+    CheckboxProp <| LabelProp <| class "-is-valid"
 
 
-checkbox : CheckboxProps msg -> Html msg
-checkbox props =
+invalid : CheckboxProp msg
+invalid =
+    CheckboxProp <| LabelProp <| class "-is-invalid"
+
+
+focus : CheckboxProp msg
+focus =
+    CheckboxProp <| InputProp <| class "-focus"
+
+
+checked : CheckboxProp msg
+checked =
+    CheckboxProp <| InputProp <| Html.Attributes.checked True
+
+
+disabled : CheckboxProp msg
+disabled =
+    CheckboxProp <| InputProp <| Html.Attributes.disabled True
+
+
+partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )
+partition =
+    List.foldr
+        (\(CheckboxProp p) ( lps, ips ) ->
+            case p of
+                LabelProp a ->
+                    ( a :: lps, ips )
+
+                InputProp a ->
+                    ( lps, a :: ips )
+        )
+        ( [], [] )
+
+
+checkbox : List (CheckboxProp msg) -> List (Html msg) -> Html msg
+checkbox props content =
+    let
+        ( labelProps, inputProps ) =
+            Debug.log "props" <| partition props
+    in
     label
-        [ class "ef-input-w ef-boolean"
-        , classList
-            [ ( "-is-valid", props.validity == Valid )
-            , ( "-is-invalid", props.validity == Invalid )
-            ]
-        ]
+        ([ class "ef-input-w ef-boolean" ]
+            ++ labelProps
+        )
         [ input
-            [ class "ef-boolean__input"
-            , classList
-                [ ( "-focus", props.focus )
-                ]
-            , type_ "checkbox"
-            , checked props.checked
-            , disabled props.disabled
-            ]
+            ([ type_ "checkbox"
+             , class "ef-boolean__input"
+             ]
+                ++ inputProps
+            )
             []
         , span [ class "ef-boolean__element -checkbox" ] []
-        , span [ class "ef-boolean__label" ] [ text props.label ]
+        , span [ class "ef-boolean__label" ] content
         ]

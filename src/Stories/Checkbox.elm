@@ -1,6 +1,6 @@
 module Stories.Checkbox exposing (Model, Msg, init, update, view)
 
-import Components.Checkbox as Checkbox
+import Components.Checkbox as C
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -28,61 +28,21 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    let
-        props =
-            Checkbox.defaultProps
-    in
     div
         []
         [ h3 [] [ text "This is the checkbox component" ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | label = "defaul"
-                }
-            ]
+            [ C.checkbox [] [ text "default" ] ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | checked = True
-                    , label = "checked"
-                }
-            ]
+            [ C.checkbox [ C.checked ] [ text "checked" ] ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | focus = True
-                    , label = "focused"
-                }
-            ]
+            [ C.checkbox [ C.focus ] [ text "focused" ] ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | disabled = True
-                    , label = "disabled"
-                }
-            ]
+            [ C.checkbox [ C.disabled ] [ text "disabled" ] ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | disabled = True
-                    , checked = True
-                    , label = "disabled"
-                }
-            ]
+            [ C.checkbox [ C.disabled, C.checked ] [ text "disabled and checked" ] ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | validity = Checkbox.Invalid
-                    , label = "invalid"
-                }
-            ]
+            [ C.checkbox [ C.invalid ] [ text "invalid" ] ]
         , div [ class "u-mb-m" ]
-            [ Checkbox.checkbox
-                { props
-                    | validity = Checkbox.Invalid
-                    , checked = True
-                    , label = "invalid"
-                }
-            ]
+            [ C.checkbox [ C.invalid, C.checked ] [ text "invalid and checked" ] ]
         ]
