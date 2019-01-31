@@ -1,4 +1,14 @@
-module Padding exposing (Padding(..), paddingClass, paddingClasses)
+module Padding exposing
+    ( Padding(..)
+    , bottomPad
+    , horizontalPad
+    , leftPad
+    , paddingClass
+    , paddingClasses
+    , rightPad
+    , topPad
+    , verticalPad
+    )
 
 import Breakpoint as BP
 import Html exposing (..)
@@ -18,6 +28,46 @@ type Padding
 paddingClass : BP.Breakpoint -> Padding -> String -> String
 paddingClass bp pd mod =
     "u-" ++ BP.toString bp ++ "-p" ++ mod ++ "-" ++ toString pd
+
+
+leftPad : Padding -> (String -> p) -> p
+leftPad p tag =
+    tag <| paddingClass BP.Small p "l"
+
+
+rightPad : Padding -> (String -> p) -> p
+rightPad p tag =
+    tag <| paddingClass BP.Small p "r"
+
+
+topPad : Padding -> (String -> p) -> p
+topPad p tag =
+    tag <| paddingClass BP.Small p "t"
+
+
+bottomPad : Padding -> (String -> p) -> p
+bottomPad p tag =
+    tag <| paddingClass BP.Small p "b"
+
+
+horizontalPad : Padding -> (String -> p) -> p
+horizontalPad p tag =
+    tag <|
+        ([ paddingClass BP.Small p "l"
+         , paddingClass BP.Small p "r"
+         ]
+            |> String.join " "
+        )
+
+
+verticalPad : Padding -> (String -> p) -> p
+verticalPad p tag =
+    tag <|
+        ([ paddingClass BP.Small p "t"
+         , paddingClass BP.Small p "b"
+         ]
+            |> String.join " "
+        )
 
 
 

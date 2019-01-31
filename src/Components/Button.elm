@@ -12,6 +12,7 @@ module Components.Button exposing
     , secondary
     , small
     , square
+    , topPad
     )
 
 import Breakpoint as BP
@@ -40,6 +41,11 @@ button props content =
 buttonProp : String -> ButtonProp msg
 buttonProp =
     wrapClass ButtonProp
+
+
+topPad : P.Padding -> ButtonProp msg
+topPad p =
+    P.topPad p buttonProp
 
 
 padding : List P.Padding -> ButtonProp msg

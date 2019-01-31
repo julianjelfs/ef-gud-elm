@@ -73,7 +73,7 @@ overridePadding model =
         , exampleButton [ B.primary, B.padding [ P.Zero, P.Large, P.Medium ] ] "padding is fine"
         , exampleButton
             [ B.primary
-            , B.padding [ P.ExtraLarge, P.Large, P.Medium, P.ExtraExtraLarge ]
+            , B.topPad P.ExtraExtraLarge
             ]
             "totally fine"
         ]

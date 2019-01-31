@@ -14,6 +14,7 @@ Msg	src/Stories/Checkbox.elm	/^type Msg$/;"	t
 Padding	src/Padding.elm	/^type Padding$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
+bottomPad	src/Padding.elm	/^bottomPad : Padding -> (String -> p) -> p$/;"	f
 button	src/Components/Button.elm	/^button : List (ButtonProp msg) -> List (Html msg) -> Html msg$/;"	f
 buttonProp	src/Components/Button.elm	/^buttonProp : String -> ButtonProp msg$/;"	f
 buttonStates	src/Stories/Button.elm	/^buttonStates : List (B.ButtonProp Msg) -> Model -> Html Msg$/;"	f
@@ -27,10 +28,12 @@ disabled	src/Components/Checkbox.elm	/^disabled : CheckboxProp msg$/;"	c
 exampleButton	src/Stories/Button.elm	/^exampleButton : List (B.ButtonProp Msg) -> String -> Html Msg$/;"	f
 focus	src/Components/Button.elm	/^focus : ButtonProp msg$/;"	c
 focus	src/Components/Checkbox.elm	/^focus : CheckboxProp msg$/;"	c
+horizontalPad	src/Padding.elm	/^horizontalPad : Padding -> (String -> p) -> p$/;"	f
 hover	src/Components/Button.elm	/^hover : ButtonProp msg$/;"	c
 init	src/Stories/Button.elm	/^init : Model$/;"	c
 init	src/Stories/Checkbox.elm	/^init : Model$/;"	c
 invalid	src/Components/Checkbox.elm	/^invalid : CheckboxProp msg$/;"	c
+leftPad	src/Padding.elm	/^leftPad : Padding -> (String -> p) -> p$/;"	f
 loading	src/Components/Button.elm	/^loading : ButtonProp msg$/;"	c
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
@@ -43,15 +46,19 @@ partition	src/Components/Checkbox.elm	/^partition : List (CheckboxProp msg) -> (
 primary	src/Components/Button.elm	/^primary : ButtonProp msg$/;"	c
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
+rightPad	src/Padding.elm	/^rightPad : Padding -> (String -> p) -> p$/;"	f
 secondary	src/Components/Button.elm	/^secondary : ButtonProp msg$/;"	c
 secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"	f
 small	src/Components/Button.elm	/^small : ButtonProp msg$/;"	c
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 square	src/Components/Button.elm	/^square : ButtonProp msg$/;"	c
 toString	src/Padding.elm	/^toString : Padding -> String$/;"	f
+topPad	src/Components/Button.elm	/^topPad : P.Padding -> ButtonProp msg$/;"	f
+topPad	src/Padding.elm	/^topPad : Padding -> (String -> p) -> p$/;"	f
 update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Checkbox.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 valid	src/Components/Checkbox.elm	/^valid : CheckboxProp msg$/;"	c
+verticalPad	src/Padding.elm	/^verticalPad : Padding -> (String -> p) -> p$/;"	f
 view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Checkbox.elm	/^view : Model -> Html Msg$/;"	f
 wrapClass	src/Utils.elm	/^wrapClass : (Attribute msg -> p) -> String -> p$/;"	f
