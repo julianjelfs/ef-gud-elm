@@ -4,6 +4,7 @@ import Components.Button as B
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Padding as P
 
 
 type alias Model =
@@ -58,6 +59,26 @@ primaryButton model =
         ]
 
 
+overridePadding : Model -> Html Msg
+overridePadding model =
+    div
+        [ class "ef-button-group u-s-p-s" ]
+        [ exampleButton [ B.primary, B.padding [ P.ExtraSmall ] ] "we can"
+        , exampleButton [ B.primary, B.padding [ P.Small ] ] "override"
+        , exampleButton [ B.primary, B.padding [ P.Medium ] ] "the"
+        , exampleButton [ B.primary, B.padding [ P.Large ] ] "padding if"
+        , exampleButton [ B.primary, B.padding [ P.ExtraLarge ] ] "we really"
+        , exampleButton [ B.primary, B.padding [ P.ExtraExtraLarge ] ] "want to !!!"
+        , exampleButton [ B.primary, B.padding [ P.Zero, P.Large ] ] "also uneven"
+        , exampleButton [ B.primary, B.padding [ P.Zero, P.Large, P.Medium ] ] "padding is fine"
+        , exampleButton
+            [ B.primary
+            , B.padding [ P.ExtraLarge, P.Large, P.Medium, P.ExtraExtraLarge ]
+            ]
+            "totally fine"
+        ]
+
+
 smallButtons : Model -> Html Msg
 smallButtons model =
     div
@@ -93,6 +114,7 @@ view model =
         , buttonStates secondaryProps model
         , buttonStates squareProps model
         , smallButtons model
+        , overridePadding model
         , div [ class "u-s-p-s" ]
             [ pre []
                 [ text <|

@@ -11,6 +11,7 @@ Model	src/Stories/Button.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Checkbox.elm	/^type alias Model =$/;"	a
 Msg	src/Stories/Button.elm	/^type Msg$/;"	t
 Msg	src/Stories/Checkbox.elm	/^type Msg$/;"	t
+Padding	src/Padding.elm	/^type Padding$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 button	src/Components/Button.elm	/^button : List (ButtonProp msg) -> List (Html msg) -> Html msg$/;"	f
@@ -34,6 +35,10 @@ loading	src/Components/Button.elm	/^loading : ButtonProp msg$/;"	c
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
+overridePadding	src/Stories/Button.elm	/^overridePadding : Model -> Html Msg$/;"	f
+padding	src/Components/Button.elm	/^padding : List P.Padding -> ButtonProp msg$/;"	f
+paddingClass	src/Padding.elm	/^paddingClass : BP.Breakpoint -> Padding -> String -> String$/;"	f
+paddingClasses	src/Padding.elm	/^paddingClasses : List Padding -> (String -> p) -> p$/;"	f
 partition	src/Components/Checkbox.elm	/^partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 primary	src/Components/Button.elm	/^primary : ButtonProp msg$/;"	c
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
@@ -43,6 +48,7 @@ secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"
 small	src/Components/Button.elm	/^small : ButtonProp msg$/;"	c
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 square	src/Components/Button.elm	/^square : ButtonProp msg$/;"	c
+toString	src/Padding.elm	/^toString : Padding -> String$/;"	f
 update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Checkbox.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 valid	src/Components/Checkbox.elm	/^valid : CheckboxProp msg$/;"	c

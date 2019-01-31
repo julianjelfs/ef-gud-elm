@@ -1,6 +1,7 @@
-module Padding exposing (Padding(..), paddingClass)
+module Padding exposing (Padding(..), paddingClass, paddingClasses)
 
 import Breakpoint as BP
+import Html exposing (..)
 
 
 type Padding
@@ -14,9 +15,57 @@ type Padding
     | ExtraExtraLarge
 
 
-paddingClass : BP.Breakpoint -> Padding -> String
-paddingClass bp pd =
-    "u-" ++ BP.toString bp ++ "-p-" ++ toString pd
+paddingClass : BP.Breakpoint -> Padding -> String -> String
+paddingClass bp pd mod =
+    "u-" ++ BP.toString bp ++ "-p" ++ mod ++ "-" ++ toString pd
+
+
+
+-- same rules as css
+-- one value, rule applies to all four sides
+-- two values = vertical, horizontal
+-- three values = top, left & right, bottom
+-- four values = top, right, bottom, left
+
+
+paddingClasses : List Padding -> (String -> p) -> p
+paddingClasses ps tag =
+    case ps of
+        a :: [] ->
+            tag <| paddingClass BP.Small a ""
+
+        v :: h :: [] ->
+            tag <|
+                ([ paddingClass BP.Small v "t"
+                 , paddingClass BP.Small v "b"
+                 , paddingClass BP.Small h "l"
+                 , paddingClass BP.Small h "r"
+                 ]
+                    |> String.join " "
+                )
+
+        t :: h :: b :: [] ->
+            tag <|
+                ([ paddingClass BP.Small t "t"
+                 , paddingClass BP.Small b "b"
+                 , paddingClass BP.Small h "l"
+                 , paddingClass BP.Small h "r"
+                 ]
+                    |> String.join " "
+                )
+
+        t :: r :: b :: l :: [] ->
+            tag <|
+                ([ paddingClass BP.Small t "t"
+                 , paddingClass BP.Small b "b"
+                 , paddingClass BP.Small l "l"
+                 , paddingClass BP.Small r "r"
+                 ]
+                    |> String.join " "
+                )
+
+        _ ->
+            tag ""
 
 
 toString : Padding -> String

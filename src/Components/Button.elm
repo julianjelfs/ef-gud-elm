@@ -7,15 +7,18 @@ module Components.Button exposing
     , hover
     , loading
     , onClick
+    , padding
     , primary
     , secondary
     , small
     , square
     )
 
+import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Padding as P
 import Utils exposing (..)
 
 
@@ -37,6 +40,11 @@ button props content =
 buttonProp : String -> ButtonProp msg
 buttonProp =
     wrapClass ButtonProp
+
+
+padding : List P.Padding -> ButtonProp msg
+padding ps =
+    P.paddingClasses ps buttonProp
 
 
 onClick : msg -> ButtonProp msg
