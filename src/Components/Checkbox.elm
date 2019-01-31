@@ -25,27 +25,35 @@ type CheckboxProp msg
 
 valid : CheckboxProp msg
 valid =
-    CheckboxProp <| LabelProp <| class "-is-valid"
+    wrapLabel "-is-valid"
 
 
 invalid : CheckboxProp msg
 invalid =
-    CheckboxProp <| LabelProp <| class "-is-invalid"
+    wrapLabel "-is-invalid"
 
 
 focus : CheckboxProp msg
 focus =
-    CheckboxProp <| InputProp <| class "-focus"
+    wrapInput "-focus"
 
 
 checked : CheckboxProp msg
 checked =
-    CheckboxProp <| InputProp <| Html.Attributes.checked True
+    (CheckboxProp << InputProp << Html.Attributes.checked) True
 
 
 disabled : CheckboxProp msg
 disabled =
-    CheckboxProp <| InputProp <| Html.Attributes.disabled True
+    (CheckboxProp << InputProp << Html.Attributes.disabled) True
+
+
+wrapInput =
+    wrapClass (CheckboxProp << InputProp)
+
+
+wrapLabel =
+    wrapClass (CheckboxProp << LabelProp)
 
 
 partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )
@@ -66,7 +74,7 @@ checkbox : List (CheckboxProp msg) -> List (Html msg) -> Html msg
 checkbox props content =
     let
         ( labelProps, inputProps ) =
-            Debug.log "props" <| partition props
+            partition props
     in
     label
         ([ class "ef-input-w ef-boolean" ]
