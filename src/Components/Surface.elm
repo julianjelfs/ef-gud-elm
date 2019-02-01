@@ -1,8 +1,11 @@
 module Components.Surface exposing
-    ( SurfaceProps
-    , SurfaceShadow(..)
-    , SurfaceShape(..)
-    , defaultProps
+    ( SurfaceProp
+    , deepShadow
+    , href
+    , onClick
+    , outline
+    , rounded
+    , shadow
     , surface
     )
 
@@ -10,57 +13,60 @@ import Color exposing (ThemeColor, backgroundClass)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (maybeAppend)
+import Utils exposing (maybeAppend, wrapClass)
 
 
-type SurfaceShadow
-    = NoShadow
-    | DefaultShadow
-    | DeepShadow
+surfaceProp : String -> SurfaceProp msg
+surfaceProp =
+    wrapClass SurfaceProp
 
 
-type SurfaceShape
-    = Square
-    | Rounded
+outline : SurfaceProp msg
+outline =
+    surfaceProp "-outline"
 
 
-type alias SurfaceProps msg =
-    { outline : Bool
-    , shadow : SurfaceShadow
-    , shape : SurfaceShape
-    , onClick : Maybe msg
-    }
+shadow : SurfaceProp msg
+shadow =
+    surfaceProp "-shadow"
 
 
-defaultProps : SurfaceProps msg
-defaultProps =
-    { outline = False
-    , shadow = NoShadow
-    , shape = Square
-    , onClick = Nothing
-    }
+deepShadow : SurfaceProp msg
+deepShadow =
+    surfaceProp "-deep-shadow"
 
 
-surface : SurfaceProps msg -> List (Html msg) -> Html msg
-surface props children =
+rounded : SurfaceProp msg
+rounded =
+    surfaceProp "-rounded"
+
+
+onClick : msg -> SurfaceProp msg
+onClick =
+    SurfaceProp << Html.Events.onClick
+
+
+href : String -> SurfaceProp msg
+href =
+    SurfaceProp << Html.Attributes.href
+
+
+type SurfaceProp msg
+    = SurfaceProp (Attribute msg)
+
+
+surface : Bool -> List (SurfaceProp msg) -> List (Html msg) -> Html msg
+surface interactive props children =
     let
         element =
-            if props.onClick /= Nothing then
+            if interactive then
                 a
 
             else
                 div
     in
     element
-        ([ class "ef-surface"
-         , classList
-            [ ( "-outline", props.outline )
-            , ( "-shadow", props.shadow == DefaultShadow )
-            , ( "-deep-shadow", props.shadow == DeepShadow )
-            , ( "-rounded", props.shape == Rounded )
-            ]
-         , href ""
-         ]
-            |> maybeAppend (Maybe.map onClick props.onClick)
+        ([ class "ef-surface" ]
+            ++ List.map (\(SurfaceProp a) -> a) props
         )
         children

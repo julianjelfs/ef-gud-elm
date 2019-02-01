@@ -2,7 +2,7 @@ module Stories.Surface exposing (Model, Msg, init, update, view)
 
 import Breakpoint as BP
 import Color as C
-import Components.Surface as Surface
+import Components.Surface as S
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -11,35 +11,34 @@ import Utils exposing (loremIpsum)
 
 
 type alias Model =
-    {}
+    { numClicks : Int }
 
 
 type Msg
-    = NoOp
+    = OnClick
 
 
 init : Model
 init =
-    {}
+    { numClicks = 0 }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        OnClick ->
+            ( { model | numClicks = model.numClicks + 1 }, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
-    let
-        d =
-            Surface.defaultProps
-    in
     div []
         [ div
             [ class <| PD.paddingClass BP.Small PD.Medium ""
             , class <| C.backgroundClass C.HelloPaper
             ]
-            [ Surface.surface d
+            [ S.surface False
+                []
                 [ h3 [] [ text "This stuff is inside a boring surface" ]
                 , p [] [ text loremIpsum ]
                 ]
@@ -48,7 +47,8 @@ view model =
             [ class <| C.backgroundClass C.EfGrey
             , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
-            [ Surface.surface { d | outline = True }
+            [ S.surface False
+                [ S.outline ]
                 [ h3 [] [ text "A surface can have an outline" ]
                 , p [] [ text loremIpsum ]
                 ]
@@ -57,7 +57,8 @@ view model =
             [ class <| C.backgroundClass C.LegalPaper
             , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
-            [ Surface.surface { d | shadow = Surface.DefaultShadow }
+            [ S.surface False
+                [ S.shadow ]
                 [ h3 [] [ text "Or it can have a shadow" ]
                 , p [] [ text loremIpsum ]
                 ]
@@ -66,7 +67,8 @@ view model =
             [ class <| C.backgroundClass C.OutdoorPaper
             , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
-            [ Surface.surface { d | shadow = Surface.DeepShadow }
+            [ S.surface False
+                [ S.deepShadow ]
                 [ h3 [] [ text "And even a DEEP shadow" ]
                 , p [] [ text loremIpsum ]
                 ]
@@ -75,12 +77,8 @@ view model =
             [ class <| C.backgroundClass C.White
             , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
-            [ Surface.surface
-                { d
-                    | shadow = Surface.DeepShadow
-                    , shape =
-                        Surface.Rounded
-                }
+            [ S.surface False
+                [ S.deepShadow, S.rounded ]
                 [ h3 [] [ text "And we can also have round corners" ]
                 , p [] [ text loremIpsum ]
                 ]
@@ -89,9 +87,14 @@ view model =
             [ class <| C.backgroundClass C.EfGrey
             , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
-            [ Surface.surface
-                { d | onClick = Just NoOp }
+            [ S.surface
+                True
+                [ S.onClick OnClick ]
                 [ h3 [] [ text "We get interaction states if we wrap an <a> tag" ]
+                , p []
+                    [ text "Number of clicks: "
+                    , span [] [ text <| String.fromInt model.numClicks ]
+                    ]
                 , p [] [ text loremIpsum ]
                 ]
             ]
