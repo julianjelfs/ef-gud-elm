@@ -72,6 +72,11 @@ section {
   height: 100%;
 }
 
+code {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
 [data-tag]:before,
 [data-tag-s]:before,
 [data-tag-m]:before,

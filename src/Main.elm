@@ -9,6 +9,7 @@ import Stories.Button as Button
 import Stories.Checkbox as Checkbox
 import Stories.Container as Container
 import Stories.Grid as Grid
+import Stories.Icon as Icon
 import Stories.Input as Input
 import Stories.Link as Link
 import Stories.Section as Section
@@ -33,6 +34,7 @@ type Route
     | Stack
     | Link
     | Checkbox
+    | Icon
     | NotFound
 
 
@@ -48,6 +50,7 @@ type alias Model =
     , stack : Stack.Model
     , link : Link.Model
     , checkbox : Checkbox.Model
+    , icon : Icon.Model
     }
 
 
@@ -64,6 +67,7 @@ init _ url key =
       , stack = Stack.init
       , link = Link.init
       , checkbox = Checkbox.init
+      , icon = Icon.init
       }
     , Cmd.none
     )
@@ -90,6 +94,7 @@ type Msg
     | StackMsg Stack.Msg
     | LinkMsg Link.Msg
     | CheckboxMsg Checkbox.Msg
+    | IconMsg Icon.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -171,6 +176,13 @@ update msg model =
             in
             ( { model | checkbox = subModel }, Cmd.map CheckboxMsg subCmd )
 
+        IconMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Icon.update subMsg model.icon
+            in
+            ( { model | icon = subModel }, Cmd.map IconMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -185,6 +197,7 @@ routeParser =
         , Url.map Stack (Url.s "stack")
         , Url.map Link (Url.s "link")
         , Url.map Checkbox (Url.s "checkbox")
+        , Url.map Icon (Url.s "icon")
         ]
 
 
@@ -221,6 +234,7 @@ view model =
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
+                    , menuItem model.route Icon "icon" "Icon Component"
                     ]
                 ]
             , section [ class "content" ]
@@ -266,6 +280,9 @@ componentView model =
 
         Stack ->
             Html.map StackMsg (Stack.view model.stack)
+
+        Icon ->
+            Html.map IconMsg (Icon.view model.icon)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]
