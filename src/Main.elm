@@ -12,6 +12,7 @@ import Stories.Grid as Grid
 import Stories.Input as Input
 import Stories.Link as Link
 import Stories.Section as Section
+import Stories.Select as Select
 import Stories.Stack as Stack
 import Stories.Surface as Surface
 import Stories.Typography as Typography
@@ -35,6 +36,7 @@ type Route
     | Link
     | Checkbox
     | Typography
+    | Select
     | NotFound
 
 
@@ -51,6 +53,7 @@ type alias Model =
     , link : Link.Model
     , checkbox : Checkbox.Model
     , typography : Typography.Model
+    , select : Select.Model
     }
 
 
@@ -68,6 +71,7 @@ init _ url key =
       , link = Link.init
       , checkbox = Checkbox.init
       , typography = Typography.init
+      , select = Select.init
       }
     , Cmd.none
     )
@@ -95,6 +99,7 @@ type Msg
     | LinkMsg Link.Msg
     | CheckboxMsg Checkbox.Msg
     | TypographyMsg Typography.Msg
+    | SelectMsg Select.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -183,6 +188,13 @@ update msg model =
             in
             ( { model | typography = subModel }, Cmd.map TypographyMsg subCmd )
 
+        SelectMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Select.update subMsg model.select
+            in
+            ( { model | select = subModel }, Cmd.map SelectMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -198,6 +210,7 @@ routeParser =
         , Url.map Link (Url.s "link")
         , Url.map Checkbox (Url.s "checkbox")
         , Url.map Typography (Url.s "typography")
+        , Url.map Select (Url.s "select")
         ]
 
 
@@ -235,6 +248,7 @@ view model =
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
                     , menuItem model.route Typography "typography" "Typography Components"
+                    , menuItem model.route Select "select" "Select Components"
                     ]
                 ]
             , section [ class "content" ]
@@ -283,6 +297,9 @@ componentView model =
 
         Typography ->
             Html.map TypographyMsg (Typography.view model.typography)
+
+        Select ->
+            Html.map SelectMsg (Select.view model.select)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]

@@ -12,6 +12,7 @@ ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
 ControlProp	src/Components/Checkbox.elm	/^type ControlProp msg$/;"	t
 ControlProp	src/Components/Input.elm	/^type ControlProp msg$/;"	t
+ControlProp	src/Components/Select.elm	/^type ControlProp msg$/;"	t
 InputProp	src/Components/Input.elm	/^type InputProp msg$/;"	t
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a
@@ -23,6 +24,7 @@ Model	src/Stories/Grid.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Input.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Link.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Section.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Select.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Stack.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Surface.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Template.elm	/^type alias Model =$/;"	a
@@ -35,15 +37,18 @@ Msg	src/Stories/Grid.elm	/^type Msg$/;"	t
 Msg	src/Stories/Input.elm	/^type Msg$/;"	t
 Msg	src/Stories/Link.elm	/^type Msg$/;"	t
 Msg	src/Stories/Section.elm	/^type Msg$/;"	t
+Msg	src/Stories/Select.elm	/^type Msg$/;"	t
 Msg	src/Stories/Stack.elm	/^type Msg$/;"	t
 Msg	src/Stories/Surface.elm	/^type Msg$/;"	t
 Msg	src/Stories/Template.elm	/^type Msg$/;"	t
 Msg	src/Stories/Typography.elm	/^type Msg$/;"	t
+Option	src/Components/Select.elm	/^type Option$/;"	t
 Padding	src/Padding.elm	/^type Padding$/;"	t
 Route	src/Main.elm	/^type Route$/;"	t
 Row	src/Components/Grid.elm	/^type Row msg$/;"	t
 RowProp	src/Components/Grid.elm	/^type RowProp msg$/;"	t
 SectionProp	src/Components/Section.elm	/^type SectionProp msg$/;"	t
+SelectProp	src/Components/Select.elm	/^type SelectProp msg$/;"	t
 StackItem	src/Components/Stack.elm	/^type StackItem msg$/;"	t
 StackItemProp	src/Components/Stack.elm	/^type StackItemProp msg$/;"	t
 StackProp	src/Components/Stack.elm	/^type StackProp msg$/;"	t
@@ -81,6 +86,7 @@ checked	src/Components/Checkbox.elm	/^checked : CheckboxProp msg$/;"	c
 col	src/Components/Grid.elm	/^col : List (ColProp msg) -> List (Html msg) -> Column msg$/;"	f
 coloredBox	src/Stories/Stack.elm	/^coloredBox : String -> Html msg$/;"	f
 completed	src/Components/Input.elm	/^completed : InputProp msg$/;"	c
+completed	src/Components/Select.elm	/^completed : SelectProp msg$/;"	c
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
 concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
@@ -90,6 +96,7 @@ defaultTags	src/Stories/Utils.elm	/^defaultTags : BoxTags$/;"	c
 disabled	src/Components/Button.elm	/^disabled : ButtonProp msg$/;"	c
 disabled	src/Components/Checkbox.elm	/^disabled : CheckboxProp msg$/;"	c
 disabled	src/Components/Input.elm	/^disabled : InputProp msg$/;"	c
+disabled	src/Components/Select.elm	/^disabled : SelectProp msg$/;"	c
 exampleButton	src/Stories/Button.elm	/^exampleButton : List (B.ButtonProp Msg) -> String -> Html Msg$/;"	f
 exampleInput	src/Stories/Input.elm	/^exampleInput : List (I.InputProp Msg) -> Html Msg$/;"	f
 extraLargeCollapse	src/Components/Grid.elm	/^extraLargeCollapse : ColProp msg$/;"	c
@@ -107,6 +114,7 @@ extralargeYTop	src/Components/Grid.elm	/^extralargeYTop : ColProp msg$/;"	c
 focus	src/Components/Button.elm	/^focus : ButtonProp msg$/;"	c
 focus	src/Components/Checkbox.elm	/^focus : CheckboxProp msg$/;"	c
 focus	src/Components/Input.elm	/^focus : InputProp msg$/;"	c
+focus	src/Components/Select.elm	/^focus : SelectProp msg$/;"	c
 fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
 h1	src/Components/Typography.elm	/^h1 : List (Html msg) -> Html msg$/;"	f
 h1	src/Stories/Typography.elm	/^h1 : Html Msg$/;"	c
@@ -133,6 +141,7 @@ init	src/Stories/Grid.elm	/^init : Model$/;"	c
 init	src/Stories/Input.elm	/^init : Model$/;"	c
 init	src/Stories/Link.elm	/^init : Model$/;"	c
 init	src/Stories/Section.elm	/^init : Model$/;"	c
+init	src/Stories/Select.elm	/^init : Model$/;"	c
 init	src/Stories/Stack.elm	/^init : Model$/;"	c
 init	src/Stories/Surface.elm	/^init : Model$/;"	c
 init	src/Stories/Template.elm	/^init : Model$/;"	c
@@ -142,6 +151,7 @@ inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
 inputTypes	src/Stories/Input.elm	/^inputTypes : Model -> List (Html Msg)$/;"	f
 invalid	src/Components/Checkbox.elm	/^invalid : CheckboxProp msg$/;"	c
 invalid	src/Components/Input.elm	/^invalid : InputProp msg$/;"	c
+invalid	src/Components/Select.elm	/^invalid : SelectProp msg$/;"	c
 item	src/Components/Stack.elm	/^item : List (StackItemProp msg) -> List (Html msg) -> StackItem msg$/;"	f
 itemAlignment	src/Stories/Stack.elm	/^itemAlignment : Html Msg$/;"	c
 itemBottom	src/Components/Stack.elm	/^itemBottom : StackItemProp msg$/;"	c
@@ -163,6 +173,7 @@ leftPad	src/Padding.elm	/^leftPad : Padding -> (String -> p) -> p$/;"	f
 link	src/Components/Link.elm	/^link : LinkProps msg -> List (Html msg) -> Html msg$/;"	f
 loading	src/Components/Button.elm	/^loading : ButtonProp msg$/;"	c
 loading	src/Components/Input.elm	/^loading : InputProp msg$/;"	c
+loading	src/Components/Select.elm	/^loading : SelectProp msg$/;"	c
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
@@ -183,6 +194,9 @@ offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
 onClick	src/Components/Surface.elm	/^onClick : msg -> SurfaceProp msg$/;"	f
 onInput	src/Components/Input.elm	/^onInput : (String -> msg) -> InputProp msg$/;"	f
+onSelect	src/Components/Select.elm	/^onSelect : (String -> msg) -> SelectProp msg$/;"	f
+option	src/Components/Select.elm	/^option : Option -> Html msg$/;"	f
+options	src/Stories/Select.elm	/^options : List S.Option$/;"	c
 outline	src/Components/Surface.elm	/^outline : SurfaceProp msg$/;"	c
 overridePadding	src/Stories/Button.elm	/^overridePadding : Model -> Html Msg$/;"	f
 padding	src/Components/Button.elm	/^padding : List P.Padding -> ButtonProp msg$/;"	f
@@ -194,6 +208,7 @@ paraBook	src/Components/Typography.elm	/^paraBook : List (Html msg) -> Html msg$
 paraBook	src/Stories/Typography.elm	/^paraBook : Html Msg$/;"	c
 partition	src/Components/Checkbox.elm	/^partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/Input.elm	/^partition : List (InputProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
+partition	src/Components/Select.elm	/^partition : List (SelectProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 placeholder	src/Components/Input.elm	/^placeholder : String -> InputProp msg$/;"	f
 primary	src/Components/Button.elm	/^primary : ButtonProp msg$/;"	c
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
@@ -208,7 +223,10 @@ rowClass	src/Components/Grid.elm	/^rowClass : String -> RowProp msg$/;"	f
 secondary	src/Components/Button.elm	/^secondary : ButtonProp msg$/;"	c
 secondaryButton	src/Stories/Button.elm	/^secondaryButton : Model -> Html Msg$/;"	f
 section	src/Components/Section.elm	/^section : List (SectionProp msg) -> List (Html msg) -> Html msg$/;"	f
+select	src/Components/Select.elm	/^select : List (SelectProp msg) -> List Option -> Html msg$/;"	f
+selectStates	src/Stories/Select.elm	/^selectStates : Html Msg$/;"	c
 shadow	src/Components/Surface.elm	/^shadow : SurfaceProp msg$/;"	c
+simpleSelect	src/Stories/Select.elm	/^simpleSelect : Html Msg$/;"	c
 simpleStack	src/Stories/Stack.elm	/^simpleStack : Html Msg$/;"	c
 size	src/Components/Section.elm	/^size : BP.Breakpoint -> SectionProp msg$/;"	f
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
@@ -250,6 +268,7 @@ update	src/Stories/Grid.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Input.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Link.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Select.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Stack.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
@@ -261,7 +280,9 @@ vBottom	src/Components/Stack.elm	/^vBottom : StackProp msg$/;"	c
 vTop	src/Components/Stack.elm	/^vTop : StackProp msg$/;"	c
 valid	src/Components/Checkbox.elm	/^valid : CheckboxProp msg$/;"	c
 valid	src/Components/Input.elm	/^valid : InputProp msg$/;"	c
+valid	src/Components/Select.elm	/^valid : SelectProp msg$/;"	c
 value	src/Components/Input.elm	/^value : String -> InputProp msg$/;"	f
+value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
 verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
 verticalAlignmentChildOverrides	src/Stories/Grid.elm	/^verticalAlignmentChildOverrides : Html Msg$/;"	c
 verticalPad	src/Padding.elm	/^verticalPad : Padding -> (String -> p) -> p$/;"	f
@@ -273,6 +294,7 @@ view	src/Stories/Grid.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Link.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Select.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Stack.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
