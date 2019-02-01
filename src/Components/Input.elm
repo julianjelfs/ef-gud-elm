@@ -1,15 +1,73 @@
 module Components.Input exposing
-    ( InputProps
+    ( InputProp
     , InputType(..)
-    , InputValidity(..)
-    , defaultProps
-    , inputComponent
+    , completed
+    , disabled
+    , focus
+    , input
+    , invalid
+    , loading
+    , onInput
+    , placeholder
+    , type_
+    , valid
+    , value
     )
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Utils exposing (..)
+
+
+valid : InputProp msg
+valid =
+    wrapper "-is-valid"
+
+
+invalid : InputProp msg
+invalid =
+    wrapper "-is-invalid"
+
+
+loading : InputProp msg
+loading =
+    wrapper "-is-loading"
+
+
+focus : InputProp msg
+focus =
+    field "-focus"
+
+
+completed : InputProp msg
+completed =
+    field "-completed"
+
+
+value : String -> InputProp msg
+value =
+    InputProp << FieldProp << Html.Attributes.value
+
+
+disabled : InputProp msg
+disabled =
+    (InputProp << FieldProp << Html.Attributes.disabled) True
+
+
+type_ : InputType -> InputProp msg
+type_ =
+    InputProp << FieldProp << Html.Attributes.type_ << typeToString
+
+
+placeholder : String -> InputProp msg
+placeholder =
+    InputProp << FieldProp << Html.Attributes.placeholder
+
+
+onInput : (String -> msg) -> InputProp msg
+onInput =
+    InputProp << FieldProp << Html.Events.onInput
 
 
 type InputType
@@ -20,37 +78,6 @@ type InputType
     | SearchInput
     | TelInput
     | UrlInput
-
-
-type InputValidity
-    = Valid
-    | Invalid
-    | Neither
-
-
-type alias InputProps msg =
-    { focus : Bool
-    , type_ : InputType
-    , placeholder : Maybe String
-    , completed : Bool
-    , disabled : Bool
-    , validity : InputValidity
-    , loading : Bool
-    , onInput : Maybe (String -> msg)
-    }
-
-
-defaultProps : InputProps msg
-defaultProps =
-    { focus = False
-    , type_ = TextInput
-    , placeholder = Nothing
-    , completed = False
-    , disabled = False
-    , validity = Neither
-    , loading = False
-    , onInput = Nothing
-    }
 
 
 typeToString : InputType -> String
@@ -78,27 +105,51 @@ typeToString t =
             "url"
 
 
-inputComponent : InputProps msg -> Html msg
-inputComponent props =
+type ControlProp msg
+    = WrapperProp (Attribute msg)
+    | FieldProp (Attribute msg)
+
+
+type InputProp msg
+    = InputProp (ControlProp msg)
+
+
+wrapper =
+    wrapClass (InputProp << WrapperProp)
+
+
+field =
+    wrapClass (InputProp << FieldProp)
+
+
+partition : List (InputProp msg) -> ( List (Attribute msg), List (Attribute msg) )
+partition =
+    List.foldr
+        (\(InputProp p) ( wps, fps ) ->
+            case p of
+                WrapperProp a ->
+                    ( a :: wps, fps )
+
+                FieldProp a ->
+                    ( wps, a :: fps )
+        )
+        ( [], [] )
+
+
+input : List (InputProp msg) -> Html msg
+input props =
+    let
+        ( wrapperProps, fieldProps ) =
+            partition props
+    in
     div
-        [ class "ef-input-w u-mb-m"
-        , classList
-            [ ( "-is-valid", props.validity == Valid )
-            , ( "-is-invalid", props.validity == Invalid )
-            , ( "-is-loading", props.loading )
-            ]
-        ]
-        [ input
+        ([ class "ef-input-w u-mb-m" ]
+            ++ wrapperProps
+        )
+        [ Html.input
             ([ class "ef-input"
-             , classList
-                [ ( "-focus", props.focus )
-                , ( "-completed", props.completed )
-                ]
-             , type_ <| typeToString props.type_
-             , placeholder <| Maybe.withDefault "" props.placeholder
-             , disabled (props.disabled || props.loading)
              ]
-                |> maybeAppend (Maybe.map onInput props.onInput)
+                ++ fieldProps
             )
             []
         ]

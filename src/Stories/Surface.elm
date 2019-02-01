@@ -36,7 +36,7 @@ view model =
     in
     div []
         [ div
-            [ class <| PD.paddingClass BP.Small PD.Medium
+            [ class <| PD.paddingClass BP.Small PD.Medium ""
             , class <| C.backgroundClass C.HelloPaper
             ]
             [ Surface.surface d
@@ -46,7 +46,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.EfGrey
-            , class <| PD.paddingClass BP.Small PD.Medium
+            , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
             [ Surface.surface { d | outline = True }
                 [ h3 [] [ text "A surface can have an outline" ]
@@ -55,7 +55,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.LegalPaper
-            , class <| PD.paddingClass BP.Small PD.Medium
+            , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
             [ Surface.surface { d | shadow = Surface.DefaultShadow }
                 [ h3 [] [ text "Or it can have a shadow" ]
@@ -64,7 +64,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.OutdoorPaper
-            , class <| PD.paddingClass BP.Small PD.Medium
+            , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
             [ Surface.surface { d | shadow = Surface.DeepShadow }
                 [ h3 [] [ text "And even a DEEP shadow" ]
@@ -73,7 +73,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.White
-            , class <| PD.paddingClass BP.Small PD.Medium
+            , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
             [ Surface.surface
                 { d
@@ -87,7 +87,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.EfGrey
-            , class <| PD.paddingClass BP.Small PD.Medium
+            , class <| PD.paddingClass BP.Small PD.Medium ""
             ]
             [ Surface.surface
                 { d | onClick = Just NoOp }

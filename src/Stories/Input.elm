@@ -1,6 +1,6 @@
 module Stories.Input exposing (Model, Msg, init, update, view)
 
-import Components.Input as Input
+import Components.Input as I
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -26,123 +26,58 @@ update msg model =
             ( { model | text = str }, Cmd.none )
 
 
+exampleInput : List (I.InputProp Msg) -> Html Msg
+exampleInput props =
+    I.input (I.onInput OnInput :: props)
+
+
 inputTypes : Model -> List (Html Msg)
 inputTypes model =
-    let
-        defProps =
-            Input.defaultProps
-
-        props =
-            { defProps | onInput = Just OnInput }
-    in
-    [ div [] [ Input.inputComponent { props | placeholder = Just "type: text" } ]
+    [ div [] [ I.input [ I.placeholder "type: text" ] ]
     , div []
         [ code [] [ text model.text ] ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "type: email"
-                , type_ =
-                    Input.EmailInput
-            }
-        ]
+        [ exampleInput [ I.placeholder "type: email", I.type_ I.EmailInput ] ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "type: number"
-                , type_ =
-                    Input.NumberInput
-            }
-        ]
+        [ exampleInput [ I.placeholder "type: number", I.type_ I.NumberInput ] ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "type: password"
-                , type_ =
-                    Input.PasswordInput
-            }
-        ]
+        [ exampleInput [ I.placeholder "type: password", I.type_ I.PasswordInput ] ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "type: search"
-                , type_ =
-                    Input.SearchInput
-            }
-        ]
+        [ exampleInput [ I.placeholder "type: search", I.type_ I.SearchInput ] ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "type: tel"
-                , type_ =
-                    Input.TelInput
-            }
-        ]
+        [ exampleInput [ I.placeholder "type: tel", I.type_ I.TelInput ] ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "type: url"
-                , type_ =
-                    Input.UrlInput
-            }
-        ]
+        [ exampleInput [ I.placeholder "type: url", I.type_ I.UrlInput ] ]
     ]
 
 
 inputStates : List (Html Msg)
 inputStates =
-    let
-        props =
-            Input.defaultProps
-    in
     [ div []
-        [ Input.inputComponent
-            { props
-                | placeholder =
-                    Just "untouched"
-            }
+        [ exampleInput [ I.placeholder "untouched" ] ]
+    , div []
+        [ exampleInput
+            [ I.placeholder "focused", I.focus ]
         ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "focused"
-                , focus = True
-            }
+        [ exampleInput
+            [ I.value "completed", I.completed ]
         ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "completed"
-                , completed = True
-            }
+        [ exampleInput
+            [ I.placeholder "disabled", I.disabled ]
         ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "disabled"
-                , disabled = True
-            }
+        [ exampleInput
+            [ I.value "valid", I.valid ]
         ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "valid"
-                , validity = Input.Valid
-            }
+        [ exampleInput
+            [ I.value "invalid", I.invalid ]
         ]
     , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "invalid"
-                , validity = Input.Invalid
-            }
-        ]
-    , div []
-        [ Input.inputComponent
-            { props
-                | placeholder = Just "loading"
-                , loading = True
-            }
+        [ exampleInput
+            [ I.placeholder "loading", I.loading ]
         ]
     ]
 
