@@ -7,23 +7,23 @@ import Html.Events exposing (..)
 
 
 type alias Model =
-    {}
+    { selected : Maybe ( String, String ) }
 
 
 type Msg
-    = NoOp
+    = OnSelect (Maybe ( String, String ))
 
 
 init : Model
 init =
-    {}
+    { selected = Nothing }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp ->
-            ( model, Cmd.none )
+        OnSelect s ->
+            ( { model | selected = s }, Cmd.none )
 
 
 options : List S.Option
@@ -36,14 +36,38 @@ options =
     ]
 
 
-simpleSelect : Html Msg
-simpleSelect =
-    S.select [] options
+simpleSelect : Model -> Html Msg
+simpleSelect model =
+    div
+        []
+        [ p [] [ text "In its simple state" ]
+        , S.select [ S.onSelect OnSelect ] options
+        , p
+            []
+            [ text <|
+                "The selected item is: "
+                    ++ Maybe.withDefault "unselected"
+                        (Maybe.map (\( t, v ) -> "Text: " ++ t ++ ", Value: " ++ v)
+                            model.selected
+                        )
+            ]
+        , br [] []
+        ]
 
 
 selectStates : Html Msg
 selectStates =
-    S.select [] options
+    div
+        []
+        [ p [] [ text "In all its other states" ]
+        , S.select [] (S.PlaceholderOption "untouched with 'placeholder'" :: options)
+        , S.select [ S.focus ] (S.Option "z" "focused" :: options)
+        , S.select [ S.completed ] (S.Option "z" "completed" :: options)
+        , S.select [ S.disabled ] (S.Option "z" "disabled" :: options)
+        , S.select [ S.valid ] (S.Option "z" "valid" :: options)
+        , S.select [ S.invalid ] (S.Option "z" "invalid" :: options)
+        , S.select [ S.loading ] (S.Option "z" "loading" :: options)
+        ]
 
 
 view : Model -> Html Msg
@@ -51,6 +75,6 @@ view model =
     div
         []
         [ h3 [] [ text "This is the select component" ]
-        , simpleSelect
+        , simpleSelect model
         , selectStates
         ]

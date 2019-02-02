@@ -12,7 +12,6 @@ ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
 ControlProp	src/Components/Checkbox.elm	/^type ControlProp msg$/;"	t
 ControlProp	src/Components/Input.elm	/^type ControlProp msg$/;"	t
-ControlProp	src/Components/Select.elm	/^type ControlProp msg$/;"	t
 InputProp	src/Components/Input.elm	/^type InputProp msg$/;"	t
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a
@@ -194,8 +193,10 @@ offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
 onClick	src/Components/Surface.elm	/^onClick : msg -> SurfaceProp msg$/;"	f
 onInput	src/Components/Input.elm	/^onInput : (String -> msg) -> InputProp msg$/;"	f
-onSelect	src/Components/Select.elm	/^onSelect : (String -> msg) -> SelectProp msg$/;"	f
+onSelect	src/Components/Select.elm	/^onSelect : (Maybe ( String, String ) -> msg) -> SelectProp msg$/;"	f
 option	src/Components/Select.elm	/^option : Option -> Html msg$/;"	f
+optionDecoder	src/Components/Select.elm	/^optionDecoder : Decode.Decoder ( String, String )$/;"	c
+optionParser	src/Components/Select.elm	/^optionParser : Decode.Decoder (Maybe ( String, String ))$/;"	c
 options	src/Stories/Select.elm	/^options : List S.Option$/;"	c
 outline	src/Components/Surface.elm	/^outline : SurfaceProp msg$/;"	c
 overridePadding	src/Stories/Button.elm	/^overridePadding : Model -> Html Msg$/;"	f
@@ -226,7 +227,7 @@ section	src/Components/Section.elm	/^section : List (SectionProp msg) -> List (H
 select	src/Components/Select.elm	/^select : List (SelectProp msg) -> List Option -> Html msg$/;"	f
 selectStates	src/Stories/Select.elm	/^selectStates : Html Msg$/;"	c
 shadow	src/Components/Surface.elm	/^shadow : SurfaceProp msg$/;"	c
-simpleSelect	src/Stories/Select.elm	/^simpleSelect : Html Msg$/;"	c
+simpleSelect	src/Stories/Select.elm	/^simpleSelect : Model -> Html Msg$/;"	f
 simpleStack	src/Stories/Stack.elm	/^simpleStack : Html Msg$/;"	c
 size	src/Components/Section.elm	/^size : BP.Breakpoint -> SectionProp msg$/;"	f
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f

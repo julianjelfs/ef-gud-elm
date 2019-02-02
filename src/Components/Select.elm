@@ -15,6 +15,8 @@ module Components.Select exposing
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Json.Decode as Decode
+import Json.Decode.Extra as Decode
 import Utils exposing (..)
 
 
@@ -30,7 +32,18 @@ invalid =
 
 loading : SelectProp msg
 loading =
-    wrapper "-is-loading"
+    Multiple <|
+        [ wrapper "-is-loading"
+        , disabled
+        ]
+
+
+disabled : SelectProp msg
+disabled =
+    Multiple <|
+        [ wrapper "-is-disabled"
+        , FieldProp <| Html.Attributes.disabled True
+        ]
 
 
 focus : SelectProp msg
@@ -45,90 +58,94 @@ completed =
 
 value : String -> SelectProp msg
 value =
-    SelectProp << FieldProp << Html.Attributes.value
+    FieldProp << Html.Attributes.value
 
 
-disabled : SelectProp msg
-disabled =
-    (SelectProp << FieldProp << Html.Attributes.disabled) True
+onSelect : (Maybe ( String, String ) -> msg) -> SelectProp msg
+onSelect handler =
+    FieldProp <| on "change" (Decode.map handler optionParser)
 
 
-onSelect : (String -> msg) -> SelectProp msg
-onSelect =
-    SelectProp << FieldProp << Html.Events.onInput
+optionParser : Decode.Decoder (Maybe ( String, String ))
+optionParser =
+    Decode.map List.head
+        (Decode.at [ "target", "selectedOptions" ] (Decode.collection optionDecoder))
 
 
-type ControlProp msg
-    = WrapperProp (Attribute msg)
-    | FieldProp (Attribute msg)
+optionDecoder : Decode.Decoder ( String, String )
+optionDecoder =
+    Decode.map2 Tuple.pair
+        (Decode.field "text" Decode.string)
+        (Decode.field "value" Decode.string)
 
 
 type SelectProp msg
-    = SelectProp (ControlProp msg)
+    = WrapperProp (Attribute msg)
+    | FieldProp (Attribute msg)
+    | Multiple (List (SelectProp msg))
 
 
 wrapper =
-    wrapClass (SelectProp << WrapperProp)
+    wrapClass WrapperProp
 
 
 field =
-    wrapClass (SelectProp << FieldProp)
+    wrapClass FieldProp
 
 
 partition : List (SelectProp msg) -> ( List (Attribute msg), List (Attribute msg) )
 partition =
     List.foldr
-        (\(SelectProp p) ( wps, fps ) ->
+        (\p ( wps, fps ) ->
             case p of
                 WrapperProp a ->
                     ( a :: wps, fps )
 
                 FieldProp a ->
                     ( wps, a :: fps )
+
+                Multiple props ->
+                    let
+                        ( wps_, fps_ ) =
+                            partition props
+                    in
+                    ( wps ++ wps_, fps ++ fps_ )
         )
         ( [], [] )
 
 
 select : List (SelectProp msg) -> List Option -> Html msg
 select props options =
+    let
+        ( wrapperProps, fieldProps ) =
+            partition props
+    in
     div
-        [ class "ef-input-w -select u-mb-m" ]
+        ([ class "ef-input-w -select u-mb-m" ] ++ wrapperProps)
         [ Html.select
-            [ class "ef-input"
-            , required True
-            ]
+            ([ class "ef-input" ] ++ fieldProps)
             (List.map option options)
         ]
 
 
 option : Option -> Html msg
-option (Option key val) =
-    Html.option
-        [ Html.Attributes.value key ]
-        [ text val ]
+option o =
+    case o of
+        Option key val ->
+            Html.option
+                [ Html.Attributes.value key ]
+                [ text val ]
+
+        PlaceholderOption val ->
+            Html.option
+                [ Html.Attributes.value ""
+                , selected True
+                , Html.Attributes.disabled True
+                , hidden True
+                ]
+                [ text val ]
 
 
 type Option
     = Option String String
-
-
-
--- <div class="ef-input-w -select u-mb-m">
---     <select class="ef-input" required>
---         <option value="" selected disabled hidden>untouched with 'placeholder'</option>
---         <option value="b">Two</option>
---         <option value="c">Three</option>
---         <option value="d">Four</option>
---     </select>
--- </div>
--- div
---     ([ class "ef-input-w u-mb-m" ]
---         ++ wrapperProps
---     )
---     [ Html.input
---         ([ class "ef-input"
---          ]
---             ++ fieldProps
---         )
---         []
---     ]
+    | PlaceholderOption String
