@@ -243,12 +243,12 @@ view model =
                     , menuItem model.route Grid "grid" "Grid Component"
                     , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Input "input" "Input Component"
+                    , menuItem model.route Select "select" "Select Components"
                     , menuItem model.route Checkbox "checkbox" "Checkbox Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
                     , menuItem model.route Typography "typography" "Typography Components"
-                    , menuItem model.route Select "select" "Select Components"
                     ]
                 ]
             , section [ class "content" ]

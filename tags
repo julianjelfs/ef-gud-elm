@@ -11,7 +11,6 @@ CheckboxProp	src/Components/Checkbox.elm	/^type CheckboxProp msg$/;"	t
 ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
 ControlProp	src/Components/Checkbox.elm	/^type ControlProp msg$/;"	t
-ControlProp	src/Components/Input.elm	/^type ControlProp msg$/;"	t
 InputProp	src/Components/Input.elm	/^type InputProp msg$/;"	t
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a

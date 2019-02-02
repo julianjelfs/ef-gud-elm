@@ -47,27 +47,27 @@ completed =
 
 value : String -> InputProp msg
 value =
-    InputProp << FieldProp << Html.Attributes.value
+    FieldProp << Html.Attributes.value
 
 
 disabled : InputProp msg
 disabled =
-    (InputProp << FieldProp << Html.Attributes.disabled) True
+    (FieldProp << Html.Attributes.disabled) True
 
 
 type_ : InputType -> InputProp msg
 type_ =
-    InputProp << FieldProp << Html.Attributes.type_ << typeToString
+    FieldProp << Html.Attributes.type_ << typeToString
 
 
 placeholder : String -> InputProp msg
 placeholder =
-    InputProp << FieldProp << Html.Attributes.placeholder
+    FieldProp << Html.Attributes.placeholder
 
 
 onInput : (String -> msg) -> InputProp msg
 onInput =
-    InputProp << FieldProp << Html.Events.onInput
+    FieldProp << Html.Events.onInput
 
 
 type InputType
@@ -105,27 +105,23 @@ typeToString t =
             "url"
 
 
-type ControlProp msg
+type InputProp msg
     = WrapperProp (Attribute msg)
     | FieldProp (Attribute msg)
 
 
-type InputProp msg
-    = InputProp (ControlProp msg)
-
-
 wrapper =
-    wrapClass (InputProp << WrapperProp)
+    wrapClass WrapperProp
 
 
 field =
-    wrapClass (InputProp << FieldProp)
+    wrapClass FieldProp
 
 
 partition : List (InputProp msg) -> ( List (Attribute msg), List (Attribute msg) )
 partition =
     List.foldr
-        (\(InputProp p) ( wps, fps ) ->
+        (\p ( wps, fps ) ->
             case p of
                 WrapperProp a ->
                     ( a :: wps, fps )
