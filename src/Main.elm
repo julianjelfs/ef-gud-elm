@@ -15,6 +15,7 @@ import Stories.Section as Section
 import Stories.Select as Select
 import Stories.Stack as Stack
 import Stories.Surface as Surface
+import Stories.TextArea as TextArea
 import Stories.Typography as Typography
 import Url exposing (Url)
 import Url.Parser as Url
@@ -37,6 +38,7 @@ type Route
     | Checkbox
     | Typography
     | Select
+    | TextArea
     | NotFound
 
 
@@ -54,6 +56,7 @@ type alias Model =
     , checkbox : Checkbox.Model
     , typography : Typography.Model
     , select : Select.Model
+    , textarea : TextArea.Model
     }
 
 
@@ -72,6 +75,7 @@ init _ url key =
       , checkbox = Checkbox.init
       , typography = Typography.init
       , select = Select.init
+      , textarea = TextArea.init
       }
     , Cmd.none
     )
@@ -100,6 +104,7 @@ type Msg
     | CheckboxMsg Checkbox.Msg
     | TypographyMsg Typography.Msg
     | SelectMsg Select.Msg
+    | TextAreaMsg TextArea.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -195,6 +200,13 @@ update msg model =
             in
             ( { model | select = subModel }, Cmd.map SelectMsg subCmd )
 
+        TextAreaMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    TextArea.update subMsg model.textarea
+            in
+            ( { model | textarea = subModel }, Cmd.map TextAreaMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -211,6 +223,7 @@ routeParser =
         , Url.map Checkbox (Url.s "checkbox")
         , Url.map Typography (Url.s "typography")
         , Url.map Select (Url.s "select")
+        , Url.map TextArea (Url.s "textarea")
         ]
 
 
@@ -243,6 +256,7 @@ view model =
                     , menuItem model.route Grid "grid" "Grid Component"
                     , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Input "input" "Input Component"
+                    , menuItem model.route TextArea "textarea" "Text Area Component"
                     , menuItem model.route Select "select" "Select Components"
                     , menuItem model.route Checkbox "checkbox" "Checkbox Component"
                     , menuItem model.route Section "section" "Section Component"
@@ -300,6 +314,9 @@ componentView model =
 
         Select ->
             Html.map SelectMsg (Select.view model.select)
+
+        TextArea ->
+            Html.map TextAreaMsg (TextArea.view model.textarea)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]
