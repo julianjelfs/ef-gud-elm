@@ -45,5 +45,5 @@ There are pros and cons to this approach. On the plus side it results in a very 
 
 With the design considerations given above, contributions are welcome via PR. If
 you add a component, please also add a story and wire it up in the Main.elm
-module. For a roadmap of what needs doing, have a look at [http://localhost:3000](http://localhost:3000). If you want to add something that is not part of the GUD or you feel like it makes sense to deviate from the design principles adopted so far then it's probably worth a discussion before you begin.
+module. For a roadmap of what needs doing, have a look at [http://code.ef.design](http://code.ef.design). If you want to add something that is not part of the GUD or you feel like it makes sense to deviate from the design principles adopted so far then it's probably worth a discussion before you begin.
 
