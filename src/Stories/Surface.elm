@@ -6,7 +6,7 @@ import Components.Surface as S
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Padding as PD
+import Spacing as SP
 import Utils exposing (loremIpsum)
 
 
@@ -34,7 +34,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ div
-            [ class <| PD.paddingClass BP.Small PD.Medium ""
+            [ SP.paddingClass "" BP.Small SP.Medium
             , class <| C.backgroundClass C.HelloPaper
             ]
             [ S.surface False
@@ -45,7 +45,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.EfGrey
-            , class <| PD.paddingClass BP.Small PD.Medium ""
+            , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
                 [ S.outline ]
@@ -55,7 +55,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.LegalPaper
-            , class <| PD.paddingClass BP.Small PD.Medium ""
+            , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
                 [ S.shadow ]
@@ -65,7 +65,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.OutdoorPaper
-            , class <| PD.paddingClass BP.Small PD.Medium ""
+            , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
                 [ S.deepShadow ]
@@ -75,7 +75,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.White
-            , class <| PD.paddingClass BP.Small PD.Medium ""
+            , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
                 [ S.deepShadow, S.rounded ]
@@ -85,7 +85,7 @@ view model =
             ]
         , div
             [ class <| C.backgroundClass C.EfGrey
-            , class <| PD.paddingClass BP.Small PD.Medium ""
+            , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface
                 True

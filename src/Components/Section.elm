@@ -5,7 +5,7 @@ import Color exposing (ThemeColor, backgroundClass)
 import Components.Container as Container
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Padding exposing (Padding)
+import Spacing as Sp
 
 
 type SectionProp msg

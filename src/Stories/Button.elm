@@ -4,7 +4,7 @@ import Components.Button as B
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Padding as P
+import Spacing as S
 
 
 type alias Model =
@@ -59,21 +59,21 @@ primaryButton model =
         ]
 
 
-overridePadding : Model -> Html Msg
-overridePadding model =
+overrideSpacing : Model -> Html Msg
+overrideSpacing model =
     div
         [ class "ef-button-group u-s-p-s" ]
-        [ exampleButton [ B.primary, B.padding [ P.ExtraSmall ] ] "we can"
-        , exampleButton [ B.primary, B.padding [ P.Small ] ] "override"
-        , exampleButton [ B.primary, B.padding [ P.Medium ] ] "the"
-        , exampleButton [ B.primary, B.padding [ P.Large ] ] "padding if"
-        , exampleButton [ B.primary, B.padding [ P.ExtraLarge ] ] "we really"
-        , exampleButton [ B.primary, B.padding [ P.ExtraExtraLarge ] ] "want to !!!"
-        , exampleButton [ B.primary, B.padding [ P.Zero, P.Large ] ] "also uneven"
-        , exampleButton [ B.primary, B.padding [ P.Zero, P.Large, P.Medium ] ] "padding is fine"
+        [ exampleButton [ B.primary, B.padding [ S.ExtraSmall ] ] "we can"
+        , exampleButton [ B.primary, B.leftMargin S.Large, B.padding [ S.Small ] ] "override"
+        , exampleButton [ B.primary, B.padding [ S.Medium ] ] "the"
+        , exampleButton [ B.primary, B.padding [ S.Large ] ] "padding if"
+        , exampleButton [ B.primary, B.padding [ S.ExtraLarge ] ] "we really"
+        , exampleButton [ B.primary, B.padding [ S.ExtraExtraLarge ] ] "want to !!!"
+        , exampleButton [ B.primary, B.padding [ S.Zero, S.Large ] ] "also uneven"
+        , exampleButton [ B.primary, B.padding [ S.Zero, S.Large, S.Medium ] ] "padding is fine"
         , exampleButton
             [ B.primary
-            , B.topPad P.ExtraExtraLarge
+            , B.topPad S.ExtraExtraLarge
             ]
             "totally fine"
         ]
@@ -114,7 +114,7 @@ view model =
         , buttonStates secondaryProps model
         , buttonStates squareProps model
         , smallButtons model
-        , overridePadding model
+        , overrideSpacing model
         , div [ class "u-s-p-s" ]
             [ pre []
                 [ text <|
