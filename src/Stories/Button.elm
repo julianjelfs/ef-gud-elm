@@ -1,6 +1,7 @@
 module Stories.Button exposing (Model, Msg, init, update, view)
 
 import Components.Button as B
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -107,7 +108,7 @@ view model =
     in
     div
         []
-        [ h3 [] [ text "This is the button component" ]
+        [ T.h4 [ text "This is the button component" ]
         , primaryButton model
         , buttonStates defaultProps model
         , secondaryButton model

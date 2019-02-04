@@ -292,7 +292,7 @@ offsetting =
 
 view : Model -> Html Msg
 view model =
-    Container.container
+    div []
         [ h3 [] [ text "This is the grid component" ]
         , autoWidths
         , br [] []

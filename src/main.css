@@ -27,8 +27,9 @@ section {
 .sidebar a {
   text-decoration: none;
 }
-.selected-component a {
+.selected-component .ef-text-body {
   color: #ffffff;
+  font-weight: bold;
 }
 
 .content {
@@ -36,7 +37,6 @@ section {
 }
 
 .selected-component {
-  font-weight: bold;
   background-color: #ff329b;
 }
 .bordered-box {

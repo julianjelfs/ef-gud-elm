@@ -2,6 +2,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -253,7 +254,9 @@ menuItem selectedRoute route path desc =
               )
             ]
         ]
-        [ a [ href path ] [ text desc ] ]
+        [ a [ href path ]
+            [ T.body [ text desc ] ]
+        ]
 
 
 view : Model -> Document Msg
@@ -280,8 +283,8 @@ view model =
                     ]
                 ]
             , section [ class "content" ]
-                [ h1 [] [ text "EF Web UI Kit" ]
-                , p [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
+                [ T.h1 [ text "EF Web UI Kit" ]
+                , T.body [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
                 , hr [] []
                 , componentView model
                 ]
@@ -294,7 +297,7 @@ componentView : Model -> Html Msg
 componentView model =
     case model.route of
         Home ->
-            h2 [] [ text "Select a component" ]
+            T.h4 [ text "Select a component from the sidebar" ]
 
         Button ->
             Html.map ButtonMsg (Button.view model.button)
