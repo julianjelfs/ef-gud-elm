@@ -4,7 +4,9 @@ module Components.Radio exposing
     , disabled
     , focus
     , invalid
+    , namedRadio
     , radio
+    , radioGroup
     , valid
     )
 
@@ -38,6 +40,11 @@ invalid =
 focus : RadioProp msg
 focus =
     wrapInput "-focus"
+
+
+name : String -> RadioProp msg
+name =
+    InputProp << Html.Attributes.name
 
 
 checked : RadioProp msg
@@ -92,3 +99,25 @@ radio props content =
         , span [ class "ef-boolean__element -radio" ] []
         , span [ class "ef-boolean__label" ] content
         ]
+
+
+
+-- to ensure type safety for radio groups *and* ensure that each radio in the
+-- group has the *same* name property we wrap a function that expects the group
+-- name and returns a radio. This is actually quite cool.
+
+
+type NamedRadio msg
+    = NamedRadio (String -> Html msg)
+
+
+namedRadio : List (RadioProp msg) -> List (Html msg) -> NamedRadio msg
+namedRadio props content =
+    NamedRadio (\n -> radio (name n :: props) content)
+
+
+radioGroup : String -> List (NamedRadio msg) -> Html msg
+radioGroup n radios =
+    div
+        [ class "ef-form-group -inline" ]
+        (List.map (\(NamedRadio r) -> r n) radios)

@@ -26,12 +26,11 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> Html Msg
-view model =
+radioStates : Html msg
+radioStates =
     div
         []
-        [ h3 [] [ text "This is the radio component" ]
-        , div [ class "u-mb-m" ]
+        [ div [ class "u-mb-m" ]
             [ R.radio [] [ text "default" ] ]
         , div [ class "u-mb-m" ]
             [ R.radio [ R.checked ] [ text "checked" ] ]
@@ -45,4 +44,26 @@ view model =
             [ R.radio [ R.invalid ] [ text "invalid" ] ]
         , div [ class "u-mb-m" ]
             [ R.radio [ R.invalid, R.checked ] [ text "invalid and checked" ] ]
+        ]
+
+
+radioGroup : Html msg
+radioGroup =
+    R.radioGroup "demo"
+        [ R.namedRadio [ R.checked ] [ text "Select" ]
+        , R.namedRadio [] [ text "a" ]
+        , R.namedRadio [] [ text "single" ]
+        , R.namedRadio [] [ text "option" ]
+        ]
+
+
+view : Model -> Html Msg
+view model =
+    div
+        []
+        [ h3 [] [ text "This is the radio component" ]
+        , radioStates
+        , br [] []
+        , h5 [] [ text "This is a radio group" ]
+        , radioGroup
         ]
