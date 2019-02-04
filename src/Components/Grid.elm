@@ -65,7 +65,7 @@ module Components.Grid exposing
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Padding as P
+import Spacing as S
 import Utils exposing (..)
 
 
@@ -85,9 +85,9 @@ type Row msg
     = Row (Html msg)
 
 
-bottomPad : P.Padding -> ColProp msg
-bottomPad p =
-    P.bottomPad p (wrapClass ColProp)
+bottomPad : S.Spacing -> ColProp msg
+bottomPad =
+    ColProp << S.bottomPad
 
 
 row : List (RowProp msg) -> List (Column msg) -> Html msg

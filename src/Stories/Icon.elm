@@ -6,7 +6,7 @@ import Components.Surface as S
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Padding as P
+import Spacing as SP
 
 
 type alias Model =
@@ -33,14 +33,16 @@ view : Model -> Html Msg
 view model =
     let
         colProps =
-            [ G.bottomPad P.Medium, G.smallSpan 12, G.mediumSpan 6, G.largeSpan 4, G.extraLargeSpan 2 ]
+            [ G.bottomPad SP.Medium, G.smallSpan 12, G.mediumSpan 6, G.largeSpan 4, G.extraLargeSpan 2 ]
 
         exampleIcon i name =
             G.col colProps
                 [ S.surface False
                     [ S.shadow, S.rounded ]
-                    [ I.icon [ I.iconType i ]
-                    , code [] [ text name ]
+                    [ span [ style "font-size" "24px" ]
+                        [ I.icon [ I.iconType i ]
+                        , code [] [ text name ]
+                        ]
                     ]
                 ]
     in
@@ -81,5 +83,19 @@ view model =
             , exampleIcon I.Heart "-heart"
             , exampleIcon I.HeartFilled "-heart-filled"
             , exampleIcon I.Play "-play"
+            , exampleIcon I.Trash "-trash"
+            , exampleIcon I.Bookmark "-bookmark"
+            , exampleIcon I.Bell "-bell"
+            , exampleIcon I.Menu "-menu"
+            , exampleIcon I.Article "-article"
+            , exampleIcon I.Close "-close"
+            , exampleIcon I.Search "-search"
+            , exampleIcon I.Info "-info"
+            , exampleIcon I.Grid "-grid"
+            , exampleIcon I.Grid2 "-grid-2"
+            , exampleIcon I.Columns "-columns"
+            , exampleIcon I.User "-user"
+            , exampleIcon I.Gallery "-gallery"
+            , exampleIcon I.Login "-login"
             ]
         ]

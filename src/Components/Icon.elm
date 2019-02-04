@@ -45,6 +45,20 @@ type Icon
     | Heart
     | HeartFilled
     | Play
+    | Trash
+    | Bookmark
+    | Bell
+    | Menu
+    | Article
+    | Close
+    | Search
+    | Info
+    | Grid
+    | Grid2
+    | Columns
+    | User
+    | Gallery
+    | Login
 
 
 toString : Icon -> String
@@ -148,6 +162,48 @@ toString i =
 
         Play ->
             "-play"
+
+        Trash ->
+            "-trash"
+
+        Bookmark ->
+            "-bookmark"
+
+        Bell ->
+            "-bell"
+
+        Menu ->
+            "-menu"
+
+        Article ->
+            "-article"
+
+        Close ->
+            "-close"
+
+        Search ->
+            "-search"
+
+        Info ->
+            "-info"
+
+        Grid ->
+            "-grid"
+
+        Grid2 ->
+            "-grid-2"
+
+        Columns ->
+            "-columns"
+
+        User ->
+            "-user"
+
+        Gallery ->
+            "-gallery"
+
+        Login ->
+            "-login"
 
 
 iconType : Icon -> IconProp msg
