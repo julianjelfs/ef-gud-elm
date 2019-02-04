@@ -1,15 +1,13 @@
-module Components.Input exposing
-    ( InputProp
-    , InputType(..)
+module Components.TextArea exposing
+    ( TextAreaProp
     , completed
     , disabled
     , focus
-    , input
     , invalid
     , loading
     , onInput
     , placeholder
-    , type_
+    , textarea
     , valid
     , value
     )
@@ -20,92 +18,52 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-valid : InputProp msg
+valid : TextAreaProp msg
 valid =
     wrapper "-is-valid"
 
 
-invalid : InputProp msg
+invalid : TextAreaProp msg
 invalid =
     wrapper "-is-invalid"
 
 
-loading : InputProp msg
+loading : TextAreaProp msg
 loading =
     wrapper "-is-loading"
 
 
-focus : InputProp msg
+focus : TextAreaProp msg
 focus =
     field "-focus"
 
 
-completed : InputProp msg
+completed : TextAreaProp msg
 completed =
     field "-completed"
 
 
-value : String -> InputProp msg
+value : String -> TextAreaProp msg
 value =
     FieldProp << Html.Attributes.value
 
 
-disabled : InputProp msg
+disabled : TextAreaProp msg
 disabled =
     (FieldProp << Html.Attributes.disabled) True
 
 
-type_ : InputType -> InputProp msg
-type_ =
-    FieldProp << Html.Attributes.type_ << typeToString
-
-
-placeholder : String -> InputProp msg
+placeholder : String -> TextAreaProp msg
 placeholder =
     FieldProp << Html.Attributes.placeholder
 
 
-onInput : (String -> msg) -> InputProp msg
+onInput : (String -> msg) -> TextAreaProp msg
 onInput =
     FieldProp << Html.Events.onInput
 
 
-type InputType
-    = EmailInput
-    | TextInput
-    | NumberInput
-    | PasswordInput
-    | SearchInput
-    | TelInput
-    | UrlInput
-
-
-typeToString : InputType -> String
-typeToString t =
-    case t of
-        EmailInput ->
-            "email"
-
-        TextInput ->
-            "text"
-
-        NumberInput ->
-            "number"
-
-        PasswordInput ->
-            "password"
-
-        SearchInput ->
-            "search"
-
-        TelInput ->
-            "tel"
-
-        UrlInput ->
-            "url"
-
-
-type InputProp msg
+type TextAreaProp msg
     = WrapperProp (Attribute msg)
     | FieldProp (Attribute msg)
 
@@ -118,7 +76,7 @@ field =
     wrapClass FieldProp
 
 
-partition : List (InputProp msg) -> ( List (Attribute msg), List (Attribute msg) )
+partition : List (TextAreaProp msg) -> ( List (Attribute msg), List (Attribute msg) )
 partition =
     List.foldr
         (\p ( wps, fps ) ->
@@ -132,17 +90,17 @@ partition =
         ( [], [] )
 
 
-input : List (InputProp msg) -> Html msg
-input props =
+textarea : List (TextAreaProp msg) -> Html msg
+textarea props =
     let
         ( wrapperProps, fieldProps ) =
             partition props
     in
     div
-        ([ class "ef-input-w u-mb-m" ]
+        ([ class "ef-input-w -textarea u-mb-m" ]
             ++ wrapperProps
         )
-        [ Html.input
+        [ Html.textarea
             ([ class "ef-input"
              ]
                 ++ fieldProps

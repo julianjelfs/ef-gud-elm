@@ -13,8 +13,11 @@ import Stories.Icon as Icon
 import Stories.Input as Input
 import Stories.Link as Link
 import Stories.Section as Section
+import Stories.Select as Select
 import Stories.Stack as Stack
 import Stories.Surface as Surface
+import Stories.TextArea as TextArea
+import Stories.Typography as Typography
 import Url exposing (Url)
 import Url.Parser as Url
 
@@ -35,6 +38,9 @@ type Route
     | Link
     | Checkbox
     | Icon
+    | Typography
+    | Select
+    | TextArea
     | NotFound
 
 
@@ -51,6 +57,9 @@ type alias Model =
     , link : Link.Model
     , checkbox : Checkbox.Model
     , icon : Icon.Model
+    , typography : Typography.Model
+    , select : Select.Model
+    , textarea : TextArea.Model
     }
 
 
@@ -68,6 +77,9 @@ init _ url key =
       , link = Link.init
       , checkbox = Checkbox.init
       , icon = Icon.init
+      , typography = Typography.init
+      , select = Select.init
+      , textarea = TextArea.init
       }
     , Cmd.none
     )
@@ -95,6 +107,9 @@ type Msg
     | LinkMsg Link.Msg
     | CheckboxMsg Checkbox.Msg
     | IconMsg Icon.Msg
+    | TypographyMsg Typography.Msg
+    | SelectMsg Select.Msg
+    | TextAreaMsg TextArea.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -183,6 +198,27 @@ update msg model =
             in
             ( { model | icon = subModel }, Cmd.map IconMsg subCmd )
 
+        TypographyMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Typography.update subMsg model.typography
+            in
+            ( { model | typography = subModel }, Cmd.map TypographyMsg subCmd )
+
+        SelectMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Select.update subMsg model.select
+            in
+            ( { model | select = subModel }, Cmd.map SelectMsg subCmd )
+
+        TextAreaMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    TextArea.update subMsg model.textarea
+            in
+            ( { model | textarea = subModel }, Cmd.map TextAreaMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -198,6 +234,9 @@ routeParser =
         , Url.map Link (Url.s "link")
         , Url.map Checkbox (Url.s "checkbox")
         , Url.map Icon (Url.s "icon")
+        , Url.map Typography (Url.s "typography")
+        , Url.map Select (Url.s "select")
+        , Url.map TextArea (Url.s "textarea")
         ]
 
 
@@ -230,11 +269,14 @@ view model =
                     , menuItem model.route Grid "grid" "Grid Component"
                     , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Input "input" "Input Component"
+                    , menuItem model.route TextArea "textarea" "Text Area Component"
+                    , menuItem model.route Select "select" "Select Components"
                     , menuItem model.route Checkbox "checkbox" "Checkbox Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
                     , menuItem model.route Icon "icon" "Icon Component"
+                    , menuItem model.route Typography "typography" "Typography Components"
                     ]
                 ]
             , section [ class "content" ]
@@ -283,6 +325,15 @@ componentView model =
 
         Icon ->
             Html.map IconMsg (Icon.view model.icon)
+
+        Typography ->
+            Html.map TypographyMsg (Typography.view model.typography)
+
+        Select ->
+            Html.map SelectMsg (Select.view model.select)
+
+        TextArea ->
+            Html.map TextAreaMsg (TextArea.view model.textarea)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]

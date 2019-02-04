@@ -5,6 +5,7 @@ module Components.Button exposing
     , disabled
     , focus
     , hover
+    , leftMargin
     , loading
     , onClick
     , padding
@@ -19,7 +20,7 @@ import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Padding as P
+import Spacing as S
 import Utils exposing (..)
 
 
@@ -43,14 +44,19 @@ buttonProp =
     wrapClass ButtonProp
 
 
-topPad : P.Padding -> ButtonProp msg
-topPad p =
-    P.topPad p buttonProp
+topPad : S.Spacing -> ButtonProp msg
+topPad =
+    ButtonProp << S.topPad
 
 
-padding : List P.Padding -> ButtonProp msg
-padding ps =
-    P.paddingClasses ps buttonProp
+leftMargin : S.Spacing -> ButtonProp msg
+leftMargin =
+    ButtonProp << S.leftMargin
+
+
+padding : List S.Spacing -> ButtonProp msg
+padding =
+    ButtonProp << S.paddingClasses
 
 
 onClick : msg -> ButtonProp msg
