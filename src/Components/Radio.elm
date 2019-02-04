@@ -1,10 +1,10 @@
-module Components.Checkbox exposing
-    ( CheckboxProp
-    , checkbox
+module Components.Radio exposing
+    ( RadioProp
     , checked
     , disabled
     , focus
     , invalid
+    , radio
     , valid
     )
 
@@ -14,32 +14,38 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-type CheckboxProp msg
+
+-- TODO this component is basically identical to the checkbox component
+-- can we have a shared props wrapper and extract the prop generation util
+-- functions to a shared util.
+
+
+type RadioProp msg
     = LabelProp (Attribute msg)
     | InputProp (Attribute msg)
 
 
-valid : CheckboxProp msg
+valid : RadioProp msg
 valid =
     wrapLabel "-is-valid"
 
 
-invalid : CheckboxProp msg
+invalid : RadioProp msg
 invalid =
     wrapLabel "-is-invalid"
 
 
-focus : CheckboxProp msg
+focus : RadioProp msg
 focus =
     wrapInput "-focus"
 
 
-checked : CheckboxProp msg
+checked : RadioProp msg
 checked =
     (InputProp << Html.Attributes.checked) True
 
 
-disabled : CheckboxProp msg
+disabled : RadioProp msg
 disabled =
     (InputProp << Html.Attributes.disabled) True
 
@@ -52,7 +58,7 @@ wrapLabel =
     wrapClass LabelProp
 
 
-partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )
+partition : List (RadioProp msg) -> ( List (Attribute msg), List (Attribute msg) )
 partition =
     List.foldr
         (\p ( lps, ips ) ->
@@ -66,8 +72,8 @@ partition =
         ( [], [] )
 
 
-checkbox : List (CheckboxProp msg) -> List (Html msg) -> Html msg
-checkbox props content =
+radio : List (RadioProp msg) -> List (Html msg) -> Html msg
+radio props content =
     let
         ( labelProps, inputProps ) =
             partition props
@@ -77,12 +83,12 @@ checkbox props content =
             ++ labelProps
         )
         [ input
-            ([ type_ "checkbox"
+            ([ type_ "radio"
              , class "ef-boolean__input"
              ]
                 ++ inputProps
             )
             []
-        , span [ class "ef-boolean__element -checkbox" ] []
+        , span [ class "ef-boolean__element -radio" ] []
         , span [ class "ef-boolean__label" ] content
         ]

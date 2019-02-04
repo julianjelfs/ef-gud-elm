@@ -13,6 +13,7 @@ import Stories.Grid as Grid
 import Stories.Icon as Icon
 import Stories.Input as Input
 import Stories.Link as Link
+import Stories.Radio as Radio
 import Stories.Section as Section
 import Stories.Select as Select
 import Stories.Stack as Stack
@@ -38,6 +39,7 @@ type Route
     | Stack
     | Link
     | Checkbox
+    | Radio
     | Icon
     | Typography
     | Select
@@ -57,6 +59,7 @@ type alias Model =
     , stack : Stack.Model
     , link : Link.Model
     , checkbox : Checkbox.Model
+    , radio : Radio.Model
     , icon : Icon.Model
     , typography : Typography.Model
     , select : Select.Model
@@ -77,6 +80,7 @@ init _ url key =
       , stack = Stack.init
       , link = Link.init
       , checkbox = Checkbox.init
+      , radio = Radio.init
       , icon = Icon.init
       , typography = Typography.init
       , select = Select.init
@@ -107,6 +111,7 @@ type Msg
     | StackMsg Stack.Msg
     | LinkMsg Link.Msg
     | CheckboxMsg Checkbox.Msg
+    | RadioMsg Radio.Msg
     | IconMsg Icon.Msg
     | TypographyMsg Typography.Msg
     | SelectMsg Select.Msg
@@ -192,6 +197,13 @@ update msg model =
             in
             ( { model | checkbox = subModel }, Cmd.map CheckboxMsg subCmd )
 
+        RadioMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Radio.update subMsg model.radio
+            in
+            ( { model | radio = subModel }, Cmd.map RadioMsg subCmd )
+
         IconMsg subMsg ->
             let
                 ( subModel, subCmd ) =
@@ -234,6 +246,7 @@ routeParser =
         , Url.map Stack (Url.s "stack")
         , Url.map Link (Url.s "link")
         , Url.map Checkbox (Url.s "checkbox")
+        , Url.map Radio (Url.s "radio")
         , Url.map Icon (Url.s "icon")
         , Url.map Typography (Url.s "typography")
         , Url.map Select (Url.s "select")
@@ -275,6 +288,7 @@ view model =
                     , menuItem model.route TextArea "textarea" "Text Area Component"
                     , menuItem model.route Select "select" "Select Components"
                     , menuItem model.route Checkbox "checkbox" "Checkbox Component"
+                    , menuItem model.route Radio "radio" "Radio Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
@@ -310,6 +324,9 @@ componentView model =
 
         Checkbox ->
             Html.map CheckboxMsg (Checkbox.view model.checkbox)
+
+        Radio ->
+            Html.map RadioMsg (Radio.view model.radio)
 
         Section ->
             Html.map SectionMsg (Section.view model.section)
