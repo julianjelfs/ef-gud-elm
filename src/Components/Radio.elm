@@ -20,6 +20,13 @@ import Utils exposing (..)
 -- TODO this component is basically identical to the checkbox component
 -- can we have a shared props wrapper and extract the prop generation util
 -- functions to a shared util.
+-- perhaps we can use phantom types here
+-- type InputProp a msg = InputProp msg
+-- disabled : InputProp Radio msg = Input.disabled
+-- where Input.disabed : ???
+-- radio : List (InputProp Radio msg) -> Html msg
+-- we restrict the call to radio to only Radio specific InputProps by
+-- realising the phantom type. Hmmm - better?
 
 
 type RadioProp msg
