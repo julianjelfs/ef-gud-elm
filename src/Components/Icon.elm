@@ -18,11 +18,56 @@ type Icon
     | ChevronDown
     | ChevronDoubleLeft
     | ChevronDoubleRight
+    | IsValid
+    | IsInvalid
+    | TriangleDown
+    | TriangleUp
+    | Users
+    | Coursebook
+    | Calendar
+    | InfoMeeting
+    | Pen
+    | Phone
+    | Filter
+    | Insurance
+    | Chat
+    | Location
+    | Cloud
+    | Star
+    | Plane
+    | Facebook
+    | Twitter
+    | YouTube
+    | LinkedIn
+    | Pinterest
+    | Email
+    | NewWindow
+    | Heart
+    | HeartFilled
+    | Play
 
 
 toString : Icon -> String
 toString i =
     case i of
+        Star ->
+            "-start"
+
+        Plane ->
+            "-plane"
+
+        Facebook ->
+            "-social-fb"
+
+        Twitter ->
+            "-social-tw"
+
+        YouTube ->
+            "-social-yt"
+
+        LinkedIn ->
+            "-social-li"
+
         ChevronLeft ->
             "-chevron-left"
 
@@ -40,6 +85,69 @@ toString i =
 
         ChevronDoubleRight ->
             "-chevron-double-right"
+
+        IsValid ->
+            "-is-valid"
+
+        IsInvalid ->
+            "-is-invalid"
+
+        TriangleDown ->
+            "-triangle-down"
+
+        TriangleUp ->
+            "-triangle-up"
+
+        Users ->
+            "-users"
+
+        Coursebook ->
+            "-coursebook"
+
+        Calendar ->
+            "-calendar"
+
+        InfoMeeting ->
+            "-infomeeting"
+
+        Pen ->
+            "-pen"
+
+        Phone ->
+            "-phone"
+
+        Filter ->
+            "-filter"
+
+        Insurance ->
+            "-insurance"
+
+        Chat ->
+            "-chat"
+
+        Location ->
+            "-location"
+
+        Cloud ->
+            "-cloud"
+
+        Pinterest ->
+            "-social-pi"
+
+        Email ->
+            "-email"
+
+        NewWindow ->
+            "-new-window"
+
+        Heart ->
+            "-heart"
+
+        HeartFilled ->
+            "-heart-filled"
+
+        Play ->
+            "-play"
 
 
 iconType : Icon -> IconProp msg
