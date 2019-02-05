@@ -10,6 +10,7 @@ ButtonProp	src/Components/Button.elm	/^type ButtonProp msg$/;"	t
 CheckboxProp	src/Components/Checkbox.elm	/^type CheckboxProp msg$/;"	t
 ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
+ComponentProp	src/Components/Generic.elm	/^type ComponentProp a msg$/;"	t
 Icon	src/Components/Icon.elm	/^type Icon$/;"	t
 IconProp	src/Components/Icon.elm	/^type IconProp msg$/;"	t
 InputProp	src/Components/Input.elm	/^type InputProp msg$/;"	t
@@ -49,6 +50,7 @@ Msg	src/Stories/TextArea.elm	/^type Msg$/;"	t
 Msg	src/Stories/Typography.elm	/^type Msg$/;"	t
 NamedRadio	src/Components/Radio.elm	/^type NamedRadio msg$/;"	t
 Option	src/Components/Select.elm	/^type Option$/;"	t
+Radio	src/Components/Radio.elm	/^type Radio$/;"	t
 RadioProp	src/Components/Radio.elm	/^type RadioProp msg$/;"	t
 Route	src/Main.elm	/^type Route$/;"	t
 Row	src/Components/Grid.elm	/^type Row msg$/;"	t
@@ -288,6 +290,10 @@ smallXStart	src/Components/Grid.elm	/^smallXStart : ColProp msg$/;"	c
 smallYBottom	src/Components/Grid.elm	/^smallYBottom : ColProp msg$/;"	c
 smallYCenter	src/Components/Grid.elm	/^smallYCenter : ColProp msg$/;"	c
 smallYTop	src/Components/Grid.elm	/^smallYTop : ColProp msg$/;"	c
+someComponent	src/Components/Radio.elm	/^someComponent : List (G.ComponentProp Radio msg) -> Html msg$/;"	f
+someProperty	src/Components/Generic.elm	/^someProperty : ComponentProp a msg$/;"	c
+someProperty	src/Components/Radio.elm	/^someProperty : G.ComponentProp Radio msg$/;"	c
+someProperty2	src/Components/Generic.elm	/^someProperty2 : Attribute msg$/;"	c
 spacingClassName	src/Spacing.elm	/^spacingClassName : SpacingType -> String -> BP.Breakpoint -> Spacing -> String$/;"	f
 spacingClasses	src/Spacing.elm	/^spacingClasses : SpacingType -> List Spacing -> Attribute msg$/;"	f
 square	src/Components/Button.elm	/^square : ButtonProp msg$/;"	c

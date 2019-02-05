@@ -10,6 +10,7 @@ module Components.Radio exposing
     , valid
     )
 
+import Components.Generic as G
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -20,13 +21,29 @@ import Utils exposing (..)
 -- TODO this component is basically identical to the checkbox component
 -- can we have a shared props wrapper and extract the prop generation util
 -- functions to a shared util.
--- perhaps we can use phantom types here
--- type InputProp a msg = InputProp msg
--- disabled : InputProp Radio msg = Input.disabled
--- where Input.disabed : ???
--- radio : List (InputProp Radio msg) -> Html msg
--- we restrict the call to radio to only Radio specific InputProps by
--- realising the phantom type. Hmmm - better?
+-- the following is an example of using phantom types. We would still need
+-- to add each property that is shared to each component that uses it but
+-- it might be worth it. Also need to figure out how to mix shared and
+-- non shared properties without poluting the Generic.ComponentProp
+-- I suppose we could just implement *all* props as a ComponentProp and then
+-- just expose the ones that each component supports and then never export
+-- the Generic module so that it cannot be used directly.
+
+
+type Radio
+    = Radio
+
+
+someProperty : G.ComponentProp Radio msg
+someProperty =
+    G.someProperty
+
+
+someComponent : List (G.ComponentProp Radio msg) -> Html msg
+someComponent props =
+    div
+        (List.map G.extractAttribute props)
+        []
 
 
 type RadioProp msg
