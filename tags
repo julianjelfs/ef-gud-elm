@@ -29,6 +29,7 @@ Model	src/Stories/Section.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Select.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Stack.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Surface.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Switch.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Template.elm	/^type alias Model =$/;"	a
 Model	src/Stories/TextArea.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Typography.elm	/^type alias Model =$/;"	a
@@ -45,6 +46,7 @@ Msg	src/Stories/Section.elm	/^type Msg$/;"	t
 Msg	src/Stories/Select.elm	/^type Msg$/;"	t
 Msg	src/Stories/Stack.elm	/^type Msg$/;"	t
 Msg	src/Stories/Surface.elm	/^type Msg$/;"	t
+Msg	src/Stories/Switch.elm	/^type Msg$/;"	t
 Msg	src/Stories/Template.elm	/^type Msg$/;"	t
 Msg	src/Stories/TextArea.elm	/^type Msg$/;"	t
 Msg	src/Stories/Typography.elm	/^type Msg$/;"	t
@@ -63,6 +65,7 @@ StackItem	src/Components/Stack.elm	/^type StackItem msg$/;"	t
 StackItemProp	src/Components/Stack.elm	/^type StackItemProp msg$/;"	t
 StackProp	src/Components/Stack.elm	/^type StackProp msg$/;"	t
 SurfaceProp	src/Components/Surface.elm	/^type SurfaceProp msg$/;"	t
+SwitchProp	src/Components/Switch.elm	/^type SwitchProp msg$/;"	t
 TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 TextAreaProp	src/Components/TextArea.elm	/^type TextAreaProp msg$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
@@ -97,6 +100,7 @@ checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServic
 checkbox	src/Components/Checkbox.elm	/^checkbox : List (CheckboxProp msg) -> List (Html msg) -> Html msg$/;"	f
 checked	src/Components/Checkbox.elm	/^checked : CheckboxProp msg$/;"	c
 checked	src/Components/Radio.elm	/^checked : RadioProp msg$/;"	c
+checked	src/Components/Switch.elm	/^checked : SwitchProp msg$/;"	c
 col	src/Components/Grid.elm	/^col : List (ColProp msg) -> List (Html msg) -> Column msg$/;"	f
 coloredBox	src/Stories/Stack.elm	/^coloredBox : String -> Html msg$/;"	f
 completed	src/Components/Input.elm	/^completed : InputProp msg$/;"	c
@@ -113,6 +117,7 @@ disabled	src/Components/Checkbox.elm	/^disabled : CheckboxProp msg$/;"	c
 disabled	src/Components/Input.elm	/^disabled : InputProp msg$/;"	c
 disabled	src/Components/Radio.elm	/^disabled : RadioProp msg$/;"	c
 disabled	src/Components/Select.elm	/^disabled : SelectProp msg$/;"	c
+disabled	src/Components/Switch.elm	/^disabled : SwitchProp msg$/;"	c
 disabled	src/Components/TextArea.elm	/^disabled : TextAreaProp msg$/;"	c
 exampleButton	src/Stories/Button.elm	/^exampleButton : List (B.ButtonProp Msg) -> String -> Html Msg$/;"	f
 exampleInput	src/Stories/Input.elm	/^exampleInput : List (I.InputProp Msg) -> Html Msg$/;"	f
@@ -134,6 +139,7 @@ focus	src/Components/Checkbox.elm	/^focus : CheckboxProp msg$/;"	c
 focus	src/Components/Input.elm	/^focus : InputProp msg$/;"	c
 focus	src/Components/Radio.elm	/^focus : RadioProp msg$/;"	c
 focus	src/Components/Select.elm	/^focus : SelectProp msg$/;"	c
+focus	src/Components/Switch.elm	/^focus : SwitchProp msg$/;"	c
 focus	src/Components/TextArea.elm	/^focus : TextAreaProp msg$/;"	c
 fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
 h1	src/Components/Typography.elm	/^h1 : List (Html msg) -> Html msg$/;"	f
@@ -169,6 +175,7 @@ init	src/Stories/Section.elm	/^init : Model$/;"	c
 init	src/Stories/Select.elm	/^init : Model$/;"	c
 init	src/Stories/Stack.elm	/^init : Model$/;"	c
 init	src/Stories/Surface.elm	/^init : Model$/;"	c
+init	src/Stories/Switch.elm	/^init : Model$/;"	c
 init	src/Stories/Template.elm	/^init : Model$/;"	c
 init	src/Stories/TextArea.elm	/^init : Model$/;"	c
 init	src/Stories/Typography.elm	/^init : Model$/;"	c
@@ -179,12 +186,15 @@ invalid	src/Components/Checkbox.elm	/^invalid : CheckboxProp msg$/;"	c
 invalid	src/Components/Input.elm	/^invalid : InputProp msg$/;"	c
 invalid	src/Components/Radio.elm	/^invalid : RadioProp msg$/;"	c
 invalid	src/Components/Select.elm	/^invalid : SelectProp msg$/;"	c
+invalid	src/Components/Switch.elm	/^invalid : SwitchProp msg$/;"	c
 invalid	src/Components/TextArea.elm	/^invalid : TextAreaProp msg$/;"	c
 item	src/Components/Stack.elm	/^item : List (StackItemProp msg) -> List (Html msg) -> StackItem msg$/;"	f
 itemAlignment	src/Stories/Stack.elm	/^itemAlignment : Html Msg$/;"	c
 itemBottom	src/Components/Stack.elm	/^itemBottom : StackItemProp msg$/;"	c
 itemStretch	src/Components/Stack.elm	/^itemStretch : StackItemProp msg$/;"	c
 itemTop	src/Components/Stack.elm	/^itemTop : StackItemProp msg$/;"	c
+large	src/Components/Switch.elm	/^large : SwitchProp msg$/;"	c
+large	src/Stories/Switch.elm	/^large : Html Msg$/;"	c
 largeCollapse	src/Components/Grid.elm	/^largeCollapse : ColProp msg$/;"	c
 largeFirst	src/Components/Grid.elm	/^largeFirst : ColProp msg$/;"	c
 largeLast	src/Components/Grid.elm	/^largeLast : ColProp msg$/;"	c
@@ -248,6 +258,7 @@ partition	src/Components/Checkbox.elm	/^partition : List (CheckboxProp msg) -> (
 partition	src/Components/Input.elm	/^partition : List (InputProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/Radio.elm	/^partition : List (RadioProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/Select.elm	/^partition : List (SelectProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
+partition	src/Components/Switch.elm	/^partition : List (SwitchProp msg) -> ( List (Attribute msg), List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/TextArea.elm	/^partition : List (TextAreaProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 placeholder	src/Components/Input.elm	/^placeholder : String -> InputProp msg$/;"	f
 placeholder	src/Components/TextArea.elm	/^placeholder : String -> TextAreaProp msg$/;"	f
@@ -277,6 +288,7 @@ simpleStack	src/Stories/Stack.elm	/^simpleStack : Html Msg$/;"	c
 size	src/Components/Section.elm	/^size : BP.Breakpoint -> SectionProp msg$/;"	f
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
 small	src/Components/Button.elm	/^small : ButtonProp msg$/;"	c
+small	src/Stories/Switch.elm	/^small : Html Msg$/;"	c
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 smallCollapse	src/Components/Grid.elm	/^smallCollapse : ColProp msg$/;"	c
 smallFirst	src/Components/Grid.elm	/^smallFirst : ColProp msg$/;"	c
@@ -303,6 +315,7 @@ subtitle	src/Components/Typography.elm	/^subtitle : List (Html msg) -> Html msg$
 subtitle	src/Stories/Typography.elm	/^subtitle : Html Msg$/;"	c
 surface	src/Components/Surface.elm	/^surface : Bool -> List (SurfaceProp msg) -> List (Html msg) -> Html msg$/;"	f
 surfaceProp	src/Components/Surface.elm	/^surfaceProp : String -> SurfaceProp msg$/;"	f
+switch	src/Components/Switch.elm	/^switch : List (SwitchProp msg) -> List (Html msg) -> Html msg$/;"	f
 taggedBox	src/Stories/Utils.elm	/^taggedBox : String -> Html msg$/;"	f
 taggedBoxFromSpans	src/Stories/Grid.elm	/^taggedBoxFromSpans : Maybe Int -> Maybe Int -> Maybe Int -> Maybe Int -> Html Msg$/;"	f
 template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
@@ -330,6 +343,7 @@ update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"
 update	src/Stories/Select.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Stack.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Surface.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Switch.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/TextArea.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Typography.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
@@ -342,6 +356,7 @@ valid	src/Components/Checkbox.elm	/^valid : CheckboxProp msg$/;"	c
 valid	src/Components/Input.elm	/^valid : InputProp msg$/;"	c
 valid	src/Components/Radio.elm	/^valid : RadioProp msg$/;"	c
 valid	src/Components/Select.elm	/^valid : SelectProp msg$/;"	c
+valid	src/Components/Switch.elm	/^valid : SwitchProp msg$/;"	c
 valid	src/Components/TextArea.elm	/^valid : TextAreaProp msg$/;"	c
 value	src/Components/Input.elm	/^value : String -> InputProp msg$/;"	f
 value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
@@ -363,6 +378,7 @@ view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Select.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Stack.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Surface.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Switch.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/TextArea.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Typography.elm	/^view : Model -> Html Msg$/;"	f
