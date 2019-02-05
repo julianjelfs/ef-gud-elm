@@ -1,4 +1,7 @@
-module Color exposing (ThemeColor(..), backgroundClass)
+module Color exposing (ThemeColor(..), bgColor)
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
 
 
 type ThemeColor
@@ -15,38 +18,39 @@ type ThemeColor
     | OutdoorPaper
 
 
-backgroundClass : ThemeColor -> String
-backgroundClass c =
-    case c of
-        DigitalFirstBlue ->
-            "u-bg-first-blue"
+bgColor : ThemeColor -> Attribute msg
+bgColor c =
+    class <|
+        case c of
+            DigitalFirstBlue ->
+                "u-bg-first-blue"
 
-        EducationBlue ->
-            "u-bg-education-blue"
+            EducationBlue ->
+                "u-bg-education-blue"
 
-        HelloPink ->
-            "u-bg-hello-pink"
+            HelloPink ->
+                "u-bg-hello-pink"
 
-        EfGrey ->
-            "u-bg-ef-grey"
+            EfGrey ->
+                "u-bg-ef-grey"
 
-        InkBlack ->
-            "u-bg-ink-black"
+            InkBlack ->
+                "u-bg-ink-black"
 
-        White ->
-            "u-bg-white"
+            White ->
+                "u-bg-white"
 
-        FirstPaper ->
-            "u-bg-first-paper"
+            FirstPaper ->
+                "u-bg-first-paper"
 
-        LegalPaper ->
-            "u-bg-legal-paper"
+            LegalPaper ->
+                "u-bg-legal-paper"
 
-        HelloPaper ->
-            "u-bg-hello-paper"
+            HelloPaper ->
+                "u-bg-hello-paper"
 
-        EducationPaper ->
-            "u-bg-education-paper"
+            EducationPaper ->
+                "u-bg-education-paper"
 
-        OutdoorPaper ->
-            "u-bg-outdoor-paper"
+            OutdoorPaper ->
+                "u-bg-outdoor-paper"

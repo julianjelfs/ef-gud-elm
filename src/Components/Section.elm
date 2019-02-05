@@ -1,7 +1,7 @@
-module Components.Section exposing (backgroundColor, section, size)
+module Components.Section exposing (bgColor, section, size)
 
 import Breakpoint as BP
-import Color exposing (ThemeColor, backgroundClass)
+import Color as Color
 import Components.Container as Container
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -12,9 +12,9 @@ type SectionProp msg
     = SectionProp (Attribute msg)
 
 
-backgroundColor : ThemeColor -> SectionProp msg
-backgroundColor =
-    SectionProp << class << backgroundClass
+bgColor : Color.ThemeColor -> SectionProp msg
+bgColor =
+    SectionProp << Color.bgColor
 
 
 size : BP.Breakpoint -> SectionProp msg
@@ -26,4 +26,4 @@ section : List (SectionProp msg) -> List (Html msg) -> Html msg
 section props children =
     Html.section
         ([ class "ef-section" ] ++ List.map (\(SectionProp a) -> a) props)
-        [ Container.container children ]
+        [ Container.container [] children ]

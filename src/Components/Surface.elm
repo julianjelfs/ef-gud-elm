@@ -9,7 +9,6 @@ module Components.Surface exposing
     , surface
     )
 
-import Color exposing (ThemeColor, backgroundClass)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

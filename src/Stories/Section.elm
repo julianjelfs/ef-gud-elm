@@ -31,26 +31,26 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ S.section [ S.backgroundColor HelloPaper, S.size BP.Small ]
+        [ S.section [ S.bgColor HelloPaper, S.size BP.Small ]
             [ h3 [] [ text "This stuff is inside a SMALL section" ]
             , p [] [ text loremIpsum ]
             ]
         , S.section
-            [ S.backgroundColor OutdoorPaper
+            [ S.bgColor OutdoorPaper
             , S.size BP.Medium
             ]
             [ h3 [] [ text "This stuff is inside a MEDIUM section" ]
             , p [] [ text loremIpsum ]
             ]
         , S.section
-            [ S.backgroundColor LegalPaper
+            [ S.bgColor LegalPaper
             , S.size BP.Large
             ]
             [ h3 [] [ text "This stuff is inside a LARGE section" ]
             , p [] [ text loremIpsum ]
             ]
         , S.section
-            [ S.backgroundColor EducationPaper
+            [ S.bgColor EducationPaper
             , S.size BP.ExtraLarge
             ]
             [ h3 [] [ text "This stuff is inside a EXTRA LARGE section" ]

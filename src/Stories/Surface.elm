@@ -35,7 +35,7 @@ view model =
     div []
         [ div
             [ SP.paddingClass "" BP.Small SP.Medium
-            , class <| C.backgroundClass C.HelloPaper
+            , C.bgColor C.HelloPaper
             ]
             [ S.surface False
                 []
@@ -44,7 +44,7 @@ view model =
                 ]
             ]
         , div
-            [ class <| C.backgroundClass C.EfGrey
+            [ C.bgColor C.EfGrey
             , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
@@ -54,7 +54,7 @@ view model =
                 ]
             ]
         , div
-            [ class <| C.backgroundClass C.LegalPaper
+            [ C.bgColor C.LegalPaper
             , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
@@ -64,7 +64,7 @@ view model =
                 ]
             ]
         , div
-            [ class <| C.backgroundClass C.OutdoorPaper
+            [ C.bgColor C.OutdoorPaper
             , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
@@ -74,7 +74,7 @@ view model =
                 ]
             ]
         , div
-            [ class <| C.backgroundClass C.White
+            [ C.bgColor C.White
             , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface False
@@ -84,7 +84,7 @@ view model =
                 ]
             ]
         , div
-            [ class <| C.backgroundClass C.EfGrey
+            [ C.bgColor C.EfGrey
             , SP.paddingClass "" BP.Small SP.Medium
             ]
             [ S.surface

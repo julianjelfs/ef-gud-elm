@@ -11,6 +11,7 @@ CheckboxProp	src/Components/Checkbox.elm	/^type CheckboxProp msg$/;"	t
 ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
 ComponentProp	src/Components/Generic.elm	/^type ComponentProp a msg$/;"	t
+ContainerProp	src/Components/Container.elm	/^type ContainerProp msg$/;"	t
 Icon	src/Components/Icon.elm	/^type Icon$/;"	t
 IconProp	src/Components/Icon.elm	/^type IconProp msg$/;"	t
 InputProp	src/Components/Input.elm	/^type InputProp msg$/;"	t
@@ -73,15 +74,18 @@ active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
 all	tests/Tests.elm	/^all : Test$/;"	c
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
-backgroundClass	src/Color.elm	/^backgroundClass : ThemeColor -> String$/;"	f
-backgroundColor	src/Components/Section.elm	/^backgroundColor : ThemeColor -> SectionProp msg$/;"	f
 behaviour	src/Stories/Grid.elm	/^behaviour : Html Msg$/;"	c
+bgColor	src/Color.elm	/^bgColor : ThemeColor -> Attribute msg$/;"	f
+bgColor	src/Components/Container.elm	/^bgColor : C.ThemeColor -> ContainerProp msg$/;"	f
+bgColor	src/Components/Section.elm	/^bgColor : Color.ThemeColor -> SectionProp msg$/;"	f
 body	src/Components/Typography.elm	/^body : List (Html msg) -> Html msg$/;"	f
 body	src/Stories/Typography.elm	/^body : Html Msg$/;"	c
 bodyBook	src/Components/Typography.elm	/^bodyBook : List (Html msg) -> Html msg$/;"	f
 bodyBook	src/Stories/Typography.elm	/^bodyBook : Html Msg$/;"	c
 borderedBox	src/Stories/Utils.elm	/^borderedBox : Bool -> List (Html msg) -> Html msg$/;"	f
+bottomMargin	src/Components/Container.elm	/^bottomMargin : S.Spacing -> ContainerProp msg$/;"	f
 bottomMargin	src/Spacing.elm	/^bottomMargin : Spacing -> Attribute msg$/;"	f
+bottomPad	src/Components/Container.elm	/^bottomPad : S.Spacing -> ContainerProp msg$/;"	f
 bottomPad	src/Components/Grid.elm	/^bottomPad : S.Spacing -> ColProp msg$/;"	f
 bottomPad	src/Spacing.elm	/^bottomPad : Spacing -> Attribute msg$/;"	f
 box	src/Stories/Utils.elm	/^box : BoxTags -> Html msg$/;"	f
@@ -108,7 +112,7 @@ completed	src/Components/Select.elm	/^completed : SelectProp msg$/;"	c
 completed	src/Components/TextArea.elm	/^completed : TextAreaProp msg$/;"	c
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
 concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
-container	src/Components/Container.elm	/^container : List (Html msg) -> Html msg$/;"	f
+container	src/Components/Container.elm	/^container : List (ContainerProp msg) -> List (Html msg) -> Html msg$/;"	f
 deepShadow	src/Components/Surface.elm	/^deepShadow : SurfaceProp msg$/;"	c
 defaultSpan	src/Components/Grid.elm	/^defaultSpan : Int -> ColProp msg$/;"	f
 defaultTags	src/Stories/Utils.elm	/^defaultTags : BoxTags$/;"	c
@@ -156,7 +160,9 @@ h6	src/Components/Typography.elm	/^h6 : List (Html msg) -> Html msg$/;"	f
 h6	src/Stories/Typography.elm	/^h6 : Html Msg$/;"	c
 horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
 horizontalAlignmentChildOverrides	src/Stories/Grid.elm	/^horizontalAlignmentChildOverrides : Html Msg$/;"	c
+horizontalMargin	src/Components/Container.elm	/^horizontalMargin : S.Spacing -> ContainerProp msg$/;"	f
 horizontalMargin	src/Spacing.elm	/^horizontalMargin : Spacing -> Attribute msg$/;"	f
+horizontalPad	src/Components/Container.elm	/^horizontalPad : S.Spacing -> ContainerProp msg$/;"	f
 horizontalPad	src/Spacing.elm	/^horizontalPad : Spacing -> Attribute msg$/;"	f
 hover	src/Components/Button.elm	/^hover : ButtonProp msg$/;"	c
 href	src/Components/Surface.elm	/^href : String -> SurfaceProp msg$/;"	f
@@ -208,7 +214,9 @@ largeYBottom	src/Components/Grid.elm	/^largeYBottom : ColProp msg$/;"	c
 largeYCenter	src/Components/Grid.elm	/^largeYCenter : ColProp msg$/;"	c
 largeYTop	src/Components/Grid.elm	/^largeYTop : ColProp msg$/;"	c
 leftMargin	src/Components/Button.elm	/^leftMargin : S.Spacing -> ButtonProp msg$/;"	f
+leftMargin	src/Components/Container.elm	/^leftMargin : S.Spacing -> ContainerProp msg$/;"	f
 leftMargin	src/Spacing.elm	/^leftMargin : Spacing -> Attribute msg$/;"	f
+leftPad	src/Components/Container.elm	/^leftPad : S.Spacing -> ContainerProp msg$/;"	f
 leftPad	src/Spacing.elm	/^leftPad : Spacing -> Attribute msg$/;"	f
 link	src/Components/Link.elm	/^link : LinkProps msg -> List (Html msg) -> Html msg$/;"	f
 loading	src/Components/Button.elm	/^loading : ButtonProp msg$/;"	c
@@ -235,6 +243,7 @@ mediumYTop	src/Components/Grid.elm	/^mediumYTop : ColProp msg$/;"	c
 menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
 name	src/Components/Radio.elm	/^name : String -> RadioProp msg$/;"	f
 namedRadio	src/Components/Radio.elm	/^namedRadio : List (RadioProp msg) -> List (Html msg) -> NamedRadio msg$/;"	f
+normal	src/Stories/Container.elm	/^normal : Html Msg$/;"	c
 offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
 onClick	src/Components/Surface.elm	/^onClick : msg -> SurfaceProp msg$/;"	f
@@ -271,7 +280,9 @@ radioStates	src/Stories/Radio.elm	/^radioStates : Html msg$/;"	c
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 reordering	src/Stories/Grid.elm	/^reordering : Html Msg$/;"	c
 responsiveWidths	src/Stories/Grid.elm	/^responsiveWidths : Html Msg$/;"	c
+rightMargin	src/Components/Container.elm	/^rightMargin : S.Spacing -> ContainerProp msg$/;"	f
 rightMargin	src/Spacing.elm	/^rightMargin : Spacing -> Attribute msg$/;"	f
+rightPad	src/Components/Container.elm	/^rightPad : S.Spacing -> ContainerProp msg$/;"	f
 rightPad	src/Spacing.elm	/^rightPad : Spacing -> Attribute msg$/;"	f
 rounded	src/Components/Surface.elm	/^rounded : SurfaceProp msg$/;"	c
 routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
@@ -306,6 +317,7 @@ someComponent	src/Components/Radio.elm	/^someComponent : List (G.ComponentProp R
 someProperty	src/Components/Generic.elm	/^someProperty : ComponentProp a msg$/;"	c
 someProperty	src/Components/Radio.elm	/^someProperty : G.ComponentProp Radio msg$/;"	c
 someProperty2	src/Components/Generic.elm	/^someProperty2 : Attribute msg$/;"	c
+spacedOut	src/Stories/Container.elm	/^spacedOut : Html Msg$/;"	c
 spacingClassName	src/Spacing.elm	/^spacingClassName : SpacingType -> String -> BP.Breakpoint -> Spacing -> String$/;"	f
 spacingClasses	src/Spacing.elm	/^spacingClasses : SpacingType -> List Spacing -> Attribute msg$/;"	f
 square	src/Components/Button.elm	/^square : ButtonProp msg$/;"	c
@@ -324,8 +336,10 @@ textarea	src/Components/TextArea.elm	/^textarea : List (TextAreaProp msg) -> Htm
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
 toString	src/Components/Icon.elm	/^toString : Icon -> String$/;"	f
 toString	src/Spacing.elm	/^toString : Spacing -> String$/;"	f
+topMargin	src/Components/Container.elm	/^topMargin : S.Spacing -> ContainerProp msg$/;"	f
 topMargin	src/Spacing.elm	/^topMargin : Spacing -> Attribute msg$/;"	f
 topPad	src/Components/Button.elm	/^topPad : S.Spacing -> ButtonProp msg$/;"	f
+topPad	src/Components/Container.elm	/^topPad : S.Spacing -> ContainerProp msg$/;"	f
 topPad	src/Spacing.elm	/^topPad : Spacing -> Attribute msg$/;"	f
 typeString	src/Spacing.elm	/^typeString : SpacingType -> String$/;"	f
 typeToString	src/Components/Input.elm	/^typeToString : InputType -> String$/;"	f
@@ -363,7 +377,9 @@ value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
 value	src/Components/TextArea.elm	/^value : String -> TextAreaProp msg$/;"	f
 verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
 verticalAlignmentChildOverrides	src/Stories/Grid.elm	/^verticalAlignmentChildOverrides : Html Msg$/;"	c
+verticalMargin	src/Components/Container.elm	/^verticalMargin : S.Spacing -> ContainerProp msg$/;"	f
 verticalMargin	src/Spacing.elm	/^verticalMargin : Spacing -> Attribute msg$/;"	f
+verticalPad	src/Components/Container.elm	/^verticalPad : S.Spacing -> ContainerProp msg$/;"	f
 verticalPad	src/Spacing.elm	/^verticalPad : Spacing -> Attribute msg$/;"	f
 view	src/Main.elm	/^view : Model -> Document Msg$/;"	f
 view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
@@ -382,6 +398,7 @@ view	src/Stories/Switch.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Template.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/TextArea.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Typography.elm	/^view : Model -> Html Msg$/;"	f
+withMargin	src/Stories/Container.elm	/^withMargin : Html Msg$/;"	c
 wrapClass	src/Utils.elm	/^wrapClass : (Attribute msg -> p) -> String -> p$/;"	f
 xAround	src/Components/Grid.elm	/^xAround : RowProp msg$/;"	c
 xBetween	src/Components/Grid.elm	/^xBetween : RowProp msg$/;"	c
