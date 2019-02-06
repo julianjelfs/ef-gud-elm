@@ -9,6 +9,7 @@ import Html.Events exposing (..)
 import Stories.Button as Button
 import Stories.Checkbox as Checkbox
 import Stories.Container as Container
+import Stories.Form as Form
 import Stories.Grid as Grid
 import Stories.Icon as Icon
 import Stories.Input as Input
@@ -46,6 +47,7 @@ type Route
     | Select
     | TextArea
     | Switch
+    | Form
     | NotFound
 
 
@@ -67,6 +69,7 @@ type alias Model =
     , select : Select.Model
     , textarea : TextArea.Model
     , switch : Switch.Model
+    , form : Form.Model
     }
 
 
@@ -89,6 +92,7 @@ init _ url key =
       , select = Select.init
       , textarea = TextArea.init
       , switch = Switch.init
+      , form = Form.init
       }
     , Cmd.none
     )
@@ -121,6 +125,7 @@ type Msg
     | SelectMsg Select.Msg
     | TextAreaMsg TextArea.Msg
     | SwitchMsg Switch.Msg
+    | FormMsg Form.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -244,6 +249,13 @@ update msg model =
             in
             ( { model | switch = subModel }, Cmd.map SwitchMsg subCmd )
 
+        FormMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Form.update subMsg model.form
+            in
+            ( { model | form = subModel }, Cmd.map FormMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -264,6 +276,7 @@ routeParser =
         , Url.map Typography (Url.s "typography")
         , Url.map Select (Url.s "select")
         , Url.map TextArea (Url.s "textarea")
+        , Url.map Form (Url.s "form")
         ]
 
 
@@ -294,15 +307,16 @@ view model =
                 [ ul
                     []
                     [ menuItem model.route Button "button" "Button Component"
-                    , menuItem model.route Link "link" "Link Component"
-                    , menuItem model.route Grid "grid" "Grid Component"
-                    , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Input "input" "Input Component"
                     , menuItem model.route TextArea "textarea" "Text Area Component"
                     , menuItem model.route Select "select" "Select Components"
                     , menuItem model.route Checkbox "checkbox" "Checkbox Component"
                     , menuItem model.route Switch "switch" "Switch Component"
                     , menuItem model.route Radio "radio" "Radio Component"
+                    , menuItem model.route Form "form" "Form Component"
+                    , menuItem model.route Link "link" "Link Component"
+                    , menuItem model.route Grid "grid" "Grid Component"
+                    , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
@@ -371,6 +385,9 @@ componentView model =
 
         TextArea ->
             Html.map TextAreaMsg (TextArea.view model.textarea)
+
+        Form ->
+            Html.map FormMsg (Form.view model.form)
 
         NotFound ->
             h2 [] [ text "Unknown component selected" ]
