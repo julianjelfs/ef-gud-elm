@@ -62,7 +62,7 @@ inputStates =
         ]
     , div []
         [ exampleInput
-            [ I.value "completed", I.completed ]
+            [ I.value <| Just "completed", I.completed ]
         ]
     , div []
         [ exampleInput
@@ -70,11 +70,11 @@ inputStates =
         ]
     , div []
         [ exampleInput
-            [ I.value "valid", I.valid ]
+            [ I.value <| Just "valid", I.valid ]
         ]
     , div []
         [ exampleInput
-            [ I.value "invalid", I.invalid ]
+            [ I.value <| Just "invalid", I.invalid ]
         ]
     , div []
         [ exampleInput

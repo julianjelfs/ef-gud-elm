@@ -20,7 +20,7 @@ type alias Model =
 
 
 type Msg
-    = NoOp
+    = UpdateFirstName String
 
 
 type BrochurePrefs
@@ -108,15 +108,22 @@ init =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp ->
-            ( model, Cmd.none )
+        UpdateFirstName firstName ->
+            let
+                form =
+                    model.form
+
+                updatedForm =
+                    { form | firstName = Just firstName }
+            in
+            ( { model | form = updatedForm, userRecord = formToUser updatedForm }, Cmd.none )
 
 
 exampleForm : Model -> Html Msg
-exampleForm model =
+exampleForm { form, userRecord } =
     let
         valid =
-            model.userRecord /= Nothing
+            userRecord /= Nothing
     in
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
@@ -124,7 +131,12 @@ exampleForm model =
                 [ F.fieldset (F.legend "Name")
                     [ G.row []
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input [ I.placeholder "First name" ] ]
+                            [ I.input
+                                [ I.onInput UpdateFirstName
+                                , I.value form.firstName
+                                , I.placeholder "First name"
+                                ]
+                            ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                             [ I.input [ I.placeholder "Last name" ] ]
                         ]

@@ -82,9 +82,9 @@ completed =
     field "-completed"
 
 
-value : String -> InputProp msg
+value : Maybe String -> InputProp msg
 value =
-    FieldProp << Html.Attributes.value
+    FieldProp << Html.Attributes.value << Maybe.withDefault ""
 
 
 disabled : InputProp msg
