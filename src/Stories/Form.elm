@@ -14,16 +14,95 @@ import Spacing as S
 
 
 type alias Model =
-    {}
+    { form : FormData
+    , userRecord : Maybe UserRecord
+    }
 
 
 type Msg
     = NoOp
 
 
+type BrochurePrefs
+    = Email
+    | Post
+    | Both
+
+
+type alias UserRecord =
+    { firstName : String
+    , lastName : String
+    , dob : String
+    , prefs : BrochurePrefs
+    , streetName : String
+    , streetNumber : String
+    , city : String
+    , postCode : String
+    , email : String
+    , phone : String
+    }
+
+
+type alias FormData =
+    { firstName : Maybe String
+    , lastName : Maybe String
+    , dob : Maybe String
+    , prefs : BrochurePrefs
+    , streetName : Maybe String
+    , streetNumber : Maybe String
+    , city : Maybe String
+    , postCode : Maybe String
+    , email : Maybe String
+    , phone : Maybe String
+    }
+
+
+initialForm : FormData
+initialForm =
+    { firstName = Nothing
+    , lastName = Nothing
+    , dob = Nothing
+    , prefs = Email
+    , streetName = Nothing
+    , streetNumber = Nothing
+    , city = Nothing
+    , postCode = Nothing
+    , email = Nothing
+    , phone = Nothing
+    }
+
+
+formToUser : FormData -> Maybe UserRecord
+formToUser { firstName, lastName, dob, prefs, streetName, streetNumber, city, postCode, email, phone } =
+    -- there is not magic here - just write a function to say whether the data is valid
+    -- if there is repeating logic, extract it and re-use it.
+    Maybe.map UserRecord firstName
+        |> apply lastName
+        |> apply dob
+        |> apply (Just prefs)
+        |> apply streetName
+        |> apply streetNumber
+        |> apply city
+        |> apply postCode
+        |> apply email
+        |> apply phone
+
+
+apply : Maybe a -> Maybe (a -> b) -> Maybe b
+apply a f =
+    case ( a, f ) of
+        ( Just a_, Just f_ ) ->
+            Just (f_ a_)
+
+        _ ->
+            Nothing
+
+
 init : Model
 init =
-    {}
+    { form = initialForm
+    , userRecord = formToUser initialForm
+    }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -33,8 +112,12 @@ update msg model =
             ( model, Cmd.none )
 
 
-exampleForm : Html Msg
-exampleForm =
+exampleForm : Model -> Html Msg
+exampleForm model =
+    let
+        valid =
+            model.userRecord /= Nothing
+    in
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
             [ F.form
@@ -102,7 +185,7 @@ exampleForm =
                     ]
                 , G.row [ G.verticalMargin S.Large ]
                     [ G.col []
-                        [ B.button [ B.primary ] [ text "Submit" ] ]
+                        [ B.button [ B.primary, B.disabled (not valid) ] [ text "Submit" ] ]
                     ]
                 ]
             ]
@@ -115,5 +198,5 @@ view model =
         []
         [ T.h4 [ text "This is the form component" ]
         , T.para [ text "Forms use the regular grid for layout, and spacing utility classes to handle row spacing." ]
-        , exampleForm
+        , exampleForm model
         ]

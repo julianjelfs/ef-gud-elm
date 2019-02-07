@@ -104,6 +104,6 @@ small =
     buttonProp "-small"
 
 
-disabled : ButtonProp msg
+disabled : Bool -> ButtonProp msg
 disabled =
-    ButtonProp <| Html.Attributes.disabled True
+    ButtonProp << Html.Attributes.disabled

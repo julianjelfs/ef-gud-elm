@@ -35,7 +35,7 @@ buttonStates props model =
         [ exampleButton (props ++ [ B.hover ]) "Hover"
         , exampleButton (props ++ [ B.active ]) "Active"
         , exampleButton (props ++ [ B.focus ]) "Focus"
-        , exampleButton (props ++ [ B.disabled ]) "Disabled"
+        , exampleButton (props ++ [ B.disabled True ]) "Disabled"
         , exampleButton (props ++ [ B.loading ]) "Loading"
         ]
 
