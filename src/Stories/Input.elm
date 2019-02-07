@@ -4,6 +4,7 @@ import Components.Input as I
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
 
 
 type alias Model =
@@ -28,7 +29,7 @@ update msg model =
 
 exampleInput : List (I.InputProp Msg) -> Html Msg
 exampleInput props =
-    I.input (I.onInput OnInput :: props)
+    I.input (I.onInput OnInput :: I.verticalMargin S.Medium :: props)
 
 
 inputTypes : Model -> List (Html Msg)

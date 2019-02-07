@@ -1,5 +1,6 @@
 module Components.Grid exposing
-    ( bottomPad
+    ( bottomMargin
+    , bottomPad
     , col
     , defaultSpan
     , extraLargeCollapse
@@ -14,6 +15,7 @@ module Components.Grid exposing
     , extralargeYBottom
     , extralargeYCenter
     , extralargeYTop
+    , horizontalMargin
     , largeCollapse
     , largeFirst
     , largeLast
@@ -26,6 +28,7 @@ module Components.Grid exposing
     , largeYBottom
     , largeYCenter
     , largeYTop
+    , leftMargin
     , mediumCollapse
     , mediumFirst
     , mediumLast
@@ -38,6 +41,7 @@ module Components.Grid exposing
     , mediumYBottom
     , mediumYCenter
     , mediumYTop
+    , rightMargin
     , row
     , smallCollapse
     , smallFirst
@@ -51,6 +55,8 @@ module Components.Grid exposing
     , smallYBottom
     , smallYCenter
     , smallYTop
+    , topMargin
+    , verticalMargin
     , xAround
     , xBetween
     , xCenter
@@ -83,6 +89,36 @@ type Column msg
 
 type Row msg
     = Row (Html msg)
+
+
+verticalMargin : S.Spacing -> RowProp msg
+verticalMargin =
+    RowProp << S.verticalMargin
+
+
+topMargin : S.Spacing -> RowProp msg
+topMargin =
+    RowProp << S.topMargin
+
+
+rightMargin : S.Spacing -> RowProp msg
+rightMargin =
+    RowProp << S.rightMargin
+
+
+leftMargin : S.Spacing -> RowProp msg
+leftMargin =
+    RowProp << S.leftMargin
+
+
+horizontalMargin : S.Spacing -> RowProp msg
+horizontalMargin =
+    RowProp << S.horizontalMargin
+
+
+bottomMargin : S.Spacing -> RowProp msg
+bottomMargin =
+    RowProp << S.bottomMargin
 
 
 bottomPad : S.Spacing -> ColProp msg

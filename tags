@@ -6,19 +6,15 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 Legend	src/Components/Form.elm	/^type Legend msg$/;"	t
 Model	src/Main.elm	/^type alias Model =$/;"	a
-Model	src/Stories/Form.elm	/^type alias Model =$/;"	a
 Msg	src/Main.elm	/^type Msg$/;"	t
-Msg	src/Stories/Form.elm	/^type Msg$/;"	t
 Route	src/Main.elm	/^type Route$/;"	t
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
-exampleForm	src/Stories/Form.elm	/^exampleForm : Html Msg$/;"	c
 field	src/Components/Form.elm	/^field : Maybe String -> List (Html msg) -> Html msg$/;"	f
 fieldset	src/Components/Form.elm	/^fieldset : Legend msg -> List (Html msg) -> Html msg$/;"	f
 form	src/Components/Form.elm	/^form : List (Html msg) -> Html msg$/;"	f
 formGroup	src/Components/Form.elm	/^formGroup : List (Html msg) -> Html msg$/;"	f
 init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
-init	src/Stories/Form.elm	/^init : Model$/;"	c
 legend	src/Components/Form.elm	/^legend : String -> Legend msg$/;"	f
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Msg$/;"	f
@@ -26,7 +22,5 @@ module.exports.homepage	elmapp.config.js	/^    "homepage": "https:\/\/julianjelf
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 routeParser	src/Main.elm	/^routeParser : Url.Parser (Route -> a) a$/;"	f
 update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
-update	src/Stories/Form.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
 view	src/Main.elm	/^view : Model -> Document Msg$/;"	f
-view	src/Stories/Form.elm	/^view : Model -> Html Msg$/;"	f

@@ -1,23 +1,60 @@
 module Components.Input exposing
     ( InputProp
     , InputType(..)
+    , bottomMargin
     , completed
     , disabled
     , focus
+    , horizontalMargin
     , input
     , invalid
+    , leftMargin
     , loading
     , onInput
     , placeholder
+    , rightMargin
+    , topMargin
     , type_
     , valid
     , value
+    , verticalMargin
     )
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
 import Utils exposing (..)
+
+
+verticalMargin : S.Spacing -> InputProp msg
+verticalMargin =
+    WrapperProp << S.verticalMargin
+
+
+topMargin : S.Spacing -> InputProp msg
+topMargin =
+    WrapperProp << S.topMargin
+
+
+rightMargin : S.Spacing -> InputProp msg
+rightMargin =
+    WrapperProp << S.rightMargin
+
+
+leftMargin : S.Spacing -> InputProp msg
+leftMargin =
+    WrapperProp << S.leftMargin
+
+
+horizontalMargin : S.Spacing -> InputProp msg
+horizontalMargin =
+    WrapperProp << S.horizontalMargin
+
+
+bottomMargin : S.Spacing -> InputProp msg
+bottomMargin =
+    WrapperProp << S.bottomMargin
 
 
 valid : InputProp msg
@@ -139,7 +176,7 @@ input props =
             partition props
     in
     div
-        ([ class "ef-input-w u-mb-m" ]
+        ([ class "ef-input-w" ]
             ++ wrapperProps
         )
         [ Html.input

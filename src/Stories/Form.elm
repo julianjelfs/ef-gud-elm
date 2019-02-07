@@ -1,5 +1,6 @@
 module Stories.Form exposing (Model, Msg, init, update, view)
 
+import Components.Button as B
 import Components.Checkbox as C
 import Components.Form as F
 import Components.Grid as G
@@ -9,6 +10,7 @@ import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
 
 
 type alias Model =
@@ -44,7 +46,7 @@ exampleForm =
                             [ I.input [ I.placeholder "Last name" ] ]
                         ]
                     ]
-                , G.row []
+                , G.row [ G.verticalMargin S.Medium ]
                     [ G.col [ G.largeSpan 3, G.mediumSpan 6, G.smallSpan 8 ]
                         [ F.formGroup
                             [ F.field (Just "Date of Birth")
@@ -67,23 +69,40 @@ exampleForm =
                     ]
                 , F.fieldset (F.legend "Address")
                     [ G.row []
-                        [ G.col [ G.mediumSpan 6, G.smallSpan 12 ] [ text "Stree name" ]
-                        , G.col [ G.mediumSpan 6, G.smallSpan 12 ] [ text "Number" ]
+                        [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
+                            [ I.input [ I.placeholder "Street Name" ] ]
+                        , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
+                            [ I.input [ I.placeholder "Number" ] ]
                         ]
                     , G.row []
-                        [ G.col [ G.mediumSpan 6, G.smallSpan 12 ] [ text "City" ]
-                        , G.col [ G.mediumSpan 6, G.smallSpan 12 ] [ text "Post Code" ]
+                        [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
+                            [ I.input [ I.placeholder "City" ] ]
+                        , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
+                            [ I.input [ I.placeholder "Post Code" ] ]
                         ]
                     ]
                 , G.row []
-                    [ G.col [ G.mediumSpan 6, G.smallSpan 12 ] [ text "Email Address" ]
-                    , G.col [ G.mediumSpan 6, G.smallSpan 12 ] [ text "Phone number" ]
+                    [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
+                        [ F.formGroup
+                            [ F.field (Just "Email Address")
+                                [ I.input [ I.placeholder "Email Address" ] ]
+                            ]
+                        ]
+                    , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
+                        [ F.formGroup
+                            [ F.field (Just "Phone Number")
+                                [ I.input [ I.placeholder "Phone Number" ] ]
+                            ]
+                        ]
                     ]
-                , G.row []
-                    [ G.col [] [ text "Legal checkbox stuff" ]
+                , G.row [ G.verticalMargin S.Medium ]
+                    [ G.col []
+                        [ C.checkbox [] [ text "Yes, I (or my legal guardian) have read and understood how EF processes my personal data as set out in the Privacy Policy, and agree to EF's use of my personal data for marketing purposes." ]
+                        ]
                     ]
-                , G.row []
-                    [ G.col [] [ text "Submit button" ]
+                , G.row [ G.verticalMargin S.Large ]
+                    [ G.col []
+                        [ B.button [ B.primary ] [ text "Submit" ] ]
                     ]
                 ]
             ]
