@@ -12,6 +12,7 @@ module Components.Input exposing
     , loading
     , onInput
     , placeholder
+    , required
     , rightMargin
     , topMargin
     , type_
@@ -100,6 +101,11 @@ type_ =
 placeholder : String -> InputProp msg
 placeholder =
     FieldProp << Html.Attributes.placeholder
+
+
+required : Bool -> InputProp msg
+required =
+    FieldProp << Html.Attributes.required
 
 
 onInput : (String -> msg) -> InputProp msg

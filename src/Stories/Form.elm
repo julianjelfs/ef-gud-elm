@@ -21,6 +21,7 @@ type alias Model =
 
 type Msg
     = UpdateFirstName String
+    | UpdateLastName String
 
 
 type BrochurePrefs
@@ -88,6 +89,10 @@ formToUser { firstName, lastName, dob, prefs, streetName, streetNumber, city, po
         |> apply phone
 
 
+
+-- home grown applicative!
+
+
 apply : Maybe a -> Maybe (a -> b) -> Maybe b
 apply a f =
     case ( a, f ) of
@@ -105,6 +110,10 @@ init =
     }
 
 
+
+-- this makes me want to puke
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -115,6 +124,16 @@ update msg model =
 
                 updatedForm =
                     { form | firstName = Just firstName }
+            in
+            ( { model | form = updatedForm, userRecord = formToUser updatedForm }, Cmd.none )
+
+        UpdateLastName lastName ->
+            let
+                form =
+                    model.form
+
+                updatedForm =
+                    { form | lastName = Just lastName }
             in
             ( { model | form = updatedForm, userRecord = formToUser updatedForm }, Cmd.none )
 
@@ -135,10 +154,17 @@ exampleForm { form, userRecord } =
                                 [ I.onInput UpdateFirstName
                                 , I.value form.firstName
                                 , I.placeholder "First name"
+                                , I.required True
                                 ]
                             ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input [ I.placeholder "Last name" ] ]
+                            [ I.input
+                                [ I.placeholder "Last name"
+                                , I.value form.lastName
+                                , I.required True
+                                , I.onInput UpdateLastName
+                                ]
+                            ]
                         ]
                     ]
                 , G.row [ G.verticalMargin S.Medium ]
@@ -197,7 +223,7 @@ exampleForm { form, userRecord } =
                     ]
                 , G.row [ G.verticalMargin S.Large ]
                     [ G.col []
-                        [ B.button [ B.primary, B.disabled (not valid) ] [ text "Submit" ] ]
+                        [ B.button [ B.primary, B.disabled False ] [ text "Submit" ] ]
                     ]
                 ]
             ]
