@@ -13,6 +13,7 @@ ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
 ComponentProp	src/Components/Generic.elm	/^type ComponentProp a msg$/;"	t
 ContainerProp	src/Components/Container.elm	/^type ContainerProp msg$/;"	t
+Field	src/Components/Form.elm	/^type Field f$/;"	t
 FieldControl	src/Components/Forms/Field.elm	/^type FieldControl msg$/;"	t
 FieldInfo	src/Components/Form.elm	/^type alias FieldInfo =$/;"	a
 FieldProp	src/Components/Forms/Field.elm	/^type FieldProp msg$/;"	t
@@ -92,8 +93,10 @@ TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 TextAreaProp	src/Components/TextArea.elm	/^type TextAreaProp msg$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
 UserRecord	src/Stories/Form.elm	/^type alias UserRecord =$/;"	a
+Validator	src/Components/Form.elm	/^type Validator$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
 all	tests/Tests.elm	/^all : Test$/;"	c
+and	src/Components/Form.elm	/^and : Validator -> Validator -> Validator$/;"	f
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
 apply	src/Stories/Form.elm	/^apply : Maybe a -> Maybe (a -> b) -> Maybe b$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
@@ -208,7 +211,7 @@ hover	src/Components/Button.elm	/^hover : ButtonProp msg$/;"	c
 href	src/Components/Surface.elm	/^href : String -> SurfaceProp msg$/;"	f
 icon	src/Components/Icon.elm	/^icon : List (IconProp msg) -> Html msg$/;"	f
 iconType	src/Components/Icon.elm	/^iconType : Icon -> IconProp msg$/;"	f
-init	src/Components/Form.elm	/^init : Model f$/;"	c
+init	src/Components/Form.elm	/^init : List (Field f) -> Model f$/;"	f
 init	src/Components/Forms/Field.elm	/^init : Model$/;"	c
 init	src/Components/Forms/Fieldset.elm	/^init : Model$/;"	c
 init	src/Components/Forms/Form.elm	/^init : Dict String Field.Model -> Model$/;"	f
@@ -231,6 +234,7 @@ init	src/Stories/Switch.elm	/^init : Model$/;"	c
 init	src/Stories/Template.elm	/^init : Model$/;"	c
 init	src/Stories/TextArea.elm	/^init : Model$/;"	c
 init	src/Stories/Typography.elm	/^init : Model$/;"	c
+initField	src/Components/Form.elm	/^initField : f -> Validator -> Field f$/;"	f
 initialForm	src/Stories/Form.elm	/^initialForm : FormData$/;"	c
 input	src/Components/Input.elm	/^input : List (InputProp msg) -> Html msg$/;"	f
 inputField	src/Components/Forms/Field.elm	/^inputField : List (I.InputProp Msg) -> FieldControl Msg$/;"	f
@@ -280,6 +284,7 @@ loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 marginClass	src/Spacing.elm	/^marginClass : String -> BP.Breakpoint -> Spacing -> Attribute msg$/;"	f
 marginClasses	src/Spacing.elm	/^marginClasses : List Spacing -> Attribute msg$/;"	f
+maxLength	src/Components/Form.elm	/^maxLength : Int -> Validator$/;"	f
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 mediumCollapse	src/Components/Grid.elm	/^mediumCollapse : ColProp msg$/;"	c
 mediumFirst	src/Components/Grid.elm	/^mediumFirst : ColProp msg$/;"	c
@@ -334,6 +339,7 @@ radioGroup	src/Stories/Radio.elm	/^radioGroup : Html msg$/;"	c
 radioStates	src/Stories/Radio.elm	/^radioStates : Html msg$/;"	c
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 reordering	src/Stories/Grid.elm	/^reordering : Html Msg$/;"	c
+required	src/Components/Form.elm	/^required : Validator$/;"	c
 required	src/Components/Input.elm	/^required : Bool -> InputProp msg$/;"	f
 responsiveWidths	src/Stories/Grid.elm	/^responsiveWidths : Html Msg$/;"	c
 rightMargin	src/Components/Container.elm	/^rightMargin : S.Spacing -> ContainerProp msg$/;"	f
@@ -428,6 +434,7 @@ update	src/Stories/Switch.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	
 update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/TextArea.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Typography.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+updateFieldInfo	src/Components/Form.elm	/^updateFieldInfo : String -> FieldInfo -> FieldInfo$/;"	f
 upsertFieldValue	src/Components/Form.elm	/^upsertFieldValue : f -> String -> List ( f, FieldInfo ) -> List ( f, FieldInfo )$/;"	f
 urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
 vAround	src/Components/Stack.elm	/^vAround : StackProp msg$/;"	c

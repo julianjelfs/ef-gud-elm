@@ -114,7 +114,11 @@ init : Model
 init =
     { form = initialForm
     , userRecord = formToUser initialForm
-    , formModel = F.init
+    , formModel =
+        F.init
+            [ F.initField FirstName (F.required |> F.and (F.maxLength 5))
+            , F.initField LastName F.required
+            ]
     }
 
 
@@ -234,6 +238,16 @@ view model =
             [ text <|
                 "Has the form been edited? "
                     ++ (if model.formModel.dirty then
+                            "Yes"
+
+                        else
+                            "No"
+                       )
+            ]
+        , T.para
+            [ text <|
+                "Is the form valid? "
+                    ++ (if model.formModel.valid then
                             "Yes"
 
                         else

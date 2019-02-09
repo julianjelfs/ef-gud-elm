@@ -1,9 +1,26 @@
-module Components.Form exposing (Model, Msg, field, fieldValue, fieldset, form, formGroup, init, legend, onInput, update)
+module Components.Form exposing
+    ( Model
+    , Msg
+    , and
+    , field
+    , fieldValue
+    , fieldset
+    , form
+    , formGroup
+    , init
+    , initField
+    , legend
+    , maxLength
+    , onInput
+    , required
+    , update
+    )
 
 import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Utils exposing (catMaybes)
 
 
 type alias Model f =
@@ -17,15 +34,73 @@ type alias Model f =
 type alias FieldInfo =
     { value : String
     , valid : Bool
+    , validator : String -> Maybe String
     }
 
 
-init : Model f
-init =
+type Validator
+    = Validator (String -> Maybe String)
+
+
+
+-- validator combinators
+
+
+and : Validator -> Validator -> Validator
+and (Validator a) (Validator b) =
+    Validator
+        (\s ->
+            let
+                errs =
+                    catMaybes [ a s, b s ]
+            in
+            if List.isEmpty errs then
+                Nothing
+
+            else
+                Just (errs |> String.join ", ")
+        )
+
+
+required : Validator
+required =
+    Validator
+        (\s ->
+            if s == "" then
+                Just "You must enter this field"
+
+            else
+                Nothing
+        )
+
+
+maxLength : Int -> Validator
+maxLength n =
+    Validator
+        (\s ->
+            if String.length s > n then
+                Just <| "Max length is " ++ String.fromInt n
+
+            else
+                Nothing
+        )
+
+
+type Field f
+    = Field ( f, FieldInfo )
+
+
+initField : f -> Validator -> Field f
+initField f (Validator fn) =
+    Field ( f, FieldInfo "" (fn "" == Nothing) fn )
+
+
+init : List (Field f) -> Model f
+init fields =
     { valid = False
     , dirty = False
     , submitted = False
-    , fields = []
+    , fields = List.map (\(Field fi) -> fi) fields
     }
 
 
@@ -59,13 +134,18 @@ fieldValue f { fields } =
         |> List.head
 
 
+updateFieldInfo : String -> FieldInfo -> FieldInfo
+updateFieldInfo val fi =
+    { fi | value = val, valid = fi.validator val == Nothing }
+
+
 upsertFieldValue : f -> String -> List ( f, FieldInfo ) -> List ( f, FieldInfo )
 upsertFieldValue f val fields =
     let
         ( found_, fields_ ) =
             listReplace
                 (\( f_, _ ) -> f_ == f)
-                (\( f_, fi ) -> ( f_, { fi | value = val } ))
+                (\( f_, fi ) -> ( f_, updateFieldInfo val fi ))
                 fields
     in
     case found_ of
@@ -73,14 +153,24 @@ upsertFieldValue f val fields =
             fields_
 
         False ->
-            ( f, FieldInfo val False ) :: fields_
+            ( f, FieldInfo val False (always Nothing) ) :: fields_
 
 
 update : Msg f -> Model f -> ( Model f, Cmd (Msg f) )
 update msg model =
     case msg of
         OnInput f str ->
-            ( { model | dirty = True, fields = upsertFieldValue f str model.fields }, Cmd.none )
+            let
+                fields =
+                    upsertFieldValue f str model.fields
+            in
+            ( { model
+                | dirty = True
+                , valid = True
+                , fields = fields
+              }
+            , Cmd.none
+            )
 
 
 form : Model f -> List (Html (Msg f)) -> Html (Msg f)
