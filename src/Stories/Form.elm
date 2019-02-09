@@ -17,19 +17,24 @@ import Spacing as S
 type alias Model =
     { form : FormData
     , userRecord : Maybe UserRecord
-    , formModel : F.Model
+    , formModel : F.Model FormFields
     }
 
 
 type Msg
     = OnSubmit
-    | FormMsg F.Msg
+    | FormMsg (F.Msg FormFields)
 
 
 type BrochurePrefs
     = Email
     | Post
     | Both
+
+
+type FormFields
+    = FirstName
+    | LastName
 
 
 type alias UserRecord =
@@ -127,7 +132,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-exampleForm : Model -> Html F.Msg
+exampleForm : Model -> Html (F.Msg FormFields)
 exampleForm { form, userRecord, formModel } =
     let
         valid =
@@ -143,14 +148,15 @@ exampleForm { form, userRecord, formModel } =
                             [ I.input
                                 [ I.placeholder "First name"
                                 , I.required True
-                                , I.onInput F.onInput
+                                , I.value <| F.fieldValue FirstName formModel
+                                , I.onInput (F.onInput FirstName)
                                 ]
                             ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                             [ I.input
                                 [ I.placeholder "Last name"
-                                , I.value form.lastName
                                 , I.required True
+                                , I.onInput (F.onInput LastName)
                                 ]
                             ]
                         ]
@@ -224,5 +230,15 @@ view model =
         []
         [ T.h4 [ text "This is the form component" ]
         , T.para [ text "Forms use the regular grid for layout, and spacing utility classes to handle row spacing." ]
+        , T.para
+            [ text <|
+                "Has the form been edited? "
+                    ++ (if model.formModel.dirty then
+                            "Yes"
+
+                        else
+                            "No"
+                       )
+            ]
         , Html.map FormMsg <| exampleForm model
         ]
