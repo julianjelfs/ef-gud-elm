@@ -1,55 +1,55 @@
-module Components.Form exposing
-    ( field
-    , fieldset
-    , form
-    , formGroup
-    , legend
-    )
+module Components.Form exposing (Model, Msg, field, fieldset, form, formGroup, init, legend, onInput, update)
 
+import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
-type Legend msg
-    = Legend (Html msg)
+type alias Model =
+    { valid : Bool
+    , dirty : Bool
+    , submitted : Bool
+    }
 
 
-legend : String -> Legend msg
-legend txt =
-    Legend <| Html.legend [ class "ef-form-label" ] [ text txt ]
+init : Model
+init =
+    { valid = False
+    , dirty = False
+    , submitted = False
+    }
 
 
-formGroup : List (Html msg) -> Html msg
-formGroup children =
-    div
-        []
+type Msg
+    = OnInput String
+
+
+onInput : String -> Msg
+onInput =
+    OnInput
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        OnInput str ->
+            let
+                _ =
+                    Debug.log "FormInput" str
+            in
+            ( model, Cmd.none )
+
+
+form : Model -> List (Html Msg) -> Html Msg
+form model children =
+    Html.form
+        [ class "ef-form" ]
         children
 
 
-
--- so what is a form, a fieldset, a formgroup and a field
--- what are their properties, what can their children be
--- what is their state? How do they relate to validation?
--- elm is not good at this. I want a form to, in some sense "contain"
--- fields, but it cannot dictate the layout of the fields
--- Seems like input -> field -> fieldGroup -> form *all* require
--- some concept of validity. Does this mean that they all need
--- state? Does this mean that they all need to have knowledge of
--- their children i.e. a formGroup is valid if all of it's
--- children are valid presumably. Needs a spike I think.
-
-
-fieldset : Legend msg -> List (Html msg) -> Html msg
-fieldset (Legend l) children =
-    Html.fieldset
-        [ class "ef-form-fieldset u-mb-m" ]
-        (l :: children)
-
-
-field : Maybe String -> List (Html msg) -> Html msg
-field label children =
+field : Maybe String -> Html Msg -> Html Msg
+field label control =
     let
         lbl =
             Maybe.map (\l -> Html.label [ class "ef-form-label" ] [ text l ]) label
@@ -57,11 +57,32 @@ field label children =
     in
     div
         []
-        (lbl :: children)
+        (lbl
+            :: control
+            :: [ div [ class "ef-form-validation" ]
+                    [ text "this is the validation message" ]
+               ]
+        )
 
 
-form : List (Html msg) -> Html msg
-form children =
+type Legend
+    = Legend (Html Msg)
+
+
+legend : String -> Legend
+legend txt =
+    Legend <| Html.legend [ class "ef-form-label" ] [ text txt ]
+
+
+fieldset : Legend -> List (Html Msg) -> Html Msg
+fieldset (Legend l) children =
+    Html.fieldset
+        [ class "ef-form-fieldset u-mb-m" ]
+        (l :: children)
+
+
+formGroup : List (Html Msg) -> Html Msg
+formGroup children =
     div
-        [ class "ef-form" ]
+        []
         children

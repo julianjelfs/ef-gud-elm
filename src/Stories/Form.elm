@@ -7,6 +7,7 @@ import Components.Grid as G
 import Components.Input as I
 import Components.Radio as R
 import Components.Typography as T
+import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -16,12 +17,13 @@ import Spacing as S
 type alias Model =
     { form : FormData
     , userRecord : Maybe UserRecord
+    , formModel : F.Model
     }
 
 
 type Msg
-    = UpdateFirstName String
-    | UpdateLastName String
+    = OnSubmit
+    | FormMsg F.Msg
 
 
 type BrochurePrefs
@@ -107,39 +109,26 @@ init : Model
 init =
     { form = initialForm
     , userRecord = formToUser initialForm
+    , formModel = F.init
     }
-
-
-
--- this makes me want to puke
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        UpdateFirstName firstName ->
+        FormMsg subMsg ->
             let
-                form =
-                    model.form
-
-                updatedForm =
-                    { form | firstName = Just firstName }
+                ( subModel, subCmd ) =
+                    F.update subMsg model.formModel
             in
-            ( { model | form = updatedForm, userRecord = formToUser updatedForm }, Cmd.none )
+            ( { model | formModel = subModel }, Cmd.map FormMsg subCmd )
 
-        UpdateLastName lastName ->
-            let
-                form =
-                    model.form
-
-                updatedForm =
-                    { form | lastName = Just lastName }
-            in
-            ( { model | form = updatedForm, userRecord = formToUser updatedForm }, Cmd.none )
+        OnSubmit ->
+            ( model, Cmd.none )
 
 
-exampleForm : Model -> Html Msg
-exampleForm { form, userRecord } =
+exampleForm : Model -> Html F.Msg
+exampleForm { form, userRecord, formModel } =
     let
         valid =
             userRecord /= Nothing
@@ -147,14 +136,14 @@ exampleForm { form, userRecord } =
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
             [ F.form
+                formModel
                 [ F.fieldset (F.legend "Name")
                     [ G.row []
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                             [ I.input
-                                [ I.onInput UpdateFirstName
-                                , I.value form.firstName
-                                , I.placeholder "First name"
+                                [ I.placeholder "First name"
                                 , I.required True
+                                , I.onInput F.onInput
                                 ]
                             ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
@@ -162,7 +151,6 @@ exampleForm { form, userRecord } =
                                 [ I.placeholder "Last name"
                                 , I.value form.lastName
                                 , I.required True
-                                , I.onInput UpdateLastName
                                 ]
                             ]
                         ]
@@ -171,7 +159,7 @@ exampleForm { form, userRecord } =
                     [ G.col [ G.largeSpan 3, G.mediumSpan 6, G.smallSpan 8 ]
                         [ F.formGroup
                             [ F.field (Just "Date of Birth")
-                                [ I.input [ I.placeholder "DD/MM/YYYY" ] ]
+                                (I.input [ I.placeholder "DD/MM/YYYY" ])
                             ]
                         ]
                     ]
@@ -206,13 +194,13 @@ exampleForm { form, userRecord } =
                     [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                         [ F.formGroup
                             [ F.field (Just "Email Address")
-                                [ I.input [ I.placeholder "Email Address" ] ]
+                                (I.input [ I.placeholder "Email Address" ])
                             ]
                         ]
                     , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                         [ F.formGroup
                             [ F.field (Just "Phone Number")
-                                [ I.input [ I.placeholder "Phone Number" ] ]
+                                (I.input [ I.placeholder "Phone Number" ])
                             ]
                         ]
                     ]
@@ -223,7 +211,7 @@ exampleForm { form, userRecord } =
                     ]
                 , G.row [ G.verticalMargin S.Large ]
                     [ G.col []
-                        [ B.button [ B.primary, B.disabled False ] [ text "Submit" ] ]
+                        [ B.button [ B.submit, B.primary, B.disabled False ] [ text "Submit" ] ]
                     ]
                 ]
             ]
@@ -236,5 +224,5 @@ view model =
         []
         [ T.h4 [ text "This is the form component" ]
         , T.para [ text "Forms use the regular grid for layout, and spacing utility classes to handle row spacing." ]
-        , exampleForm model
+        , Html.map FormMsg <| exampleForm model
         ]

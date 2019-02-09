@@ -13,6 +13,7 @@ module Components.Button exposing
     , secondary
     , small
     , square
+    , submit
     , topPad
     )
 
@@ -107,3 +108,8 @@ small =
 disabled : Bool -> ButtonProp msg
 disabled =
     ButtonProp << Html.Attributes.disabled
+
+
+submit : ButtonProp msg
+submit =
+    ButtonProp <| Html.Attributes.type_ "submit"
