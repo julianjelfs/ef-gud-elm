@@ -180,7 +180,7 @@ focus	src/Components/Radio.elm	/^focus : RadioProp msg$/;"	c
 focus	src/Components/Select.elm	/^focus : SelectProp msg$/;"	c
 focus	src/Components/Switch.elm	/^focus : SwitchProp msg$/;"	c
 focus	src/Components/TextArea.elm	/^focus : TextAreaProp msg$/;"	c
-form	src/Components/Form.elm	/^form : Model f -> List (Html (Msg f)) -> Html (Msg f)$/;"	f
+form	src/Components/Form.elm	/^form : List (Html (Msg f)) -> Html (Msg f)$/;"	f
 form	src/Components/Forms/Form.elm	/^form : List (FormProp msg) -> Model -> List (Html msg) -> Html msg$/;"	f
 formGroup	src/Components/Form.elm	/^formGroup : List (Html (Msg f)) -> Html (Msg f)$/;"	f
 formGroup	src/Components/Forms/FormGroup.elm	/^formGroup : List (Html msg) -> Html msg$/;"	f
@@ -314,6 +314,7 @@ option	src/Components/Select.elm	/^option : Option -> Html msg$/;"	f
 optionDecoder	src/Components/Select.elm	/^optionDecoder : Decode.Decoder ( String, String )$/;"	c
 optionParser	src/Components/Select.elm	/^optionParser : Decode.Decoder (Maybe ( String, String ))$/;"	c
 options	src/Stories/Select.elm	/^options : List S.Option$/;"	c
+or	src/Components/Form.elm	/^or : Validator -> Validator -> Validator$/;"	f
 outline	src/Components/Surface.elm	/^outline : SurfaceProp msg$/;"	c
 overrideSpacing	src/Stories/Button.elm	/^overrideSpacing : Model -> Html Msg$/;"	f
 padding	src/Components/Button.elm	/^padding : List S.Spacing -> ButtonProp msg$/;"	f

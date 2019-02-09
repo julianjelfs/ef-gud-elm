@@ -145,7 +145,6 @@ exampleForm { form, userRecord, formModel } =
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
             [ F.form
-                formModel
                 [ F.fieldset (F.legend "Name")
                     [ G.row []
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]

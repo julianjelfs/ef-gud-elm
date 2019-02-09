@@ -12,6 +12,7 @@ module Components.Form exposing
     , legend
     , maxLength
     , onInput
+    , or
     , required
     , update
     )
@@ -59,6 +60,19 @@ and (Validator a) (Validator b) =
 
             else
                 Just (errs |> String.join ", ")
+        )
+
+
+or : Validator -> Validator -> Validator
+or (Validator a) (Validator b) =
+    Validator
+        (\s ->
+            Maybe.map2
+                (\a_ b_ ->
+                    a_ ++ ", " ++ b_
+                )
+                (a s)
+                (b s)
         )
 
 
@@ -173,8 +187,8 @@ update msg model =
             )
 
 
-form : Model f -> List (Html (Msg f)) -> Html (Msg f)
-form model children =
+form : List (Html (Msg f)) -> Html (Msg f)
+form children =
     Html.form
         [ class "ef-form" ]
         children
