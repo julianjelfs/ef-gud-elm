@@ -3,6 +3,8 @@ module Components.Form exposing
     , Msg
     , and
     , field
+    , fieldError
+    , fieldValid
     , fieldValue
     , fieldset
     , form
@@ -15,13 +17,14 @@ module Components.Form exposing
     , or
     , required
     , update
+    , validationMessage
     )
 
 import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (catMaybes)
+import Utils exposing (appendIf, catMaybes)
 
 
 type alias Model f =
@@ -111,11 +114,15 @@ initField f (Validator fn) =
 
 init : List (Field f) -> Model f
 init fields =
-    { valid = False
-    , dirty = False
-    , submitted = False
-    , fields = List.map (\(Field fi) -> fi) fields
-    }
+    let
+        m =
+            { valid = False
+            , dirty = False
+            , submitted = False
+            , fields = List.map (\(Field fi) -> fi) fields
+            }
+    in
+    { m | valid = formValid m }
 
 
 type Msg f
@@ -141,10 +148,26 @@ listReplace pred map =
 
 
 fieldValue : f -> Model f -> Maybe String
-fieldValue f { fields } =
+fieldValue =
+    propertyOfFieldInfo .value
+
+
+fieldValid : f -> Model f -> Bool
+fieldValid f m =
+    propertyOfFieldInfo .valid f m |> Maybe.withDefault True
+
+
+fieldError : f -> Model f -> Maybe String
+fieldError f m =
+    propertyOfFieldInfo identity f m
+        |> Maybe.andThen (\fi -> fi.validator fi.value)
+
+
+propertyOfFieldInfo : (FieldInfo -> a) -> f -> Model f -> Maybe a
+propertyOfFieldInfo prop f { fields } =
     fields
         |> List.filter (\( f_, _ ) -> f_ == f)
-        |> List.map (\( _, { value } ) -> value)
+        |> List.map (\( _, fi ) -> prop fi)
         |> List.head
 
 
@@ -180,7 +203,7 @@ update msg model =
             in
             ( { model
                 | dirty = True
-                , valid = True
+                , valid = formValid { model | fields = fields }
                 , fields = fields
               }
             , Cmd.none
@@ -192,6 +215,18 @@ form children =
     Html.form
         [ class "ef-form" ]
         children
+
+
+validationMessage : f -> Model f -> Html (Msg f)
+validationMessage f m =
+    fieldError f m
+        |> Maybe.map
+            (\err ->
+                div
+                    [ class "ef-form-validation -is-invalid" ]
+                    [ text err ]
+            )
+        |> Maybe.withDefault (text "")
 
 
 field : Maybe String -> Html (Msg f) -> Html (Msg f)
@@ -227,8 +262,28 @@ fieldset (Legend l) children =
         (l :: children)
 
 
-formGroup : List (Html (Msg f)) -> Html (Msg f)
-formGroup children =
+groupValid : List f -> Model f -> Bool
+groupValid fs m =
+    List.foldr
+        (\f v ->
+            fieldValid f m && v
+        )
+        True
+        fs
+
+
+formValid : Model f -> Bool
+formValid m =
+    List.foldr
+        (\( f, _ ) v ->
+            fieldValid f m && v
+        )
+        True
+        m.fields
+
+
+formGroup : List f -> Model f -> List (Html (Msg f)) -> Html (Msg f)
+formGroup fs model children =
     div
-        []
+        ([ class "ef-form-group" ] |> appendIf (not <| groupValid fs model) (class "-is-invalid"))
         children

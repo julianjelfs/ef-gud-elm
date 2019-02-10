@@ -17,7 +17,6 @@ Field	src/Components/Form.elm	/^type Field f$/;"	t
 FieldControl	src/Components/Forms/Field.elm	/^type FieldControl msg$/;"	t
 FieldInfo	src/Components/Form.elm	/^type alias FieldInfo =$/;"	a
 FieldProp	src/Components/Forms/Field.elm	/^type FieldProp msg$/;"	t
-FormData	src/Stories/Form.elm	/^type alias FormData =$/;"	a
 FormFields	src/Stories/Form.elm	/^type FormFields$/;"	t
 FormProp	src/Components/Forms/Form.elm	/^type FormProp msg$/;"	t
 Icon	src/Components/Icon.elm	/^type Icon$/;"	t
@@ -92,13 +91,11 @@ SwitchProp	src/Components/Switch.elm	/^type SwitchProp msg$/;"	t
 TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 TextAreaProp	src/Components/TextArea.elm	/^type TextAreaProp msg$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
-UserRecord	src/Stories/Form.elm	/^type alias UserRecord =$/;"	a
 Validator	src/Components/Form.elm	/^type Validator$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
 all	tests/Tests.elm	/^all : Test$/;"	c
 and	src/Components/Form.elm	/^and : Validator -> Validator -> Validator$/;"	f
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
-apply	src/Stories/Form.elm	/^apply : Maybe a -> Maybe (a -> b) -> Maybe b$/;"	f
 autoWidths	src/Stories/Grid.elm	/^autoWidths : Html Msg$/;"	c
 behaviour	src/Stories/Grid.elm	/^behaviour : Html Msg$/;"	c
 bgColor	src/Color.elm	/^bgColor : ThemeColor -> Attribute msg$/;"	f
@@ -170,6 +167,8 @@ extralargeYCenter	src/Components/Grid.elm	/^extralargeYCenter : ColProp msg$/;"	
 extralargeYTop	src/Components/Grid.elm	/^extralargeYTop : ColProp msg$/;"	c
 field	src/Components/Form.elm	/^field : Maybe String -> Html (Msg f) -> Html (Msg f)$/;"	f
 field	src/Components/Forms/Field.elm	/^field : Maybe String -> FieldControl msg -> Html msg$/;"	f
+fieldError	src/Components/Form.elm	/^fieldError : f -> Model f -> Maybe String$/;"	f
+fieldValid	src/Components/Form.elm	/^fieldValid : f -> Model f -> Bool$/;"	f
 fieldValue	src/Components/Form.elm	/^fieldValue : f -> Model f -> Maybe String$/;"	f
 fieldset	src/Components/Form.elm	/^fieldset : Legend f -> List (Html (Msg f)) -> Html (Msg f)$/;"	f
 fieldset	src/Components/Forms/Fieldset.elm	/^fieldset : Legend msg -> List (Html msg) -> Html msg$/;"	f
@@ -182,10 +181,11 @@ focus	src/Components/Switch.elm	/^focus : SwitchProp msg$/;"	c
 focus	src/Components/TextArea.elm	/^focus : TextAreaProp msg$/;"	c
 form	src/Components/Form.elm	/^form : List (Html (Msg f)) -> Html (Msg f)$/;"	f
 form	src/Components/Forms/Form.elm	/^form : List (FormProp msg) -> Model -> List (Html msg) -> Html msg$/;"	f
-formGroup	src/Components/Form.elm	/^formGroup : List (Html (Msg f)) -> Html (Msg f)$/;"	f
+formGroup	src/Components/Form.elm	/^formGroup : List f -> Model f -> List (Html (Msg f)) -> Html (Msg f)$/;"	f
 formGroup	src/Components/Forms/FormGroup.elm	/^formGroup : List (Html msg) -> Html msg$/;"	f
-formToUser	src/Stories/Form.elm	/^formToUser : FormData -> Maybe UserRecord$/;"	f
+formValid	src/Components/Form.elm	/^formValid : Model f -> Bool$/;"	f
 fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
+groupValid	src/Components/Form.elm	/^groupValid : List f -> Model f -> Bool$/;"	f
 h1	src/Components/Typography.elm	/^h1 : List (Html msg) -> Html msg$/;"	f
 h1	src/Stories/Typography.elm	/^h1 : Html Msg$/;"	c
 h2	src/Components/Typography.elm	/^h2 : List (Html msg) -> Html msg$/;"	f
@@ -235,7 +235,6 @@ init	src/Stories/Template.elm	/^init : Model$/;"	c
 init	src/Stories/TextArea.elm	/^init : Model$/;"	c
 init	src/Stories/Typography.elm	/^init : Model$/;"	c
 initField	src/Components/Form.elm	/^initField : f -> Validator -> Field f$/;"	f
-initialForm	src/Stories/Form.elm	/^initialForm : FormData$/;"	c
 input	src/Components/Input.elm	/^input : List (InputProp msg) -> Html msg$/;"	f
 inputField	src/Components/Forms/Field.elm	/^inputField : List (I.InputProp Msg) -> FieldControl Msg$/;"	f
 inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
@@ -334,6 +333,7 @@ placeholder	src/Components/Input.elm	/^placeholder : String -> InputProp msg$/;"
 placeholder	src/Components/TextArea.elm	/^placeholder : String -> TextAreaProp msg$/;"	f
 primary	src/Components/Button.elm	/^primary : ButtonProp msg$/;"	c
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
+propertyOfFieldInfo	src/Components/Form.elm	/^propertyOfFieldInfo : (FieldInfo -> a) -> f -> Model f -> Maybe a$/;"	f
 radio	src/Components/Radio.elm	/^radio : List (RadioProp msg) -> List (Html msg) -> Html msg$/;"	f
 radioGroup	src/Components/Radio.elm	/^radioGroup : String -> List (NamedRadio msg) -> Html msg$/;"	f
 radioGroup	src/Stories/Radio.elm	/^radioGroup : Html msg$/;"	c
@@ -448,6 +448,7 @@ valid	src/Components/Radio.elm	/^valid : RadioProp msg$/;"	c
 valid	src/Components/Select.elm	/^valid : SelectProp msg$/;"	c
 valid	src/Components/Switch.elm	/^valid : SwitchProp msg$/;"	c
 valid	src/Components/TextArea.elm	/^valid : TextAreaProp msg$/;"	c
+validationMessage	src/Components/Form.elm	/^validationMessage : f -> Model f -> Html (Msg f)$/;"	f
 value	src/Components/Input.elm	/^value : Maybe String -> InputProp msg$/;"	f
 value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
 value	src/Components/TextArea.elm	/^value : String -> TextAreaProp msg$/;"	f

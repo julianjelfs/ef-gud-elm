@@ -12,12 +12,11 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Spacing as S
+import Utils exposing (appendIf)
 
 
 type alias Model =
-    { form : FormData
-    , userRecord : Maybe UserRecord
-    , formModel : F.Model FormFields
+    { formModel : F.Model FormFields
     }
 
 
@@ -37,84 +36,9 @@ type FormFields
     | LastName
 
 
-type alias UserRecord =
-    { firstName : String
-    , lastName : String
-    , dob : String
-    , prefs : BrochurePrefs
-    , streetName : String
-    , streetNumber : String
-    , city : String
-    , postCode : String
-    , email : String
-    , phone : String
-    }
-
-
-type alias FormData =
-    { firstName : Maybe String
-    , lastName : Maybe String
-    , dob : Maybe String
-    , prefs : BrochurePrefs
-    , streetName : Maybe String
-    , streetNumber : Maybe String
-    , city : Maybe String
-    , postCode : Maybe String
-    , email : Maybe String
-    , phone : Maybe String
-    }
-
-
-initialForm : FormData
-initialForm =
-    { firstName = Nothing
-    , lastName = Nothing
-    , dob = Nothing
-    , prefs = Email
-    , streetName = Nothing
-    , streetNumber = Nothing
-    , city = Nothing
-    , postCode = Nothing
-    , email = Nothing
-    , phone = Nothing
-    }
-
-
-formToUser : FormData -> Maybe UserRecord
-formToUser { firstName, lastName, dob, prefs, streetName, streetNumber, city, postCode, email, phone } =
-    -- there is not magic here - just write a function to say whether the data is valid
-    -- if there is repeating logic, extract it and re-use it.
-    Maybe.map UserRecord firstName
-        |> apply lastName
-        |> apply dob
-        |> apply (Just prefs)
-        |> apply streetName
-        |> apply streetNumber
-        |> apply city
-        |> apply postCode
-        |> apply email
-        |> apply phone
-
-
-
--- home grown applicative!
-
-
-apply : Maybe a -> Maybe (a -> b) -> Maybe b
-apply a f =
-    case ( a, f ) of
-        ( Just a_, Just f_ ) ->
-            Just (f_ a_)
-
-        _ ->
-            Nothing
-
-
 init : Model
 init =
-    { form = initialForm
-    , userRecord = formToUser initialForm
-    , formModel =
+    { formModel =
         F.init
             [ F.initField FirstName (F.required |> F.and (F.maxLength 5))
             , F.initField LastName F.required
@@ -137,10 +61,13 @@ update msg model =
 
 
 exampleForm : Model -> Html (F.Msg FormFields)
-exampleForm { form, userRecord, formModel } =
+exampleForm { formModel } =
     let
-        valid =
-            userRecord /= Nothing
+        firstNameInvalid =
+            not <| F.fieldValid FirstName formModel
+
+        lastNameInvalid =
+            not <| F.fieldValid LastName formModel
     in
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
@@ -148,25 +75,39 @@ exampleForm { form, userRecord, formModel } =
                 [ F.fieldset (F.legend "Name")
                     [ G.row []
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input
-                                [ I.placeholder "First name"
-                                , I.required True
-                                , I.value <| F.fieldValue FirstName formModel
-                                , I.onInput (F.onInput FirstName)
+                            [ F.formGroup [ FirstName ]
+                                formModel
+                                [ I.input
+                                    ([ I.placeholder "First name"
+                                     , I.required True
+                                     , I.value <| F.fieldValue FirstName formModel
+                                     , I.onInput (F.onInput FirstName)
+                                     ]
+                                        |> appendIf firstNameInvalid I.invalid
+                                    )
+                                , F.validationMessage FirstName formModel
                                 ]
                             ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input
-                                [ I.placeholder "Last name"
-                                , I.required True
-                                , I.onInput (F.onInput LastName)
+                            [ F.formGroup [ LastName ]
+                                formModel
+                                [ I.input
+                                    ([ I.placeholder "Last name"
+                                     , I.required True
+                                     , I.value <| F.fieldValue LastName formModel
+                                     , I.onInput (F.onInput LastName)
+                                     ]
+                                        |> appendIf lastNameInvalid I.invalid
+                                    )
+                                , F.validationMessage LastName formModel
                                 ]
                             ]
                         ]
                     ]
                 , G.row [ G.verticalMargin S.Medium ]
                     [ G.col [ G.largeSpan 3, G.mediumSpan 6, G.smallSpan 8 ]
-                        [ F.formGroup
+                        [ F.formGroup []
+                            formModel
                             [ F.field (Just "Date of Birth")
                                 (I.input [ I.placeholder "DD/MM/YYYY" ])
                             ]
@@ -175,7 +116,8 @@ exampleForm { form, userRecord, formModel } =
                 , F.fieldset (F.legend "How would you like to receive your brochure?")
                     [ G.row []
                         [ G.col []
-                            [ F.formGroup
+                            [ F.formGroup []
+                                formModel
                                 [ R.radioGroup "validation"
                                     [ R.namedRadio [ R.checked ] [ text "Email" ]
                                     , R.namedRadio [] [ text "Post" ]
@@ -201,13 +143,15 @@ exampleForm { form, userRecord, formModel } =
                     ]
                 , G.row []
                     [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                        [ F.formGroup
+                        [ F.formGroup []
+                            formModel
                             [ F.field (Just "Email Address")
                                 (I.input [ I.placeholder "Email Address" ])
                             ]
                         ]
                     , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                        [ F.formGroup
+                        [ F.formGroup []
+                            formModel
                             [ F.field (Just "Phone Number")
                                 (I.input [ I.placeholder "Phone Number" ])
                             ]
