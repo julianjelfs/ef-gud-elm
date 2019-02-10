@@ -12,6 +12,7 @@ module Components.Form exposing
     , init
     , initField
     , legend
+    , matches
     , maxLength
     , onInput
     , or
@@ -24,6 +25,7 @@ import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Regex as Rx
 import Utils exposing (appendIf, catMaybes)
 
 
@@ -76,6 +78,19 @@ or (Validator a) (Validator b) =
                 )
                 (a s)
                 (b s)
+        )
+
+
+matches : Rx.Regex -> Validator
+matches re =
+    Validator
+        (\s ->
+            case Rx.find re s of
+                [] ->
+                    Just "Field did not match the supplied regex and yes this message sucks"
+
+                _ ->
+                    Nothing
         )
 
 

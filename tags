@@ -283,6 +283,7 @@ loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 marginClass	src/Spacing.elm	/^marginClass : String -> BP.Breakpoint -> Spacing -> Attribute msg$/;"	f
 marginClasses	src/Spacing.elm	/^marginClasses : List Spacing -> Attribute msg$/;"	f
+matches	src/Components/Form.elm	/^matches : Rx.Regex -> Validator$/;"	f
 maxLength	src/Components/Form.elm	/^maxLength : Int -> Validator$/;"	f
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
 mediumCollapse	src/Components/Grid.elm	/^mediumCollapse : ColProp msg$/;"	c
@@ -436,6 +437,7 @@ update	src/Stories/Template.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;
 update	src/Stories/TextArea.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Typography.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 updateFieldInfo	src/Components/Form.elm	/^updateFieldInfo : String -> FieldInfo -> FieldInfo$/;"	f
+upperCase	src/Stories/Form.elm	/^upperCase : Rx.Regex$/;"	c
 upsertFieldValue	src/Components/Form.elm	/^upsertFieldValue : f -> String -> List ( f, FieldInfo ) -> List ( f, FieldInfo )$/;"	f
 urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
 vAround	src/Components/Stack.elm	/^vAround : StackProp msg$/;"	c

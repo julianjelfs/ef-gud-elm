@@ -11,6 +11,7 @@ import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Regex as Rx
 import Spacing as S
 import Utils exposing (appendIf)
 
@@ -40,10 +41,16 @@ init : Model
 init =
     { formModel =
         F.init
-            [ F.initField FirstName (F.required |> F.and (F.maxLength 5))
-            , F.initField LastName F.required
+            [ F.initField FirstName (F.required |> F.and (F.maxLength 20))
+            , F.initField LastName (F.required |> F.and (F.matches upperCase))
             ]
     }
+
+
+upperCase : Rx.Regex
+upperCase =
+    Maybe.withDefault Rx.never <|
+        Rx.fromString "^zzz"
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -63,11 +70,8 @@ update msg model =
 exampleForm : Model -> Html (F.Msg FormFields)
 exampleForm { formModel } =
     let
-        firstNameInvalid =
-            not <| F.fieldValid FirstName formModel
-
-        lastNameInvalid =
-            not <| F.fieldValid LastName formModel
+        fieldInvalid f =
+            not <| F.fieldValid f formModel
     in
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
@@ -83,7 +87,7 @@ exampleForm { formModel } =
                                      , I.value <| F.fieldValue FirstName formModel
                                      , I.onInput (F.onInput FirstName)
                                      ]
-                                        |> appendIf firstNameInvalid I.invalid
+                                        |> appendIf (fieldInvalid FirstName) I.invalid
                                     )
                                 , F.validationMessage FirstName formModel
                                 ]
@@ -97,7 +101,7 @@ exampleForm { formModel } =
                                      , I.value <| F.fieldValue LastName formModel
                                      , I.onInput (F.onInput LastName)
                                      ]
-                                        |> appendIf lastNameInvalid I.invalid
+                                        |> appendIf (fieldInvalid LastName) I.invalid
                                     )
                                 , F.validationMessage LastName formModel
                                 ]
