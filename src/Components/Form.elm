@@ -14,6 +14,7 @@ module Components.Form exposing
     , legend
     , matches
     , maxLength
+    , nullValidator
     , onInput
     , or
     , required
@@ -92,6 +93,11 @@ matches re =
                 _ ->
                     Nothing
         )
+
+
+nullValidator : Validator
+nullValidator =
+    Validator (\s -> Nothing)
 
 
 required : Validator
@@ -299,6 +305,13 @@ formValid m =
 
 formGroup : List f -> Model f -> List (Html (Msg f)) -> Html (Msg f)
 formGroup fs model children =
+    let
+        valid =
+            groupValid fs model
+    in
     div
-        ([ class "ef-form-group" ] |> appendIf (not <| groupValid fs model) (class "-is-invalid"))
+        ([ class "ef-form-group" ]
+            |> appendIf (not valid) (class "-is-invalid")
+            |> appendIf valid (class "-is-valid")
+        )
         children

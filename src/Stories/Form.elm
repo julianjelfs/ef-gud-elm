@@ -35,6 +35,12 @@ type BrochurePrefs
 type FormFields
     = FirstName
     | LastName
+    | DateOfBirth
+    | BrochurePreference
+
+
+
+--TODO this needs to include initial values for each form element
 
 
 init : Model
@@ -43,8 +49,20 @@ init =
         F.init
             [ F.initField FirstName (F.required |> F.and (F.maxLength 20))
             , F.initField LastName (F.required |> F.and (F.matches upperCase))
+            , F.initField DateOfBirth (F.required |> F.and (F.matches dateish))
+            , F.initField BrochurePreference F.nullValidator
             ]
     }
+
+
+
+-- yes yes we know this is not a good regex, but you get the idea
+
+
+dateish : Rx.Regex
+dateish =
+    Maybe.withDefault Rx.never <|
+        Rx.fromString "\\d{2}\\/\\d{2}\\/\\d{4}"
 
 
 upperCase : Rx.Regex
@@ -88,6 +106,7 @@ exampleForm { formModel } =
                                      , I.onInput (F.onInput FirstName)
                                      ]
                                         |> appendIf (fieldInvalid FirstName) I.invalid
+                                        |> appendIf (not <| fieldInvalid FirstName) I.valid
                                     )
                                 , F.validationMessage FirstName formModel
                                 ]
@@ -102,6 +121,7 @@ exampleForm { formModel } =
                                      , I.onInput (F.onInput LastName)
                                      ]
                                         |> appendIf (fieldInvalid LastName) I.invalid
+                                        |> appendIf (not <| fieldInvalid LastName) I.valid
                                     )
                                 , F.validationMessage LastName formModel
                                 ]
@@ -110,10 +130,19 @@ exampleForm { formModel } =
                     ]
                 , G.row [ G.verticalMargin S.Medium ]
                     [ G.col [ G.largeSpan 3, G.mediumSpan 6, G.smallSpan 8 ]
-                        [ F.formGroup []
+                        [ F.formGroup [ DateOfBirth ]
                             formModel
                             [ F.field (Just "Date of Birth")
-                                (I.input [ I.placeholder "DD/MM/YYYY" ])
+                                (I.input
+                                    ([ I.placeholder "DD/MM/YYYY"
+                                     , I.required True
+                                     , I.value <| F.fieldValue DateOfBirth formModel
+                                     , I.onInput (F.onInput DateOfBirth)
+                                     ]
+                                        |> appendIf (fieldInvalid DateOfBirth) I.invalid
+                                        |> appendIf (not <| fieldInvalid DateOfBirth) I.valid
+                                    )
+                                )
                             ]
                         ]
                     ]
@@ -123,9 +152,21 @@ exampleForm { formModel } =
                             [ F.formGroup []
                                 formModel
                                 [ R.radioGroup "validation"
-                                    [ R.namedRadio [ R.checked ] [ text "Email" ]
-                                    , R.namedRadio [] [ text "Post" ]
-                                    , R.namedRadio [] [ text "Email & Post" ]
+                                    [ R.namedRadio
+                                        [ R.onInput (F.onInput BrochurePreference)
+                                        , R.value <| F.fieldValue BrochurePreference formModel
+                                        ]
+                                        [ text "Email" ]
+                                    , R.namedRadio
+                                        [ R.onInput (F.onInput BrochurePreference)
+                                        , R.value <| F.fieldValue BrochurePreference formModel
+                                        ]
+                                        [ text "Post" ]
+                                    , R.namedRadio
+                                        [ R.onInput (F.onInput BrochurePreference)
+                                        , R.value <| F.fieldValue BrochurePreference formModel
+                                        ]
+                                        [ text "Email & Post" ]
                                     ]
                                 ]
                             ]
@@ -177,6 +218,10 @@ exampleForm { formModel } =
 
 view : Model -> Html Msg
 view model =
+    let
+        fieldTrace s f =
+            s ++ ": " ++ (Maybe.withDefault "Unset" <| F.fieldValue f model.formModel)
+    in
     div
         []
         [ T.h4 [ text "This is the form component" ]
@@ -202,4 +247,10 @@ view model =
                        )
             ]
         , Html.map FormMsg <| exampleForm model
+        , div []
+            [ p [] [ code [] [ text <| fieldTrace "FirstName" FirstName ] ]
+            , p [] [ code [] [ text <| fieldTrace "LastName" LastName ] ]
+            , p [] [ code [] [ text <| fieldTrace "DateOfBirth" DateOfBirth ] ]
+            , p [] [ code [] [ text <| fieldTrace "BrochurePreference" BrochurePreference ] ]
+            ]
         ]

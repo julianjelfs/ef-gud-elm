@@ -5,9 +5,11 @@ module Components.Radio exposing
     , focus
     , invalid
     , namedRadio
+    , onInput
     , radio
     , radioGroup
     , valid
+    , value
     )
 
 import Components.Generic as G
@@ -49,6 +51,16 @@ someComponent props =
 type RadioProp msg
     = LabelProp (Attribute msg)
     | InputProp (Attribute msg)
+
+
+onInput : (String -> msg) -> RadioProp msg
+onInput =
+    InputProp << Html.Events.onInput
+
+
+value : Maybe String -> RadioProp msg
+value =
+    InputProp << Html.Attributes.value << Maybe.withDefault ""
 
 
 valid : RadioProp msg

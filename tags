@@ -138,6 +138,7 @@ completed	src/Components/TextArea.elm	/^completed : TextAreaProp msg$/;"	c
 componentView	src/Main.elm	/^componentView : Model -> Html Msg$/;"	f
 concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 container	src/Components/Container.elm	/^container : List (ContainerProp msg) -> List (Html msg) -> Html msg$/;"	f
+dateish	src/Stories/Form.elm	/^dateish : Rx.Regex$/;"	c
 deepShadow	src/Components/Surface.elm	/^deepShadow : SurfaceProp msg$/;"	c
 defaultSpan	src/Components/Grid.elm	/^defaultSpan : Int -> ColProp msg$/;"	f
 defaultTags	src/Stories/Utils.elm	/^defaultTags : BoxTags$/;"	c
@@ -302,11 +303,13 @@ menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Ms
 name	src/Components/Radio.elm	/^name : String -> RadioProp msg$/;"	f
 namedRadio	src/Components/Radio.elm	/^namedRadio : List (RadioProp msg) -> List (Html msg) -> NamedRadio msg$/;"	f
 normal	src/Stories/Container.elm	/^normal : Html Msg$/;"	c
+nullValidator	src/Components/Form.elm	/^nullValidator : Validator$/;"	c
 offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
 onClick	src/Components/Surface.elm	/^onClick : msg -> SurfaceProp msg$/;"	f
 onInput	src/Components/Form.elm	/^onInput : f -> String -> Msg f$/;"	f
 onInput	src/Components/Input.elm	/^onInput : (String -> msg) -> InputProp msg$/;"	f
+onInput	src/Components/Radio.elm	/^onInput : (String -> msg) -> RadioProp msg$/;"	f
 onInput	src/Components/TextArea.elm	/^onInput : (String -> msg) -> TextAreaProp msg$/;"	f
 onSelect	src/Components/Select.elm	/^onSelect : (Maybe ( String, String ) -> msg) -> SelectProp msg$/;"	f
 onSubmit	src/Components/Forms/Form.elm	/^onSubmit : msg -> FormProp msg$/;"	f
@@ -452,6 +455,7 @@ valid	src/Components/Switch.elm	/^valid : SwitchProp msg$/;"	c
 valid	src/Components/TextArea.elm	/^valid : TextAreaProp msg$/;"	c
 validationMessage	src/Components/Form.elm	/^validationMessage : f -> Model f -> Html (Msg f)$/;"	f
 value	src/Components/Input.elm	/^value : Maybe String -> InputProp msg$/;"	f
+value	src/Components/Radio.elm	/^value : Maybe String -> RadioProp msg$/;"	f
 value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
 value	src/Components/TextArea.elm	/^value : String -> TextAreaProp msg$/;"	f
 verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
