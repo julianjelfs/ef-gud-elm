@@ -26,7 +26,7 @@ type FormValueTypes
 
 
 type alias Model =
-    { formModel : F.Model FormFields FormValueTypes
+    { formModel : F.Model FormFields FormValueTypes Int
     }
 
 
@@ -48,13 +48,34 @@ type FormFields
     | BrochurePreference
 
 
+{-| This is important - it is a function that the form requires to convert the
+sum type used to represent fields into a comparable type that can be used as a
+dictionary key. It must yield a unique value for each entry or things will not
+work correctly.
+-}
+keyFn : FormFields -> Int
+keyFn f =
+    case f of
+        FirstName ->
+            0
+
+        LastName ->
+            1
+
+        DateOfBirth ->
+            2
+
+        BrochurePreference ->
+            3
+
+
 {-| validators are a problem - we cannot mix types. The initial value is of type
 FormValueTypes and therefore so must the validator be. Tsk.
 -}
 init : Model
 init =
     { formModel =
-        F.init
+        F.init keyFn
             [ F.initField FirstName
                 (FormString "")
                 (F.required formValueToString

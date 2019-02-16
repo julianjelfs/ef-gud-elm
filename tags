@@ -27,7 +27,7 @@ InputType	src/Components/Input.elm	/^type InputType$/;"	t
 Legend	src/Components/Form.elm	/^type Legend f v$/;"	t
 Legend	src/Components/Forms/Fieldset.elm	/^type Legend msg$/;"	t
 LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a
-Model	src/Components/Form.elm	/^type alias Model f v =$/;"	a
+Model	src/Components/Form.elm	/^type alias Model f v comparable =$/;"	a
 Model	src/Components/Forms/Field.elm	/^type alias Model =$/;"	a
 Model	src/Components/Forms/Fieldset.elm	/^type alias Model =$/;"	a
 Model	src/Components/Forms/Form.elm	/^type alias Model =$/;"	a
@@ -169,9 +169,9 @@ extralargeYCenter	src/Components/Grid.elm	/^extralargeYCenter : ColProp msg$/;"	
 extralargeYTop	src/Components/Grid.elm	/^extralargeYTop : ColProp msg$/;"	c
 field	src/Components/Form.elm	/^field : Maybe String -> Html (Msg f v) -> Html (Msg f v)$/;"	f
 field	src/Components/Forms/Field.elm	/^field : Maybe String -> FieldControl msg -> Html msg$/;"	f
-fieldError	src/Components/Form.elm	/^fieldError : f -> Model f v -> Maybe String$/;"	f
-fieldValid	src/Components/Form.elm	/^fieldValid : f -> Model f v -> Bool$/;"	f
-fieldValue	src/Components/Form.elm	/^fieldValue : f -> Model f v -> Maybe v$/;"	f
+fieldError	src/Components/Form.elm	/^fieldError : f -> Model f v comparable -> Maybe String$/;"	f
+fieldValid	src/Components/Form.elm	/^fieldValid : f -> Model f v comparable -> Bool$/;"	f
+fieldValue	src/Components/Form.elm	/^fieldValue : f -> Model f v comparable -> Maybe v$/;"	f
 fieldset	src/Components/Form.elm	/^fieldset : Legend f v -> List (Html (Msg f v)) -> Html (Msg f v)$/;"	f
 fieldset	src/Components/Forms/Fieldset.elm	/^fieldset : Legend msg -> List (Html msg) -> Html msg$/;"	f
 focus	src/Components/Button.elm	/^focus : ButtonProp msg$/;"	c
@@ -183,12 +183,12 @@ focus	src/Components/Switch.elm	/^focus : SwitchProp msg$/;"	c
 focus	src/Components/TextArea.elm	/^focus : TextAreaProp msg$/;"	c
 form	src/Components/Form.elm	/^form : List (Html (Msg f v)) -> Html (Msg f v)$/;"	f
 form	src/Components/Forms/Form.elm	/^form : List (FormProp msg) -> Model -> List (Html msg) -> Html msg$/;"	f
-formGroup	src/Components/Form.elm	/^formGroup : List f -> Model f v -> List (Html (Msg f v)) -> Html (Msg f v)$/;"	f
+formGroup	src/Components/Form.elm	/^formGroup : List f -> Model f v comparable -> List (Html (Msg f v)) -> Html (Msg f v)$/;"	f
 formGroup	src/Components/Forms/FormGroup.elm	/^formGroup : List (Html msg) -> Html msg$/;"	f
-formValid	src/Components/Form.elm	/^formValid : Model f v -> Bool$/;"	f
+formValid	src/Components/Form.elm	/^formValid : Model f v comparable -> Bool$/;"	f
 formValueToString	src/Stories/Form.elm	/^formValueToString : FormValueTypes -> Maybe String$/;"	f
 fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
-groupValid	src/Components/Form.elm	/^groupValid : List f -> Model f v -> Bool$/;"	f
+groupValid	src/Components/Form.elm	/^groupValid : List f -> Model f v comparable -> Bool$/;"	f
 h1	src/Components/Typography.elm	/^h1 : List (Html msg) -> Html msg$/;"	f
 h1	src/Stories/Typography.elm	/^h1 : Html Msg$/;"	c
 h2	src/Components/Typography.elm	/^h2 : List (Html msg) -> Html msg$/;"	f
@@ -214,7 +214,7 @@ hover	src/Components/Button.elm	/^hover : ButtonProp msg$/;"	c
 href	src/Components/Surface.elm	/^href : String -> SurfaceProp msg$/;"	f
 icon	src/Components/Icon.elm	/^icon : List (IconProp msg) -> Html msg$/;"	f
 iconType	src/Components/Icon.elm	/^iconType : Icon -> IconProp msg$/;"	f
-init	src/Components/Form.elm	/^init : List (Field f v) -> Model f v$/;"	f
+init	src/Components/Form.elm	/^init : (f -> comparable) -> List (Field f v) -> Model f v comparable$/;"	f
 init	src/Components/Forms/Field.elm	/^init : Model$/;"	c
 init	src/Components/Forms/Fieldset.elm	/^init : Model$/;"	c
 init	src/Components/Forms/Form.elm	/^init : Dict String Field.Model -> Model$/;"	f
@@ -253,6 +253,7 @@ itemAlignment	src/Stories/Stack.elm	/^itemAlignment : Html Msg$/;"	c
 itemBottom	src/Components/Stack.elm	/^itemBottom : StackItemProp msg$/;"	c
 itemStretch	src/Components/Stack.elm	/^itemStretch : StackItemProp msg$/;"	c
 itemTop	src/Components/Stack.elm	/^itemTop : StackItemProp msg$/;"	c
+keyFn	src/Stories/Form.elm	/^keyFn : FormFields -> Int$/;"	f
 large	src/Components/Switch.elm	/^large : SwitchProp msg$/;"	c
 large	src/Stories/Switch.elm	/^large : Html Msg$/;"	c
 largeCollapse	src/Components/Grid.elm	/^largeCollapse : ColProp msg$/;"	c
@@ -340,7 +341,7 @@ placeholder	src/Components/TextArea.elm	/^placeholder : String -> TextAreaProp m
 prefToString	src/Stories/Form.elm	/^prefToString : BrochurePrefs -> String$/;"	f
 primary	src/Components/Button.elm	/^primary : ButtonProp msg$/;"	c
 primaryButton	src/Stories/Button.elm	/^primaryButton : Model -> Html Msg$/;"	f
-propertyOfFieldInfo	src/Components/Form.elm	/^propertyOfFieldInfo : (FieldInfo v -> a) -> f -> Model f v -> Maybe a$/;"	f
+propertyOfFieldInfo	src/Components/Form.elm	/^propertyOfFieldInfo : (FieldInfo v -> a) -> f -> Model f v comparable -> Maybe a$/;"	f
 radio	src/Components/Radio.elm	/^radio : List (RadioProp msg) -> List (Html msg) -> Html msg$/;"	f
 radioGroup	src/Components/Radio.elm	/^radioGroup : String -> List (NamedRadio msg) -> Html msg$/;"	f
 radioGroup	src/Stories/Radio.elm	/^radioGroup : Html msg$/;"	c
@@ -419,7 +420,7 @@ topPad	src/Spacing.elm	/^topPad : Spacing -> Attribute msg$/;"	f
 typeString	src/Spacing.elm	/^typeString : SpacingType -> String$/;"	f
 typeToString	src/Components/Input.elm	/^typeToString : InputType -> String$/;"	f
 type_	src/Components/Input.elm	/^type_ : InputType -> InputProp msg$/;"	f
-update	src/Components/Form.elm	/^update : Msg f v -> Model f v -> ( Model f v, Cmd (Msg f v) )$/;"	f
+update	src/Components/Form.elm	/^update : Msg f v -> Model f v comparable -> ( Model f v comparable, Cmd (Msg f v) )$/;"	f
 update	src/Components/Forms/Field.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Components/Forms/Fieldset.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Components/Forms/Form.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
@@ -444,7 +445,7 @@ update	src/Stories/TextArea.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;
 update	src/Stories/Typography.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 updateFieldInfo	src/Components/Form.elm	/^updateFieldInfo : v -> FieldInfo v -> FieldInfo v$/;"	f
 upperCase	src/Stories/Form.elm	/^upperCase : Rx.Regex$/;"	c
-upsertFieldValue	src/Components/Form.elm	/^upsertFieldValue : f -> v -> List ( f, FieldInfo v ) -> List ( f, FieldInfo v )$/;"	f
+upsertFieldValue	src/Components/Form.elm	/^upsertFieldValue : f -> v -> Model f v comparable -> Dict comparable (FieldInfo v)$/;"	f
 urlToRoute	src/Main.elm	/^urlToRoute : Url -> Route$/;"	f
 vAround	src/Components/Stack.elm	/^vAround : StackProp msg$/;"	c
 vBetween	src/Components/Stack.elm	/^vBetween : StackProp msg$/;"	c
@@ -456,7 +457,7 @@ valid	src/Components/Radio.elm	/^valid : RadioProp msg$/;"	c
 valid	src/Components/Select.elm	/^valid : SelectProp msg$/;"	c
 valid	src/Components/Switch.elm	/^valid : SwitchProp msg$/;"	c
 valid	src/Components/TextArea.elm	/^valid : TextAreaProp msg$/;"	c
-validationMessage	src/Components/Form.elm	/^validationMessage : f -> Model f v -> Html (Msg f v)$/;"	f
+validationMessage	src/Components/Form.elm	/^validationMessage : f -> Model f v comparable -> Html (Msg f v)$/;"	f
 validator	src/Components/Form.elm	/^validator : (v -> Maybe String) -> (String -> Maybe String) -> Validator v$/;"	f
 value	src/Components/Input.elm	/^value : Maybe String -> InputProp msg$/;"	f
 value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f

@@ -39,11 +39,12 @@ Capabilities of the form
   - report the validity of the field
 
 -}
-type alias Model f v =
+type alias Model f v comparable =
     { valid : Bool
     , dirty : Bool
     , submitted : Bool
-    , fields : List ( f, FieldInfo v )
+    , keyFn : f -> comparable
+    , fields : Dict comparable (FieldInfo v)
     }
 
 
@@ -56,6 +57,33 @@ type alias FieldInfo v =
 
 type Validator v
     = Validator (v -> Maybe String)
+
+
+type Field f v
+    = Field ( f, FieldInfo v )
+
+
+initField : f -> v -> Validator v -> Field f v
+initField f initial (Validator fn) =
+    Field ( f, FieldInfo initial (fn initial == Nothing) fn )
+
+
+init : (f -> comparable) -> List (Field f v) -> Model f v comparable
+init keyFn fields =
+    let
+        m =
+            { valid = False
+            , dirty = False
+            , submitted = False
+            , keyFn = keyFn
+            , fields = List.map (\(Field ( f, fi )) -> ( keyFn f, fi )) fields |> Dict.fromList
+            }
+    in
+    { m | valid = formValid m }
+
+
+type Msg f v
+    = OnInput f v
 
 
 {-| validator combinators
@@ -140,32 +168,6 @@ maxLength n toString =
                 Nothing
 
 
-type Field f v
-    = Field ( f, FieldInfo v )
-
-
-initField : f -> v -> Validator v -> Field f v
-initField f initial (Validator fn) =
-    Field ( f, FieldInfo initial (fn initial == Nothing) fn )
-
-
-init : List (Field f v) -> Model f v
-init fields =
-    let
-        m =
-            { valid = False
-            , dirty = False
-            , submitted = False
-            , fields = List.map (\(Field fi) -> fi) fields
-            }
-    in
-    { m | valid = formValid m }
-
-
-type Msg f v
-    = OnInput f v
-
-
 onInput : f -> v -> Msg f v
 onInput =
     OnInput
@@ -184,28 +186,26 @@ listReplace pred map =
         ( False, [] )
 
 
-fieldValue : f -> Model f v -> Maybe v
+fieldValue : f -> Model f v comparable -> Maybe v
 fieldValue =
     propertyOfFieldInfo .value
 
 
-fieldValid : f -> Model f v -> Bool
+fieldValid : f -> Model f v comparable -> Bool
 fieldValid f m =
     propertyOfFieldInfo .valid f m |> Maybe.withDefault True
 
 
-fieldError : f -> Model f v -> Maybe String
+fieldError : f -> Model f v comparable -> Maybe String
 fieldError f m =
     propertyOfFieldInfo identity f m
         |> Maybe.andThen (\fi -> fi.validator fi.value)
 
 
-propertyOfFieldInfo : (FieldInfo v -> a) -> f -> Model f v -> Maybe a
-propertyOfFieldInfo prop f { fields } =
-    fields
-        |> List.filter (\( f_, _ ) -> f_ == f)
-        |> List.map (\( _, fi ) -> prop fi)
-        |> List.head
+propertyOfFieldInfo : (FieldInfo v -> a) -> f -> Model f v comparable -> Maybe a
+propertyOfFieldInfo prop f { fields, keyFn } =
+    Dict.get (keyFn f) fields
+        |> Maybe.map prop
 
 
 updateFieldInfo : v -> FieldInfo v -> FieldInfo v
@@ -213,30 +213,23 @@ updateFieldInfo val fi =
     { fi | value = val, valid = fi.validator val == Nothing }
 
 
-upsertFieldValue : f -> v -> List ( f, FieldInfo v ) -> List ( f, FieldInfo v )
-upsertFieldValue f val fields =
-    let
-        ( found_, fields_ ) =
-            listReplace
-                (\( f_, _ ) -> f_ == f)
-                (\( f_, fi ) -> ( f_, updateFieldInfo val fi ))
-                fields
-    in
-    case found_ of
-        True ->
-            fields_
+upsertFieldValue : f -> v -> Model f v comparable -> Dict comparable (FieldInfo v)
+upsertFieldValue f val { fields, keyFn } =
+    case Dict.get (keyFn f) fields of
+        Nothing ->
+            Dict.insert (keyFn f) (FieldInfo val False (always Nothing)) fields
 
-        False ->
-            ( f, FieldInfo val False (always Nothing) ) :: fields_
+        Just _ ->
+            Dict.update (keyFn f) (Maybe.map (updateFieldInfo val)) fields
 
 
-update : Msg f v -> Model f v -> ( Model f v, Cmd (Msg f v) )
+update : Msg f v -> Model f v comparable -> ( Model f v comparable, Cmd (Msg f v) )
 update msg model =
     case msg of
         OnInput f val ->
             let
                 fields =
-                    upsertFieldValue f val model.fields
+                    upsertFieldValue f val model
             in
             ( { model
                 | dirty = True
@@ -254,7 +247,7 @@ form children =
         children
 
 
-validationMessage : f -> Model f v -> Html (Msg f v)
+validationMessage : f -> Model f v comparable -> Html (Msg f v)
 validationMessage f m =
     fieldError f m
         |> Maybe.map
@@ -299,7 +292,7 @@ fieldset (Legend l) children =
         (l :: children)
 
 
-groupValid : List f -> Model f v -> Bool
+groupValid : List f -> Model f v comparable -> Bool
 groupValid fs m =
     List.foldr
         (\f v ->
@@ -309,17 +302,17 @@ groupValid fs m =
         fs
 
 
-formValid : Model f v -> Bool
+formValid : Model f v comparable -> Bool
 formValid m =
-    List.foldr
-        (\( f, _ ) v ->
-            fieldValid f m && v
+    Dict.foldr
+        (\k { valid } v ->
+            v && valid
         )
         True
         m.fields
 
 
-formGroup : List f -> Model f v -> List (Html (Msg f v)) -> Html (Msg f v)
+formGroup : List f -> Model f v comparable -> List (Html (Msg f v)) -> Html (Msg f v)
 formGroup fs model children =
     let
         valid =
