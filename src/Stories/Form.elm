@@ -224,20 +224,17 @@ exampleForm { formModel } =
                                 formModel
                                 [ R.radioGroup "validation"
                                     [ R.namedRadio
-                                        ([ R.onInput (\_ -> F.onInput BrochurePreference (FormBrochurePrefs Email))
-                                         ]
+                                        ([ R.onInput (always <| F.onInput BrochurePreference (FormBrochurePrefs Email)) ]
                                             |> appendIf (brochurePrefValueChecked Email) R.checked
                                         )
                                         [ text "Email" ]
                                     , R.namedRadio
-                                        ([ R.onInput (\_ -> F.onInput BrochurePreference (FormBrochurePrefs Post))
-                                         ]
+                                        ([ R.onInput (always <| F.onInput BrochurePreference (FormBrochurePrefs Post)) ]
                                             |> appendIf (brochurePrefValueChecked Post) R.checked
                                         )
                                         [ text "Post" ]
                                     , R.namedRadio
-                                        ([ R.onInput (\_ -> F.onInput BrochurePreference (FormBrochurePrefs Both))
-                                         ]
+                                        ([ R.onInput (always <| F.onInput BrochurePreference (FormBrochurePrefs Both)) ]
                                             |> appendIf (brochurePrefValueChecked Both) R.checked
                                         )
                                         [ text "Email & Post" ]

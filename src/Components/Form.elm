@@ -89,30 +89,13 @@ or (Validator a) (Validator b) =
         )
 
 
-matches : Rx.Regex -> (v -> Maybe String) -> Validator v
-matches re toString =
-    Validator <|
-        \v ->
-            case toString v of
-                Nothing ->
-                    Nothing
-
-                Just s ->
-                    case Rx.find re s of
-                        [] ->
-                            Just "Field did not match the supplied regex and yes this message sucks"
-
-                        _ ->
-                            Nothing
-
-
 nullValidator : Validator v
 nullValidator =
     Validator (\s -> Nothing)
 
 
-required : (v -> Maybe String) -> Validator v
-required toString =
+validator : (v -> Maybe String) -> (String -> Maybe String) -> Validator v
+validator toString fn =
     Validator <|
         \v ->
             case toString v of
@@ -120,27 +103,41 @@ required toString =
                     Nothing
 
                 Just s ->
-                    if s == "" then
-                        Just "You must enter this field"
+                    fn s
 
-                    else
-                        Nothing
+
+matches : Rx.Regex -> (v -> Maybe String) -> Validator v
+matches re toString =
+    validator toString <|
+        \s ->
+            case Rx.find re s of
+                [] ->
+                    Just "Field did not match the supplied regex and yes this message sucks"
+
+                _ ->
+                    Nothing
+
+
+required : (v -> Maybe String) -> Validator v
+required toString =
+    validator toString <|
+        \s ->
+            if s == "" then
+                Just "You must enter this field"
+
+            else
+                Nothing
 
 
 maxLength : Int -> (v -> Maybe String) -> Validator v
 maxLength n toString =
-    Validator <|
-        \v ->
-            case toString v of
-                Nothing ->
-                    Nothing
+    validator toString <|
+        \s ->
+            if String.length s > n then
+                Just <| "Max length is " ++ String.fromInt n
 
-                Just s ->
-                    if String.length s > n then
-                        Just <| "Max length is " ++ String.fromInt n
-
-                    else
-                        Nothing
+            else
+                Nothing
 
 
 type Field f v

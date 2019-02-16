@@ -457,6 +457,7 @@ valid	src/Components/Select.elm	/^valid : SelectProp msg$/;"	c
 valid	src/Components/Switch.elm	/^valid : SwitchProp msg$/;"	c
 valid	src/Components/TextArea.elm	/^valid : TextAreaProp msg$/;"	c
 validationMessage	src/Components/Form.elm	/^validationMessage : f -> Model f v -> Html (Msg f v)$/;"	f
+validator	src/Components/Form.elm	/^validator : (v -> Maybe String) -> (String -> Maybe String) -> Validator v$/;"	f
 value	src/Components/Input.elm	/^value : Maybe String -> InputProp msg$/;"	f
 value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
 value	src/Components/TextArea.elm	/^value : String -> TextAreaProp msg$/;"	f
