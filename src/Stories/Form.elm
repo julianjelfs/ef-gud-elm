@@ -341,15 +341,7 @@ view model =
                                     Just v ->
                                         case v of
                                             FormBrochurePrefs p ->
-                                                case p of
-                                                    Email ->
-                                                        "Email"
-
-                                                    Post ->
-                                                        "Post"
-
-                                                    Both ->
-                                                        "Both"
+                                                prefToString p
 
                                             _ ->
                                                 "Unset"

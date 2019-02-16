@@ -30,12 +30,15 @@ import Regex as Rx
 import Utils exposing (appendIf, catMaybes)
 
 
+{-| This is totally out of control, needs a re-think
+Capabilities of the form
 
--- gaggit this is no good because we can't have a heteronenous list
--- i.e. we can't have int fields and string fields
--- we *could* have int | string fields though (thinking face)
+  - track a collection of fields
+  - retrieve the value of a field (generically)
+  - constrain the type of the field and the type of the value
+  - report the validity of the field
 
-
+-}
 type alias Model f v =
     { valid : Bool
     , dirty : Bool
