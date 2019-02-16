@@ -9,7 +9,6 @@ module Components.Radio exposing
     , radio
     , radioGroup
     , valid
-    , value
     )
 
 import Components.Generic as G
@@ -56,11 +55,6 @@ type RadioProp msg
 onInput : (String -> msg) -> RadioProp msg
 onInput =
     InputProp << Html.Events.onInput
-
-
-value : Maybe String -> RadioProp msg
-value =
-    InputProp << Html.Attributes.value << Maybe.withDefault ""
 
 
 valid : RadioProp msg

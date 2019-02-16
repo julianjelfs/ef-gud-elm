@@ -16,14 +16,23 @@ import Spacing as S
 import Utils exposing (appendIf)
 
 
+{-| these are the sorts of type that our form may contain
+this is not very nice but I can think of no other way to
+achieve a heterogeneous list of form field values
+-}
+type FormValueTypes
+    = FormString String
+    | FormBrochurePrefs BrochurePrefs
+
+
 type alias Model =
-    { formModel : F.Model FormFields
+    { formModel : F.Model FormFields FormValueTypes
     }
 
 
 type Msg
     = OnSubmit
-    | FormMsg (F.Msg FormFields)
+    | FormMsg (F.Msg FormFields FormValueTypes)
 
 
 type BrochurePrefs
@@ -39,26 +48,44 @@ type FormFields
     | BrochurePreference
 
 
-
---TODO this needs to include initial values for each form element
-
-
+{-| validators are a problem - we cannot mix types. The initial value is of type
+FormValueTypes and therefore so must the validator be. Tsk.
+-}
 init : Model
 init =
     { formModel =
         F.init
-            [ F.initField FirstName (F.required |> F.and (F.maxLength 20))
-            , F.initField LastName (F.required |> F.and (F.matches upperCase))
-            , F.initField DateOfBirth (F.required |> F.and (F.matches dateish))
-            , F.initField BrochurePreference F.nullValidator
+            [ F.initField FirstName
+                (FormString "")
+                (F.required formValueToString
+                    |> F.and
+                        (F.maxLength 20
+                            formValueToString
+                        )
+                )
+            , F.initField LastName
+                (FormString "")
+                (F.required formValueToString
+                    |> F.and
+                        (F.matches upperCase
+                            formValueToString
+                        )
+                )
+            , F.initField DateOfBirth
+                (FormString "")
+                (F.required formValueToString
+                    |> F.and
+                        (F.matches dateish
+                            formValueToString
+                        )
+                )
+            , F.initField BrochurePreference (FormBrochurePrefs Email) F.nullValidator
             ]
     }
 
 
-
--- yes yes we know this is not a good regex, but you get the idea
-
-
+{-| yes yes we know this is not a good regex, but you get the idea
+-}
 dateish : Rx.Regex
 dateish =
     Maybe.withDefault Rx.never <|
@@ -85,11 +112,55 @@ update msg model =
             ( model, Cmd.none )
 
 
-exampleForm : Model -> Html (F.Msg FormFields)
+prefToString : BrochurePrefs -> String
+prefToString pref =
+    case pref of
+        Email ->
+            "Email"
+
+        Post ->
+            "Post"
+
+        Both ->
+            "Both"
+
+
+formValueToString : FormValueTypes -> Maybe String
+formValueToString v =
+    case v of
+        FormString s ->
+            Just s
+
+        _ ->
+            Nothing
+
+
+exampleForm : Model -> Html (F.Msg FormFields FormValueTypes)
 exampleForm { formModel } =
     let
         fieldInvalid f =
             not <| F.fieldValid f formModel
+
+        stringFieldValue f =
+            case F.fieldValue f formModel of
+                Just v ->
+                    formValueToString v
+
+                Nothing ->
+                    Nothing
+
+        brochurePrefValueChecked v =
+            case F.fieldValue BrochurePreference formModel of
+                Nothing ->
+                    False
+
+                Just fv ->
+                    case fv of
+                        FormBrochurePrefs p ->
+                            p == v
+
+                        _ ->
+                            False
     in
     G.row []
         [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
@@ -102,8 +173,8 @@ exampleForm { formModel } =
                                 [ I.input
                                     ([ I.placeholder "First name"
                                      , I.required True
-                                     , I.value <| F.fieldValue FirstName formModel
-                                     , I.onInput (F.onInput FirstName)
+                                     , I.value <| stringFieldValue FirstName
+                                     , I.onInput (FormString >> F.onInput FirstName)
                                      ]
                                         |> appendIf (fieldInvalid FirstName) I.invalid
                                         |> appendIf (not <| fieldInvalid FirstName) I.valid
@@ -117,8 +188,8 @@ exampleForm { formModel } =
                                 [ I.input
                                     ([ I.placeholder "Last name"
                                      , I.required True
-                                     , I.value <| F.fieldValue LastName formModel
-                                     , I.onInput (F.onInput LastName)
+                                     , I.value <| stringFieldValue LastName
+                                     , I.onInput (FormString >> F.onInput LastName)
                                      ]
                                         |> appendIf (fieldInvalid LastName) I.invalid
                                         |> appendIf (not <| fieldInvalid LastName) I.valid
@@ -136,8 +207,8 @@ exampleForm { formModel } =
                                 (I.input
                                     ([ I.placeholder "DD/MM/YYYY"
                                      , I.required True
-                                     , I.value <| F.fieldValue DateOfBirth formModel
-                                     , I.onInput (F.onInput DateOfBirth)
+                                     , I.value <| stringFieldValue DateOfBirth
+                                     , I.onInput (FormString >> F.onInput DateOfBirth)
                                      ]
                                         |> appendIf (fieldInvalid DateOfBirth) I.invalid
                                         |> appendIf (not <| fieldInvalid DateOfBirth) I.valid
@@ -153,19 +224,22 @@ exampleForm { formModel } =
                                 formModel
                                 [ R.radioGroup "validation"
                                     [ R.namedRadio
-                                        [ R.onInput (F.onInput BrochurePreference)
-                                        , R.value <| F.fieldValue BrochurePreference formModel
-                                        ]
+                                        ([ R.onInput (\_ -> F.onInput BrochurePreference (FormBrochurePrefs Email))
+                                         ]
+                                            |> appendIf (brochurePrefValueChecked Email) R.checked
+                                        )
                                         [ text "Email" ]
                                     , R.namedRadio
-                                        [ R.onInput (F.onInput BrochurePreference)
-                                        , R.value <| F.fieldValue BrochurePreference formModel
-                                        ]
+                                        ([ R.onInput (\_ -> F.onInput BrochurePreference (FormBrochurePrefs Post))
+                                         ]
+                                            |> appendIf (brochurePrefValueChecked Post) R.checked
+                                        )
                                         [ text "Post" ]
                                     , R.namedRadio
-                                        [ R.onInput (F.onInput BrochurePreference)
-                                        , R.value <| F.fieldValue BrochurePreference formModel
-                                        ]
+                                        ([ R.onInput (\_ -> F.onInput BrochurePreference (FormBrochurePrefs Both))
+                                         ]
+                                            |> appendIf (brochurePrefValueChecked Both) R.checked
+                                        )
                                         [ text "Email & Post" ]
                                     ]
                                 ]
@@ -220,7 +294,12 @@ view : Model -> Html Msg
 view model =
     let
         fieldTrace s f =
-            s ++ ": " ++ (Maybe.withDefault "Unset" <| F.fieldValue f model.formModel)
+            s
+                ++ ": "
+                ++ (F.fieldValue f model.formModel
+                        |> Maybe.andThen formValueToString
+                        |> Maybe.withDefault "Unset"
+                   )
     in
     div
         []
@@ -251,6 +330,31 @@ view model =
             [ p [] [ code [] [ text <| fieldTrace "FirstName" FirstName ] ]
             , p [] [ code [] [ text <| fieldTrace "LastName" LastName ] ]
             , p [] [ code [] [ text <| fieldTrace "DateOfBirth" DateOfBirth ] ]
-            , p [] [ code [] [ text <| fieldTrace "BrochurePreference" BrochurePreference ] ]
+            , p []
+                [ code []
+                    [ text <|
+                        "BrochurePreference: "
+                            ++ (case F.fieldValue BrochurePreference model.formModel of
+                                    Nothing ->
+                                        "Unset"
+
+                                    Just v ->
+                                        case v of
+                                            FormBrochurePrefs p ->
+                                                case p of
+                                                    Email ->
+                                                        "Email"
+
+                                                    Post ->
+                                                        "Post"
+
+                                                    Both ->
+                                                        "Both"
+
+                                            _ ->
+                                                "Unset"
+                               )
+                    ]
+                ]
             ]
         ]

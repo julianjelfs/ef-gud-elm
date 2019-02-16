@@ -30,30 +30,34 @@ import Regex as Rx
 import Utils exposing (appendIf, catMaybes)
 
 
-type alias Model f =
+
+-- gaggit this is no good because we can't have a heteronenous list
+-- i.e. we can't have int fields and string fields
+-- we *could* have int | string fields though (thinking face)
+
+
+type alias Model f v =
     { valid : Bool
     , dirty : Bool
     , submitted : Bool
-    , fields : List ( f, FieldInfo )
+    , fields : List ( f, FieldInfo v )
     }
 
 
-type alias FieldInfo =
-    { value : String
+type alias FieldInfo v =
+    { value : v
     , valid : Bool
-    , validator : String -> Maybe String
+    , validator : v -> Maybe String
     }
 
 
-type Validator
-    = Validator (String -> Maybe String)
+type Validator v
+    = Validator (v -> Maybe String)
 
 
-
--- validator combinators
-
-
-and : Validator -> Validator -> Validator
+{-| validator combinators
+-}
+and : Validator v -> Validator v -> Validator v
 and (Validator a) (Validator b) =
     Validator
         (\s ->
@@ -69,7 +73,7 @@ and (Validator a) (Validator b) =
         )
 
 
-or : Validator -> Validator -> Validator
+or : Validator v -> Validator v -> Validator v
 or (Validator a) (Validator b) =
     Validator
         (\s ->
@@ -82,58 +86,70 @@ or (Validator a) (Validator b) =
         )
 
 
-matches : Rx.Regex -> Validator
-matches re =
-    Validator
-        (\s ->
-            case Rx.find re s of
-                [] ->
-                    Just "Field did not match the supplied regex and yes this message sucks"
-
-                _ ->
+matches : Rx.Regex -> (v -> Maybe String) -> Validator v
+matches re toString =
+    Validator <|
+        \v ->
+            case toString v of
+                Nothing ->
                     Nothing
-        )
+
+                Just s ->
+                    case Rx.find re s of
+                        [] ->
+                            Just "Field did not match the supplied regex and yes this message sucks"
+
+                        _ ->
+                            Nothing
 
 
-nullValidator : Validator
+nullValidator : Validator v
 nullValidator =
     Validator (\s -> Nothing)
 
 
-required : Validator
-required =
-    Validator
-        (\s ->
-            if s == "" then
-                Just "You must enter this field"
+required : (v -> Maybe String) -> Validator v
+required toString =
+    Validator <|
+        \v ->
+            case toString v of
+                Nothing ->
+                    Nothing
 
-            else
-                Nothing
-        )
+                Just s ->
+                    if s == "" then
+                        Just "You must enter this field"
 
-
-maxLength : Int -> Validator
-maxLength n =
-    Validator
-        (\s ->
-            if String.length s > n then
-                Just <| "Max length is " ++ String.fromInt n
-
-            else
-                Nothing
-        )
+                    else
+                        Nothing
 
 
-type Field f
-    = Field ( f, FieldInfo )
+maxLength : Int -> (v -> Maybe String) -> Validator v
+maxLength n toString =
+    Validator <|
+        \v ->
+            case toString v of
+                Nothing ->
+                    Nothing
+
+                Just s ->
+                    if String.length s > n then
+                        Just <| "Max length is " ++ String.fromInt n
+
+                    else
+                        Nothing
 
 
-initField : f -> Validator -> Field f
-initField f (Validator fn) =
-    Field ( f, FieldInfo "" (fn "" == Nothing) fn )
+type Field f v
+    = Field ( f, FieldInfo v )
 
 
-init : List (Field f) -> Model f
+initField : f -> v -> Validator v -> Field f v
+initField f initial (Validator fn) =
+    Field ( f, FieldInfo initial (fn initial == Nothing) fn )
+
+
+init : List (Field f v) -> Model f v
 init fields =
     let
         m =
@@ -146,11 +162,11 @@ init fields =
     { m | valid = formValid m }
 
 
-type Msg f
-    = OnInput f String
+type Msg f v
+    = OnInput f v
 
 
-onInput : f -> String -> Msg f
+onInput : f -> v -> Msg f v
 onInput =
     OnInput
 
@@ -168,23 +184,23 @@ listReplace pred map =
         ( False, [] )
 
 
-fieldValue : f -> Model f -> Maybe String
+fieldValue : f -> Model f v -> Maybe v
 fieldValue =
     propertyOfFieldInfo .value
 
 
-fieldValid : f -> Model f -> Bool
+fieldValid : f -> Model f v -> Bool
 fieldValid f m =
     propertyOfFieldInfo .valid f m |> Maybe.withDefault True
 
 
-fieldError : f -> Model f -> Maybe String
+fieldError : f -> Model f v -> Maybe String
 fieldError f m =
     propertyOfFieldInfo identity f m
         |> Maybe.andThen (\fi -> fi.validator fi.value)
 
 
-propertyOfFieldInfo : (FieldInfo -> a) -> f -> Model f -> Maybe a
+propertyOfFieldInfo : (FieldInfo v -> a) -> f -> Model f v -> Maybe a
 propertyOfFieldInfo prop f { fields } =
     fields
         |> List.filter (\( f_, _ ) -> f_ == f)
@@ -192,12 +208,12 @@ propertyOfFieldInfo prop f { fields } =
         |> List.head
 
 
-updateFieldInfo : String -> FieldInfo -> FieldInfo
+updateFieldInfo : v -> FieldInfo v -> FieldInfo v
 updateFieldInfo val fi =
     { fi | value = val, valid = fi.validator val == Nothing }
 
 
-upsertFieldValue : f -> String -> List ( f, FieldInfo ) -> List ( f, FieldInfo )
+upsertFieldValue : f -> v -> List ( f, FieldInfo v ) -> List ( f, FieldInfo v )
 upsertFieldValue f val fields =
     let
         ( found_, fields_ ) =
@@ -214,13 +230,13 @@ upsertFieldValue f val fields =
             ( f, FieldInfo val False (always Nothing) ) :: fields_
 
 
-update : Msg f -> Model f -> ( Model f, Cmd (Msg f) )
+update : Msg f v -> Model f v -> ( Model f v, Cmd (Msg f v) )
 update msg model =
     case msg of
-        OnInput f str ->
+        OnInput f val ->
             let
                 fields =
-                    upsertFieldValue f str model.fields
+                    upsertFieldValue f val model.fields
             in
             ( { model
                 | dirty = True
@@ -231,14 +247,14 @@ update msg model =
             )
 
 
-form : List (Html (Msg f)) -> Html (Msg f)
+form : List (Html (Msg f v)) -> Html (Msg f v)
 form children =
     Html.form
         [ class "ef-form" ]
         children
 
 
-validationMessage : f -> Model f -> Html (Msg f)
+validationMessage : f -> Model f v -> Html (Msg f v)
 validationMessage f m =
     fieldError f m
         |> Maybe.map
@@ -250,7 +266,7 @@ validationMessage f m =
         |> Maybe.withDefault (text "")
 
 
-field : Maybe String -> Html (Msg f) -> Html (Msg f)
+field : Maybe String -> Html (Msg f v) -> Html (Msg f v)
 field label control =
     let
         lbl =
@@ -267,23 +283,23 @@ field label control =
         )
 
 
-type Legend f
-    = Legend (Html (Msg f))
+type Legend f v
+    = Legend (Html (Msg f v))
 
 
-legend : String -> Legend f
+legend : String -> Legend f v
 legend txt =
     Legend <| Html.legend [ class "ef-form-label" ] [ text txt ]
 
 
-fieldset : Legend f -> List (Html (Msg f)) -> Html (Msg f)
+fieldset : Legend f v -> List (Html (Msg f v)) -> Html (Msg f v)
 fieldset (Legend l) children =
     Html.fieldset
         [ class "ef-form-fieldset u-mb-m" ]
         (l :: children)
 
 
-groupValid : List f -> Model f -> Bool
+groupValid : List f -> Model f v -> Bool
 groupValid fs m =
     List.foldr
         (\f v ->
@@ -293,7 +309,7 @@ groupValid fs m =
         fs
 
 
-formValid : Model f -> Bool
+formValid : Model f v -> Bool
 formValid m =
     List.foldr
         (\( f, _ ) v ->
@@ -303,7 +319,7 @@ formValid m =
         m.fields
 
 
-formGroup : List f -> Model f -> List (Html (Msg f)) -> Html (Msg f)
+formGroup : List f -> Model f v -> List (Html (Msg f v)) -> Html (Msg f v)
 formGroup fs model children =
     let
         valid =
