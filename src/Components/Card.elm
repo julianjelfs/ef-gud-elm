@@ -4,6 +4,8 @@ module Components.Card exposing
     , imageUrl
     , noshadow
     , outline
+    , small
+    , teaserCard
     , title
     , vertical
     )
@@ -32,6 +34,11 @@ type Body
 vertical : CardProp msg
 vertical =
     CardProp (class "-vertical")
+
+
+small : CardProp msg
+small =
+    CardProp (class "-small")
 
 
 outline : CardProp msg
@@ -82,6 +89,24 @@ card props (ImageUrl u) (Title t) (Body b) =
                         , class "ef-card--content__link"
                         ]
                         [ text "Link to page" ]
+                    ]
+                ]
+            ]
+        ]
+
+
+teaserCard : List (CardProp msg) -> ImageUrl -> Title -> Body -> Html msg
+teaserCard props (ImageUrl u) (Title t) (Body b) =
+    a
+        ([ class "ef-card--teaser", href "#" ] ++ List.map (\(CardProp a) -> a) props)
+        [ img [ class "ef-card--teaser__img", src u ] []
+        , div
+            [ class "ef-card--teaser__inner" ]
+            [ div
+                [ class "ef-card--teaser__content" ]
+                [ h4 [ class "ef-card--teaser__title" ] [ text t ]
+                , div [ class "ef-card--teaser__text" ]
+                    [ p [] [ text b ]
                     ]
                 ]
             ]
