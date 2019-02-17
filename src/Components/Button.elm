@@ -7,6 +7,7 @@ module Components.Button exposing
     , hover
     , leftMargin
     , loading
+    , margin
     , onClick
     , padding
     , primary
@@ -57,7 +58,12 @@ leftMargin =
 
 padding : List S.Spacing -> ButtonProp msg
 padding =
-    ButtonProp << S.paddingClasses
+    ButtonProp << S.padding
+
+
+margin : List S.Spacing -> ButtonProp msg
+margin =
+    ButtonProp << S.margin
 
 
 onClick : msg -> ButtonProp msg

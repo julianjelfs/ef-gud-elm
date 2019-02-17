@@ -7,10 +7,8 @@ module Spacing exposing
     , horizontalPad
     , leftMargin
     , leftPad
-    , marginClass
-    , marginClasses
-    , paddingClass
-    , paddingClasses
+    , margin
+    , padding
     , rightMargin
     , rightPad
     , topMargin
@@ -61,17 +59,9 @@ spacingClassName type_ mod bp pd =
         ++ toString pd
 
 
-
---TODO this should not be exported
-
-
 paddingClass : String -> BP.Breakpoint -> Spacing -> Attribute msg
 paddingClass mod bp =
     class << spacingClassName Padding mod bp
-
-
-
---TODO this should not be exported
 
 
 marginClass : String -> BP.Breakpoint -> Spacing -> Attribute msg
@@ -159,21 +149,19 @@ verticalMargin p =
         )
 
 
-
--- same rules as css
--- one value, rule applies to all four sides
--- two values = vertical, horizontal
--- three values = top, left & right, bottom
--- four values = top, right, bottom, left
-
-
-paddingClasses : List Spacing -> Attribute msg
-paddingClasses =
+{-| same rules as css
+one value, rule applies to all four sides
+two values = vertical, horizontal
+three values = top, left & right, bottom
+four values = top, right, bottom, left
+-}
+padding : List Spacing -> Attribute msg
+padding =
     spacingClasses Padding
 
 
-marginClasses : List Spacing -> Attribute msg
-marginClasses =
+margin : List Spacing -> Attribute msg
+margin =
     spacingClasses Margin
 
 

@@ -286,8 +286,10 @@ loading	src/Components/Select.elm	/^loading : SelectProp msg$/;"	c
 loading	src/Components/TextArea.elm	/^loading : TextAreaProp msg$/;"	c
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
+margin	src/Components/Button.elm	/^margin : List S.Spacing -> ButtonProp msg$/;"	f
+margin	src/Components/Container.elm	/^margin : List S.Spacing -> ContainerProp msg$/;"	f
+margin	src/Spacing.elm	/^margin : List Spacing -> Attribute msg$/;"	f
 marginClass	src/Spacing.elm	/^marginClass : String -> BP.Breakpoint -> Spacing -> Attribute msg$/;"	f
-marginClasses	src/Spacing.elm	/^marginClasses : List Spacing -> Attribute msg$/;"	f
 matches	src/Components/Form.elm	/^matches : Rx.Regex -> (v -> Maybe String) -> Validator v$/;"	f
 maxLength	src/Components/Form.elm	/^maxLength : Int -> (v -> Maybe String) -> Validator v$/;"	f
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
@@ -325,8 +327,9 @@ or	src/Components/Form.elm	/^or : Validator v -> Validator v -> Validator v$/;"	
 outline	src/Components/Surface.elm	/^outline : SurfaceProp msg$/;"	c
 overrideSpacing	src/Stories/Button.elm	/^overrideSpacing : Model -> Html Msg$/;"	f
 padding	src/Components/Button.elm	/^padding : List S.Spacing -> ButtonProp msg$/;"	f
+padding	src/Components/Container.elm	/^padding : List S.Spacing -> ContainerProp msg$/;"	f
+padding	src/Spacing.elm	/^padding : List Spacing -> Attribute msg$/;"	f
 paddingClass	src/Spacing.elm	/^paddingClass : String -> BP.Breakpoint -> Spacing -> Attribute msg$/;"	f
-paddingClasses	src/Spacing.elm	/^paddingClasses : List Spacing -> Attribute msg$/;"	f
 para	src/Components/Typography.elm	/^para : List (Html msg) -> Html msg$/;"	f
 para	src/Stories/Typography.elm	/^para : Html Msg$/;"	c
 paraBook	src/Components/Typography.elm	/^paraBook : List (Html msg) -> Html msg$/;"	f

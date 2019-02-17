@@ -191,7 +191,7 @@ exampleForm { formModel } =
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                             [ F.formGroup [ FirstName ]
                                 formModel
-                                [ I.input
+                                [ I.input I.TextInput
                                     ([ I.placeholder "First name"
                                      , I.required True
                                      , I.value <| stringFieldValue FirstName
@@ -206,7 +206,7 @@ exampleForm { formModel } =
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                             [ F.formGroup [ LastName ]
                                 formModel
-                                [ I.input
+                                [ I.input I.TextInput
                                     ([ I.placeholder "Last name"
                                      , I.required True
                                      , I.value <| stringFieldValue LastName
@@ -225,7 +225,7 @@ exampleForm { formModel } =
                         [ F.formGroup [ DateOfBirth ]
                             formModel
                             [ F.field (Just "Date of Birth")
-                                (I.input
+                                (I.input I.TextInput
                                     ([ I.placeholder "DD/MM/YYYY"
                                      , I.required True
                                      , I.value <| stringFieldValue DateOfBirth
@@ -267,15 +267,15 @@ exampleForm { formModel } =
                 , F.fieldset (F.legend "Address")
                     [ G.row []
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input [ I.placeholder "Street Name" ] ]
+                            [ I.input I.TextInput [ I.placeholder "Street Name" ] ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input [ I.placeholder "Number" ] ]
+                            [ I.input I.TextInput [ I.placeholder "Number" ] ]
                         ]
                     , G.row []
                         [ G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input [ I.placeholder "City" ] ]
+                            [ I.input I.TextInput [ I.placeholder "City" ] ]
                         , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
-                            [ I.input [ I.placeholder "Post Code" ] ]
+                            [ I.input I.TextInput [ I.placeholder "Post Code" ] ]
                         ]
                     ]
                 , G.row []
@@ -283,14 +283,14 @@ exampleForm { formModel } =
                         [ F.formGroup []
                             formModel
                             [ F.field (Just "Email Address")
-                                (I.input [ I.placeholder "Email Address" ])
+                                (I.input I.TextInput [ I.placeholder "Email Address" ])
                             ]
                         ]
                     , G.col [ G.mediumSpan 6, G.smallSpan 12 ]
                         [ F.formGroup []
                             formModel
                             [ F.field (Just "Phone Number")
-                                (I.input [ I.placeholder "Phone Number" ])
+                                (I.input I.TextInput [ I.placeholder "Phone Number" ])
                             ]
                         ]
                     ]

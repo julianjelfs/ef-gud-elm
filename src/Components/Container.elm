@@ -7,6 +7,8 @@ module Components.Container exposing
     , horizontalPad
     , leftMargin
     , leftPad
+    , margin
+    , padding
     , rightMargin
     , rightPad
     , topMargin
@@ -28,6 +30,16 @@ type ContainerProp msg
 bgColor : C.ThemeColor -> ContainerProp msg
 bgColor =
     ContainerProp << C.bgColor
+
+
+padding : List S.Spacing -> ContainerProp msg
+padding =
+    ContainerProp << S.padding
+
+
+margin : List S.Spacing -> ContainerProp msg
+margin =
+    ContainerProp << S.margin
 
 
 verticalPad : S.Spacing -> ContainerProp msg

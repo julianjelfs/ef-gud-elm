@@ -1,7 +1,8 @@
 module Stories.Surface exposing (Model, Msg, init, update, view)
 
 import Breakpoint as BP
-import Color as C
+import Color
+import Components.Container as C
 import Components.Surface as S
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -33,9 +34,9 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div
-            [ SP.paddingClass "" BP.Small SP.Medium
-            , C.bgColor C.HelloPaper
+        [ C.container
+            [ C.padding [ SP.Large ]
+            , C.bgColor Color.HelloPaper
             ]
             [ S.surface False
                 []
@@ -43,9 +44,9 @@ view model =
                 , p [] [ text loremIpsum ]
                 ]
             ]
-        , div
-            [ C.bgColor C.EfGrey
-            , SP.paddingClass "" BP.Small SP.Medium
+        , C.container
+            [ C.bgColor Color.EfGrey
+            , C.padding [ SP.Large ]
             ]
             [ S.surface False
                 [ S.outline ]
@@ -53,9 +54,9 @@ view model =
                 , p [] [ text loremIpsum ]
                 ]
             ]
-        , div
-            [ C.bgColor C.LegalPaper
-            , SP.paddingClass "" BP.Small SP.Medium
+        , C.container
+            [ C.bgColor Color.LegalPaper
+            , C.padding [ SP.Large ]
             ]
             [ S.surface False
                 [ S.shadow ]
@@ -63,9 +64,9 @@ view model =
                 , p [] [ text loremIpsum ]
                 ]
             ]
-        , div
-            [ C.bgColor C.OutdoorPaper
-            , SP.paddingClass "" BP.Small SP.Medium
+        , C.container
+            [ C.bgColor Color.OutdoorPaper
+            , C.padding [ SP.Large ]
             ]
             [ S.surface False
                 [ S.deepShadow ]
@@ -73,9 +74,9 @@ view model =
                 , p [] [ text loremIpsum ]
                 ]
             ]
-        , div
-            [ C.bgColor C.White
-            , SP.paddingClass "" BP.Small SP.Medium
+        , C.container
+            [ C.bgColor Color.White
+            , C.padding [ SP.Large ]
             ]
             [ S.surface False
                 [ S.deepShadow, S.rounded ]
@@ -83,9 +84,9 @@ view model =
                 , p [] [ text loremIpsum ]
                 ]
             ]
-        , div
-            [ C.bgColor C.EfGrey
-            , SP.paddingClass "" BP.Small SP.Medium
+        , C.container
+            [ C.bgColor Color.EfGrey
+            , C.padding [ SP.Large ]
             ]
             [ S.surface
                 True
