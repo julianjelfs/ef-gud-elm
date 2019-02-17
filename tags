@@ -94,6 +94,7 @@ TextAreaProp	src/Components/TextArea.elm	/^type TextAreaProp msg$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
 Validator	src/Components/Form.elm	/^type Validator v$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
+active	src/Components/Input.elm	/^active : InputProp msg$/;"	c
 all	tests/Tests.elm	/^all : Test$/;"	c
 and	src/Components/Form.elm	/^and : Validator v -> Validator v -> Validator v$/;"	f
 appendIf	src/Utils.elm	/^appendIf : Bool -> a -> List a -> List a$/;"	f
@@ -152,7 +153,7 @@ disabled	src/Components/Switch.elm	/^disabled : SwitchProp msg$/;"	c
 disabled	src/Components/TextArea.elm	/^disabled : TextAreaProp msg$/;"	c
 exampleButton	src/Stories/Button.elm	/^exampleButton : List (B.ButtonProp Msg) -> String -> Html Msg$/;"	f
 exampleForm	src/Stories/Form.elm	/^exampleForm : Model -> Html (F.Msg FormFields FormValueTypes)$/;"	f
-exampleInput	src/Stories/Input.elm	/^exampleInput : List (I.InputProp Msg) -> Html Msg$/;"	f
+exampleInput	src/Stories/Input.elm	/^exampleInput : I.InputType -> List (I.InputProp Msg) -> Html Msg$/;"	f
 exampleTextArea	src/Stories/TextArea.elm	/^exampleTextArea : List (T.TextAreaProp Msg) -> Html Msg$/;"	f
 extraLargeCollapse	src/Components/Grid.elm	/^extraLargeCollapse : ColProp msg$/;"	c
 extraLargeFirst	src/Components/Grid.elm	/^extraLargeFirst : ColProp msg$/;"	c
@@ -238,7 +239,7 @@ init	src/Stories/Template.elm	/^init : Model$/;"	c
 init	src/Stories/TextArea.elm	/^init : Model$/;"	c
 init	src/Stories/Typography.elm	/^init : Model$/;"	c
 initField	src/Components/Form.elm	/^initField : f -> v -> Validator v -> Field f v$/;"	f
-input	src/Components/Input.elm	/^input : List (InputProp msg) -> Html msg$/;"	f
+input	src/Components/Input.elm	/^input : InputType -> List (InputProp msg) -> Html msg$/;"	f
 inputField	src/Components/Forms/Field.elm	/^inputField : List (I.InputProp Msg) -> FieldControl Msg$/;"	f
 inputStates	src/Stories/Input.elm	/^inputStates : List (Html Msg)$/;"	c
 inputTypes	src/Stories/Input.elm	/^inputTypes : Model -> List (Html Msg)$/;"	f
@@ -346,6 +347,7 @@ radio	src/Components/Radio.elm	/^radio : List (RadioProp msg) -> List (Html msg)
 radioGroup	src/Components/Radio.elm	/^radioGroup : String -> List (NamedRadio msg) -> Html msg$/;"	f
 radioGroup	src/Stories/Radio.elm	/^radioGroup : Html msg$/;"	c
 radioStates	src/Stories/Radio.elm	/^radioStates : Html msg$/;"	c
+rangeSlider	src/Stories/Input.elm	/^rangeSlider : List (Html Msg)$/;"	c
 registerValidSW	src/registerServiceWorker.js	/^function registerValidSW(swUrl) {$/;"	f
 reordering	src/Stories/Grid.elm	/^reordering : Html Msg$/;"	c
 required	src/Components/Form.elm	/^required : (v -> Maybe String) -> Validator v$/;"	f

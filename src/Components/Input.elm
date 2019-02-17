@@ -1,6 +1,7 @@
 module Components.Input exposing
     ( InputProp
     , InputType(..)
+    , active
     , bottomMargin
     , completed
     , disabled
@@ -15,7 +16,6 @@ module Components.Input exposing
     , required
     , rightMargin
     , topMargin
-    , type_
     , valid
     , value
     , verticalMargin
@@ -78,6 +78,11 @@ focus =
     field "-focus"
 
 
+active : InputProp msg
+active =
+    field "-is-active"
+
+
 completed : InputProp msg
 completed =
     field "-completed"
@@ -94,8 +99,18 @@ disabled =
 
 
 type_ : InputType -> InputProp msg
-type_ =
-    FieldProp << Html.Attributes.type_ << typeToString
+type_ t =
+    let
+        p =
+            [ FieldProp << Html.Attributes.type_ <| typeToString t ]
+    in
+    Multiple <|
+        case t of
+            RangeSlider ->
+                field "ef-range" :: p
+
+            _ ->
+                field "ef-input" :: p
 
 
 placeholder : String -> InputProp msg
@@ -121,6 +136,7 @@ type InputType
     | SearchInput
     | TelInput
     | UrlInput
+    | RangeSlider
 
 
 typeToString : InputType -> String
@@ -147,10 +163,14 @@ typeToString t =
         UrlInput ->
             "url"
 
+        RangeSlider ->
+            "range"
+
 
 type InputProp msg
     = WrapperProp (Attribute msg)
     | FieldProp (Attribute msg)
+    | Multiple (List (InputProp msg))
 
 
 wrapper =
@@ -171,24 +191,28 @@ partition =
 
                 FieldProp a ->
                     ( wps, a :: fps )
+
+                Multiple props ->
+                    let
+                        ( wps_, fps_ ) =
+                            partition props
+                    in
+                    ( wps ++ wps_, fps ++ fps_ )
         )
         ( [], [] )
 
 
-input : List (InputProp msg) -> Html msg
-input props =
+input : InputType -> List (InputProp msg) -> Html msg
+input t props =
     let
         ( wrapperProps, fieldProps ) =
-            partition props
+            partition (type_ t :: props)
     in
     div
         ([ class "ef-input-w" ]
             ++ wrapperProps
         )
         [ Html.input
-            ([ class "ef-input"
-             ]
-                ++ fieldProps
-            )
+            fieldProps
             []
         ]
