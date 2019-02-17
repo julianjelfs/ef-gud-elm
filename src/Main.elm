@@ -7,6 +7,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Stories.Button as Button
+import Stories.Card as Card
 import Stories.Checkbox as Checkbox
 import Stories.Container as Container
 import Stories.Form as Form
@@ -50,6 +51,7 @@ type Route
     | Switch
     | Form
     | Logo
+    | Card
     | NotFound
 
 
@@ -73,6 +75,7 @@ type alias Model =
     , switch : Switch.Model
     , form : Form.Model
     , logo : Logo.Model
+    , card : Card.Model
     }
 
 
@@ -97,6 +100,7 @@ init _ url key =
       , switch = Switch.init
       , form = Form.init
       , logo = Logo.init
+      , card = Card.init
       }
     , Cmd.none
     )
@@ -131,6 +135,7 @@ type Msg
     | SwitchMsg Switch.Msg
     | FormMsg Form.Msg
     | LogoMsg Logo.Msg
+    | CardMsg Card.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -268,6 +273,13 @@ update msg model =
             in
             ( { model | logo = subModel }, Cmd.map LogoMsg subCmd )
 
+        CardMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Card.update subMsg model.card
+            in
+            ( { model | card = subModel }, Cmd.map CardMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -290,6 +302,7 @@ routeParser =
         , Url.map TextArea (Url.s "textarea")
         , Url.map Form (Url.s "form")
         , Url.map Logo (Url.s "logo")
+        , Url.map Card (Url.s "card")
         ]
 
 
@@ -332,6 +345,7 @@ view model =
                     , menuItem model.route Stack "stack" "Stack Component"
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
+                    , menuItem model.route Card "card" "Card Component"
                     , menuItem model.route Container "container" "Container Component"
                     , menuItem model.route Icon "icon" "Icon Component"
                     , menuItem model.route Logo "logo" "Logo Component"
@@ -405,6 +419,9 @@ componentView model =
 
         Logo ->
             Html.map LogoMsg (Logo.view model.logo)
+
+        Card ->
+            Html.map CardMsg (Card.view model.card)
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]

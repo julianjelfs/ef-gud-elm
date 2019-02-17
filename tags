@@ -4,10 +4,12 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Body	src/Components/Card.elm	/^type Body$/;"	t
 BoxTags	src/Stories/Utils.elm	/^type alias BoxTags =$/;"	a
 Breakpoint	src/Breakpoint.elm	/^type Breakpoint$/;"	t
 BrochurePrefs	src/Stories/Form.elm	/^type BrochurePrefs$/;"	t
 ButtonProp	src/Components/Button.elm	/^type ButtonProp msg$/;"	t
+CardProp	src/Components/Card.elm	/^type CardProp msg$/;"	t
 CheckboxProp	src/Components/Checkbox.elm	/^type CheckboxProp msg$/;"	t
 ColProp	src/Components/Grid.elm	/^type ColProp msg$/;"	t
 Column	src/Components/Grid.elm	/^type Column msg$/;"	t
@@ -22,6 +24,7 @@ FormProp	src/Components/Forms/Form.elm	/^type FormProp msg$/;"	t
 FormValueTypes	src/Stories/Form.elm	/^type FormValueTypes$/;"	t
 Icon	src/Components/Icon.elm	/^type Icon$/;"	t
 IconProp	src/Components/Icon.elm	/^type IconProp msg$/;"	t
+ImageUrl	src/Components/Card.elm	/^type ImageUrl$/;"	t
 InputProp	src/Components/Input.elm	/^type InputProp msg$/;"	t
 InputType	src/Components/Input.elm	/^type InputType$/;"	t
 Legend	src/Components/Form.elm	/^type Legend f v$/;"	t
@@ -35,6 +38,7 @@ Model	src/Components/Forms/Form.elm	/^type alias Model =$/;"	a
 Model	src/Components/Forms/FormGroup.elm	/^type alias Model =$/;"	a
 Model	src/Main.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Button.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Card.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Checkbox.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Container.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Form.elm	/^type alias Model =$/;"	a
@@ -59,6 +63,7 @@ Msg	src/Components/Forms/Form.elm	/^type Msg$/;"	t
 Msg	src/Components/Forms/FormGroup.elm	/^type Msg$/;"	t
 Msg	src/Main.elm	/^type Msg$/;"	t
 Msg	src/Stories/Button.elm	/^type Msg$/;"	t
+Msg	src/Stories/Card.elm	/^type Msg$/;"	t
 Msg	src/Stories/Checkbox.elm	/^type Msg$/;"	t
 Msg	src/Stories/Container.elm	/^type Msg$/;"	t
 Msg	src/Stories/Form.elm	/^type Msg$/;"	t
@@ -95,6 +100,7 @@ SwitchProp	src/Components/Switch.elm	/^type SwitchProp msg$/;"	t
 TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 TextAreaProp	src/Components/TextArea.elm	/^type TextAreaProp msg$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
+Title	src/Components/Card.elm	/^type Title$/;"	t
 TypoProp	src/Components/Typography.elm	/^type TypoProp msg$/;"	t
 Validator	src/Components/Form.elm	/^type Validator v$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
@@ -108,10 +114,12 @@ bgColor	src/Color.elm	/^bgColor : ThemeColor -> Attribute msg$/;"	f
 bgColor	src/Components/Container.elm	/^bgColor : C.ThemeColor -> ContainerProp msg$/;"	f
 bgColor	src/Components/Section.elm	/^bgColor : Color.ThemeColor -> SectionProp msg$/;"	f
 black	src/Components/Typography.elm	/^black : TypoProp msg$/;"	c
+body	src/Components/Card.elm	/^body : String -> Body$/;"	f
 body	src/Components/Typography.elm	/^body : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 body	src/Stories/Typography.elm	/^body : Html Msg$/;"	c
 bodyBook	src/Components/Typography.elm	/^bodyBook : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 bodyBook	src/Stories/Typography.elm	/^bodyBook : Html Msg$/;"	c
+bodyText	src/Stories/Card.elm	/^bodyText : String$/;"	c
 bold	src/Components/Typography.elm	/^bold : TypoProp msg$/;"	c
 book	src/Components/Typography.elm	/^book : TypoProp msg$/;"	c
 borderedBox	src/Stories/Utils.elm	/^borderedBox : Bool -> List (Html msg) -> Html msg$/;"	f
@@ -133,6 +141,7 @@ bpString	src/Components/Grid.elm	/^bpString : String -> String -> ColProp msg$/;
 button	src/Components/Button.elm	/^button : List (ButtonProp msg) -> List (Html msg) -> Html msg$/;"	f
 buttonProp	src/Components/Button.elm	/^buttonProp : String -> ButtonProp msg$/;"	f
 buttonStates	src/Stories/Button.elm	/^buttonStates : List (B.ButtonProp Msg) -> Model -> Html Msg$/;"	f
+card	src/Components/Card.elm	/^card : List (CardProp msg) -> ImageUrl -> Title -> Body -> Html msg$/;"	f
 catMaybes	src/Utils.elm	/^catMaybes : List (Maybe a) -> List a$/;"	f
 checkValidServiceWorker	src/registerServiceWorker.js	/^function checkValidServiceWorker(swUrl) {$/;"	f
 checkbox	src/Components/Checkbox.elm	/^checkbox : List (CheckboxProp msg) -> List (Html msg) -> Html msg$/;"	f
@@ -151,6 +160,7 @@ concatIf	src/Utils.elm	/^concatIf : Bool -> List a -> List a -> List a$/;"	f
 container	src/Components/Container.elm	/^container : List (ContainerProp msg) -> List (Html msg) -> Html msg$/;"	f
 dateish	src/Stories/Form.elm	/^dateish : Rx.Regex$/;"	c
 deepShadow	src/Components/Surface.elm	/^deepShadow : SurfaceProp msg$/;"	c
+defaultCard	src/Stories/Card.elm	/^defaultCard : Html Msg$/;"	c
 defaultSpan	src/Components/Grid.elm	/^defaultSpan : Int -> ColProp msg$/;"	f
 defaultTags	src/Stories/Utils.elm	/^defaultTags : BoxTags$/;"	c
 disabled	src/Components/Button.elm	/^disabled : Bool -> ButtonProp msg$/;"	f
@@ -225,6 +235,7 @@ hover	src/Components/Button.elm	/^hover : ButtonProp msg$/;"	c
 href	src/Components/Surface.elm	/^href : String -> SurfaceProp msg$/;"	f
 icon	src/Components/Icon.elm	/^icon : List (IconProp msg) -> Html msg$/;"	f
 iconType	src/Components/Icon.elm	/^iconType : Icon -> IconProp msg$/;"	f
+imageUrl	src/Components/Card.elm	/^imageUrl : String -> ImageUrl$/;"	f
 init	src/Components/Form.elm	/^init : (f -> comparable) -> List (Field f v) -> Model f v comparable$/;"	f
 init	src/Components/Forms/Field.elm	/^init : Model$/;"	c
 init	src/Components/Forms/Fieldset.elm	/^init : Model$/;"	c
@@ -232,6 +243,7 @@ init	src/Components/Forms/Form.elm	/^init : Dict String Field.Model -> Model$/;"
 init	src/Components/Forms/FormGroup.elm	/^init : Model$/;"	c
 init	src/Main.elm	/^init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )$/;"	f
 init	src/Stories/Button.elm	/^init : Model$/;"	c
+init	src/Stories/Card.elm	/^init : Model$/;"	c
 init	src/Stories/Checkbox.elm	/^init : Model$/;"	c
 init	src/Stories/Container.elm	/^init : Model$/;"	c
 init	src/Stories/Form.elm	/^init : Model$/;"	c
@@ -327,6 +339,8 @@ menuItem	src/Main.elm	/^menuItem : Route -> Route -> String -> String -> Html Ms
 name	src/Components/Radio.elm	/^name : String -> RadioProp msg$/;"	f
 namedRadio	src/Components/Radio.elm	/^namedRadio : List (RadioProp msg) -> List (Html msg) -> NamedRadio msg$/;"	f
 normal	src/Stories/Container.elm	/^normal : Html Msg$/;"	c
+noshadow	src/Components/Card.elm	/^noshadow : CardProp msg$/;"	c
+noshadow	src/Stories/Card.elm	/^noshadow : Html Msg$/;"	c
 nullValidator	src/Components/Form.elm	/^nullValidator : Validator v$/;"	c
 offsetting	src/Stories/Grid.elm	/^offsetting : Html Msg$/;"	c
 onClick	src/Components/Button.elm	/^onClick : msg -> ButtonProp msg$/;"	f
@@ -342,7 +356,9 @@ optionDecoder	src/Components/Select.elm	/^optionDecoder : Decode.Decoder ( Strin
 optionParser	src/Components/Select.elm	/^optionParser : Decode.Decoder (Maybe ( String, String ))$/;"	c
 options	src/Stories/Select.elm	/^options : List S.Option$/;"	c
 or	src/Components/Form.elm	/^or : Validator v -> Validator v -> Validator v$/;"	f
+outline	src/Components/Card.elm	/^outline : CardProp msg$/;"	c
 outline	src/Components/Surface.elm	/^outline : SurfaceProp msg$/;"	c
+outlined	src/Stories/Card.elm	/^outlined : Html Msg$/;"	c
 overrideSpacing	src/Stories/Button.elm	/^overrideSpacing : Model -> Html Msg$/;"	f
 padding	src/Components/Button.elm	/^padding : List S.Spacing -> ButtonProp msg$/;"	f
 padding	src/Components/Container.elm	/^padding : List S.Spacing -> ContainerProp msg$/;"	f
@@ -433,6 +449,8 @@ taggedBoxFromSpans	src/Stories/Grid.elm	/^taggedBoxFromSpans : Maybe Int -> Mayb
 template	src/Components/Template.elm	/^template : TemplateProps -> List (Html msg) -> Html msg$/;"	f
 textAreaStates	src/Stories/TextArea.elm	/^textAreaStates : Model -> List (Html Msg)$/;"	f
 textarea	src/Components/TextArea.elm	/^textarea : List (TextAreaProp msg) -> Html msg$/;"	f
+title	src/Components/Card.elm	/^title : String -> Title$/;"	f
+titleText	src/Stories/Card.elm	/^titleText : String$/;"	c
 toString	src/Breakpoint.elm	/^toString : Breakpoint -> String$/;"	f
 toString	src/Components/Icon.elm	/^toString : Icon -> String$/;"	f
 toString	src/Spacing.elm	/^toString : Spacing -> String$/;"	f
@@ -453,6 +471,7 @@ update	src/Components/Forms/Form.elm	/^update : Msg -> Model -> ( Model, Cmd Msg
 update	src/Components/Forms/FormGroup.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Main.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Button.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Card.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Checkbox.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Container.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Form.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
@@ -489,8 +508,10 @@ validator	src/Components/Form.elm	/^validator : (v -> Maybe String) -> (String -
 value	src/Components/Input.elm	/^value : Maybe String -> InputProp msg$/;"	f
 value	src/Components/Select.elm	/^value : String -> SelectProp msg$/;"	f
 value	src/Components/TextArea.elm	/^value : String -> TextAreaProp msg$/;"	f
+vertical	src/Components/Card.elm	/^vertical : CardProp msg$/;"	c
 verticalAlignment	src/Stories/Grid.elm	/^verticalAlignment : Html Msg$/;"	c
 verticalAlignmentChildOverrides	src/Stories/Grid.elm	/^verticalAlignmentChildOverrides : Html Msg$/;"	c
+verticalCard	src/Stories/Card.elm	/^verticalCard : Html Msg$/;"	c
 verticalMargin	src/Components/Container.elm	/^verticalMargin : S.Spacing -> ContainerProp msg$/;"	f
 verticalMargin	src/Components/Grid.elm	/^verticalMargin : S.Spacing -> RowProp msg$/;"	f
 verticalMargin	src/Components/Input.elm	/^verticalMargin : S.Spacing -> InputProp msg$/;"	f
@@ -499,6 +520,7 @@ verticalPad	src/Components/Container.elm	/^verticalPad : S.Spacing -> ContainerP
 verticalPad	src/Spacing.elm	/^verticalPad : Spacing -> Attribute msg$/;"	f
 view	src/Main.elm	/^view : Model -> Document Msg$/;"	f
 view	src/Stories/Button.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Card.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Checkbox.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Container.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Form.elm	/^view : Model -> Html Msg$/;"	f
