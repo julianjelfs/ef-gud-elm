@@ -1,12 +1,18 @@
 module Components.Typography exposing
-    ( body
+    ( black
+    , body
     , bodyBook
+    , bold
+    , book
     , h1
     , h2
     , h3
     , h4
     , h5
     , h6
+    , italic
+    , light
+    , medium
     , para
     , paraBook
     , subtitle
@@ -18,65 +24,127 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-h1 : List (Html msg) -> Html msg
-h1 =
-    typo Html.h1 "ef-h1"
+type TypoProp msg
+    = TypoProp (Attribute msg)
+    | Emphasis
 
 
-h2 : List (Html msg) -> Html msg
-h2 =
-    typo Html.h2 "ef-h2"
+classToProp : String -> TypoProp msg
+classToProp =
+    class >> TypoProp
 
 
-h3 : List (Html msg) -> Html msg
-h3 =
-    typo Html.h3 "ef-h3"
+italic : TypoProp msg
+italic =
+    Emphasis
 
 
-h4 : List (Html msg) -> Html msg
-h4 =
-    typo Html.h4 "ef-h4"
+light : TypoProp msg
+light =
+    classToProp "u-f-light"
 
 
-h5 : List (Html msg) -> Html msg
-h5 =
-    typo Html.h5 "ef-h5"
+book : TypoProp msg
+book =
+    classToProp "u-f-book"
 
 
-h6 : List (Html msg) -> Html msg
-h6 =
-    typo Html.h6 "ef-h6"
+medium : TypoProp msg
+medium =
+    classToProp "u-f-medium"
 
 
-subtitle : List (Html msg) -> Html msg
-subtitle =
-    typo Html.p "ef-text-subtitle"
+bold : TypoProp msg
+bold =
+    classToProp "u-f-bold"
 
 
-body : List (Html msg) -> Html msg
-body =
-    typo Html.p "ef-text-body"
+black : TypoProp msg
+black =
+    classToProp "u-f-black"
 
 
-bodyBook : List (Html msg) -> Html msg
-bodyBook =
-    typo Html.p "ef-text-body -book"
+h1 : List (TypoProp msg) -> List (Html msg) -> Html msg
+h1 props =
+    typo Html.h1 (classToProp "ef-h1" :: props)
 
 
-para : List (Html msg) -> Html msg
-para =
-    typo Html.p "ef-text-para"
+h2 : List (TypoProp msg) -> List (Html msg) -> Html msg
+h2 props =
+    typo Html.h2 (classToProp "ef-h2" :: props)
 
 
-paraBook : List (Html msg) -> Html msg
-paraBook =
-    typo Html.p "ef-text-para -book"
+h3 : List (TypoProp msg) -> List (Html msg) -> Html msg
+h3 props =
+    typo Html.h3 (classToProp "ef-h3" :: props)
+
+
+h4 : List (TypoProp msg) -> List (Html msg) -> Html msg
+h4 props =
+    typo Html.h4 (classToProp "ef-h4" :: props)
+
+
+h5 : List (TypoProp msg) -> List (Html msg) -> Html msg
+h5 props =
+    typo Html.h5 (classToProp "ef-h5" :: props)
+
+
+h6 : List (TypoProp msg) -> List (Html msg) -> Html msg
+h6 props =
+    typo Html.h6 (classToProp "ef-h6" :: props)
+
+
+subtitle : List (TypoProp msg) -> List (Html msg) -> Html msg
+subtitle props =
+    typo Html.p (classToProp "ef-text-subtitle" :: props)
+
+
+body : List (TypoProp msg) -> List (Html msg) -> Html msg
+body props =
+    typo Html.p (classToProp "ef-text-body" :: props)
+
+
+bodyBook : List (TypoProp msg) -> List (Html msg) -> Html msg
+bodyBook props =
+    typo Html.p (classToProp "ef-text-body -book" :: props)
+
+
+para : List (TypoProp msg) -> List (Html msg) -> Html msg
+para props =
+    typo Html.p (classToProp "ef-text-para" :: props)
+
+
+paraBook : List (TypoProp msg) -> List (Html msg) -> Html msg
+paraBook props =
+    typo Html.p (classToProp "ef-text-para -book" :: props)
+
+
+partition : List (TypoProp msg) -> ( Bool, List (Attribute msg) )
+partition =
+    List.foldr
+        (\p ( e, ps ) ->
+            case p of
+                Emphasis ->
+                    ( True, ps )
+
+                TypoProp a ->
+                    ( e, a :: ps )
+        )
+        ( False, [] )
 
 
 typo :
     (List (Attribute msg) -> List (Html msg) -> Html msg)
-    -> String
+    -> List (TypoProp msg)
     -> List (Html msg)
     -> Html msg
-typo ctor cls content =
-    ctor [ class cls ] content
+typo ctor props content =
+    let
+        ( emphasis, attrs ) =
+            partition props
+    in
+    if emphasis then
+        em [] [ ctor attrs content ]
+
+    else
+        ctor attrs content

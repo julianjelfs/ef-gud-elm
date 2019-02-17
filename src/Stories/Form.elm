@@ -321,9 +321,9 @@ view model =
     in
     div
         []
-        [ T.h4 [ text "This is the form component" ]
-        , T.para [ text "Forms use the regular grid for layout, and spacing utility classes to handle row spacing." ]
-        , T.para
+        [ T.h4 [] [ text "This is the form component" ]
+        , T.para [] [ text "Forms use the regular grid for layout, and spacing utility classes to handle row spacing." ]
+        , T.para []
             [ text <|
                 "Has the form been edited? "
                     ++ (if model.formModel.dirty then
@@ -333,7 +333,7 @@ view model =
                             "No"
                        )
             ]
-        , T.para
+        , T.para []
             [ text <|
                 "Is the form valid? "
                     ++ (if model.formModel.valid then

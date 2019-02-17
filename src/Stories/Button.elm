@@ -108,7 +108,7 @@ view model =
     in
     div
         []
-        [ T.h4 [ text "This is the button component" ]
+        [ T.h4 [] [ text "This is the button component" ]
         , primaryButton model
         , buttonStates defaultProps model
         , secondaryButton model

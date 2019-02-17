@@ -67,10 +67,10 @@ normal =
 view : Model -> Html Msg
 view model =
     div []
-        [ T.h4 [ text "This stuff is inside a container" ]
+        [ T.h4 [] [ text "This stuff is inside a container" ]
         , normal
         , br [] []
-        , T.h4 [ text "We can also modify the spacing easily enough" ]
+        , T.h4 [] [ text "We can also modify the spacing easily enough" ]
         , spacedOut
         , br [] []
         , withMargin

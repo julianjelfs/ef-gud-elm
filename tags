@@ -27,6 +27,7 @@ InputType	src/Components/Input.elm	/^type InputType$/;"	t
 Legend	src/Components/Form.elm	/^type Legend f v$/;"	t
 Legend	src/Components/Forms/Fieldset.elm	/^type Legend msg$/;"	t
 LinkProps	src/Components/Link.elm	/^type alias LinkProps msg =$/;"	a
+LogoProp	src/Components/Logo.elm	/^type LogoProp msg$/;"	t
 Model	src/Components/Form.elm	/^type alias Model f v comparable =$/;"	a
 Model	src/Components/Forms/Field.elm	/^type alias Model =$/;"	a
 Model	src/Components/Forms/Fieldset.elm	/^type alias Model =$/;"	a
@@ -41,6 +42,7 @@ Model	src/Stories/Grid.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Icon.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Input.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Link.elm	/^type alias Model =$/;"	a
+Model	src/Stories/Logo.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Radio.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Section.elm	/^type alias Model =$/;"	a
 Model	src/Stories/Select.elm	/^type alias Model =$/;"	a
@@ -64,6 +66,7 @@ Msg	src/Stories/Grid.elm	/^type Msg$/;"	t
 Msg	src/Stories/Icon.elm	/^type Msg$/;"	t
 Msg	src/Stories/Input.elm	/^type Msg$/;"	t
 Msg	src/Stories/Link.elm	/^type Msg$/;"	t
+Msg	src/Stories/Logo.elm	/^type Msg$/;"	t
 Msg	src/Stories/Radio.elm	/^type Msg$/;"	t
 Msg	src/Stories/Section.elm	/^type Msg$/;"	t
 Msg	src/Stories/Select.elm	/^type Msg$/;"	t
@@ -92,6 +95,7 @@ SwitchProp	src/Components/Switch.elm	/^type SwitchProp msg$/;"	t
 TemplateProps	src/Components/Template.elm	/^type alias TemplateProps =$/;"	a
 TextAreaProp	src/Components/TextArea.elm	/^type TextAreaProp msg$/;"	t
 ThemeColor	src/Color.elm	/^type ThemeColor$/;"	t
+TypoProp	src/Components/Typography.elm	/^type TypoProp msg$/;"	t
 Validator	src/Components/Form.elm	/^type Validator v$/;"	t
 active	src/Components/Button.elm	/^active : ButtonProp msg$/;"	c
 active	src/Components/Input.elm	/^active : InputProp msg$/;"	c
@@ -103,10 +107,13 @@ behaviour	src/Stories/Grid.elm	/^behaviour : Html Msg$/;"	c
 bgColor	src/Color.elm	/^bgColor : ThemeColor -> Attribute msg$/;"	f
 bgColor	src/Components/Container.elm	/^bgColor : C.ThemeColor -> ContainerProp msg$/;"	f
 bgColor	src/Components/Section.elm	/^bgColor : Color.ThemeColor -> SectionProp msg$/;"	f
-body	src/Components/Typography.elm	/^body : List (Html msg) -> Html msg$/;"	f
+black	src/Components/Typography.elm	/^black : TypoProp msg$/;"	c
+body	src/Components/Typography.elm	/^body : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 body	src/Stories/Typography.elm	/^body : Html Msg$/;"	c
-bodyBook	src/Components/Typography.elm	/^bodyBook : List (Html msg) -> Html msg$/;"	f
+bodyBook	src/Components/Typography.elm	/^bodyBook : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 bodyBook	src/Stories/Typography.elm	/^bodyBook : Html Msg$/;"	c
+bold	src/Components/Typography.elm	/^bold : TypoProp msg$/;"	c
+book	src/Components/Typography.elm	/^book : TypoProp msg$/;"	c
 borderedBox	src/Stories/Utils.elm	/^borderedBox : Bool -> List (Html msg) -> Html msg$/;"	f
 bottomMargin	src/Components/Container.elm	/^bottomMargin : S.Spacing -> ContainerProp msg$/;"	f
 bottomMargin	src/Components/Grid.elm	/^bottomMargin : S.Spacing -> RowProp msg$/;"	f
@@ -132,6 +139,8 @@ checkbox	src/Components/Checkbox.elm	/^checkbox : List (CheckboxProp msg) -> Lis
 checked	src/Components/Checkbox.elm	/^checked : CheckboxProp msg$/;"	c
 checked	src/Components/Radio.elm	/^checked : RadioProp msg$/;"	c
 checked	src/Components/Switch.elm	/^checked : SwitchProp msg$/;"	c
+classToProp	src/Components/Logo.elm	/^classToProp : String -> LogoProp msg$/;"	f
+classToProp	src/Components/Typography.elm	/^classToProp : String -> TypoProp msg$/;"	f
 col	src/Components/Grid.elm	/^col : List (ColProp msg) -> List (Html msg) -> Column msg$/;"	f
 coloredBox	src/Stories/Stack.elm	/^coloredBox : String -> Html msg$/;"	f
 completed	src/Components/Input.elm	/^completed : InputProp msg$/;"	c
@@ -182,6 +191,7 @@ focus	src/Components/Radio.elm	/^focus : RadioProp msg$/;"	c
 focus	src/Components/Select.elm	/^focus : SelectProp msg$/;"	c
 focus	src/Components/Switch.elm	/^focus : SwitchProp msg$/;"	c
 focus	src/Components/TextArea.elm	/^focus : TextAreaProp msg$/;"	c
+fontTweaks	src/Stories/Typography.elm	/^fontTweaks : Html Msg$/;"	c
 form	src/Components/Form.elm	/^form : List (Html (Msg f v)) -> Html (Msg f v)$/;"	f
 form	src/Components/Forms/Form.elm	/^form : List (FormProp msg) -> Model -> List (Html msg) -> Html msg$/;"	f
 formGroup	src/Components/Form.elm	/^formGroup : List f -> Model f v comparable -> List (Html (Msg f v)) -> Html (Msg f v)$/;"	f
@@ -190,17 +200,17 @@ formValid	src/Components/Form.elm	/^formValid : Model f v comparable -> Bool$/;"
 formValueToString	src/Stories/Form.elm	/^formValueToString : FormValueTypes -> Maybe String$/;"	f
 fullLayout	src/Stories/Stack.elm	/^fullLayout : Html Msg$/;"	c
 groupValid	src/Components/Form.elm	/^groupValid : List f -> Model f v comparable -> Bool$/;"	f
-h1	src/Components/Typography.elm	/^h1 : List (Html msg) -> Html msg$/;"	f
+h1	src/Components/Typography.elm	/^h1 : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 h1	src/Stories/Typography.elm	/^h1 : Html Msg$/;"	c
-h2	src/Components/Typography.elm	/^h2 : List (Html msg) -> Html msg$/;"	f
+h2	src/Components/Typography.elm	/^h2 : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 h2	src/Stories/Typography.elm	/^h2 : Html Msg$/;"	c
-h3	src/Components/Typography.elm	/^h3 : List (Html msg) -> Html msg$/;"	f
+h3	src/Components/Typography.elm	/^h3 : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 h3	src/Stories/Typography.elm	/^h3 : Html Msg$/;"	c
-h4	src/Components/Typography.elm	/^h4 : List (Html msg) -> Html msg$/;"	f
+h4	src/Components/Typography.elm	/^h4 : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 h4	src/Stories/Typography.elm	/^h4 : Html Msg$/;"	c
-h5	src/Components/Typography.elm	/^h5 : List (Html msg) -> Html msg$/;"	f
+h5	src/Components/Typography.elm	/^h5 : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 h5	src/Stories/Typography.elm	/^h5 : Html Msg$/;"	c
-h6	src/Components/Typography.elm	/^h6 : List (Html msg) -> Html msg$/;"	f
+h6	src/Components/Typography.elm	/^h6 : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 h6	src/Stories/Typography.elm	/^h6 : Html Msg$/;"	c
 homepage	elmapp.config.js	/^module.exports = {$/;"	p	class:module.exports
 horizontalAlignment	src/Stories/Grid.elm	/^horizontalAlignment : Html Msg$/;"	c
@@ -229,6 +239,7 @@ init	src/Stories/Grid.elm	/^init : Model$/;"	c
 init	src/Stories/Icon.elm	/^init : Model$/;"	c
 init	src/Stories/Input.elm	/^init : Model$/;"	c
 init	src/Stories/Link.elm	/^init : Model$/;"	c
+init	src/Stories/Logo.elm	/^init : Model$/;"	c
 init	src/Stories/Radio.elm	/^init : Model$/;"	c
 init	src/Stories/Section.elm	/^init : Model$/;"	c
 init	src/Stories/Select.elm	/^init : Model$/;"	c
@@ -249,6 +260,8 @@ invalid	src/Components/Radio.elm	/^invalid : RadioProp msg$/;"	c
 invalid	src/Components/Select.elm	/^invalid : SelectProp msg$/;"	c
 invalid	src/Components/Switch.elm	/^invalid : SwitchProp msg$/;"	c
 invalid	src/Components/TextArea.elm	/^invalid : TextAreaProp msg$/;"	c
+inverse	src/Components/Logo.elm	/^inverse : LogoProp msg$/;"	c
+italic	src/Components/Typography.elm	/^italic : TypoProp msg$/;"	c
 item	src/Components/Stack.elm	/^item : List (StackItemProp msg) -> List (Html msg) -> StackItem msg$/;"	f
 itemAlignment	src/Stories/Stack.elm	/^itemAlignment : Html Msg$/;"	c
 itemBottom	src/Components/Stack.elm	/^itemBottom : StackItemProp msg$/;"	c
@@ -278,12 +291,16 @@ leftPad	src/Components/Container.elm	/^leftPad : S.Spacing -> ContainerProp msg$
 leftPad	src/Spacing.elm	/^leftPad : Spacing -> Attribute msg$/;"	f
 legend	src/Components/Form.elm	/^legend : String -> Legend f v$/;"	f
 legend	src/Components/Forms/Fieldset.elm	/^legend : String -> Legend msg$/;"	f
+light	src/Components/Typography.elm	/^light : TypoProp msg$/;"	c
 link	src/Components/Link.elm	/^link : LinkProps msg -> List (Html msg) -> Html msg$/;"	f
 listReplace	src/Components/Form.elm	/^listReplace : (a -> Bool) -> (a -> a) -> List a -> ( Bool, List a )$/;"	f
 loading	src/Components/Button.elm	/^loading : ButtonProp msg$/;"	c
 loading	src/Components/Input.elm	/^loading : InputProp msg$/;"	c
 loading	src/Components/Select.elm	/^loading : SelectProp msg$/;"	c
 loading	src/Components/TextArea.elm	/^loading : TextAreaProp msg$/;"	c
+logo	src/Components/Logo.elm	/^logo : List (LogoProp msg) -> Html msg$/;"	f
+logoContainer	src/Stories/Logo.elm	/^logoContainer : Bool -> String -> String -> Html Msg -> Html Msg$/;"	f
+logoView	src/Stories/Logo.elm	/^logoView : Bool -> Html Msg$/;"	f
 loremIpsum	src/Utils.elm	/^loremIpsum : String$/;"	c
 main	src/Main.elm	/^main : Program () Model Msg$/;"	c
 margin	src/Components/Button.elm	/^margin : List S.Spacing -> ButtonProp msg$/;"	f
@@ -293,6 +310,7 @@ marginClass	src/Spacing.elm	/^marginClass : String -> BP.Breakpoint -> Spacing -
 matches	src/Components/Form.elm	/^matches : Rx.Regex -> (v -> Maybe String) -> Validator v$/;"	f
 maxLength	src/Components/Form.elm	/^maxLength : Int -> (v -> Maybe String) -> Validator v$/;"	f
 maybeAppend	src/Utils.elm	/^maybeAppend : Maybe a -> List a -> List a$/;"	f
+medium	src/Components/Typography.elm	/^medium : TypoProp msg$/;"	c
 mediumCollapse	src/Components/Grid.elm	/^mediumCollapse : ColProp msg$/;"	c
 mediumFirst	src/Components/Grid.elm	/^mediumFirst : ColProp msg$/;"	c
 mediumLast	src/Components/Grid.elm	/^mediumLast : ColProp msg$/;"	c
@@ -330,9 +348,9 @@ padding	src/Components/Button.elm	/^padding : List S.Spacing -> ButtonProp msg$/
 padding	src/Components/Container.elm	/^padding : List S.Spacing -> ContainerProp msg$/;"	f
 padding	src/Spacing.elm	/^padding : List Spacing -> Attribute msg$/;"	f
 paddingClass	src/Spacing.elm	/^paddingClass : String -> BP.Breakpoint -> Spacing -> Attribute msg$/;"	f
-para	src/Components/Typography.elm	/^para : List (Html msg) -> Html msg$/;"	f
+para	src/Components/Typography.elm	/^para : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 para	src/Stories/Typography.elm	/^para : Html Msg$/;"	c
-paraBook	src/Components/Typography.elm	/^paraBook : List (Html msg) -> Html msg$/;"	f
+paraBook	src/Components/Typography.elm	/^paraBook : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 paraBook	src/Stories/Typography.elm	/^paraBook : Html Msg$/;"	c
 partition	src/Components/Checkbox.elm	/^partition : List (CheckboxProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/Input.elm	/^partition : List (InputProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
@@ -340,6 +358,7 @@ partition	src/Components/Radio.elm	/^partition : List (RadioProp msg) -> ( List 
 partition	src/Components/Select.elm	/^partition : List (SelectProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/Switch.elm	/^partition : List (SwitchProp msg) -> ( List (Attribute msg), List (Attribute msg), List (Attribute msg) )$/;"	f
 partition	src/Components/TextArea.elm	/^partition : List (TextAreaProp msg) -> ( List (Attribute msg), List (Attribute msg) )$/;"	f
+partition	src/Components/Typography.elm	/^partition : List (TypoProp msg) -> ( Bool, List (Attribute msg) )$/;"	f
 placeholder	src/Components/Input.elm	/^placeholder : String -> InputProp msg$/;"	f
 placeholder	src/Components/TextArea.elm	/^placeholder : String -> TextAreaProp msg$/;"	f
 prefToString	src/Stories/Form.elm	/^prefToString : BrochurePrefs -> String$/;"	f
@@ -372,11 +391,13 @@ section	src/Components/Section.elm	/^section : List (SectionProp msg) -> List (H
 select	src/Components/Select.elm	/^select : List (SelectProp msg) -> List Option -> Html msg$/;"	f
 selectStates	src/Stories/Select.elm	/^selectStates : Html Msg$/;"	c
 shadow	src/Components/Surface.elm	/^shadow : SurfaceProp msg$/;"	c
+simple	src/Components/Logo.elm	/^simple : LogoProp msg$/;"	c
 simpleSelect	src/Stories/Select.elm	/^simpleSelect : Model -> Html Msg$/;"	f
 simpleStack	src/Stories/Stack.elm	/^simpleStack : Html Msg$/;"	c
 size	src/Components/Section.elm	/^size : BP.Breakpoint -> SectionProp msg$/;"	f
 sizeClass	src/Breakpoint.elm	/^sizeClass : Breakpoint -> String$/;"	f
 small	src/Components/Button.elm	/^small : ButtonProp msg$/;"	c
+small	src/Components/Logo.elm	/^small : LogoProp msg$/;"	c
 small	src/Stories/Switch.elm	/^small : Html Msg$/;"	c
 smallButtons	src/Stories/Button.elm	/^smallButtons : Model -> Html Msg$/;"	f
 smallCollapse	src/Components/Grid.elm	/^smallCollapse : ColProp msg$/;"	c
@@ -402,7 +423,7 @@ square	src/Components/Button.elm	/^square : ButtonProp msg$/;"	c
 stack	src/Components/Stack.elm	/^stack : List (StackProp msg) -> List (StackItem msg) -> Html msg$/;"	f
 stackAlignment	src/Stories/Stack.elm	/^stackAlignment : Html Msg$/;"	c
 submit	src/Components/Button.elm	/^submit : ButtonProp msg$/;"	c
-subtitle	src/Components/Typography.elm	/^subtitle : List (Html msg) -> Html msg$/;"	f
+subtitle	src/Components/Typography.elm	/^subtitle : List (TypoProp msg) -> List (Html msg) -> Html msg$/;"	f
 subtitle	src/Stories/Typography.elm	/^subtitle : Html Msg$/;"	c
 surface	src/Components/Surface.elm	/^surface : Bool -> List (SurfaceProp msg) -> List (Html msg) -> Html msg$/;"	f
 surfaceProp	src/Components/Surface.elm	/^surfaceProp : String -> SurfaceProp msg$/;"	f
@@ -439,6 +460,7 @@ update	src/Stories/Grid.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Icon.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Input.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Link.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
+update	src/Stories/Logo.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Radio.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Section.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
 update	src/Stories/Select.elm	/^update : Msg -> Model -> ( Model, Cmd Msg )$/;"	f
@@ -484,6 +506,7 @@ view	src/Stories/Grid.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Icon.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Input.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Link.elm	/^view : Model -> Html Msg$/;"	f
+view	src/Stories/Logo.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Radio.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Section.elm	/^view : Model -> Html Msg$/;"	f
 view	src/Stories/Select.elm	/^view : Model -> Html Msg$/;"	f

@@ -31,7 +31,7 @@ large : Html Msg
 large =
     div
         []
-        [ T.h4 [ text "... or large" ]
+        [ T.h4 [] [ text "... or large" ]
         , div [ class "u-mb-m" ]
             [ S.switch [ S.large ] [ text "default" ] ]
         , div [ class "u-mb-m" ]
@@ -53,7 +53,7 @@ small : Html Msg
 small =
     div
         []
-        [ T.h4 [ text "Which can be small ..." ]
+        [ T.h4 [] [ text "Which can be small ..." ]
         , div [ class "u-mb-m" ]
             [ S.switch [] [ text "default" ] ]
         , div [ class "u-mb-m" ]
@@ -75,7 +75,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ T.h4 [ text "This is the switch component" ]
+        [ T.h4 [] [ text "This is the switch component" ]
         , small
         , large
         ]

@@ -72,6 +72,22 @@ section {
   height: 100%;
 }
 
+.logobox {
+  height: 300px;
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #fffde6;
+}
+
+.inverse {
+  background: #000000;
+}
+
+.inverse h5,
+.inverse p {
+  color: #fff;
+}
+
 code {
   margin-left: 10px;
   font-size: 14px;

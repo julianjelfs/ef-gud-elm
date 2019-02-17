@@ -14,6 +14,7 @@ import Stories.Grid as Grid
 import Stories.Icon as Icon
 import Stories.Input as Input
 import Stories.Link as Link
+import Stories.Logo as Logo
 import Stories.Radio as Radio
 import Stories.Section as Section
 import Stories.Select as Select
@@ -48,6 +49,7 @@ type Route
     | TextArea
     | Switch
     | Form
+    | Logo
     | NotFound
 
 
@@ -70,6 +72,7 @@ type alias Model =
     , textarea : TextArea.Model
     , switch : Switch.Model
     , form : Form.Model
+    , logo : Logo.Model
     }
 
 
@@ -93,6 +96,7 @@ init _ url key =
       , textarea = TextArea.init
       , switch = Switch.init
       , form = Form.init
+      , logo = Logo.init
       }
     , Cmd.none
     )
@@ -126,6 +130,7 @@ type Msg
     | TextAreaMsg TextArea.Msg
     | SwitchMsg Switch.Msg
     | FormMsg Form.Msg
+    | LogoMsg Logo.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -256,6 +261,13 @@ update msg model =
             in
             ( { model | form = subModel }, Cmd.map FormMsg subCmd )
 
+        LogoMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Logo.update subMsg model.logo
+            in
+            ( { model | logo = subModel }, Cmd.map LogoMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -277,6 +289,7 @@ routeParser =
         , Url.map Select (Url.s "select")
         , Url.map TextArea (Url.s "textarea")
         , Url.map Form (Url.s "form")
+        , Url.map Logo (Url.s "logo")
         ]
 
 
@@ -294,7 +307,7 @@ menuItem selectedRoute route path desc =
             ]
         ]
         [ a [ href path ]
-            [ T.body [ text desc ] ]
+            [ T.body [] [ text desc ] ]
         ]
 
 
@@ -321,12 +334,13 @@ view model =
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Container "container" "Container Component"
                     , menuItem model.route Icon "icon" "Icon Component"
+                    , menuItem model.route Logo "logo" "Logo Component"
                     , menuItem model.route Typography "typography" "Typography Components"
                     ]
                 ]
             , section [ class "content" ]
-                [ T.h1 [ text "EF Web UI Kit" ]
-                , T.body [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
+                [ T.h1 [] [ text "EF Web UI Kit" ]
+                , T.body [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
                 , hr [] []
                 , componentView model
                 ]
@@ -339,7 +353,7 @@ componentView : Model -> Html Msg
 componentView model =
     case model.route of
         Home ->
-            T.h4 [ text "Select a component from the sidebar" ]
+            T.h4 [] [ text "Select a component from the sidebar" ]
 
         Button ->
             Html.map ButtonMsg (Button.view model.button)
@@ -389,8 +403,11 @@ componentView model =
         Form ->
             Html.map FormMsg (Form.view model.form)
 
+        Logo ->
+            Html.map LogoMsg (Logo.view model.logo)
+
         NotFound ->
-            h2 [] [ text "Unknown component selected" ]
+            T.h2 [] [ text "Unknown component selected" ]
 
 
 
