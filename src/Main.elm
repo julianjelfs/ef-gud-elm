@@ -11,6 +11,7 @@ import Stories.Card as Card
 import Stories.Checkbox as Checkbox
 import Stories.Container as Container
 import Stories.Form as Form
+import Stories.Fullbleed as Fullbleed
 import Stories.Grid as Grid
 import Stories.Icon as Icon
 import Stories.Input as Input
@@ -52,6 +53,7 @@ type Route
     | Form
     | Logo
     | Card
+    | Fullbleed
     | NotFound
 
 
@@ -76,6 +78,7 @@ type alias Model =
     , form : Form.Model
     , logo : Logo.Model
     , card : Card.Model
+    , fullbleed : Fullbleed.Model
     }
 
 
@@ -101,6 +104,7 @@ init _ url key =
       , form = Form.init
       , logo = Logo.init
       , card = Card.init
+      , fullbleed = Fullbleed.init
       }
     , Cmd.none
     )
@@ -136,6 +140,7 @@ type Msg
     | FormMsg Form.Msg
     | LogoMsg Logo.Msg
     | CardMsg Card.Msg
+    | FullbleedMsg Fullbleed.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -280,6 +285,13 @@ update msg model =
             in
             ( { model | card = subModel }, Cmd.map CardMsg subCmd )
 
+        FullbleedMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Fullbleed.update subMsg model.fullbleed
+            in
+            ( { model | fullbleed = subModel }, Cmd.map FullbleedMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -303,6 +315,7 @@ routeParser =
         , Url.map Form (Url.s "form")
         , Url.map Logo (Url.s "logo")
         , Url.map Card (Url.s "card")
+        , Url.map Fullbleed (Url.s "fullbleed")
         ]
 
 
@@ -346,6 +359,7 @@ view model =
                     , menuItem model.route Section "section" "Section Component"
                     , menuItem model.route Surface "surface" "Surface Component"
                     , menuItem model.route Card "card" "Card Component"
+                    , menuItem model.route Fullbleed "fullbleed" "Fullbleed Component"
                     , menuItem model.route Container "container" "Container Component"
                     , menuItem model.route Icon "icon" "Icon Component"
                     , menuItem model.route Logo "logo" "Logo Component"
@@ -422,6 +436,9 @@ componentView model =
 
         Card ->
             Html.map CardMsg (Card.view model.card)
+
+        Fullbleed ->
+            Html.map FullbleedMsg (Fullbleed.view model.fullbleed)
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]
