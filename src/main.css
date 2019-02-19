@@ -12,10 +12,15 @@ section {
 .container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .sidebar {
-  width: 400px;
+  flex-basis: 400px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  height: 25vh;
 }
 
 .sidebar li {
@@ -33,6 +38,7 @@ section {
 }
 
 .content {
+  height: 150vh;
   width: 100%;
 }
 
