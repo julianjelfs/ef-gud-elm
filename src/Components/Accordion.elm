@@ -86,8 +86,8 @@ collapsed model index =
 
 
 wrap : Html parent -> Html (Msg parent)
-wrap h =
-    Html.map Foreign h
+wrap =
+    Html.map Foreign
 
 
 content : List (Html parent) -> AccordionContent parent
