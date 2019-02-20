@@ -6,6 +6,7 @@ import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Stories.Accordion as Accordion
 import Stories.Button as Button
 import Stories.Card as Card
 import Stories.Checkbox as Checkbox
@@ -54,6 +55,7 @@ type Route
     | Logo
     | Card
     | Fullbleed
+    | Accordion
     | NotFound
 
 
@@ -79,6 +81,7 @@ type alias Model =
     , logo : Logo.Model
     , card : Card.Model
     , fullbleed : Fullbleed.Model
+    , accordion : Accordion.Model
     }
 
 
@@ -105,6 +108,7 @@ init _ url key =
       , logo = Logo.init
       , card = Card.init
       , fullbleed = Fullbleed.init
+      , accordion = Accordion.init
       }
     , Cmd.none
     )
@@ -141,6 +145,7 @@ type Msg
     | LogoMsg Logo.Msg
     | CardMsg Card.Msg
     | FullbleedMsg Fullbleed.Msg
+    | AccordionMsg Accordion.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -292,6 +297,13 @@ update msg model =
             in
             ( { model | fullbleed = subModel }, Cmd.map FullbleedMsg subCmd )
 
+        AccordionMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Accordion.update subMsg model.accordion
+            in
+            ( { model | accordion = subModel }, Cmd.map AccordionMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -316,6 +328,7 @@ routeParser =
         , Url.map Logo (Url.s "logo")
         , Url.map Card (Url.s "card")
         , Url.map Fullbleed (Url.s "fullbleed")
+        , Url.map Accordion (Url.s "accordion")
         ]
 
 
@@ -364,6 +377,7 @@ view model =
                     , menuItem model.route Icon "icon" "Icon Component"
                     , menuItem model.route Logo "logo" "Logo Component"
                     , menuItem model.route Typography "typography" "Typography Components"
+                    , menuItem model.route Accordion "accordion" "Accordion Component"
                     ]
                 ]
             , section [ class "content" ]
@@ -439,6 +453,9 @@ componentView model =
 
         Fullbleed ->
             Html.map FullbleedMsg (Fullbleed.view model.fullbleed)
+
+        Accordion ->
+            Html.map AccordionMsg (Accordion.view model.accordion)
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]
