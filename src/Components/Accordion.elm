@@ -16,6 +16,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Spacing as S
+import Task
 import Utils exposing (..)
 
 
@@ -23,8 +24,9 @@ type alias Model =
     { items : Dict Int Bool }
 
 
-type Msg
+type Msg parent
     = Toggle Int
+    | Foreign parent
 
 
 init : Model
@@ -32,9 +34,12 @@ init =
     { items = Dict.empty }
 
 
-update : Msg -> Model -> Model
+update : Msg parent -> Model -> ( Model, Cmd parent )
 update msg model =
     case msg of
+        Foreign p ->
+            ( model, Task.perform identity (Task.succeed p) )
+
         Toggle index ->
             let
                 items =
@@ -45,27 +50,27 @@ update msg model =
                         False ->
                             Dict.insert index True model.items
             in
-            { model | items = items }
+            ( { model | items = items }, Cmd.none )
 
 
-type AccordionProp
-    = AccordionProp (Attribute Msg)
+type AccordionProp parent
+    = AccordionProp (Attribute (Msg parent))
 
 
-type AccordionItem
-    = AccordionItem (Model -> Int -> Html Msg)
+type AccordionItem parent
+    = AccordionItem (Model -> Int -> Html (Msg parent))
 
 
-type AccordionContent
-    = AccordionContent (Model -> Int -> Html Msg)
+type AccordionContent parent
+    = AccordionContent (Model -> Int -> Html (Msg parent))
 
 
-padding : List S.Spacing -> AccordionProp
+padding : List S.Spacing -> AccordionProp parent
 padding =
     AccordionProp << S.padding
 
 
-margin : List S.Spacing -> AccordionProp
+margin : List S.Spacing -> AccordionProp parent
 margin =
     AccordionProp << S.margin
 
@@ -80,14 +85,12 @@ collapsed model index =
             True
 
 
-
-{- # this is going to be a problem because we would want the accordion item
-   content to deal in Msg types of the parent, not the accordion itself but that
-   is going to be difficult
--}
+wrap : Html parent -> Html (Msg parent)
+wrap h =
+    Html.map Foreign h
 
 
-content : List (Html Msg) -> AccordionContent
+content : List (Html parent) -> AccordionContent parent
 content children =
     AccordionContent <|
         \model index ->
@@ -102,10 +105,10 @@ content children =
                     |> appendIf c (style "height" "0px")
                     |> appendIf c (attribute "aria-hidden" "true")
                 )
-                children
+                (List.map wrap children)
 
 
-item : String -> AccordionContent -> AccordionItem
+item : String -> AccordionContent parent -> AccordionItem parent
 item title (AccordionContent child) =
     AccordionItem <|
         \model index ->
@@ -133,7 +136,7 @@ item title (AccordionContent child) =
                 ]
 
 
-accordion : Model -> List AccordionProp -> List AccordionItem -> Html Msg
+accordion : Model -> List (AccordionProp parent) -> List (AccordionItem parent) -> Html (Msg parent)
 accordion model props items =
     div
         ([ class "ef-accordion" ] ++ List.map (\(AccordionProp a) -> a) props)

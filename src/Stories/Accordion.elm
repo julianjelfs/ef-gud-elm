@@ -6,6 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Spacing as S
+import Task
 import Utils exposing (loremIpsum)
 
 
@@ -14,7 +15,7 @@ type alias Model =
 
 
 type Msg
-    = AccordionMsg A.Msg
+    = AccordionMsg (A.Msg Msg)
     | ButtonClick
 
 
@@ -28,12 +29,16 @@ update msg model =
     case msg of
         AccordionMsg subMsg ->
             let
-                subModel =
+                ( subModel, subCmd ) =
                     A.update subMsg model.acc
             in
-            ( { model | acc = subModel }, Cmd.none )
+            ( { model | acc = subModel }, subCmd )
 
         ButtonClick ->
+            let
+                _ =
+                    Debug.log "This is very very cool" ()
+            in
             ( model, Cmd.none )
 
 
@@ -47,15 +52,12 @@ accordion model =
                 [ A.item "Title One" (A.content [ T.h3 [] [ text "Section One" ], text loremIpsum ])
                 , A.item "Title Two" (A.content [ T.h3 [] [ text "Section Two" ], text loremIpsum ])
                 , A.item "Title Three" (A.content [ T.h3 [] [ text "Section Three" ], text loremIpsum ])
-
-                --  Can we think of a way to make the below code compile?
-                -- , A.item "Title Four"
-                --     (A.content
-                --         [ T.h3 [] [ text "Section Three" ]
-                --         , text loremIpsum
-                --         , button [ onClick ButtonClick ] []
-                --         ]
-                --     )
+                , A.item "Title Four"
+                    (A.content
+                        [ T.h3 [] [ text "Section Four" ]
+                        , button [ onClick ButtonClick ] [ text "Click me!" ]
+                        ]
+                    )
                 ]
         ]
 
