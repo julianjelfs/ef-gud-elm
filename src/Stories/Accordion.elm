@@ -15,6 +15,7 @@ type alias Model =
 
 type Msg
     = AccordionMsg A.Msg
+    | ButtonClick
 
 
 init : Model
@@ -32,6 +33,9 @@ update msg model =
             in
             ( { model | acc = subModel }, Cmd.none )
 
+        ButtonClick ->
+            ( model, Cmd.none )
+
 
 accordion : Model -> Html Msg
 accordion model =
@@ -43,6 +47,15 @@ accordion model =
                 [ A.item "Title One" (A.content [ T.h3 [] [ text "Section One" ], text loremIpsum ])
                 , A.item "Title Two" (A.content [ T.h3 [] [ text "Section Two" ], text loremIpsum ])
                 , A.item "Title Three" (A.content [ T.h3 [] [ text "Section Three" ], text loremIpsum ])
+
+                --  Can we think of a way to make the below code compile?
+                -- , A.item "Title Four"
+                --     (A.content
+                --         [ T.h3 [] [ text "Section Three" ]
+                --         , text loremIpsum
+                --         , button [ onClick ButtonClick ] []
+                --         ]
+                --     )
                 ]
         ]
 
