@@ -40,9 +40,9 @@ accordion model =
         [ Html.map AccordionMsg <|
             A.accordion model.acc
                 [ A.margin [ S.Medium, S.Medium, S.Medium, S.Zero ] ]
-                [ A.item "Title One" (A.content [ text loremIpsum ])
-                , A.item "Title Two" (A.content [ text loremIpsum ])
-                , A.item "Title Three" (A.content [ text loremIpsum ])
+                [ A.item "Title One" (A.content [ T.h3 [] [ text "Section One" ], text loremIpsum ])
+                , A.item "Title Two" (A.content [ T.h3 [] [ text "Section Two" ], text loremIpsum ])
+                , A.item "Title Three" (A.content [ T.h3 [] [ text "Section Three" ], text loremIpsum ])
                 ]
         ]
 

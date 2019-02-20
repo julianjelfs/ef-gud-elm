@@ -11,6 +11,7 @@ module Components.Accordion exposing
     , update
     )
 
+import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -19,7 +20,7 @@ import Utils exposing (..)
 
 
 type alias Model =
-    { index : Int }
+    { items : Dict Int Bool }
 
 
 type Msg
@@ -28,7 +29,7 @@ type Msg
 
 init : Model
 init =
-    { index = 0 }
+    { items = Dict.empty }
 
 
 update : Msg -> Model -> Model
@@ -36,10 +37,15 @@ update msg model =
     case msg of
         Toggle index ->
             let
-                _ =
-                    Debug.log "Expanding" index
+                items =
+                    case Dict.member index model.items of
+                        True ->
+                            Dict.update index (Maybe.map not) model.items
+
+                        False ->
+                            Dict.insert index True model.items
             in
-            { model | index = index }
+            { model | items = items }
 
 
 type AccordionProp
@@ -64,6 +70,16 @@ margin =
     AccordionProp << S.margin
 
 
+collapsed : Model -> Int -> Bool
+collapsed model index =
+    case Dict.get index model.items of
+        Just e ->
+            not e
+
+        Nothing ->
+            True
+
+
 
 {- # this is going to be a problem because we would want the accordion item
    content to deal in Msg types of the parent, not the accordion itself but that
@@ -75,12 +91,17 @@ content : List (Html Msg) -> AccordionContent
 content children =
     AccordionContent <|
         \model index ->
+            let
+                c =
+                    collapsed model index
+            in
             div
-                [ class "ef-accordion__content"
-                , attribute "data-dd" "test-accordion"
-                , attribute "aria-hidden" "true"
-                , style "height" "0px"
-                ]
+                ([ class "ef-accordion__content"
+                 , attribute "data-dd" "test-accordion"
+                 ]
+                    |> appendIf c (style "height" "0px")
+                    |> appendIf c (attribute "aria-hidden" "true")
+                )
                 children
 
 
@@ -88,13 +109,23 @@ item : String -> AccordionContent -> AccordionItem
 item title (AccordionContent child) =
     AccordionItem <|
         \model index ->
+            let
+                c =
+                    collapsed model index
+            in
             div
                 [ class "ef-accordion__item" ]
                 [ h4
                     [ class "ef-h6 ef-accordion__title"
                     , attribute "data-dd-toggle" "test-accordion"
-                    , attribute "aria-expanded" "false"
                     , attribute "aria-controls" "test-accordion"
+                    , attribute "aria-expanded"
+                        (if c then
+                            "false"
+
+                         else
+                            "true"
+                        )
                     , onClick (Toggle index)
                     ]
                     [ text title ]
