@@ -20,7 +20,7 @@ section {
   position: sticky;
   position: -webkit-sticky;
   top: 0;
-  height: 25vh;
+  height: 100vh;
 }
 
 .sidebar li {
@@ -38,7 +38,6 @@ section {
 }
 
 .content {
-  height: 150vh;
   width: 100%;
 }
 
