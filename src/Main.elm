@@ -18,6 +18,7 @@ import Stories.Icon as Icon
 import Stories.Input as Input
 import Stories.Link as Link
 import Stories.Logo as Logo
+import Stories.Pagination as Pagination
 import Stories.Radio as Radio
 import Stories.Section as Section
 import Stories.Select as Select
@@ -56,6 +57,7 @@ type Route
     | Card
     | Fullbleed
     | Accordion
+    | Pagination
     | NotFound
 
 
@@ -82,6 +84,7 @@ type alias Model =
     , card : Card.Model
     , fullbleed : Fullbleed.Model
     , accordion : Accordion.Model
+    , pagination : Pagination.Model
     }
 
 
@@ -109,6 +112,7 @@ init _ url key =
       , card = Card.init
       , fullbleed = Fullbleed.init
       , accordion = Accordion.init
+      , pagination = Pagination.init
       }
     , Cmd.none
     )
@@ -146,6 +150,7 @@ type Msg
     | CardMsg Card.Msg
     | FullbleedMsg Fullbleed.Msg
     | AccordionMsg Accordion.Msg
+    | PaginationMsg Pagination.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -304,6 +309,13 @@ update msg model =
             in
             ( { model | accordion = subModel }, Cmd.map AccordionMsg subCmd )
 
+        PaginationMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Pagination.update subMsg model.pagination
+            in
+            ( { model | pagination = subModel }, Cmd.map PaginationMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -329,6 +341,7 @@ routeParser =
         , Url.map Card (Url.s "card")
         , Url.map Fullbleed (Url.s "fullbleed")
         , Url.map Accordion (Url.s "accordion")
+        , Url.map Pagination (Url.s "pagination")
         ]
 
 
@@ -378,6 +391,7 @@ view model =
                     , menuItem model.route Logo "logo" "Logo Component"
                     , menuItem model.route Typography "typography" "Typography Components"
                     , menuItem model.route Accordion "accordion" "Accordion Component"
+                    , menuItem model.route Pagination "pagination" "Pagination Component"
                     ]
                 ]
             , section [ class "content" ]
@@ -456,6 +470,9 @@ componentView model =
 
         Accordion ->
             Html.map AccordionMsg (Accordion.view model.accordion)
+
+        Pagination ->
+            Html.map PaginationMsg (Pagination.view model.pagination)
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]
