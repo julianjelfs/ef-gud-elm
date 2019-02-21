@@ -1,6 +1,7 @@
 module Stories.Accordion exposing (Model, Msg, init, update, view)
 
 import Components.Accordion as A
+import Components.Button as B
 import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -11,7 +12,9 @@ import Utils exposing (loremIpsum)
 
 
 type alias Model =
-    { acc : A.Model }
+    { acc : A.Model
+    , numClicks : Int
+    }
 
 
 type Msg
@@ -21,7 +24,9 @@ type Msg
 
 init : Model
 init =
-    { acc = A.init }
+    { acc = A.init
+    , numClicks = 0
+    }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -35,11 +40,7 @@ update msg model =
             ( { model | acc = subModel }, subCmd )
 
         ButtonClick ->
-            let
-                _ =
-                    Debug.log "This is very very cool" ()
-            in
-            ( model, Cmd.none )
+            ( { model | numClicks = model.numClicks + 1 }, Cmd.none )
 
 
 accordion : Model -> Html Msg
@@ -55,7 +56,8 @@ accordion model =
                 , A.item "Title Four"
                     (A.content
                         [ T.h3 [] [ text "Section Four" ]
-                        , button [ onClick ButtonClick ] [ text "Click me!" ]
+                        , T.para [] [ text "This section contains a button to click to show that interactions are also easy enough" ]
+                        , B.button [ B.primary, B.onClick ButtonClick ] [ text "Click me!" ]
                         ]
                     )
                 ]
@@ -69,4 +71,5 @@ view model =
         [ T.h4 [ T.light ] [ text "The accordion component is used to show and hide blocks of secondary content which might otherwise clutter the UI" ]
         , T.para [] [ text "Since an accordion requires a small amount of state it is implemented as an Elm component with a full lifecycle of its own" ]
         , accordion model
+        , div [] [ code [] [ text <| "Number of Clicks: " ++ String.fromInt model.numClicks ] ]
         ]
