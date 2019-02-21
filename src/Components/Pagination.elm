@@ -10,8 +10,11 @@ import Html.Events exposing (..)
 import Utils exposing (..)
 
 
-type PaginationProp msg
-    = PaginationProp (Attribute msg)
+type alias PaginationProps msg =
+    { index : Int
+    , pages : Int
+    , onPage : Int -> msg
+    }
 
 
 type Size
@@ -19,26 +22,24 @@ type Size
     | Large
 
 
-classToProp : String -> PaginationProp msg
-classToProp =
-    class >> PaginationProp
-
-
-pager : Size -> List (PaginationProp msg) -> Html msg
+pager : Size -> PaginationProps msg -> Html msg
 pager size props =
     case size of
         Small ->
             text "Small Pager"
 
         Large ->
-            largePager
+            largePager props
 
 
-largePager : Html msg
-largePager =
+largePager : PaginationProps msg -> Html msg
+largePager { index, pages, onPage } =
     div [ class "ef-pagination--lg" ]
         [ button
-            [ class "ef-pagination--lg__btn ef-button -secondary -filled -square u-mr-xs" ]
+            [ class "ef-pagination--lg__btn ef-button -secondary -filled -square u-mr-xs"
+            , onClick <| onPage 0
+            , disabled (index == 0)
+            ]
             [ I.icon [ I.iconType I.ChevronLeft ] ]
         , div
             [ class "ef-pagination--lg__content" ]
@@ -79,6 +80,9 @@ largePager =
                 [ text "20" ]
             ]
         , button
-            [ class "ef-pagination--lg__btn ef-button -secondary -filled -square u-mr-xs" ]
+            [ class "ef-pagination--lg__btn ef-button -secondary -filled -square u-mr-xs"
+            , onClick <| onPage (pages - 1)
+            , disabled (index == (pages - 1))
+            ]
             [ I.icon [ I.iconType I.ChevronRight ] ]
         ]
