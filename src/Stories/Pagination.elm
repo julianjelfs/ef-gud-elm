@@ -33,4 +33,5 @@ view model =
     div
         []
         [ T.h4 [ T.light ] [ text "The pagination component allows users to navigate multi-page content. For this component we currently just provide the styling with some dummy content" ]
+        , P.pager P.Large []
         ]

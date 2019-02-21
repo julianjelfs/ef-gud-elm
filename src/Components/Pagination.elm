@@ -1,8 +1,9 @@
 module Components.Pagination exposing
     ( Size(..)
-    , size
+    , pager
     )
 
+import Components.Icon as I
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -23,17 +24,61 @@ classToProp =
     class >> PaginationProp
 
 
-size : Size -> PaginationProp msg
-size s =
-    case s of
+pager : Size -> List (PaginationProp msg) -> Html msg
+pager size props =
+    case size of
         Small ->
-            classToProp "ef-pagination--sm"
+            text "Small Pager"
 
         Large ->
-            classToProp "ef-pagination--lg"
+            largePager
 
 
-pager : List (PaginationProp msg) -> Html msg
-pager props =
-    div (class "ef-pagination" :: List.map (\(PaginationProp a) -> a) props)
-        [ text "TODO" ]
+largePager : Html msg
+largePager =
+    div [ class "ef-pagination--lg" ]
+        [ button
+            [ class "ef-pagination--lg__btn ef-button -secondary -filled -square u-mr-xs" ]
+            [ I.icon [ I.iconType I.ChevronLeft ] ]
+        , div
+            [ class "ef-pagination--lg__content" ]
+            [ a
+                [ href "#"
+                , class "ef-pagination--lg__page"
+                ]
+                [ text "1" ]
+            , a
+                [ href "#"
+                , class "ef-pagination--lg__page"
+                ]
+                [ text "2" ]
+            , a
+                [ href "#"
+                , class "ef-pagination--lg__page -is-active"
+                ]
+                [ text "3" ]
+            , a
+                [ href "#"
+                , class "ef-pagination--lg__page"
+                ]
+                [ text "4" ]
+            , a
+                [ href "#"
+                , class "ef-pagination--lg__page"
+                ]
+                [ text "5" ]
+            , a
+                [ href "#"
+                , class "ef-pagination--lg__page -more"
+                ]
+                [ text "..." ]
+            , a
+                [ href "#"
+                , class "ef-pagination--lg__page"
+                ]
+                [ text "20" ]
+            ]
+        , button
+            [ class "ef-pagination--lg__btn ef-button -secondary -filled -square u-mr-xs" ]
+            [ I.icon [ I.iconType I.ChevronRight ] ]
+        ]
