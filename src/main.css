@@ -10,17 +10,34 @@ section {
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  grid-template-rows: 170px 1fr;
+  grid-template-areas: "sidebar header" "sidebar content";
 }
 
 .sidebar {
-  flex-basis: 350px;
+  grid-area: sidebar;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
   height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+  box-shadow: -1px 5px 10px 0px rgba(0, 60, 100, 0.2);
+}
+
+.content {
+  grid-area: content;
+  padding: 30px 50px 30px 50px;
+  max-width: 1400px;
 }
 
 .sidebar ul {
@@ -44,10 +61,6 @@ section {
 .selected-component .ef-text-body {
   font-weight: bold;
   color: #ffffff;
-}
-
-.content {
-  width: 100%;
 }
 
 .selected-component {

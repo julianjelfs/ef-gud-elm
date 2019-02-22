@@ -395,12 +395,12 @@ view model =
                     , menuItem model.route Pagination "pagination" "Pagination Component"
                     ]
                 ]
-            , section [ class "content" ]
+            , section [ class "header" ]
                 [ T.h1 [] [ text "EF Web UI Kit" ]
                 , T.body [] [ text "A demo Elm implementation of the EF GUD 4.0 components" ]
-                , hr [] []
-                , componentView model
                 ]
+            , section [ class "content" ]
+                [ componentView model ]
             ]
         ]
     }

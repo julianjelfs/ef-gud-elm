@@ -184,7 +184,7 @@ exampleForm { formModel } =
                             False
     in
     G.row []
-        [ G.col [ G.mediumSpan 10, G.largeSpan 8 ]
+        [ G.col []
             [ F.form
                 [ F.fieldset (F.legend "Name")
                     [ G.row []
