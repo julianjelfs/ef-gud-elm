@@ -16,25 +16,34 @@ section {
 }
 
 .sidebar {
-  flex-basis: 400px;
+  flex-basis: 350px;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
   height: 100vh;
 }
 
+.sidebar ul {
+  margin-left: -30px;
+}
+
 .sidebar li {
   list-style: none;
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   font-size: 1.2rem;
 }
 
 .sidebar a {
   text-decoration: none;
 }
+
+.sidebar .ef-text-body {
+  color: #dddddd;
+}
+
 .selected-component .ef-text-body {
-  color: #ffffff;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .content {
@@ -42,7 +51,8 @@ section {
 }
 
 .selected-component {
-  background-color: #ff329b;
+  border-left: 3px solid #ff329b;
+  padding-left: 17px !important;
 }
 .bordered-box {
   padding: 20px;

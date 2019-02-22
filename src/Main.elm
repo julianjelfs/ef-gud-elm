@@ -2,6 +2,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
+import Color as C
 import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -368,7 +369,7 @@ view model =
     { title = "EF Web UI Kit - Elm Style"
     , body =
         [ div [ class "container" ]
-            [ section [ class "sidebar" ]
+            [ section [ class "sidebar", C.bgColor C.EducationBlue ]
                 [ ul
                     []
                     [ menuItem model.route Button "button" "Button Component"
