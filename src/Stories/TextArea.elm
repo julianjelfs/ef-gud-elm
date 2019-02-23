@@ -1,6 +1,7 @@
 module Stories.TextArea exposing (Model, Msg, init, update, view)
 
 import Components.TextArea as T
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -68,7 +69,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        ([ h3 [] [ text "This is the textarea component" ]
+        ([ T.h4 [] [ text "This is the textarea component" ]
          ]
             ++ textAreaStates model
         )

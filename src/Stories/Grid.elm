@@ -2,6 +2,7 @@ module Stories.Grid exposing (Model, Msg, init, update, view)
 
 import Components.Container as Container
 import Components.Grid as Grid
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -293,7 +294,7 @@ offsetting =
 view : Model -> Html Msg
 view model =
     div []
-        [ h3 [] [ text "This is the grid component" ]
+        [ T.h4 [] [ text "This is the grid component" ]
         , autoWidths
         , br [] []
         , responsiveWidths

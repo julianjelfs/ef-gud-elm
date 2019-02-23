@@ -22,6 +22,7 @@ section {
   position: -webkit-sticky;
   top: 0;
   height: 100vh;
+  overflow: scroll;
 }
 
 .header {

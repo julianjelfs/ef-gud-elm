@@ -4,6 +4,7 @@ import Breakpoint as BP
 import Color
 import Components.Container as C
 import Components.Surface as S
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -34,7 +35,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ C.container
+        [ T.h4 [] [ text "This is the surface component" ]
+        , C.container
             [ C.padding [ SP.Large ]
             , C.bgColor Color.HelloPaper
             ]

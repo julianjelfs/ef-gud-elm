@@ -1,6 +1,7 @@
 module Stories.Input exposing (Model, Msg, init, update, view)
 
 import Components.Input as I
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -106,7 +107,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        ([ h3 [] [ text "This is the input component" ]
+        ([ T.h4 [] [ text "This is the input component" ]
          ]
             ++ [ h5 [] [ text "These are the input types" ] ]
             ++ inputTypes model

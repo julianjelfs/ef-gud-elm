@@ -105,7 +105,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ Html.h3 [] [ text "These are the typography elements" ]
+        [ T.h4 [] [ text "These are the typography elements" ]
         , h1
         , h2
         , h3

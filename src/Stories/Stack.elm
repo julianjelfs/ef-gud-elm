@@ -2,6 +2,7 @@ module Stories.Stack exposing (Model, Msg, init, update, view)
 
 import Components.Grid as Grid
 import Components.Stack as Stack
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -174,7 +175,7 @@ fullLayout =
 view : Model -> Html Msg
 view model =
     div [ class "stack-docs" ]
-        [ h3 [] [ text "This is the stack component" ]
+        [ T.h4 [] [ text "This is the stack component" ]
         , p []
             [ text "The ef-stack component uses flexbox to handle alignment on the Y-axis. It's far simpler than the grid, but can be combined with it to build complex tile layouts." ]
         , simpleStack

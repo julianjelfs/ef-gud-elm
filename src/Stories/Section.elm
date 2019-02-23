@@ -3,6 +3,7 @@ module Stories.Section exposing (Model, Msg, init, update, view)
 import Breakpoint as BP
 import Color exposing (ThemeColor(..))
 import Components.Section as S
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -31,7 +32,8 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ S.section [ S.bgColor HelloPaper, S.size BP.Small ]
+        [ T.h4 [] [ text "This is the section component" ]
+        , S.section [ S.bgColor HelloPaper, S.size BP.Small ]
             [ h3 [] [ text "This stuff is inside a SMALL section" ]
             , p [] [ text loremIpsum ]
             ]

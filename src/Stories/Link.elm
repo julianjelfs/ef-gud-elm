@@ -1,6 +1,7 @@
 module Stories.Link exposing (Model, Msg, init, update, view)
 
 import Components.Link as Link
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -30,7 +31,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ h3 [] [ text "This is the link component" ]
+        [ T.h4 [] [ text "This is the link component" ]
         , p []
             [ span [] [ text "The link component is ideal if you have a chunk text and " ]
             , Link.link { href = "#", onClick = Just OnClick }

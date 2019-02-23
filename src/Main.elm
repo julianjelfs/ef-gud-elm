@@ -8,6 +8,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Stories.Accordion as Accordion
+import Stories.Breadcrumb as Breadcrumb
 import Stories.Button as Button
 import Stories.Card as Card
 import Stories.Checkbox as Checkbox
@@ -59,6 +60,7 @@ type Route
     | Fullbleed
     | Accordion
     | Pagination
+    | Breadcrumb
     | NotFound
 
 
@@ -86,6 +88,7 @@ type alias Model =
     , fullbleed : Fullbleed.Model
     , accordion : Accordion.Model
     , pagination : Pagination.Model
+    , breadcrumb : Breadcrumb.Model
     }
 
 
@@ -114,6 +117,7 @@ init _ url key =
       , fullbleed = Fullbleed.init
       , accordion = Accordion.init
       , pagination = Pagination.init
+      , breadcrumb = Breadcrumb.init
       }
     , Cmd.none
     )
@@ -152,6 +156,7 @@ type Msg
     | FullbleedMsg Fullbleed.Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
+    | BreadcrumbMsg Breadcrumb.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -317,6 +322,13 @@ update msg model =
             in
             ( { model | pagination = subModel }, Cmd.map PaginationMsg subCmd )
 
+        BreadcrumbMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Breadcrumb.update subMsg model.breadcrumb
+            in
+            ( { model | breadcrumb = subModel }, Cmd.map BreadcrumbMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -343,6 +355,7 @@ routeParser =
         , Url.map Fullbleed (Url.s "fullbleed")
         , Url.map Accordion (Url.s "accordion")
         , Url.map Pagination (Url.s "pagination")
+        , Url.map Breadcrumb (Url.s "breadcrumb")
         ]
 
 
@@ -393,6 +406,7 @@ view model =
                     , menuItem model.route Typography "typography" "Typography Components"
                     , menuItem model.route Accordion "accordion" "Accordion Component"
                     , menuItem model.route Pagination "pagination" "Pagination Component"
+                    , menuItem model.route Breadcrumb "breadcrumb" "Breadcrumb Component"
                     ]
                 ]
             , section [ class "header" ]
@@ -474,6 +488,9 @@ componentView model =
 
         Pagination ->
             Html.map PaginationMsg (Pagination.view model.pagination)
+
+        Breadcrumb ->
+            Html.map BreadcrumbMsg (Breadcrumb.view model.breadcrumb)
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]

@@ -1,6 +1,7 @@
 module Stories.Radio exposing (Model, Msg, init, update, view)
 
 import Components.Radio as R
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -61,7 +62,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ h3 [] [ text "This is the radio component" ]
+        [ T.h4 [] [ text "This is the radio component" ]
         , radioStates
         , br [] []
         , h5 [] [ text "This is a radio group" ]

@@ -1,20 +1,16 @@
-module Components.Template exposing
-    ( TemplateProps
-    , template
-    )
+module Components.Template exposing (template)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
-type alias TemplateProps =
-    {}
+type TemplateProp msg
+    = TemplateProp (Attribute msg)
 
 
-template : TemplateProps -> List (Html msg) -> Html msg
-template props children =
+template : List (TemplateProp msg) -> Html msg
+template props =
     div
-        [ class "ef-template" ]
-        children
+        ([ class "ef-template" ] ++ List.map (\(TemplateProp a) -> a) props)
+        [ text "template stuff" ]

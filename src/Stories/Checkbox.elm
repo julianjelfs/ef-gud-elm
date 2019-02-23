@@ -1,6 +1,7 @@
 module Stories.Checkbox exposing (Model, Msg, init, update, view)
 
 import Components.Checkbox as C
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -30,7 +31,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ h3 [] [ text "This is the checkbox component" ]
+        [ T.h4 [] [ text "This is the checkbox component" ]
         , div [ class "u-mb-m" ]
             [ C.checkbox [] [ text "default" ] ]
         , div [ class "u-mb-m" ]

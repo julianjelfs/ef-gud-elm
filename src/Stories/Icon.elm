@@ -3,6 +3,7 @@ module Stories.Icon exposing (Model, Msg, init, update, view)
 import Components.Grid as G
 import Components.Icon as I
 import Components.Surface as S
+import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -48,7 +49,7 @@ view model =
     in
     div
         []
-        [ h3 [] [ text "There are lots of icons that you can use" ]
+        [ T.h4 [] [ text "There are lots of icons that you can use" ]
         , G.row []
             [ exampleIcon I.ChevronRight "-chevron-right"
             , exampleIcon I.ChevronLeft "-chevron-left"
