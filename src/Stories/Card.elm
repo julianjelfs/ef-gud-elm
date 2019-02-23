@@ -119,7 +119,7 @@ verticalCard =
 view : Model -> Html Msg
 view model =
     div []
-        [ T.h4 [] [ text "Cards are used to group thematically related but distinct content" ]
+        [ T.h4 [] [ text "This is the card component" ]
         , T.h5 [] [ text "Default" ]
         , defaultCard
         , br [] []
