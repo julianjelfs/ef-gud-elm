@@ -3,11 +3,11 @@ module Components.Breadcrumb exposing (active, breadcrumbs, crumb, href, onClick
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Utils exposing (..)
 
 
 type BreadcrumbProp msg
-    = LiProp (Attribute msg)
-    | SpanProp (Attribute msg)
+    = BreadcrumbProp (Attribute msg)
 
 
 type Breadcrumb msg
@@ -16,17 +16,17 @@ type Breadcrumb msg
 
 href : String -> BreadcrumbProp msg
 href =
-    Html.Attributes.href >> LiProp
+    Html.Attributes.href >> BreadcrumbProp
 
 
 onClick : msg -> BreadcrumbProp msg
 onClick =
-    Html.Events.onClick >> LiProp
+    Html.Events.onClick >> BreadcrumbProp
 
 
 active : BreadcrumbProp msg
 active =
-    SpanProp (class "-is-active")
+    BreadcrumbProp (class "-is-active")
 
 
 crumb : List (BreadcrumbProp msg) -> String -> Breadcrumb msg
@@ -46,7 +46,16 @@ breadcrumbs crumbs =
 
 renderCrumb : Breadcrumb msg -> Html msg
 renderCrumb (Breadcrumb props name) =
-    div [] []
+    li
+        [ class "ef-breadcrumbs__item"
+        , attribute "itemprop" "itemListElement"
+        , attribute "itemscope" "true"
+        , attribute "itemtype" "http://schema.org/ListItem"
+        ]
+        [ a
+            ([ class "ef-breadcrumbs__link" ] ++ List.map (\(BreadcrumbProp a) -> a) props)
+            [ text name ]
+        ]
 
 
 

@@ -1,9 +1,11 @@
 module Utils exposing
-    ( appendIf
+    ( Either(..)
+    , appendIf
     , catMaybes
     , concatIf
     , loremIpsum
     , maybeAppend
+    , partition
     , wrapClass
     )
 
@@ -53,3 +55,22 @@ maybeAppend m l =
 loremIpsum : String
 loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis convallis eros. Curabitur nulla mi, aliquet vel tempor a, pharetra ac massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis venenatis elit sed tempus rhoncus. Donec a quam dignissim, fermentum neque varius, porttitor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum lacinia venenatis nunc, a vehicula enim dictum eget. Etiam at elit turpis. In at pretium velit, quis blandit metus. Duis cursus orci eget tortor venenatis condimentum. Aenean semper sollicitudin eros sed vulputate. Morbi vehicula ut neque vitae faucibus. Duis non sollicitudin elit."
+
+
+partition : (a -> Either b b) -> List a -> ( List b, List b )
+partition sp =
+    List.foldr
+        (\p ( ls, rs ) ->
+            case sp p of
+                Left a ->
+                    ( a :: ls, rs )
+
+                Right a ->
+                    ( ls, a :: rs )
+        )
+        ( [], [] )
+
+
+type Either l r
+    = Left l
+    | Right r
