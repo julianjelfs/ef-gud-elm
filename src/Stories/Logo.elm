@@ -1,4 +1,4 @@
-module Stories.Logo exposing (Model, Msg, init, update, view)
+module Stories.Logo exposing (view)
 
 import Color
 import Components.Container as C
@@ -13,27 +13,7 @@ import Spacing as S
 import Utils exposing (appendIf)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-logoContainer : Bool -> String -> String -> Html Msg -> Html Msg
+logoContainer : Bool -> String -> String -> Html msg -> Html msg
 logoContainer inverse name desc logo =
     div
         ([ class "logobox" ] |> appendIf inverse (class "inverse"))
@@ -47,7 +27,7 @@ logoContainer inverse name desc logo =
         ]
 
 
-logoView : Bool -> Html Msg
+logoView : Bool -> Html msg
 logoView inverse =
     div
         []
@@ -78,8 +58,8 @@ logoView inverse =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div
         []
         [ T.h4 [ T.light ] [ text "The EF logo in three context dependent flavours" ]

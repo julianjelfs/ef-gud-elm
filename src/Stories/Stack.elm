@@ -1,4 +1,4 @@
-module Stories.Stack exposing (Model, Msg, init, update, view)
+module Stories.Stack exposing (view)
 
 import Components.Grid as Grid
 import Components.Stack as Stack
@@ -9,27 +9,7 @@ import Html.Events exposing (..)
 import Stories.Utils exposing (..)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-simpleStack : Html Msg
+simpleStack : Html msg
 simpleStack =
     div
         []
@@ -44,7 +24,7 @@ simpleStack =
         ]
 
 
-stackAlignment : Html Msg
+stackAlignment : Html msg
 stackAlignment =
     div
         []
@@ -81,7 +61,7 @@ stackAlignment =
         ]
 
 
-itemAlignment : Html Msg
+itemAlignment : Html msg
 itemAlignment =
     div
         []
@@ -122,7 +102,7 @@ coloredBox cls =
     box { defaultTags | bgClass = Just cls }
 
 
-fullLayout : Html Msg
+fullLayout : Html msg
 fullLayout =
     let
         stretchProps =
@@ -172,8 +152,8 @@ fullLayout =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div [ class "stack-docs" ]
         [ T.h4 [] [ text "This is the stack component" ]
         , p []

@@ -1,4 +1,4 @@
-module Stories.Typography exposing (Model, Msg, init, update, view)
+module Stories.Typography exposing (view)
 
 import Components.Typography as T
 import Html exposing (..)
@@ -6,82 +6,62 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-h1 : Html Msg
+h1 : Html msg
 h1 =
     T.h1 [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-h2 : Html Msg
+h2 : Html msg
 h2 =
     T.h2 [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-h3 : Html Msg
+h3 : Html msg
 h3 =
     T.h3 [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-h4 : Html Msg
+h4 : Html msg
 h4 =
     T.h4 [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-h5 : Html Msg
+h5 : Html msg
 h5 =
     T.h5 [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-h6 : Html Msg
+h6 : Html msg
 h6 =
     T.h6 [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-subtitle : Html Msg
+subtitle : Html msg
 subtitle =
     T.subtitle [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-body : Html Msg
+body : Html msg
 body =
     T.body [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-bodyBook : Html Msg
+bodyBook : Html msg
 bodyBook =
     T.bodyBook [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-para : Html Msg
+para : Html msg
 para =
     T.para [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-paraBook : Html Msg
+paraBook : Html msg
 paraBook =
     T.paraBook [] [ text "Lorem ipsum dolor sit amet, consetetur" ]
 
 
-fontTweaks : Html Msg
+fontTweaks : Html msg
 fontTweaks =
     div
         []
@@ -101,8 +81,8 @@ fontTweaks =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div
         []
         [ T.h4 [] [ text "These are the typography elements" ]

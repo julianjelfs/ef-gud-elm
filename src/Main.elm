@@ -72,18 +72,12 @@ type alias Model =
     , route : Route
     , filter : Maybe String
     , button : Button.Model
-    , section : Section.Model
     , surface : Surface.Model
     , input : Input.Model
-    , stack : Stack.Model
     , link : Link.Model
-    , radio : Radio.Model
-    , typography : Typography.Model
     , select : Select.Model
     , textarea : TextArea.Model
-    , switch : Switch.Model
     , form : Form.Model
-    , logo : Logo.Model
     , accordion : Accordion.Model
     , pagination : Pagination.Model
     , breadcrumb : Breadcrumb.Model
@@ -96,18 +90,12 @@ init _ url key =
       , route = urlToRoute url
       , filter = Nothing
       , button = Button.init
-      , section = Section.init
       , surface = Surface.init
       , input = Input.init
-      , stack = Stack.init
       , link = Link.init
-      , radio = Radio.init
-      , typography = Typography.init
       , select = Select.init
       , textarea = TextArea.init
-      , switch = Switch.init
       , form = Form.init
-      , logo = Logo.init
       , accordion = Accordion.init
       , pagination = Pagination.init
       , breadcrumb = Breadcrumb.init
@@ -130,18 +118,12 @@ type Msg
     | OnUrlChange Url
     | FilterComponents String
     | ButtonMsg Button.Msg
-    | SectionMsg Section.Msg
     | SurfaceMsg Surface.Msg
     | InputMsg Input.Msg
-    | StackMsg Stack.Msg
     | LinkMsg Link.Msg
-    | RadioMsg Radio.Msg
-    | TypographyMsg Typography.Msg
     | SelectMsg Select.Msg
     | TextAreaMsg TextArea.Msg
-    | SwitchMsg Switch.Msg
     | FormMsg Form.Msg
-    | LogoMsg Logo.Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
     | BreadcrumbMsg Breadcrumb.Msg
@@ -182,13 +164,6 @@ update msg model =
             in
             ( { model | button = subModel }, Cmd.map ButtonMsg subCmd )
 
-        SectionMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Section.update subMsg model.section
-            in
-            ( { model | section = subModel }, Cmd.map SectionMsg subCmd )
-
         SurfaceMsg subMsg ->
             let
                 ( subModel, subCmd ) =
@@ -203,33 +178,12 @@ update msg model =
             in
             ( { model | input = subModel }, Cmd.map InputMsg subCmd )
 
-        StackMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Stack.update subMsg model.stack
-            in
-            ( { model | stack = subModel }, Cmd.map StackMsg subCmd )
-
         LinkMsg subMsg ->
             let
                 ( subModel, subCmd ) =
                     Link.update subMsg model.link
             in
             ( { model | link = subModel }, Cmd.map LinkMsg subCmd )
-
-        RadioMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Radio.update subMsg model.radio
-            in
-            ( { model | radio = subModel }, Cmd.map RadioMsg subCmd )
-
-        TypographyMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Typography.update subMsg model.typography
-            in
-            ( { model | typography = subModel }, Cmd.map TypographyMsg subCmd )
 
         SelectMsg subMsg ->
             let
@@ -245,26 +199,12 @@ update msg model =
             in
             ( { model | textarea = subModel }, Cmd.map TextAreaMsg subCmd )
 
-        SwitchMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Switch.update subMsg model.switch
-            in
-            ( { model | switch = subModel }, Cmd.map SwitchMsg subCmd )
-
         FormMsg subMsg ->
             let
                 ( subModel, subCmd ) =
                     Form.update subMsg model.form
             in
             ( { model | form = subModel }, Cmd.map FormMsg subCmd )
-
-        LogoMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Logo.update subMsg model.logo
-            in
-            ( { model | logo = subModel }, Cmd.map LogoMsg subCmd )
 
         AccordionMsg subMsg ->
             let
@@ -412,13 +352,13 @@ componentView model =
             Checkbox.view
 
         Switch ->
-            Html.map SwitchMsg (Switch.view model.switch)
+            Switch.view
 
         Radio ->
-            Html.map RadioMsg (Radio.view model.radio)
+            Radio.view
 
         Section ->
-            Html.map SectionMsg (Section.view model.section)
+            Section.view
 
         Surface ->
             Html.map SurfaceMsg (Surface.view model.surface)
@@ -430,13 +370,13 @@ componentView model =
             Grid.view
 
         Stack ->
-            Html.map StackMsg (Stack.view model.stack)
+            Stack.view
 
         Icon ->
             Icon.view
 
         Typography ->
-            Html.map TypographyMsg (Typography.view model.typography)
+            Typography.view
 
         Select ->
             Html.map SelectMsg (Select.view model.select)
@@ -448,7 +388,7 @@ componentView model =
             Html.map FormMsg (Form.view model.form)
 
         Logo ->
-            Html.map LogoMsg (Logo.view model.logo)
+            Logo.view
 
         Card ->
             Card.view

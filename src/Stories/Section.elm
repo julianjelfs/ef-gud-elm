@@ -1,4 +1,4 @@
-module Stories.Section exposing (Model, Msg, init, update, view)
+module Stories.Section exposing (view)
 
 import Breakpoint as BP
 import Color exposing (ThemeColor(..))
@@ -10,26 +10,8 @@ import Html.Events exposing (..)
 import Utils exposing (loremIpsum)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    ( model, Cmd.none )
-
-
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div
         []
         [ T.h4 [] [ text "This is the section component" ]

@@ -1,4 +1,4 @@
-module Stories.Switch exposing (Model, Msg, init, update, view)
+module Stories.Switch exposing (view)
 
 import Components.Switch as S
 import Components.Typography as T
@@ -7,27 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-large : Html Msg
+large : Html msg
 large =
     div
         []
@@ -49,7 +29,7 @@ large =
         ]
 
 
-small : Html Msg
+small : Html msg
 small =
     div
         []
@@ -71,8 +51,8 @@ small =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div
         []
         [ T.h4 [] [ text "This is the switch component" ]
