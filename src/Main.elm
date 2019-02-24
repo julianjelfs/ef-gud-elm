@@ -3,6 +3,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Color as C
+import Components.Input as I
 import Components.Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -89,6 +90,7 @@ type alias Model =
     , accordion : Accordion.Model
     , pagination : Pagination.Model
     , breadcrumb : Breadcrumb.Model
+    , filter : Maybe String
     }
 
 
@@ -118,6 +120,7 @@ init _ url key =
       , accordion = Accordion.init
       , pagination = Pagination.init
       , breadcrumb = Breadcrumb.init
+      , filter = Nothing
       }
     , Cmd.none
     )
@@ -157,11 +160,24 @@ type Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
     | BreadcrumbMsg Breadcrumb.Msg
+    | FilterComponents String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        FilterComponents filter ->
+            ( { model
+                | filter =
+                    if filter == "" then
+                        Nothing
+
+                    else
+                        Just filter
+              }
+            , Cmd.none
+            )
+
         OnUrlRequest urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
@@ -379,35 +395,48 @@ menuItem selectedRoute route path desc =
 
 view : Model -> Document Msg
 view model =
+    let
+        mi =
+            menuItem model.route
+
+        items =
+            [ ( "Button Component", mi Button "button" )
+            , ( "Input Component", mi Input "input" )
+            , ( "Text Area Component", mi TextArea "textarea" )
+            , ( "Select Component", mi Select "select" )
+            , ( "Checkbox Component", mi Checkbox "checkbox" )
+            , ( "Switch Component", mi Switch "switch" )
+            , ( "Radio Component", mi Radio "radio" )
+            , ( "Form Component", mi Form "form" )
+            , ( "Link Component", mi Link "link" )
+            , ( "Grid Component", mi Grid "grid" )
+            , ( "Stack Component", mi Stack "stack" )
+            , ( "Section Component", mi Section "section" )
+            , ( "Surface Component", mi Surface "surface" )
+            , ( "Card Component", mi Card "card" )
+            , ( "Fullbleed Component", mi Fullbleed "fullbleed" )
+            , ( "Container Component", mi Container "container" )
+            , ( "Icon Component", mi Icon "icon" )
+            , ( "Logo Component", mi Logo "logo" )
+            , ( "Typography Component", mi Typography "typography" )
+            , ( "Accordion Component", mi Accordion "accordion" )
+            , ( "Pagination Component", mi Pagination "pagination" )
+            , ( "Breadcrumb Component", mi Breadcrumb "breadcrumb" )
+            ]
+                |> List.filter
+                    (\( name, _ ) ->
+                        Maybe.map (\s -> String.contains (String.toLower s) (String.toLower name)) model.filter
+                            |> Maybe.withDefault True
+                    )
+    in
     { title = "EF Web UI Kit - Elm Style"
     , body =
         [ div [ class "container" ]
             [ section [ class "sidebar", C.bgColor C.EducationBlue ]
-                [ ul
+                [ I.input I.TextInput [ I.onInput FilterComponents, I.placeholder "Filter Components" ]
+                , ul
                     []
-                    [ menuItem model.route Button "button" "Button Component"
-                    , menuItem model.route Input "input" "Input Component"
-                    , menuItem model.route TextArea "textarea" "Text Area Component"
-                    , menuItem model.route Select "select" "Select Components"
-                    , menuItem model.route Checkbox "checkbox" "Checkbox Component"
-                    , menuItem model.route Switch "switch" "Switch Component"
-                    , menuItem model.route Radio "radio" "Radio Component"
-                    , menuItem model.route Form "form" "Form Component"
-                    , menuItem model.route Link "link" "Link Component"
-                    , menuItem model.route Grid "grid" "Grid Component"
-                    , menuItem model.route Stack "stack" "Stack Component"
-                    , menuItem model.route Section "section" "Section Component"
-                    , menuItem model.route Surface "surface" "Surface Component"
-                    , menuItem model.route Card "card" "Card Component"
-                    , menuItem model.route Fullbleed "fullbleed" "Fullbleed Component"
-                    , menuItem model.route Container "container" "Container Component"
-                    , menuItem model.route Icon "icon" "Icon Component"
-                    , menuItem model.route Logo "logo" "Logo Component"
-                    , menuItem model.route Typography "typography" "Typography Components"
-                    , menuItem model.route Accordion "accordion" "Accordion Component"
-                    , menuItem model.route Pagination "pagination" "Pagination Component"
-                    , menuItem model.route Breadcrumb "breadcrumb" "Breadcrumb Component"
-                    ]
+                    (List.map (\( n, fn ) -> fn n) items)
                 ]
             , section [ class "header" ]
                 [ T.h1 [] [ text "EF Web UI Kit" ]

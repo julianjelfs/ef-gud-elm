@@ -75,7 +75,10 @@ loading =
 
 focus : InputProp msg
 focus =
-    field "-focus"
+    Multiple <|
+        [ field "-focus"
+        , (FieldProp << Html.Attributes.autofocus) True
+        ]
 
 
 active : InputProp msg
