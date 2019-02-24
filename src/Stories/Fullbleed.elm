@@ -1,4 +1,4 @@
-module Stories.Fullbleed exposing (Model, Msg, init, update, view)
+module Stories.Fullbleed exposing (view)
 
 import Components.Container as C
 import Components.Fullbleed as F
@@ -8,27 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-default : Html Msg
+default : Html msg
 default =
     div
         [ style "margin-bottom" "30px" ]
@@ -39,7 +19,7 @@ default =
         ]
 
 
-gradient : Html Msg
+gradient : Html msg
 gradient =
     div
         [ style "margin-bottom" "30px" ]
@@ -50,7 +30,7 @@ gradient =
         ]
 
 
-fullheight : Html Msg
+fullheight : Html msg
 fullheight =
     div
         [ style "margin-bottom" "30px" ]
@@ -61,8 +41,8 @@ fullheight =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div
         []
         [ T.h4 [ T.light ] [ text "The fullbleed component is used to build full-width hero images. By default the images take up 60% of the viewport height" ]

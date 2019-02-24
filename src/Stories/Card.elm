@@ -1,4 +1,4 @@
-module Stories.Card exposing (Model, Msg, init, update, view)
+module Stories.Card exposing (view)
 
 import Components.Card as C
 import Components.Typography as T
@@ -6,24 +6,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Utils exposing (loremIpsum)
-
-
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    ( model, Cmd.none )
 
 
 titleText : String
@@ -36,7 +18,7 @@ bodyText =
     "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum"
 
 
-defaultCard : Html Msg
+defaultCard : Html msg
 defaultCard =
     div
         [ style "width" "700px" ]
@@ -47,7 +29,7 @@ defaultCard =
         ]
 
 
-defaultTeaser : Html Msg
+defaultTeaser : Html msg
 defaultTeaser =
     div
         [ style "width" "700px" ]
@@ -58,7 +40,7 @@ defaultTeaser =
         ]
 
 
-smallTeaser : Html Msg
+smallTeaser : Html msg
 smallTeaser =
     div
         [ style "width" "700px" ]
@@ -69,7 +51,7 @@ smallTeaser =
         ]
 
 
-verticalTeaser : Html Msg
+verticalTeaser : Html msg
 verticalTeaser =
     div
         [ style "width" "350px" ]
@@ -80,7 +62,7 @@ verticalTeaser =
         ]
 
 
-outlined : Html Msg
+outlined : Html msg
 outlined =
     div
         [ style "width" "700px" ]
@@ -91,7 +73,7 @@ outlined =
         ]
 
 
-noshadow : Html Msg
+noshadow : Html msg
 noshadow =
     div
         [ style "width" "700px"
@@ -105,7 +87,7 @@ noshadow =
         ]
 
 
-verticalCard : Html Msg
+verticalCard : Html msg
 verticalCard =
     div
         [ style "width" "350px" ]
@@ -116,8 +98,8 @@ verticalCard =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div []
         [ T.h4 [] [ text "This is the card component" ]
         , T.h5 [] [ text "Default" ]

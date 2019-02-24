@@ -72,24 +72,18 @@ type alias Model =
     , route : Route
     , filter : Maybe String
     , button : Button.Model
-    , container : Container.Model
     , section : Section.Model
     , surface : Surface.Model
     , input : Input.Model
-    , grid : Grid.Model
     , stack : Stack.Model
     , link : Link.Model
-    , checkbox : Checkbox.Model
     , radio : Radio.Model
-    , icon : Icon.Model
     , typography : Typography.Model
     , select : Select.Model
     , textarea : TextArea.Model
     , switch : Switch.Model
     , form : Form.Model
     , logo : Logo.Model
-    , card : Card.Model
-    , fullbleed : Fullbleed.Model
     , accordion : Accordion.Model
     , pagination : Pagination.Model
     , breadcrumb : Breadcrumb.Model
@@ -102,24 +96,18 @@ init _ url key =
       , route = urlToRoute url
       , filter = Nothing
       , button = Button.init
-      , container = Container.init
       , section = Section.init
       , surface = Surface.init
       , input = Input.init
-      , grid = Grid.init
       , stack = Stack.init
       , link = Link.init
-      , checkbox = Checkbox.init
       , radio = Radio.init
-      , icon = Icon.init
       , typography = Typography.init
       , select = Select.init
       , textarea = TextArea.init
       , switch = Switch.init
       , form = Form.init
       , logo = Logo.init
-      , card = Card.init
-      , fullbleed = Fullbleed.init
       , accordion = Accordion.init
       , pagination = Pagination.init
       , breadcrumb = Breadcrumb.init
@@ -142,24 +130,18 @@ type Msg
     | OnUrlChange Url
     | FilterComponents String
     | ButtonMsg Button.Msg
-    | ContainerMsg Container.Msg
     | SectionMsg Section.Msg
     | SurfaceMsg Surface.Msg
     | InputMsg Input.Msg
-    | GridMsg Grid.Msg
     | StackMsg Stack.Msg
     | LinkMsg Link.Msg
-    | CheckboxMsg Checkbox.Msg
     | RadioMsg Radio.Msg
-    | IconMsg Icon.Msg
     | TypographyMsg Typography.Msg
     | SelectMsg Select.Msg
     | TextAreaMsg TextArea.Msg
     | SwitchMsg Switch.Msg
     | FormMsg Form.Msg
     | LogoMsg Logo.Msg
-    | CardMsg Card.Msg
-    | FullbleedMsg Fullbleed.Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
     | BreadcrumbMsg Breadcrumb.Msg
@@ -200,13 +182,6 @@ update msg model =
             in
             ( { model | button = subModel }, Cmd.map ButtonMsg subCmd )
 
-        ContainerMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Container.update subMsg model.container
-            in
-            ( { model | container = subModel }, Cmd.map ContainerMsg subCmd )
-
         SectionMsg subMsg ->
             let
                 ( subModel, subCmd ) =
@@ -228,13 +203,6 @@ update msg model =
             in
             ( { model | input = subModel }, Cmd.map InputMsg subCmd )
 
-        GridMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Grid.update subMsg model.grid
-            in
-            ( { model | grid = subModel }, Cmd.map GridMsg subCmd )
-
         StackMsg subMsg ->
             let
                 ( subModel, subCmd ) =
@@ -249,26 +217,12 @@ update msg model =
             in
             ( { model | link = subModel }, Cmd.map LinkMsg subCmd )
 
-        CheckboxMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Checkbox.update subMsg model.checkbox
-            in
-            ( { model | checkbox = subModel }, Cmd.map CheckboxMsg subCmd )
-
         RadioMsg subMsg ->
             let
                 ( subModel, subCmd ) =
                     Radio.update subMsg model.radio
             in
             ( { model | radio = subModel }, Cmd.map RadioMsg subCmd )
-
-        IconMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Icon.update subMsg model.icon
-            in
-            ( { model | icon = subModel }, Cmd.map IconMsg subCmd )
 
         TypographyMsg subMsg ->
             let
@@ -311,20 +265,6 @@ update msg model =
                     Logo.update subMsg model.logo
             in
             ( { model | logo = subModel }, Cmd.map LogoMsg subCmd )
-
-        CardMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Card.update subMsg model.card
-            in
-            ( { model | card = subModel }, Cmd.map CardMsg subCmd )
-
-        FullbleedMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Fullbleed.update subMsg model.fullbleed
-            in
-            ( { model | fullbleed = subModel }, Cmd.map FullbleedMsg subCmd )
 
         AccordionMsg subMsg ->
             let
@@ -469,7 +409,7 @@ componentView model =
             Html.map InputMsg (Input.view model.input)
 
         Checkbox ->
-            Html.map CheckboxMsg (Checkbox.view model.checkbox)
+            Checkbox.view
 
         Switch ->
             Html.map SwitchMsg (Switch.view model.switch)
@@ -484,16 +424,16 @@ componentView model =
             Html.map SurfaceMsg (Surface.view model.surface)
 
         Container ->
-            Html.map ContainerMsg (Container.view model.container)
+            Container.view
 
         Grid ->
-            Html.map GridMsg (Grid.view model.grid)
+            Grid.view
 
         Stack ->
             Html.map StackMsg (Stack.view model.stack)
 
         Icon ->
-            Html.map IconMsg (Icon.view model.icon)
+            Icon.view
 
         Typography ->
             Html.map TypographyMsg (Typography.view model.typography)
@@ -511,10 +451,10 @@ componentView model =
             Html.map LogoMsg (Logo.view model.logo)
 
         Card ->
-            Html.map CardMsg (Card.view model.card)
+            Card.view
 
         Fullbleed ->
-            Html.map FullbleedMsg (Fullbleed.view model.fullbleed)
+            Fullbleed.view
 
         Accordion ->
             Html.map AccordionMsg (Accordion.view model.accordion)

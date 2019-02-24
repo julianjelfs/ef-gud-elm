@@ -1,4 +1,4 @@
-module Stories.Icon exposing (Model, Msg, init, update, view)
+module Stories.Icon exposing (view)
 
 import Components.Grid as G
 import Components.Icon as I
@@ -10,28 +10,8 @@ import Html.Events exposing (..)
 import Spacing as SP
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     let
         colProps =
             [ G.bottomPad SP.Medium, G.smallSpan 12, G.mediumSpan 6, G.largeSpan 4, G.extraLargeSpan 2 ]

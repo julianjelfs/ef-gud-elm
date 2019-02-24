@@ -1,4 +1,4 @@
-module Stories.Grid exposing (Model, Msg, init, update, view)
+module Stories.Grid exposing (view)
 
 import Components.Container as Container
 import Components.Grid as Grid
@@ -10,27 +10,7 @@ import Stories.Utils exposing (..)
 import Utils exposing (..)
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-autoWidths : Html Msg
+autoWidths : Html msg
 autoWidths =
     div
         []
@@ -55,7 +35,7 @@ autoWidths =
         ]
 
 
-taggedBoxFromSpans : Maybe Int -> Maybe Int -> Maybe Int -> Maybe Int -> Html Msg
+taggedBoxFromSpans : Maybe Int -> Maybe Int -> Maybe Int -> Maybe Int -> Html msg
 taggedBoxFromSpans small medium large extraLarge =
     let
         spanToTag s =
@@ -70,7 +50,7 @@ taggedBoxFromSpans small medium large extraLarge =
         }
 
 
-responsiveWidths : Html Msg
+responsiveWidths : Html msg
 responsiveWidths =
     div
         []
@@ -107,7 +87,7 @@ responsiveWidths =
         ]
 
 
-horizontalAlignment : Html Msg
+horizontalAlignment : Html msg
 horizontalAlignment =
     div
         []
@@ -140,7 +120,7 @@ horizontalAlignment =
         ]
 
 
-horizontalAlignmentChildOverrides : Html Msg
+horizontalAlignmentChildOverrides : Html msg
 horizontalAlignmentChildOverrides =
     div
         []
@@ -170,7 +150,7 @@ horizontalAlignmentChildOverrides =
         ]
 
 
-verticalAlignment : Html Msg
+verticalAlignment : Html msg
 verticalAlignment =
     div
         []
@@ -207,7 +187,7 @@ verticalAlignment =
         ]
 
 
-verticalAlignmentChildOverrides : Html Msg
+verticalAlignmentChildOverrides : Html msg
 verticalAlignmentChildOverrides =
     div
         []
@@ -223,7 +203,7 @@ verticalAlignmentChildOverrides =
         ]
 
 
-reordering : Html Msg
+reordering : Html msg
 reordering =
     div
         []
@@ -244,7 +224,7 @@ reordering =
         ]
 
 
-behaviour : Html Msg
+behaviour : Html msg
 behaviour =
     div
         []
@@ -265,7 +245,7 @@ behaviour =
         ]
 
 
-offsetting : Html Msg
+offsetting : Html msg
 offsetting =
     div
         []
@@ -291,8 +271,8 @@ offsetting =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div []
         [ T.h4 [] [ text "This is the grid component" ]
         , autoWidths

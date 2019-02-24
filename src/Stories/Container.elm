@@ -1,4 +1,4 @@
-module Stories.Container exposing (Model, Msg, init, update, view)
+module Stories.Container exposing (view)
 
 import Color as Color
 import Components.Container as C
@@ -9,25 +9,7 @@ import Html.Events exposing (onClick)
 import Spacing as S
 
 
-type alias Model =
-    {}
-
-
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    ( model, Cmd.none )
-
-
-spacedOut : Html Msg
+spacedOut : Html msg
 spacedOut =
     div
         []
@@ -40,7 +22,7 @@ spacedOut =
         ]
 
 
-withMargin : Html Msg
+withMargin : Html msg
 withMargin =
     div
         []
@@ -55,7 +37,7 @@ withMargin =
         ]
 
 
-normal : Html Msg
+normal : Html msg
 normal =
     C.container
         []
@@ -64,8 +46,8 @@ normal =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Html msg
+view =
     div []
         [ T.h4 [] [ text "This stuff is inside a container" ]
         , normal
