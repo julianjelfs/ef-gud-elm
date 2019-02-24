@@ -28,6 +28,7 @@ import Stories.Select as Select
 import Stories.Stack as Stack
 import Stories.Surface as Surface
 import Stories.Switch as Switch
+import Stories.Table as Table
 import Stories.TextArea as TextArea
 import Stories.Typography as Typography
 import Url exposing (Url)
@@ -62,12 +63,14 @@ type Route
     | Accordion
     | Pagination
     | Breadcrumb
+    | Table
     | NotFound
 
 
 type alias Model =
     { key : Nav.Key
     , route : Route
+    , filter : Maybe String
     , button : Button.Model
     , container : Container.Model
     , section : Section.Model
@@ -90,7 +93,7 @@ type alias Model =
     , accordion : Accordion.Model
     , pagination : Pagination.Model
     , breadcrumb : Breadcrumb.Model
-    , filter : Maybe String
+    , table : Table.Model
     }
 
 
@@ -98,6 +101,7 @@ init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
     ( { key = key
       , route = urlToRoute url
+      , filter = Nothing
       , button = Button.init
       , container = Container.init
       , section = Section.init
@@ -120,7 +124,7 @@ init _ url key =
       , accordion = Accordion.init
       , pagination = Pagination.init
       , breadcrumb = Breadcrumb.init
-      , filter = Nothing
+      , table = Table.init
       }
     , Cmd.none
     )
@@ -138,6 +142,7 @@ urlToRoute =
 type Msg
     = OnUrlRequest UrlRequest
     | OnUrlChange Url
+    | FilterComponents String
     | ButtonMsg Button.Msg
     | ContainerMsg Container.Msg
     | SectionMsg Section.Msg
@@ -160,7 +165,7 @@ type Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
     | BreadcrumbMsg Breadcrumb.Msg
-    | FilterComponents String
+    | TableMsg Table.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -345,6 +350,13 @@ update msg model =
             in
             ( { model | breadcrumb = subModel }, Cmd.map BreadcrumbMsg subCmd )
 
+        TableMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Table.update subMsg model.table
+            in
+            ( { model | table = subModel }, Cmd.map TableMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -372,6 +384,7 @@ routeParser =
         , Url.map Accordion (Url.s "accordion")
         , Url.map Pagination (Url.s "pagination")
         , Url.map Breadcrumb (Url.s "breadcrumb")
+        , Url.map Table (Url.s "table")
         ]
 
 
@@ -422,6 +435,7 @@ view model =
             , ( "Accordion Component", mi Accordion "accordion" )
             , ( "Pagination Component", mi Pagination "pagination" )
             , ( "Breadcrumb Component", mi Breadcrumb "breadcrumb" )
+            , ( "Table Component", mi Table "table" )
             ]
                 |> List.filter
                     (\( name, _ ) ->
@@ -520,6 +534,9 @@ componentView model =
 
         Breadcrumb ->
             Html.map BreadcrumbMsg (Breadcrumb.view model.breadcrumb)
+
+        Table ->
+            Html.map TableMsg (Table.view model.table)
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]
