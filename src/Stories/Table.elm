@@ -1,35 +1,53 @@
-module Stories.Table exposing (Model, Msg, init, update, view)
+module Stories.Table exposing (view)
 
-import Components.Table as Table
-import Components.Typography as T
+import Components.Table as T
+import Components.Typography as Ty
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
-type alias Model =
-    {}
+view : Html msg
+view =
+    let
+        row =
+            T.row
+                [ T.cell [] [ text "lorem" ]
+                , T.cell [] [ text "ipsum" ]
+                , T.cell [] [ text "dolor" ]
+                , T.cell [] [ text "sit" ]
+                , T.cell [] [ text "amet" ]
+                , T.cell [] [ text "consectetur" ]
+                ]
 
+        header =
+            T.header
+                [ T.cell [] [ text "One" ]
+                , T.cell [] [ text "Two" ]
+                , T.cell [] [ text "Three" ]
+                , T.cell [] [ text "Four" ]
+                , T.cell [] [ text "Five" ]
+                , T.cell [] [ text "Six" ]
+                ]
 
-type Msg
-    = NoOp
-
-
-init : Model
-init =
-    {}
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-
-view : Model -> Html Msg
-view model =
+        footer =
+            T.footer
+                [ T.cell [ T.span 6 ] [ strong [] [ text "Total: " ], text "Yawn" ]
+                ]
+    in
     div
         []
-        [ T.h4 [] [ text "This is the table component" ]
+        [ Ty.h4 [] [ text "This is the table component" ]
+        , T.table
+            (Just header)
+            (T.body
+                [ row
+                , row
+                , row
+                , row
+                , row
+                , row
+                ]
+            )
+            (Just footer)
         ]

@@ -93,7 +93,6 @@ type alias Model =
     , accordion : Accordion.Model
     , pagination : Pagination.Model
     , breadcrumb : Breadcrumb.Model
-    , table : Table.Model
     }
 
 
@@ -124,7 +123,6 @@ init _ url key =
       , accordion = Accordion.init
       , pagination = Pagination.init
       , breadcrumb = Breadcrumb.init
-      , table = Table.init
       }
     , Cmd.none
     )
@@ -165,7 +163,6 @@ type Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
     | BreadcrumbMsg Breadcrumb.Msg
-    | TableMsg Table.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -350,13 +347,6 @@ update msg model =
             in
             ( { model | breadcrumb = subModel }, Cmd.map BreadcrumbMsg subCmd )
 
-        TableMsg subMsg ->
-            let
-                ( subModel, subCmd ) =
-                    Table.update subMsg model.table
-            in
-            ( { model | table = subModel }, Cmd.map TableMsg subCmd )
-
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -536,7 +526,7 @@ componentView model =
             Html.map BreadcrumbMsg (Breadcrumb.view model.breadcrumb)
 
         Table ->
-            Html.map TableMsg (Table.view model.table)
+            Table.view
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]

@@ -3,6 +3,7 @@ module Utils exposing
     , appendIf
     , catMaybes
     , concatIf
+    , flip
     , loremIpsum
     , maybeAppend
     , partition
@@ -74,3 +75,8 @@ partition sp =
 type Either l r
     = Left l
     | Right r
+
+
+flip : (a -> b -> c) -> (b -> a -> c)
+flip fn =
+    \b a -> fn a b
