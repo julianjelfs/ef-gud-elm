@@ -17,10 +17,11 @@ module Container exposing
     , verticalPad
     )
 
+import Breakpoint as BP
 import Color as C
-import Spacing as S
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Spacing as S
 
 
 type ContainerProp msg
@@ -40,6 +41,11 @@ padding =
 margin : List S.Spacing -> ContainerProp msg
 margin =
     ContainerProp << S.margin
+
+
+spacingUtil : Maybe BP.Breakpoint -> S.SpacingType -> String -> S.Spacing -> ContainerProp msg
+spacingUtil mbp t m sp =
+    ContainerProp <| S.spacingUtil mbp t m sp
 
 
 verticalPad : S.Spacing -> ContainerProp msg

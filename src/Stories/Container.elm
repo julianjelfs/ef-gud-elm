@@ -1,12 +1,13 @@
 module Stories.Container exposing (view)
 
+import Breakpoint as BP
 import Color as Color
 import Container as C
-import Spacing as S
-import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (disabled, href, src)
 import Html.Events exposing (onClick)
+import Spacing as S
+import Typography as T
 
 
 spacedOut : Html msg

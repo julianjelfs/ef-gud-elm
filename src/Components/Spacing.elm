@@ -11,6 +11,7 @@ module Spacing exposing
     , padding
     , rightMargin
     , rightPad
+    , spacingUtil
     , topMargin
     , topPad
     , verticalMargin
@@ -20,6 +21,14 @@ module Spacing exposing
 import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
+
+
+
+-- in GUD spacing util classes have the following format:
+-- u-[breakpoint-]property-size
+-- e.g. u-p-m (padding medium)
+--      u-s-mt-xl (small bp margin-top extra large)
+-- would be nice to allow these utility classes to be added to all components.
 
 
 type Spacing
@@ -46,6 +55,21 @@ typeString t =
 
         Padding ->
             "p"
+
+
+
+-- not sure about this yet
+-- certainly need to convert the modifier from a string to a sum type
+
+
+spacingUtil : Maybe BP.Breakpoint -> SpacingType -> String -> Spacing -> Attribute msg
+spacingUtil mbp type_ modifier sp =
+    class <|
+        spacingClassName
+            type_
+            modifier
+            (Maybe.withDefault BP.Small mbp)
+            sp
 
 
 spacingClassName : SpacingType -> String -> BP.Breakpoint -> Spacing -> String
