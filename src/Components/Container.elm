@@ -43,7 +43,7 @@ margin =
     ContainerProp << S.margin
 
 
-spacingUtil : Maybe BP.Breakpoint -> S.SpacingType -> String -> S.Spacing -> ContainerProp msg
+spacingUtil : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> ContainerProp msg
 spacingUtil mbp t m sp =
     ContainerProp <| S.spacingUtil mbp t m sp
 

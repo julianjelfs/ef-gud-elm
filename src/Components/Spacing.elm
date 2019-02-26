@@ -1,5 +1,6 @@
 module Spacing exposing
-    ( Spacing(..)
+    ( Modifier(..)
+    , Spacing(..)
     , SpacingType(..)
     , bottomMargin
     , bottomPad
@@ -21,6 +22,33 @@ module Spacing exposing
 import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
+
+
+type Modifier
+    = Bottom
+    | Left
+    | Right
+    | All
+    | Top
+
+
+modifierString : Modifier -> String
+modifierString m =
+    case m of
+        Bottom ->
+            "b"
+
+        Top ->
+            "t"
+
+        Left ->
+            "l"
+
+        Right ->
+            "r"
+
+        All ->
+            ""
 
 
 
@@ -57,12 +85,7 @@ typeString t =
             "p"
 
 
-
--- not sure about this yet
--- certainly need to convert the modifier from a string to a sum type
-
-
-spacingUtil : Maybe BP.Breakpoint -> SpacingType -> String -> Spacing -> Attribute msg
+spacingUtil : Maybe BP.Breakpoint -> SpacingType -> Modifier -> Spacing -> Attribute msg
 spacingUtil mbp type_ modifier sp =
     class <|
         spacingClassName
@@ -72,72 +95,72 @@ spacingUtil mbp type_ modifier sp =
             sp
 
 
-spacingClassName : SpacingType -> String -> BP.Breakpoint -> Spacing -> String
+spacingClassName : SpacingType -> Modifier -> BP.Breakpoint -> Spacing -> String
 spacingClassName type_ mod bp pd =
     "u-"
         ++ BP.toString bp
         ++ "-"
         ++ typeString type_
-        ++ mod
+        ++ modifierString mod
         ++ "-"
         ++ toString pd
 
 
-paddingClass : String -> BP.Breakpoint -> Spacing -> Attribute msg
+paddingClass : Modifier -> BP.Breakpoint -> Spacing -> Attribute msg
 paddingClass mod bp =
     class << spacingClassName Padding mod bp
 
 
-marginClass : String -> BP.Breakpoint -> Spacing -> Attribute msg
+marginClass : Modifier -> BP.Breakpoint -> Spacing -> Attribute msg
 marginClass mod bp =
     class << spacingClassName Margin mod bp
 
 
 leftPad : Spacing -> Attribute msg
 leftPad p =
-    paddingClass "l" BP.Small p
+    paddingClass Left BP.Small p
 
 
 leftMargin : Spacing -> Attribute msg
 leftMargin p =
-    marginClass "l" BP.Small p
+    marginClass Left BP.Small p
 
 
 rightPad : Spacing -> Attribute msg
 rightPad p =
-    paddingClass "r" BP.Small p
+    paddingClass Right BP.Small p
 
 
 rightMargin : Spacing -> Attribute msg
 rightMargin p =
-    marginClass "r" BP.Small p
+    marginClass Right BP.Small p
 
 
 topPad : Spacing -> Attribute msg
 topPad p =
-    paddingClass "t" BP.Small p
+    paddingClass Top BP.Small p
 
 
 topMargin : Spacing -> Attribute msg
 topMargin p =
-    marginClass "t" BP.Small p
+    marginClass Top BP.Small p
 
 
 bottomPad : Spacing -> Attribute msg
 bottomPad p =
-    paddingClass "t" BP.Small p
+    paddingClass Top BP.Small p
 
 
 bottomMargin : Spacing -> Attribute msg
 bottomMargin p =
-    marginClass "b" BP.Small p
+    marginClass Bottom BP.Small p
 
 
 horizontalPad : Spacing -> Attribute msg
 horizontalPad p =
     class <|
-        ([ spacingClassName Padding "l" BP.Small p
-         , spacingClassName Padding "r" BP.Small p
+        ([ spacingClassName Padding Left BP.Small p
+         , spacingClassName Padding Right BP.Small p
          ]
             |> String.join " "
         )
@@ -146,8 +169,8 @@ horizontalPad p =
 horizontalMargin : Spacing -> Attribute msg
 horizontalMargin p =
     class <|
-        ([ spacingClassName Margin "l" BP.Small p
-         , spacingClassName Margin "r" BP.Small p
+        ([ spacingClassName Margin Left BP.Small p
+         , spacingClassName Margin Right BP.Small p
          ]
             |> String.join " "
         )
@@ -156,8 +179,8 @@ horizontalMargin p =
 verticalPad : Spacing -> Attribute msg
 verticalPad p =
     class <|
-        ([ spacingClassName Padding "t" BP.Small p
-         , spacingClassName Padding "b" BP.Small p
+        ([ spacingClassName Padding Top BP.Small p
+         , spacingClassName Padding Bottom BP.Small p
          ]
             |> String.join " "
         )
@@ -166,8 +189,8 @@ verticalPad p =
 verticalMargin : Spacing -> Attribute msg
 verticalMargin p =
     class <|
-        ([ spacingClassName Margin "t" BP.Small p
-         , spacingClassName Margin "b" BP.Small p
+        ([ spacingClassName Margin Top BP.Small p
+         , spacingClassName Margin Bottom BP.Small p
          ]
             |> String.join " "
         )
@@ -194,29 +217,29 @@ spacingClasses type_ ps =
     class <|
         case ps of
             a :: [] ->
-                spacingClassName type_ "" BP.Small a
+                spacingClassName type_ All BP.Small a
 
             v :: h :: [] ->
-                [ spacingClassName type_ "t" BP.Small v
-                , spacingClassName type_ "b" BP.Small v
-                , spacingClassName type_ "l" BP.Small h
-                , spacingClassName type_ "r" BP.Small h
+                [ spacingClassName type_ Top BP.Small v
+                , spacingClassName type_ Bottom BP.Small v
+                , spacingClassName type_ Left BP.Small h
+                , spacingClassName type_ Right BP.Small h
                 ]
                     |> String.join " "
 
             t :: h :: b :: [] ->
-                [ spacingClassName type_ "t" BP.Small t
-                , spacingClassName type_ "b" BP.Small b
-                , spacingClassName type_ "l" BP.Small h
-                , spacingClassName type_ "r" BP.Small h
+                [ spacingClassName type_ Top BP.Small t
+                , spacingClassName type_ Bottom BP.Small b
+                , spacingClassName type_ Left BP.Small h
+                , spacingClassName type_ Right BP.Small h
                 ]
                     |> String.join " "
 
             t :: r :: b :: l :: [] ->
-                [ spacingClassName type_ "t" BP.Small t
-                , spacingClassName type_ "b" BP.Small b
-                , spacingClassName type_ "l" BP.Small l
-                , spacingClassName type_ "r" BP.Small r
+                [ spacingClassName type_ Top BP.Small t
+                , spacingClassName type_ Bottom BP.Small b
+                , spacingClassName type_ Left BP.Small l
+                , spacingClassName type_ Right BP.Small r
                 ]
                     |> String.join " "
 
