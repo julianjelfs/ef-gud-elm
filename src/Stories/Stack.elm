@@ -1,8 +1,8 @@
 module Stories.Stack exposing (view)
 
-import Components.Grid as Grid
-import Components.Stack as Stack
-import Components.Typography as T
+import Grid as Grid
+import Stack as Stack
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

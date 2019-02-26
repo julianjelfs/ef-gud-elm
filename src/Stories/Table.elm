@@ -1,7 +1,7 @@
 module Stories.Table exposing (view)
 
-import Components.Table as T
-import Components.Typography as Ty
+import Table as T
+import Typography as Ty
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

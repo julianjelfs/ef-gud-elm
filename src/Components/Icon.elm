@@ -1,14 +1,14 @@
-module Components.Icon exposing
+module Icon exposing
     ( Icon(..)
     , IconProp
     , icon
     , iconType
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type Icon

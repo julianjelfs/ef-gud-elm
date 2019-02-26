@@ -1,13 +1,13 @@
-module Components.Fullbleed exposing
+module Fullbleed exposing
     ( fullHeight
     , fullbleed
     , gradient
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type FullbleedProp msg

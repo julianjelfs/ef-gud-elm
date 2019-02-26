@@ -1,4 +1,4 @@
-module Components.Container exposing
+module Container exposing
     ( bgColor
     , bottomMargin
     , bottomPad
@@ -18,9 +18,9 @@ module Components.Container exposing
     )
 
 import Color as C
+import Spacing as S
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Spacing as S
 
 
 type ContainerProp msg

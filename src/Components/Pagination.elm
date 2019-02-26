@@ -1,12 +1,12 @@
-module Components.Pagination exposing
+module Pagination exposing
     ( Size(..)
     , pager
     )
 
-import Components.Icon as I
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Icon as I
 import Utils exposing (..)
 
 

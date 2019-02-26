@@ -1,4 +1,4 @@
-module Components.Surface exposing
+module Surface exposing
     ( SurfaceProp
     , deepShadow
     , href
@@ -9,10 +9,10 @@ module Components.Surface exposing
     , surface
     )
 
+import Utils exposing (maybeAppend, wrapClass)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (maybeAppend, wrapClass)
 
 
 surfaceProp : String -> SurfaceProp msg

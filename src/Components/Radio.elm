@@ -1,4 +1,4 @@
-module Components.Radio exposing
+module Radio exposing
     ( RadioProp
     , checked
     , disabled
@@ -11,11 +11,11 @@ module Components.Radio exposing
     , valid
     )
 
-import Components.Generic as G
+import Generic as G
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 

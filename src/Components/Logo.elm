@@ -1,14 +1,14 @@
-module Components.Logo exposing
+module Logo exposing
     ( inverse
     , logo
     , simple
     , small
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type LogoProp msg

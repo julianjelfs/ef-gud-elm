@@ -1,4 +1,4 @@
-module Components.Accordion exposing
+module Accordion exposing
     ( AccordionProp
     , Model
     , Msg
@@ -11,13 +11,13 @@ module Components.Accordion exposing
     , update
     )
 
+import Spacing as S
+import Utils exposing (..)
 import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
 import Task
-import Utils exposing (..)
 
 
 type alias Model =

@@ -1,16 +1,16 @@
 module Stories.Logo exposing (view)
 
 import Color
-import Components.Container as C
-import Components.Grid as G
-import Components.Logo as L
-import Components.Surface as Sf
-import Components.Typography as T
+import Container as C
+import Grid as G
+import Logo as L
+import Spacing as S
+import Surface as Sf
+import Typography as T
+import Utils exposing (appendIf)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
-import Utils exposing (appendIf)
 
 
 logoContainer : Bool -> String -> String -> Html msg -> Html msg

@@ -1,11 +1,11 @@
 module Stories.Button exposing (Model, Msg, init, update, view)
 
-import Components.Button as B
-import Components.Typography as T
+import Button as B
+import Spacing as S
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
 
 
 type alias Model =

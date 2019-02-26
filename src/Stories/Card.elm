@@ -1,11 +1,11 @@
 module Stories.Card exposing (view)
 
-import Components.Card as C
-import Components.Typography as T
+import Card as C
+import Typography as T
+import Utils exposing (loremIpsum)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (loremIpsum)
 
 
 titleText : String

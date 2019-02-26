@@ -1,13 +1,13 @@
 module Stories.Icon exposing (view)
 
-import Components.Grid as G
-import Components.Icon as I
-import Components.Surface as S
-import Components.Typography as T
+import Grid as G
+import Icon as I
+import Spacing as SP
+import Surface as S
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as SP
 
 
 view : Html msg

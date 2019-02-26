@@ -1,7 +1,7 @@
 module Stories.Select exposing (Model, Msg, init, update, view)
 
-import Components.Select as S
-import Components.Typography as T
+import Select as S
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

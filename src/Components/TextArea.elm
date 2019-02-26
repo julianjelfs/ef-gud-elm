@@ -1,4 +1,4 @@
-module Components.TextArea exposing
+module TextArea exposing
     ( TextAreaProp
     , completed
     , disabled
@@ -12,10 +12,10 @@ module Components.TextArea exposing
     , value
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 valid : TextAreaProp msg

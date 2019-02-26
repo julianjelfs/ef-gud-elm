@@ -1,4 +1,4 @@
-module Components.Template exposing (template)
+module Template exposing (template)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

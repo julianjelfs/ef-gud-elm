@@ -1,8 +1,8 @@
 module Stories.Pagination exposing (Model, Msg, init, update, view)
 
-import Components.Container as C
-import Components.Pagination as P
-import Components.Typography as T
+import Container as C
+import Pagination as P
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

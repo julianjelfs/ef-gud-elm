@@ -1,7 +1,7 @@
 module Stories.Switch exposing (view)
 
-import Components.Switch as S
-import Components.Typography as T
+import Switch as S
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

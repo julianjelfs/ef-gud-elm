@@ -1,9 +1,9 @@
 module Stories.Utils exposing (BoxTags, borderedBox, box, defaultTags, taggedBox)
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type alias BoxTags =

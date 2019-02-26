@@ -1,14 +1,14 @@
 module Stories.Accordion exposing (Model, Msg, init, update, view)
 
-import Components.Accordion as A
-import Components.Button as B
-import Components.Typography as T
+import Accordion as A
+import Button as B
+import Spacing as S
+import Typography as T
+import Utils exposing (loremIpsum)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
 import Task
-import Utils exposing (loremIpsum)
 
 
 type alias Model =

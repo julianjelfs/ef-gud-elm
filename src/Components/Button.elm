@@ -1,4 +1,4 @@
-module Components.Button exposing
+module Button exposing
     ( ButtonProp
     , active
     , button
@@ -19,11 +19,11 @@ module Components.Button exposing
     )
 
 import Breakpoint as BP
+import Spacing as S
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
-import Utils exposing (..)
 
 
 type ButtonProp msg

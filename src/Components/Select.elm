@@ -1,4 +1,4 @@
-module Components.Select exposing
+module Select exposing
     ( Option(..)
     , SelectProp
     , completed
@@ -12,12 +12,12 @@ module Components.Select exposing
     , value
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Decode
 import Json.Decode.Extra as Decode
-import Utils exposing (..)
 
 
 valid : SelectProp msg

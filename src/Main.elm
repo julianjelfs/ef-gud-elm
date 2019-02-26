@@ -3,8 +3,8 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Color as C
-import Components.Input as I
-import Components.Typography as T
+import Input as I
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

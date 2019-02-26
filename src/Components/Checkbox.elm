@@ -1,4 +1,4 @@
-module Components.Checkbox exposing
+module Checkbox exposing
     ( CheckboxProp
     , checkbox
     , checked
@@ -8,10 +8,10 @@ module Components.Checkbox exposing
     , valid
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type CheckboxProp msg

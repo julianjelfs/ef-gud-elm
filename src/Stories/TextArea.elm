@@ -1,7 +1,7 @@
 module Stories.TextArea exposing (Model, Msg, init, update, view)
 
-import Components.TextArea as T
-import Components.Typography as T
+import TextArea as T
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

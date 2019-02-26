@@ -1,6 +1,6 @@
 module Stories.Typography exposing (view)
 
-import Components.Typography as T
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

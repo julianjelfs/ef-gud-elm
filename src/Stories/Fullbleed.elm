@@ -1,8 +1,8 @@
 module Stories.Fullbleed exposing (view)
 
-import Components.Container as C
-import Components.Fullbleed as F
-import Components.Typography as T
+import Container as C
+import Fullbleed as F
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

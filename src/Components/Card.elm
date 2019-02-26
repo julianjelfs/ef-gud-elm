@@ -1,4 +1,4 @@
-module Components.Card exposing
+module Card exposing
     ( body
     , card
     , imageUrl

@@ -1,9 +1,9 @@
-module Components.Table exposing (body, cell, footer, header, row, span, table)
+module Table exposing (body, cell, footer, header, row, span, table)
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type TableHeader msg

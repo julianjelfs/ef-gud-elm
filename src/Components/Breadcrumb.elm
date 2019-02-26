@@ -1,9 +1,9 @@
-module Components.Breadcrumb exposing (active, breadcrumbs, crumb, href, onClick)
+module Breadcrumb exposing (active, breadcrumbs, crumb, href, onClick)
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type BreadcrumbProp msg

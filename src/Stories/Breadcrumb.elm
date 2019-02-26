@@ -1,7 +1,7 @@
 module Stories.Breadcrumb exposing (Model, Msg, init, update, view)
 
-import Components.Breadcrumb as B
-import Components.Typography as T
+import Breadcrumb as B
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

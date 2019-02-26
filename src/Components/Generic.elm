@@ -1,4 +1,4 @@
-module Components.Generic exposing (ComponentProp, extractAttribute, someProperty, someProperty2)
+module Generic exposing (ComponentProp, extractAttribute, someProperty, someProperty2)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

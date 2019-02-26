@@ -1,4 +1,4 @@
-module Components.Form exposing
+module Form exposing
     ( Model
     , Msg
     , and
@@ -22,12 +22,12 @@ module Components.Form exposing
     , validationMessage
     )
 
+import Utils exposing (appendIf, catMaybes)
 import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Regex as Rx
-import Utils exposing (appendIf, catMaybes)
 
 
 {-| This is totally out of control, needs a re-think

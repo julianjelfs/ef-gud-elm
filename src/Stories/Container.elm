@@ -1,12 +1,12 @@
 module Stories.Container exposing (view)
 
 import Color as Color
-import Components.Container as C
-import Components.Typography as T
+import Container as C
+import Spacing as S
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (disabled, href, src)
 import Html.Events exposing (onClick)
-import Spacing as S
 
 
 spacedOut : Html msg

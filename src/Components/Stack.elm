@@ -1,4 +1,4 @@
-module Components.Stack exposing
+module Stack exposing
     ( StackItem
     , item
     , itemBottom
@@ -11,10 +11,10 @@ module Components.Stack exposing
     , vTop
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type StackProp msg

@@ -1,4 +1,4 @@
-module Components.Switch exposing
+module Switch exposing
     ( SwitchProp
     , checked
     , disabled
@@ -9,10 +9,10 @@ module Components.Switch exposing
     , valid
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type SwitchProp msg

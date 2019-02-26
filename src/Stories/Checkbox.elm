@@ -1,7 +1,7 @@
 module Stories.Checkbox exposing (view)
 
-import Components.Checkbox as C
-import Components.Typography as T
+import Checkbox as C
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

@@ -1,4 +1,4 @@
-module Components.Input exposing
+module Input exposing
     ( InputProp
     , InputType(..)
     , active
@@ -21,11 +21,11 @@ module Components.Input exposing
     , verticalMargin
     )
 
+import Spacing as S
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
-import Utils exposing (..)
 
 
 verticalMargin : S.Spacing -> InputProp msg

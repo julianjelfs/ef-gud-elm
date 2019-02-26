@@ -1,8 +1,8 @@
 module Stories.Grid exposing (view)
 
-import Components.Container as Container
-import Components.Grid as Grid
-import Components.Typography as T
+import Container as Container
+import Grid as Grid
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

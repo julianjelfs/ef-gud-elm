@@ -2,12 +2,12 @@ module Stories.Section exposing (view)
 
 import Breakpoint as BP
 import Color exposing (ThemeColor(..))
-import Components.Section as S
-import Components.Typography as T
+import Section as S
+import Typography as T
+import Utils exposing (loremIpsum)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (loremIpsum)
 
 
 view : Html msg

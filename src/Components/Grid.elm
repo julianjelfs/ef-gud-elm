@@ -1,4 +1,4 @@
-module Components.Grid exposing
+module Grid exposing
     ( bottomMargin
     , bottomPad
     , col
@@ -68,11 +68,11 @@ module Components.Grid exposing
     , yTop
     )
 
+import Spacing as S
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as S
-import Utils exposing (..)
 
 
 type RowProp msg

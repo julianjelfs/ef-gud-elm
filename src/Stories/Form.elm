@@ -1,12 +1,12 @@
 module Stories.Form exposing (Model, Msg, init, update, view)
 
-import Components.Button as B
-import Components.Checkbox as C
-import Components.Form as F
-import Components.Grid as G
-import Components.Input as I
-import Components.Radio as R
-import Components.Typography as T
+import Button as B
+import Checkbox as C
+import Form as F
+import Grid as G
+import Input as I
+import Radio as R
+import Typography as T
 import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)

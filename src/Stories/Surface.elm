@@ -1,15 +1,15 @@
 module Stories.Surface exposing (Model, Msg, init, update, view)
 
 import Breakpoint as BP
-import Color
-import Components.Container as C
-import Components.Surface as S
-import Components.Typography as T
+import Color as Color
+import Container as C
+import Spacing as SP
+import Surface as S
+import Typography as T
+import Utils exposing (loremIpsum)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Spacing as SP
-import Utils exposing (loremIpsum)
 
 
 type alias Model =

@@ -1,7 +1,7 @@
 module Stories.Template exposing (Model, Msg, init, update, view)
 
-import Components.Template as Template
-import Components.Typography as T
+import Template as Template
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

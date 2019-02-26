@@ -1,11 +1,11 @@
-module Components.Section exposing (bgColor, section, size)
+module Section exposing (bgColor, section, size)
 
 import Breakpoint as BP
 import Color as Color
-import Components.Container as Container
+import Container as Container
+import Spacing as Sp
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Spacing as Sp
 
 
 type SectionProp msg

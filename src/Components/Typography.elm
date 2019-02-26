@@ -1,4 +1,4 @@
-module Components.Typography exposing
+module Typography exposing
     ( black
     , body
     , bodyBook
@@ -18,10 +18,10 @@ module Components.Typography exposing
     , subtitle
     )
 
+import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Utils exposing (..)
 
 
 type TypoProp msg

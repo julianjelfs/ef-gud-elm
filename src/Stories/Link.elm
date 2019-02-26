@@ -1,7 +1,7 @@
 module Stories.Link exposing (Model, Msg, init, update, view)
 
-import Components.Link as Link
-import Components.Typography as T
+import Link as Link
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

@@ -1,7 +1,7 @@
 module Stories.Radio exposing (view)
 
-import Components.Radio as R
-import Components.Typography as T
+import Radio as R
+import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
