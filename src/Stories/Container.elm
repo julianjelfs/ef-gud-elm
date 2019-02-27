@@ -38,6 +38,29 @@ withMargin =
         ]
 
 
+withMarginAlternateApi : Html msg
+withMarginAlternateApi =
+    div
+        []
+        [ C.container
+            [ C.spacing Nothing S.Margin S.Left S.ExtraExtraLarge
+            , C.spacing Nothing S.Margin S.Right S.ExtraExtraLarge
+            , C.spacing Nothing S.Margin S.Top S.Large
+            , C.spacing Nothing S.Margin S.Bottom S.Large
+            , C.spacing Nothing S.Padding S.Left S.Large
+            , C.spacing Nothing S.Padding S.Right S.Large
+            , C.spacing Nothing S.Padding S.Top S.ExtraExtraLarge
+            , C.spacing Nothing S.Padding S.Bottom S.ExtraExtraLarge
+            , C.bgColor Color.LegalPaper
+            ]
+            [ text "and this one has custom margins expressed with a different syntax" ]
+        ]
+
+
+
+--spacing : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> ContainerProp msg
+
+
 normal : Html msg
 normal =
     C.container
@@ -57,4 +80,6 @@ view =
         , spacedOut
         , br [] []
         , withMargin
+        , br [] []
+        , withMarginAlternateApi
         ]

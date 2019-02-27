@@ -11,6 +11,7 @@ module Container exposing
     , padding
     , rightMargin
     , rightPad
+    , spacing
     , topMargin
     , topPad
     , verticalMargin
@@ -43,9 +44,9 @@ margin =
     ContainerProp << S.margin
 
 
-spacingUtil : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> ContainerProp msg
-spacingUtil mbp t m sp =
-    ContainerProp <| S.spacingUtil mbp t m sp
+spacing : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> ContainerProp msg
+spacing mbp t m sp =
+    ContainerProp <| S.spacing mbp t m sp
 
 
 verticalPad : S.Spacing -> ContainerProp msg

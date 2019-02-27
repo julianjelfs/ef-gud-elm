@@ -12,7 +12,7 @@ module Spacing exposing
     , padding
     , rightMargin
     , rightPad
-    , spacingUtil
+    , spacing
     , topMargin
     , topPad
     , verticalMargin
@@ -51,14 +51,6 @@ modifierString m =
             ""
 
 
-
--- in GUD spacing util classes have the following format:
--- u-[breakpoint-]property-size
--- e.g. u-p-m (padding medium)
---      u-s-mt-xl (small bp margin-top extra large)
--- would be nice to allow these utility classes to be added to all components.
-
-
 type Spacing
     = Zero
     | ExtraExtraSmall
@@ -85,8 +77,8 @@ typeString t =
             "p"
 
 
-spacingUtil : Maybe BP.Breakpoint -> SpacingType -> Modifier -> Spacing -> Attribute msg
-spacingUtil mbp type_ modifier sp =
+spacing : Maybe BP.Breakpoint -> SpacingType -> Modifier -> Spacing -> Attribute msg
+spacing mbp type_ modifier sp =
     class <|
         spacingClassName
             type_

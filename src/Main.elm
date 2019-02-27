@@ -3,11 +3,10 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Color as C
-import Input as I
-import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Input as I
 import Stories.Accordion as Accordion
 import Stories.Breadcrumb as Breadcrumb
 import Stories.Button as Button
@@ -25,12 +24,14 @@ import Stories.Pagination as Pagination
 import Stories.Radio as Radio
 import Stories.Section as Section
 import Stories.Select as Select
+import Stories.Spacing as Spacing
 import Stories.Stack as Stack
 import Stories.Surface as Surface
 import Stories.Switch as Switch
 import Stories.Table as Table
 import Stories.TextArea as TextArea
 import Stories.Typography as Typography
+import Typography as T
 import Url exposing (Url)
 import Url.Parser as Url
 
@@ -64,6 +65,7 @@ type Route
     | Pagination
     | Breadcrumb
     | Table
+    | Spacing
     | NotFound
 
 
@@ -255,6 +257,7 @@ routeParser =
         , Url.map Pagination (Url.s "pagination")
         , Url.map Breadcrumb (Url.s "breadcrumb")
         , Url.map Table (Url.s "table")
+        , Url.map Spacing (Url.s "spacing")
         ]
 
 
@@ -306,6 +309,7 @@ view model =
             , ( "Pagination Component", mi Pagination "pagination" )
             , ( "Breadcrumb Component", mi Breadcrumb "breadcrumb" )
             , ( "Table Component", mi Table "table" )
+            , ( "Spacing Utilities", mi Spacing "spacing" )
             ]
                 |> List.filter
                     (\( name, _ ) ->
@@ -407,6 +411,9 @@ componentView model =
 
         Table ->
             Table.view
+
+        Spacing ->
+            Spacing.view
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]
