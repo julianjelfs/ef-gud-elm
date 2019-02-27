@@ -2,13 +2,13 @@ module Stories.Accordion exposing (Model, Msg, init, update, view)
 
 import Accordion as A
 import Button as B
-import Spacing as S
-import Typography as T
-import Utils exposing (loremIpsum)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
 import Task
+import Typography as T
+import Utils exposing (loremIpsum)
 
 
 type alias Model =
@@ -49,7 +49,9 @@ accordion model =
         [ style "width" "700px" ]
         [ Html.map AccordionMsg <|
             A.accordion model.acc
-                [ A.margin [ S.Medium, S.Medium, S.Medium, S.Zero ] ]
+                [ A.margin Nothing S.Vertical S.Medium
+                , A.margin Nothing S.Right S.Medium
+                ]
                 [ A.item "Title One" (A.content [ T.h3 [] [ text "Section One" ], text loremIpsum ])
                 , A.item "Title Two" (A.content [ T.h3 [] [ text "Section Two" ], text loremIpsum ])
                 , A.item "Title Three" (A.content [ T.h3 [] [ text "Section Three" ], text loremIpsum ])

@@ -2,60 +2,37 @@ module Input exposing
     ( InputProp
     , InputType(..)
     , active
-    , bottomMargin
     , completed
     , disabled
     , focus
-    , horizontalMargin
     , input
     , invalid
-    , leftMargin
     , loading
+    , margin
     , onInput
+    , padding
     , placeholder
     , required
-    , rightMargin
-    , topMargin
     , valid
     , value
-    , verticalMargin
     )
 
-import Spacing as S
-import Utils exposing (..)
+import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
+import Utils exposing (..)
 
 
-verticalMargin : S.Spacing -> InputProp msg
-verticalMargin =
-    WrapperProp << S.verticalMargin
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> InputProp msg
+padding bp m =
+    WrapperProp << S.padding bp m
 
 
-topMargin : S.Spacing -> InputProp msg
-topMargin =
-    WrapperProp << S.topMargin
-
-
-rightMargin : S.Spacing -> InputProp msg
-rightMargin =
-    WrapperProp << S.rightMargin
-
-
-leftMargin : S.Spacing -> InputProp msg
-leftMargin =
-    WrapperProp << S.leftMargin
-
-
-horizontalMargin : S.Spacing -> InputProp msg
-horizontalMargin =
-    WrapperProp << S.horizontalMargin
-
-
-bottomMargin : S.Spacing -> InputProp msg
-bottomMargin =
-    WrapperProp << S.bottomMargin
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> InputProp msg
+margin bp m =
+    WrapperProp << S.margin bp m
 
 
 valid : InputProp msg

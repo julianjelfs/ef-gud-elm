@@ -5,7 +5,6 @@ module Button exposing
     , disabled
     , focus
     , hover
-    , leftMargin
     , loading
     , margin
     , onClick
@@ -15,15 +14,14 @@ module Button exposing
     , small
     , square
     , submit
-    , topPad
     )
 
 import Breakpoint as BP
-import Spacing as S
-import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
+import Utils exposing (..)
 
 
 type ButtonProp msg
@@ -46,24 +44,14 @@ buttonProp =
     wrapClass ButtonProp
 
 
-topPad : S.Spacing -> ButtonProp msg
-topPad =
-    ButtonProp << S.topPad
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> ButtonProp msg
+padding bp m =
+    ButtonProp << S.padding bp m
 
 
-leftMargin : S.Spacing -> ButtonProp msg
-leftMargin =
-    ButtonProp << S.leftMargin
-
-
-padding : List S.Spacing -> ButtonProp msg
-padding =
-    ButtonProp << S.padding
-
-
-margin : List S.Spacing -> ButtonProp msg
-margin =
-    ButtonProp << S.margin
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> ButtonProp msg
+margin bp m =
+    ButtonProp << S.margin bp m
 
 
 onClick : msg -> ButtonProp msg

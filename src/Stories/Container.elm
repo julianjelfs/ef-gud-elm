@@ -15,8 +15,8 @@ spacedOut =
     div
         []
         [ C.container
-            [ C.horizontalPad S.ExtraExtraLarge
-            , C.verticalPad S.Large
+            [ C.padding Nothing S.Horizontal S.ExtraExtraLarge
+            , C.padding Nothing S.Vertical S.Large
             , C.bgColor Color.HelloPaper
             ]
             [ text "this is a padded container" ]
@@ -28,32 +28,17 @@ withMargin =
     div
         []
         [ C.container
-            [ C.horizontalMargin S.ExtraExtraLarge
-            , C.verticalMargin S.Large
-            , C.horizontalPad S.Large
-            , C.verticalPad S.ExtraExtraLarge
-            , C.bgColor Color.EducationPaper
-            ]
-            [ text "and this one has custom margins as well" ]
-        ]
-
-
-withMarginAlternateApi : Html msg
-withMarginAlternateApi =
-    div
-        []
-        [ C.container
-            [ C.spacing Nothing S.Margin S.Left S.ExtraExtraLarge
-            , C.spacing Nothing S.Margin S.Right S.ExtraExtraLarge
-            , C.spacing Nothing S.Margin S.Top S.Large
-            , C.spacing Nothing S.Margin S.Bottom S.Large
-            , C.spacing Nothing S.Padding S.Left S.Large
-            , C.spacing Nothing S.Padding S.Right S.Large
-            , C.spacing Nothing S.Padding S.Top S.ExtraExtraLarge
-            , C.spacing Nothing S.Padding S.Bottom S.ExtraExtraLarge
+            [ C.margin Nothing S.Left S.ExtraExtraLarge
+            , C.margin Nothing S.Right S.ExtraExtraLarge
+            , C.margin Nothing S.Top S.Large
+            , C.margin Nothing S.Bottom S.Large
+            , C.padding Nothing S.Left S.Large
+            , C.padding Nothing S.Right S.Large
+            , C.padding Nothing S.Top S.ExtraExtraLarge
+            , C.padding Nothing S.Bottom S.ExtraExtraLarge
             , C.bgColor Color.LegalPaper
             ]
-            [ text "and this one has custom margins expressed with a different syntax" ]
+            [ text "and this one has custom margins" ]
         ]
 
 
@@ -80,6 +65,4 @@ view =
         , spacedOut
         , br [] []
         , withMargin
-        , br [] []
-        , withMarginAlternateApi
         ]

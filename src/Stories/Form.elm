@@ -2,17 +2,17 @@ module Stories.Form exposing (Model, Msg, init, update, view)
 
 import Button as B
 import Checkbox as C
+import Dict exposing (Dict)
 import Form as F
 import Grid as G
-import Input as I
-import Radio as R
-import Typography as T
-import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Input as I
+import Radio as R
 import Regex as Rx
 import Spacing as S
+import Typography as T
 import Utils exposing (appendIf)
 
 
@@ -220,8 +220,8 @@ exampleForm { formModel } =
                             ]
                         ]
                     ]
-                , G.row [ G.verticalMargin S.Medium ]
-                    [ G.col [ G.largeSpan 3, G.mediumSpan 6, G.smallSpan 8 ]
+                , G.row []
+                    [ G.col [ G.margin Nothing S.Vertical S.Medium, G.largeSpan 3, G.mediumSpan 6, G.smallSpan 8 ]
                         [ F.formGroup [ DateOfBirth ]
                             formModel
                             [ F.field (Just "Date of Birth")
@@ -294,13 +294,13 @@ exampleForm { formModel } =
                             ]
                         ]
                     ]
-                , G.row [ G.verticalMargin S.Medium ]
-                    [ G.col []
+                , G.row []
+                    [ G.col [ G.margin Nothing S.Vertical S.Medium ]
                         [ C.checkbox [] [ text "Yes, I (or my legal guardian) have read and understood how EF processes my personal data as set out in the Privacy Policy, and agree to EF's use of my personal data for marketing purposes." ]
                         ]
                     ]
-                , G.row [ G.verticalMargin S.Large ]
-                    [ G.col []
+                , G.row []
+                    [ G.col [ G.margin Nothing S.Vertical S.Large ]
                         [ B.button [ B.submit, B.primary, B.disabled False ] [ text "Submit" ] ]
                     ]
                 ]

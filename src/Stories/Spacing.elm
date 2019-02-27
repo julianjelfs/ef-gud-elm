@@ -28,28 +28,28 @@ allTags sz mod =
 padding : S.Modifier -> String -> List (Html msg)
 padding mod modStr =
     [ outer
-        [ S.spacing Nothing S.Padding mod S.Zero ]
+        [ S.padding Nothing mod S.Zero ]
         [ box (allTags "0" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.ExtraExtraSmall ]
+        [ S.padding Nothing mod S.ExtraExtraSmall ]
         [ box (allTags "xxs" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.ExtraSmall ]
+        [ S.padding Nothing mod S.ExtraSmall ]
         [ box (allTags "xs" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.Small ]
+        [ S.padding Nothing mod S.Small ]
         [ box (allTags "s" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.Medium ]
+        [ S.padding Nothing mod S.Medium ]
         [ box (allTags "m" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.Large ]
+        [ S.padding Nothing mod S.Large ]
         [ box (allTags "l" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.ExtraLarge ]
+        [ S.padding Nothing mod S.ExtraLarge ]
         [ box (allTags "xl" modStr) ]
     , outer
-        [ S.spacing Nothing S.Padding mod S.ExtraExtraLarge ]
+        [ S.padding Nothing mod S.ExtraExtraLarge ]
         [ box (allTags "xxl" modStr) ]
     ]
 
@@ -57,28 +57,28 @@ padding mod modStr =
 margin : S.Modifier -> String -> List (Html msg)
 margin mod modStr =
     [ div
-        [ S.spacing Nothing S.Margin mod S.Zero ]
+        [ S.margin Nothing mod S.Zero ]
         [ box (allTags "0" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.ExtraExtraSmall ]
+        [ S.margin Nothing mod S.ExtraExtraSmall ]
         [ box (allTags "xxs" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.ExtraSmall ]
+        [ S.margin Nothing mod S.ExtraSmall ]
         [ box (allTags "xs" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.Small ]
+        [ S.margin Nothing mod S.Small ]
         [ box (allTags "s" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.Medium ]
+        [ S.margin Nothing mod S.Medium ]
         [ box (allTags "m" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.Large ]
+        [ S.margin Nothing mod S.Large ]
         [ box (allTags "l" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.ExtraLarge ]
+        [ S.margin Nothing mod S.ExtraLarge ]
         [ box (allTags "xl" modStr) ]
     , div
-        [ S.spacing Nothing S.Margin mod S.ExtraExtraLarge ]
+        [ S.margin Nothing mod S.ExtraExtraLarge ]
         [ box (allTags "xxl" modStr) ]
     ]
 

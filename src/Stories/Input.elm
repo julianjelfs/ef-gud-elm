@@ -1,11 +1,11 @@
 module Stories.Input exposing (Model, Msg, init, update, view)
 
-import Input as I
-import Spacing as S
-import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Input as I
+import Spacing as S
+import Typography as T
 
 
 type alias Model =
@@ -30,7 +30,7 @@ update msg model =
 
 exampleInput : I.InputType -> List (I.InputProp Msg) -> Html Msg
 exampleInput t props =
-    I.input t (I.onInput OnInput :: I.verticalMargin S.Medium :: props)
+    I.input t (I.onInput OnInput :: I.margin Nothing S.Vertical S.Medium :: props)
 
 
 inputTypes : Model -> List (Html Msg)

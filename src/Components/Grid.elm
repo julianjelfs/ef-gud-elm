@@ -1,7 +1,5 @@
 module Grid exposing
-    ( bottomMargin
-    , bottomPad
-    , col
+    ( col
     , defaultSpan
     , extraLargeCollapse
     , extraLargeFirst
@@ -15,7 +13,6 @@ module Grid exposing
     , extralargeYBottom
     , extralargeYCenter
     , extralargeYTop
-    , horizontalMargin
     , largeCollapse
     , largeFirst
     , largeLast
@@ -28,7 +25,7 @@ module Grid exposing
     , largeYBottom
     , largeYCenter
     , largeYTop
-    , leftMargin
+    , margin
     , mediumCollapse
     , mediumFirst
     , mediumLast
@@ -41,7 +38,7 @@ module Grid exposing
     , mediumYBottom
     , mediumYCenter
     , mediumYTop
-    , rightMargin
+    , padding
     , row
     , smallCollapse
     , smallFirst
@@ -55,8 +52,6 @@ module Grid exposing
     , smallYBottom
     , smallYCenter
     , smallYTop
-    , topMargin
-    , verticalMargin
     , xAround
     , xBetween
     , xCenter
@@ -68,11 +63,12 @@ module Grid exposing
     , yTop
     )
 
-import Spacing as S
-import Utils exposing (..)
+import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
+import Utils exposing (..)
 
 
 type RowProp msg
@@ -91,39 +87,14 @@ type Row msg
     = Row (Html msg)
 
 
-verticalMargin : S.Spacing -> RowProp msg
-verticalMargin =
-    RowProp << S.verticalMargin
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> ColProp msg
+padding bp m =
+    ColProp << S.padding bp m
 
 
-topMargin : S.Spacing -> RowProp msg
-topMargin =
-    RowProp << S.topMargin
-
-
-rightMargin : S.Spacing -> RowProp msg
-rightMargin =
-    RowProp << S.rightMargin
-
-
-leftMargin : S.Spacing -> RowProp msg
-leftMargin =
-    RowProp << S.leftMargin
-
-
-horizontalMargin : S.Spacing -> RowProp msg
-horizontalMargin =
-    RowProp << S.horizontalMargin
-
-
-bottomMargin : S.Spacing -> RowProp msg
-bottomMargin =
-    RowProp << S.bottomMargin
-
-
-bottomPad : S.Spacing -> ColProp msg
-bottomPad =
-    ColProp << S.bottomPad
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> ColProp msg
+margin bp m =
+    ColProp << S.margin bp m
 
 
 row : List (RowProp msg) -> List (Column msg) -> Html msg

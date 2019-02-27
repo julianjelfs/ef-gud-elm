@@ -1,21 +1,8 @@
 module Container exposing
     ( bgColor
-    , bottomMargin
-    , bottomPad
     , container
-    , horizontalMargin
-    , horizontalPad
-    , leftMargin
-    , leftPad
     , margin
     , padding
-    , rightMargin
-    , rightPad
-    , spacing
-    , topMargin
-    , topPad
-    , verticalMargin
-    , verticalPad
     )
 
 import Breakpoint as BP
@@ -34,79 +21,14 @@ bgColor =
     ContainerProp << C.bgColor
 
 
-padding : List S.Spacing -> ContainerProp msg
-padding =
-    ContainerProp << S.padding
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> ContainerProp msg
+padding bp m =
+    ContainerProp << S.padding bp m
 
 
-margin : List S.Spacing -> ContainerProp msg
-margin =
-    ContainerProp << S.margin
-
-
-spacing : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> ContainerProp msg
-spacing mbp t m sp =
-    ContainerProp <| S.spacing mbp t m sp
-
-
-verticalPad : S.Spacing -> ContainerProp msg
-verticalPad =
-    ContainerProp << S.verticalPad
-
-
-verticalMargin : S.Spacing -> ContainerProp msg
-verticalMargin =
-    ContainerProp << S.verticalMargin
-
-
-topPad : S.Spacing -> ContainerProp msg
-topPad =
-    ContainerProp << S.topPad
-
-
-topMargin : S.Spacing -> ContainerProp msg
-topMargin =
-    ContainerProp << S.topMargin
-
-
-rightPad : S.Spacing -> ContainerProp msg
-rightPad =
-    ContainerProp << S.rightPad
-
-
-rightMargin : S.Spacing -> ContainerProp msg
-rightMargin =
-    ContainerProp << S.rightMargin
-
-
-leftPad : S.Spacing -> ContainerProp msg
-leftPad =
-    ContainerProp << S.leftPad
-
-
-leftMargin : S.Spacing -> ContainerProp msg
-leftMargin =
-    ContainerProp << S.leftMargin
-
-
-horizontalPad : S.Spacing -> ContainerProp msg
-horizontalPad =
-    ContainerProp << S.horizontalPad
-
-
-horizontalMargin : S.Spacing -> ContainerProp msg
-horizontalMargin =
-    ContainerProp << S.horizontalMargin
-
-
-bottomMargin : S.Spacing -> ContainerProp msg
-bottomMargin =
-    ContainerProp << S.bottomMargin
-
-
-bottomPad : S.Spacing -> ContainerProp msg
-bottomPad =
-    ContainerProp << S.bottomPad
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> ContainerProp msg
+margin bp m =
+    ContainerProp << S.margin bp m
 
 
 container : List (ContainerProp msg) -> List (Html msg) -> Html msg

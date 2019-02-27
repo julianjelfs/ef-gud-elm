@@ -3,13 +3,13 @@ module Stories.Surface exposing (Model, Msg, init, update, view)
 import Breakpoint as BP
 import Color as Color
 import Container as C
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Spacing as SP
 import Surface as S
 import Typography as T
 import Utils exposing (loremIpsum)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 
 
 type alias Model =
@@ -34,10 +34,14 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+    let
+        largePad =
+            C.padding Nothing SP.All SP.Large
+    in
     div []
         [ T.h4 [] [ text "This is the surface component" ]
         , C.container
-            [ C.padding [ SP.Large ]
+            [ largePad
             , C.bgColor Color.HelloPaper
             ]
             [ S.surface False
@@ -48,7 +52,7 @@ view model =
             ]
         , C.container
             [ C.bgColor Color.EfGrey
-            , C.padding [ SP.Large ]
+            , largePad
             ]
             [ S.surface False
                 [ S.outline ]
@@ -58,7 +62,7 @@ view model =
             ]
         , C.container
             [ C.bgColor Color.LegalPaper
-            , C.padding [ SP.Large ]
+            , largePad
             ]
             [ S.surface False
                 [ S.shadow ]
@@ -68,7 +72,7 @@ view model =
             ]
         , C.container
             [ C.bgColor Color.OutdoorPaper
-            , C.padding [ SP.Large ]
+            , largePad
             ]
             [ S.surface False
                 [ S.deepShadow ]
@@ -78,7 +82,7 @@ view model =
             ]
         , C.container
             [ C.bgColor Color.White
-            , C.padding [ SP.Large ]
+            , largePad
             ]
             [ S.surface False
                 [ S.deepShadow, S.rounded ]
@@ -88,7 +92,7 @@ view model =
             ]
         , C.container
             [ C.bgColor Color.EfGrey
-            , C.padding [ SP.Large ]
+            , largePad
             ]
             [ S.surface
                 True

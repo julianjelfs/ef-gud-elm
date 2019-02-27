@@ -5,7 +5,8 @@ module Stack exposing
     , itemBottom
     , itemStretch
     , itemTop
-    , spacing
+    , margin
+    , padding
     , stack
     , vAround
     , vBetween
@@ -44,9 +45,14 @@ itemStretch =
     StackItemProp <| class "-stretch"
 
 
-spacing : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> StackItemProp msg
-spacing mbp t m sp =
-    StackItemProp <| S.spacing mbp t m sp
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> StackItemProp msg
+padding bp m =
+    StackItemProp << S.padding bp m
+
+
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> StackItemProp msg
+margin bp m =
+    StackItemProp << S.margin bp m
 
 
 itemTop : StackItemProp msg

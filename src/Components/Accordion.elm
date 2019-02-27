@@ -11,13 +11,14 @@ module Accordion exposing
     , update
     )
 
-import Spacing as S
-import Utils exposing (..)
+import Breakpoint as BP
 import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
 import Task
+import Utils exposing (..)
 
 
 type alias Model =
@@ -65,14 +66,14 @@ type AccordionContent parent
     = AccordionContent (Model -> Int -> Html (Msg parent))
 
 
-padding : List S.Spacing -> AccordionProp parent
-padding =
-    AccordionProp << S.padding
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> AccordionProp parent
+padding bp m =
+    AccordionProp << S.padding bp m
 
 
-margin : List S.Spacing -> AccordionProp parent
-margin =
-    AccordionProp << S.margin
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> AccordionProp parent
+margin bp m =
+    AccordionProp << S.margin bp m
 
 
 collapsed : Model -> Int -> Bool

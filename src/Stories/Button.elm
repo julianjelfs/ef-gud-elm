@@ -1,11 +1,11 @@
 module Stories.Button exposing (Model, Msg, init, update, view)
 
 import Button as B
-import Spacing as S
-import Typography as T
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
+import Typography as T
 
 
 type alias Model =
@@ -64,17 +64,33 @@ overrideSpacing : Model -> Html Msg
 overrideSpacing model =
     div
         [ class "ef-button-group u-s-p-s" ]
-        [ exampleButton [ B.primary, B.padding [ S.ExtraSmall ] ] "we can"
-        , exampleButton [ B.primary, B.leftMargin S.Large, B.padding [ S.Small ] ] "override"
-        , exampleButton [ B.primary, B.padding [ S.Medium ] ] "the"
-        , exampleButton [ B.primary, B.padding [ S.Large ] ] "padding if"
-        , exampleButton [ B.primary, B.padding [ S.ExtraLarge ] ] "we really"
-        , exampleButton [ B.primary, B.padding [ S.ExtraExtraLarge ] ] "want to !!!"
-        , exampleButton [ B.primary, B.padding [ S.Zero, S.Large ] ] "also uneven"
-        , exampleButton [ B.primary, B.padding [ S.Zero, S.Large, S.Medium ] ] "padding is fine"
+        [ exampleButton [ B.primary, B.padding Nothing S.All S.ExtraSmall ] "we can"
         , exampleButton
             [ B.primary
-            , B.topPad S.ExtraExtraLarge
+            , B.margin Nothing S.Left S.Large
+            , B.padding Nothing S.All S.Small
+            ]
+            "override"
+        , exampleButton [ B.primary, B.padding Nothing S.All S.Medium ] "the"
+        , exampleButton [ B.primary, B.padding Nothing S.All S.Large ] "padding if"
+        , exampleButton [ B.primary, B.padding Nothing S.All S.ExtraLarge ] "we really"
+        , exampleButton [ B.primary, B.padding Nothing S.All S.ExtraExtraLarge ] "want to !!!"
+        , exampleButton
+            [ B.primary
+            , B.padding Nothing S.Vertical S.Zero
+            , B.padding Nothing S.Horizontal S.Large
+            ]
+            "also uneven"
+        , exampleButton
+            [ B.primary
+            , B.padding Nothing S.Top S.Zero
+            , B.padding Nothing S.Right S.Large
+            , B.padding Nothing S.Left S.Medium
+            ]
+            "padding is fine"
+        , exampleButton
+            [ B.primary
+            , B.padding Nothing S.Top S.ExtraExtraLarge
             ]
             "totally fine"
         ]

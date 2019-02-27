@@ -1,20 +1,25 @@
 module Stories.Icon exposing (view)
 
 import Grid as G
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Icon as I
 import Spacing as SP
 import Surface as S
 import Typography as T
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 
 
 view : Html msg
 view =
     let
         colProps =
-            [ G.bottomPad SP.Medium, G.smallSpan 12, G.mediumSpan 6, G.largeSpan 4, G.extraLargeSpan 2 ]
+            [ G.padding Nothing SP.Bottom SP.Medium
+            , G.smallSpan 12
+            , G.mediumSpan 6
+            , G.largeSpan 4
+            , G.extraLargeSpan 2
+            ]
 
         exampleIcon i name =
             G.col colProps

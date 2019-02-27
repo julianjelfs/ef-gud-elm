@@ -109,7 +109,7 @@ fullLayout =
     let
         stretchProps =
             [ S.itemStretch
-            , S.spacing Nothing SP.Margin SP.Bottom SP.Small
+            , S.margin Nothing SP.Bottom SP.Small
             ]
 
         tile =
