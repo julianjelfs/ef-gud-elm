@@ -1,9 +1,11 @@
 module Stack exposing
     ( StackItem
+    , bgColor
     , item
     , itemBottom
     , itemStretch
     , itemTop
+    , spacing
     , stack
     , vAround
     , vBetween
@@ -11,10 +13,13 @@ module Stack exposing
     , vTop
     )
 
-import Utils exposing (..)
+import Breakpoint as BP
+import Color as C
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
+import Utils exposing (..)
 
 
 type StackProp msg
@@ -29,9 +34,19 @@ type StackItem msg
     = StackItem (Html msg)
 
 
+bgColor : C.ThemeColor -> StackItemProp msg
+bgColor =
+    StackItemProp << C.bgColor
+
+
 itemStretch : StackItemProp msg
 itemStretch =
     StackItemProp <| class "-stretch"
+
+
+spacing : Maybe BP.Breakpoint -> S.SpacingType -> S.Modifier -> S.Spacing -> StackItemProp msg
+spacing mbp t m sp =
+    StackItemProp <| S.spacing mbp t m sp
 
 
 itemTop : StackItemProp msg
