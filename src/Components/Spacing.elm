@@ -76,11 +76,7 @@ toString pd =
 
 
 spacing : SpacingType -> Maybe BP.Breakpoint -> Modifier -> Spacing -> Attribute msg
-spacing t mbp m sp =
-    let
-        bp =
-            Maybe.withDefault BP.Small mbp
-    in
+spacing t bp m sp =
     class <|
         case m of
             Bottom ->
@@ -109,11 +105,15 @@ spacing t mbp m sp =
                     ++ spacingClassName t "r" bp sp
 
 
-spacingClassName : SpacingType -> String -> BP.Breakpoint -> Spacing -> String
-spacingClassName t m bp sp =
+spacingClassName : SpacingType -> String -> Maybe BP.Breakpoint -> Spacing -> String
+spacingClassName t m mbp sp =
+    let
+        bpstr =
+            Maybe.map (\bp -> BP.toString bp ++ "-") mbp
+                |> Maybe.withDefault ""
+    in
     "u-"
-        ++ BP.toString bp
-        ++ "-"
+        ++ bpstr
         ++ typeString t
         ++ m
         ++ "-"

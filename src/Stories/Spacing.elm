@@ -89,6 +89,13 @@ view =
         [ class "spacing-docs" ]
         [ T.h4 [] [ text "Spacing Utilities" ]
         , T.para [ T.light ] [ text "We provide utility functions to modify container's spacing according to GUD breakpoints and spacing scales. Where appropriate there are also helpers for each component type that supports custom spacing" ]
+        , T.para [ T.light ] [ text "This is achieved using the Spacing.padding and Spacing.margin functions to apply attributes directly to elm html nodes or by using the corresponding padding and margin functions on the relevant components. In each case the signature is the same" ]
+        , code []
+            [ text "padding : Maybe BP.Breakpoint -> Modifier -> Spacing -> Attribute msg" ]
+        , br [] []
+        , code []
+            [ text "margin : Maybe BP.Breakpoint -> Modifier -> Spacing -> Attribute msg" ]
+        , div [ S.margin Nothing S.Top S.Large ] []
         , T.h5 [] [ text "Padding all round" ]
         , div [] (padding S.All "p")
         , T.h5 [] [ text "Padding top and bottom" ]
