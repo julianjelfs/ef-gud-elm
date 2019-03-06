@@ -2,17 +2,31 @@ module Surface exposing
     ( SurfaceProp
     , deepShadow
     , href
+    , margin
     , onClick
     , outline
+    , padding
     , rounded
     , shadow
     , surface
     )
 
-import Utils exposing (maybeAppend, wrapClass)
+import Breakpoint as BP
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Spacing as S
+import Utils exposing (maybeAppend, wrapClass)
+
+
+padding : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> SurfaceProp msg
+padding bp m =
+    SurfaceProp << S.padding bp m
+
+
+margin : Maybe BP.Breakpoint -> S.Modifier -> S.Spacing -> SurfaceProp msg
+margin bp m =
+    SurfaceProp << S.margin bp m
 
 
 surfaceProp : String -> SurfaceProp msg
