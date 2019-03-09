@@ -10,6 +10,7 @@ import Input as I
 import Stories.Accordion as Accordion
 import Stories.Breadcrumb as Breadcrumb
 import Stories.Button as Button
+import Stories.CalendarComponent as Calendar
 import Stories.Card as Card
 import Stories.Checkbox as Checkbox
 import Stories.Container as Container
@@ -66,6 +67,7 @@ type Route
     | Breadcrumb
     | Table
     | Spacing
+    | Calendar
     | NotFound
 
 
@@ -83,11 +85,16 @@ type alias Model =
     , accordion : Accordion.Model
     , pagination : Pagination.Model
     , breadcrumb : Breadcrumb.Model
+    , calendar : Calendar.Model
     }
 
 
 init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
+    let
+        ( calendar, calendarCmd ) =
+            Calendar.init
+    in
     ( { key = key
       , route = urlToRoute url
       , filter = Nothing
@@ -101,8 +108,9 @@ init _ url key =
       , accordion = Accordion.init
       , pagination = Pagination.init
       , breadcrumb = Breadcrumb.init
+      , calendar = calendar
       }
-    , Cmd.none
+    , Cmd.map CalendarMsg calendarCmd
     )
 
 
@@ -129,6 +137,7 @@ type Msg
     | AccordionMsg Accordion.Msg
     | PaginationMsg Pagination.Msg
     | BreadcrumbMsg Breadcrumb.Msg
+    | CalendarMsg Calendar.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -229,6 +238,13 @@ update msg model =
             in
             ( { model | breadcrumb = subModel }, Cmd.map BreadcrumbMsg subCmd )
 
+        CalendarMsg subMsg ->
+            let
+                ( subModel, subCmd ) =
+                    Calendar.update subMsg model.calendar
+            in
+            ( { model | calendar = subModel }, Cmd.map CalendarMsg subCmd )
+
 
 routeParser : Url.Parser (Route -> a) a
 routeParser =
@@ -256,6 +272,7 @@ routeParser =
         , Url.map Accordion (Url.s "accordion")
         , Url.map Pagination (Url.s "pagination")
         , Url.map Breadcrumb (Url.s "breadcrumb")
+        , Url.map Calendar (Url.s "calendar")
         , Url.map Table (Url.s "table")
         , Url.map Spacing (Url.s "spacing")
         ]
@@ -308,6 +325,7 @@ view model =
             , ( "Accordion Component", mi Accordion "accordion" )
             , ( "Pagination Component", mi Pagination "pagination" )
             , ( "Breadcrumb Component", mi Breadcrumb "breadcrumb" )
+            , ( "Calendar Component", mi Calendar "calendar" )
             , ( "Table Component", mi Table "table" )
             , ( "Spacing Utilities", mi Spacing "spacing" )
             ]
@@ -408,6 +426,9 @@ componentView model =
 
         Breadcrumb ->
             Html.map BreadcrumbMsg (Breadcrumb.view model.breadcrumb)
+
+        Calendar ->
+            Html.map CalendarMsg (Calendar.view model.calendar)
 
         Table ->
             Table.view

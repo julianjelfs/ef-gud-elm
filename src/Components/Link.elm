@@ -3,10 +3,10 @@ module Link exposing
     , link
     )
 
-import Utils exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Utils exposing (..)
 
 
 type alias LinkProps msg =
