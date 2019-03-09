@@ -1,12 +1,10 @@
 module CalendarComponent exposing
     ( Model
-    , Msg
     , calendar
     , init
     , nextWeek
     , prevWeek
     , summaryText
-    , update
     )
 
 import Calendar exposing (Date, decrementDay, fromPosix, getDay, getMonth, getWeekday, getYear, incrementDay)
@@ -43,10 +41,6 @@ type alias Model =
     , mode : Mode
     , start : Date
     }
-
-
-type Msg
-    = NoOp
 
 
 
@@ -113,11 +107,6 @@ init now =
     }
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    ( model, Cmd.none )
-
-
 getNearestMonday : Date -> Date
 getNearestMonday d =
     case getWeekday d of
@@ -137,7 +126,7 @@ getWeek from dates =
         List.reverse dates
 
 
-calendar : Model -> Unstyled.Html Msg
+calendar : Model -> Unstyled.Html msg
 calendar model =
     toUnstyled <|
         case model.mode of
@@ -151,7 +140,7 @@ calendar model =
                 dayView model
 
 
-weekView : Model -> Html Msg
+weekView : Model -> Html msg
 weekView model =
     let
         currentDay =
@@ -166,7 +155,7 @@ weekView model =
         ]
 
 
-weekHeader : Model -> List Date -> Html Msg
+weekHeader : Model -> List Date -> Html msg
 weekHeader model days =
     let
         today =
@@ -193,14 +182,14 @@ weekHeader model days =
         )
 
 
-monthView : Model -> Html Msg
+monthView : Model -> Html msg
 monthView model =
     div
         []
         [ text "TODO: Month view" ]
 
 
-dayView : Model -> Html Msg
+dayView : Model -> Html msg
 dayView model =
     div
         []

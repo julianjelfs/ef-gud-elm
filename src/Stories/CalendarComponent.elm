@@ -12,48 +12,36 @@ import Typography as T
 
 
 type alias Model =
-    { model : Maybe Calendar.Model }
+    Maybe Calendar.Model
 
 
 type Msg
-    = CalendarMsg Calendar.Msg
-    | Initialise Posix
+    = Initialise Posix
     | PreviousWeek
     | NextWeek
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { model = Nothing }, Task.perform Initialise Time.now )
+    ( Nothing, Task.perform Initialise Time.now )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        CalendarMsg sub ->
-            ( model, Cmd.none )
-
         Initialise p ->
-            ( { model | model = Just <| Calendar.init p }, Cmd.none )
+            ( Just <| Calendar.init p, Cmd.none )
 
         PreviousWeek ->
-            let
-                updated =
-                    Maybe.map Calendar.prevWeek model.model
-            in
-            ( { model | model = updated }, Cmd.none )
+            ( Maybe.map Calendar.prevWeek model, Cmd.none )
 
         NextWeek ->
-            let
-                updated =
-                    Maybe.map Calendar.nextWeek model.model
-            in
-            ( { model | model = updated }, Cmd.none )
+            ( Maybe.map Calendar.nextWeek model, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
-    case model.model of
+    case model of
         Nothing ->
             text ""
 
@@ -72,5 +60,5 @@ view model =
                         [ B.button [ B.secondary, B.onClick NextWeek ] [ text "Next Week" ] ]
                     ]
                 , br [] []
-                , Html.map CalendarMsg (Calendar.calendar m)
+                , Calendar.calendar m
                 ]
