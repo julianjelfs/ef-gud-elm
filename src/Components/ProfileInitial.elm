@@ -17,8 +17,8 @@ outerStyle =
         , Css.backgroundImage <| Css.linearGradient2 (deg 225) (stop <| hex "ffa9d5") (stop <| hex "c4d4ff") []
         , Css.alignItems center
         , Css.justifyContent center
-        , Css.display Css.inlineFlex
         , Css.lineHeight (px 96)
+        , Css.margin auto
         ]
 
 
@@ -27,7 +27,6 @@ wrapperStyle =
     Css.batch
         [ Css.maxWidth (px 96)
         , Css.maxHeight (px 104)
-        , Css.margin auto
         ]
 
 
@@ -35,8 +34,8 @@ textStyle : Style
 textStyle =
     Css.batch
         [ Css.position relative
-        , Css.top (px 30)
-        , Css.left (px 28)
+        , Css.top (px 32)
+        , Css.left (px 32)
         ]
 
 
@@ -55,16 +54,23 @@ boxShadowStyle =
         ]
 
 
-profileInitial : String -> Unstyled.Html msg
+getInitials : String -> String
+getInitials name =
+    String.split " " name
+        |> List.map (String.slice 0 1)
+        |> List.map String.toUpper
+        |> String.join ""
+
+
+profileInitial : String -> Html msg
 profileInitial name =
-    toUnstyled <|
-        div
-            [ css [ outerStyle ] ]
-            [ div
-                [ css [ wrapperStyle ] ]
-                [ div [ css [ textStyle ] ] [ Html.Styled.fromUnstyled <| T.h4 [] [ Unstyled.text name ] ]
-                , div
-                    [ css [ boxShadowStyle ] ]
-                    []
-                ]
+    div
+        [ css [ outerStyle ] ]
+        [ div
+            [ css [ wrapperStyle ] ]
+            [ div [ css [ textStyle ] ] [ Html.Styled.fromUnstyled <| T.h4 [] [ Unstyled.text (getInitials name) ] ]
+            , div
+                [ css [ boxShadowStyle ] ]
+                []
             ]
+        ]

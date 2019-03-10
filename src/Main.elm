@@ -26,6 +26,7 @@ import Stories.ProfileInitial as ProfileInitial
 import Stories.Radio as Radio
 import Stories.Section as Section
 import Stories.Select as Select
+import Stories.Sidebar as Sidebar
 import Stories.Spacing as Spacing
 import Stories.Stack as Stack
 import Stories.Surface as Surface
@@ -70,6 +71,7 @@ type Route
     | Spacing
     | Calendar
     | ProfileInitial
+    | Sidebar
     | NotFound
 
 
@@ -278,6 +280,7 @@ routeParser =
         , Url.map Table (Url.s "table")
         , Url.map Spacing (Url.s "spacing")
         , Url.map ProfileInitial (Url.s "profileinitial")
+        , Url.map Sidebar (Url.s "sidebar")
         ]
 
 
@@ -332,6 +335,7 @@ view model =
             , ( "Table Component", mi Table "table" )
             , ( "Spacing Utilities", mi Spacing "spacing" )
             , ( "Profile Initial", mi ProfileInitial "profileinitial" )
+            , ( "Sidebar", mi Sidebar "sidebar" )
             ]
                 |> List.filter
                     (\( name, _ ) ->
@@ -442,6 +446,9 @@ componentView model =
 
         ProfileInitial ->
             ProfileInitial.view
+
+        Sidebar ->
+            Sidebar.view
 
         NotFound ->
             T.h2 [] [ text "Unknown component selected" ]
