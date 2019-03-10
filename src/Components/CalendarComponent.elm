@@ -19,14 +19,6 @@ import Time exposing (Month(..), Posix, Weekday(..))
 import Utils exposing (..)
 
 
-type TimeRange
-    = TimeRange Int Int
-
-
-type Timezone
-    = Timezone String -- not sure what type this should wrap really
-
-
 type Mode
     = DayView
     | WeekView
@@ -34,8 +26,8 @@ type Mode
 
 
 type alias Model =
-    { timeRange : TimeRange
-    , timezone : Timezone
+    { timeRange : ( Int, Int )
+    , timezone : String
     , blockHeight : Float
     , now : Posix
     , mode : Mode
@@ -47,13 +39,45 @@ type alias Model =
 {- Styles -}
 
 
+borderColor : Color
+borderColor =
+    rgba 25 25 25 0.1
+
+
 todayColStyle : Style
 todayColStyle =
     Css.batch
         [ Css.borderTop3 (px 4) solid (hex "2962ff")
-        , Css.boxShadow5 (px 0) (px 2) (px 16) (px 0) (rgba 25 25 25 0.16)
+        , Css.boxShadow5 (px 0) (px 2) (px 16) (px 0) borderColor
         , Css.borderTopLeftRadius (px 4)
         , Css.borderTopRightRadius (px 4)
+        ]
+
+
+headerCellStyle : Style
+headerCellStyle =
+    Css.batch
+        [ Css.padding2 (px 18) (px 18)
+        , Css.height (px 79)
+        , Css.whiteSpace Css.noWrap
+        , Css.borderBottom3 (px 1) solid borderColor
+        ]
+
+
+todayCellStyle : Style
+todayCellStyle =
+    Css.batch
+        [ Css.height (px 76)
+        ]
+
+
+timeColStyle : Style
+timeColStyle =
+    Css.batch
+        [ Css.flex3 (int 0) (int 0) (px 50)
+        , Css.textAlign Css.right
+        , Css.minHeight (px 750)
+        , Css.paddingRight (px 10)
         ]
 
 
@@ -64,20 +88,22 @@ colBorderStyle =
         , Css.textAlign Css.center
         , Css.minHeight (px 750)
         , Css.backgroundColor (rgb 255 255 255)
-        , Css.borderTop3 (px 1) solid (rgba 25 25 25 0.1)
-        , Css.borderBottom3 (px 1) solid (rgba 25 25 25 0.1)
-        , Css.borderLeft3 (px 1) solid (rgba 25 25 25 0.1)
+        , Css.borderTop3 (px 1) solid borderColor
+        , Css.borderBottom3 (px 1) solid borderColor
+        , Css.borderLeft3 (px 1) solid borderColor
         , Css.lastChild
-            [ Css.borderRight3 (px 1) solid (rgba 25 25 25 0.1) ]
+            [ Css.borderRight3 (px 1) solid borderColor ]
         ]
 
 
-headerCellStyle : Style
-headerCellStyle =
+weekCellStyle : Style
+weekCellStyle =
     Css.batch
-        [ Css.padding2 (px 18) (px 18)
+        [ Css.height (px 42)
+        , Css.verticalAlign center
         , Css.whiteSpace Css.noWrap
-        , Css.borderBottom3 (px 1) solid (rgba 25 25 25 0.1)
+        , Css.backgroundColor (hex "f8f8f8")
+        , Css.borderBottom3 (px 1) solid borderColor
         ]
 
 
@@ -87,8 +113,8 @@ init now =
         mode =
             WeekView
     in
-    { timeRange = TimeRange 7 18
-    , timezone = Timezone "GMT"
+    { timeRange = ( 7, 18 )
+    , timezone = "GMT"
     , blockHeight = 50.0
     , now = now
     , mode = mode
@@ -151,12 +177,27 @@ weekView model =
     in
     div
         []
-        [ weekHeader model days
+        [ weekColumns model days
         ]
 
 
-weekHeader : Model -> List Date -> Html msg
-weekHeader model days =
+weekCells : Model -> List (Html msg)
+weekCells model =
+    let
+        ( start, end ) =
+            model.timeRange |> Debug.log "Range: "
+    in
+    List.concatMap
+        (\h ->
+            [ div [ css [ weekCellStyle ] ] []
+            , div [ css [ weekCellStyle ] ] []
+            ]
+        )
+        (List.range start end)
+
+
+weekColumns : Model -> List Date -> Html msg
+weekColumns model days =
     let
         today =
             fromPosix model.now
@@ -165,20 +206,23 @@ weekHeader model days =
         [ css
             [ displayFlex ]
         ]
-        (List.map
-            (\d ->
-                div
-                    [ css
-                        ([ colBorderStyle ] |> appendIf (d == today) todayColStyle)
-                    ]
-                    [ div
-                        [ css [ headerCellStyle ] ]
-                        [ span [ css [ fontSize (px 28), fontWeight bold ] ] [ text <| String.fromInt <| getDay d ]
-                        , text <| " " ++ (weekdayToString <| getWeekday d)
+        (div [ css [ timeColStyle ] ] [ text model.timezone ]
+            :: List.map
+                (\d ->
+                    div
+                        [ css
+                            ([ colBorderStyle ] |> appendIf (d == today) todayColStyle)
                         ]
-                    ]
-            )
-            days
+                        ([ div
+                            [ css ([ headerCellStyle ] |> appendIf (d == today) todayCellStyle) ]
+                            [ span [ css [ fontSize (px 28), fontWeight bold ] ] [ text <| String.fromInt <| getDay d ]
+                            , text <| " " ++ (weekdayToString <| getWeekday d)
+                            ]
+                         ]
+                            ++ weekCells model
+                        )
+                )
+                days
         )
 
 
