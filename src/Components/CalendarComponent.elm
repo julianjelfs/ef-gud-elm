@@ -62,7 +62,7 @@ colBorderStyle =
     Css.batch
         [ Css.flex (int 1)
         , Css.textAlign Css.center
-        , Css.minHeight (px 550)
+        , Css.minHeight (px 750)
         , Css.backgroundColor (rgb 255 255 255)
         , Css.borderTop3 (px 1) solid (rgba 25 25 25 0.1)
         , Css.borderBottom3 (px 1) solid (rgba 25 25 25 0.1)
