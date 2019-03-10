@@ -48,8 +48,7 @@ view model =
         Just m ->
             div
                 []
-                [ T.h4 [] [ text "This is the calendar component" ]
-                , G.row []
+                [ G.row []
                     [ G.col [ G.smallSpan 3 ]
                         [ B.button [ B.secondary, B.onClick PreviousWeek ] [ text "Previous Week" ] ]
                     , G.col [ G.smallSpan 6 ]

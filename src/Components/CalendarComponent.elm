@@ -96,10 +96,10 @@ colBorderStyle =
         ]
 
 
-weekCellStyle : Style
-weekCellStyle =
+weekCellStyle : Float -> Style
+weekCellStyle pxHeight =
     Css.batch
-        [ Css.height (px 42)
+        [ Css.height (px pxHeight)
         , Css.verticalAlign center
         , Css.whiteSpace Css.noWrap
         , Css.backgroundColor (hex "f8f8f8")
@@ -186,12 +186,13 @@ weekCells model =
     let
         ( start, end ) =
             model.timeRange |> Debug.log "Range: "
+
+        cell =
+            div [ css [ weekCellStyle model.blockHeight ] ] []
     in
     List.concatMap
         (\h ->
-            [ div [ css [ weekCellStyle ] ] []
-            , div [ css [ weekCellStyle ] ] []
-            ]
+            [ cell, cell ]
         )
         (List.range start end)
 
